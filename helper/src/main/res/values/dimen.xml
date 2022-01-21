@@ -1,0 +1,67 @@
+<resources>
+    //alertDialogResultCRUD:
+    <dimen name="CustomDialogActionResultMargin">5sp</dimen>
+    <dimen name="CustomDialogActionResultCommandSize">48sp</dimen>
+    <dimen name="CustomDialogActionResultCommandMarginTopBottom">16sp</dimen>
+    <dimen name="CustomDialogActionResultCommandMarginStartEnd">50sp</dimen>
+    <dimen name="CustomDialogActionResultCommandMarginBottomContainer">75sp</dimen>
+    <dimen name="CustomDialogActionResultSizeExit">32sp</dimen>
+    <dimen name="CustomDialogActionResultPadding">10sp</dimen>
+
+    //alertDialog:
+    <dimen name="CustomDialogActionLayoutMargin">10sp</dimen>
+    <dimen name="CustomDialogActionSizeIcon">32sp</dimen>
+    <dimen name="CustomDialogActionSizeMargin">2sp</dimen>
+    <dimen name="CustomDialogActionCommandMargin">24sp</dimen>
+
+    //alertDialogResult:
+    <dimen name="activity_auditoria_margin">3sp</dimen>
+    <dimen name="custom_dialog_result_margin_command">15sp</dimen>
+
+    //alertDialogResultExport:
+    <dimen name="command_end_bottom_margin">24sp</dimen>
+
+    //ActivityGenericForAddItem:
+    <dimen name="ActivityGenericForAddItemCardViewSize">150sp</dimen>
+    <dimen name="ActivityGenericForAddItemCardViewMarginImage">10sp</dimen>
+    <dimen name="ActivityGenericForAddItemCardViewSizeImage">96sp</dimen>
+    <dimen name="ActivityGenericForAddItemCardViewMargin">16sp</dimen>
+    <dimen name="ActivityGenericForAddItemCardViewRound">16sp</dimen>
+    <dimen name="ActivityGenericForAddItemCardViewElevation">8sp</dimen>
+    <dimen name="ActivityGenericForAddItemCardViewTextSize">18sp</dimen>
+    <dimen name="ActivityGenericForAddItemCardViewTextPadding">5sp</dimen>
+    <dimen name="ActivityGenericForAddItemCardViewTextMargin">10sp</dimen>
+
+    //Commands:
+    <dimen name="CommandAddSizeImage">64sp</dimen>
+    <dimen name="CommandAddMarginImage">24sp</dimen>
+
+    <!--    //ActivityGeneric-->
+    <dimen name="ActivityGenericSearchTextMargin">10sp</dimen>
+    <dimen name="ActivityGenericSearchTextPadding">10sp</dimen>
+    <dimen name="ActivityGenericSearchSizeImage">24sp</dimen>
+    <dimen name="ActivityGenericSearchMarginImage">5sp</dimen>
+    <dimen name="ActivityGenericRecyclerMargin">10sp</dimen>
+
+    <!--    //Dialog Crud:-->
+    <dimen name="DialogCrudTextMargin">16sp</dimen>
+    <dimen name="DialogCrudTextPadding">10sp</dimen>
+    <dimen name="DialogCrudPictureMargin">8sp</dimen>
+    <dimen name="DialogCrudLayoutMargin">5sp</dimen>
+    <dimen name="DialogCrudPictureChooseSize">48sp</dimen>
+    <!--    //DialogGenericChoosePicture-->
+    <dimen name="DialogGenericChoosePictureSize">256sp</dimen>
+
+<!--    CustomViewer-->
+    <dimen name="CustomViewerCommandSize">36sp</dimen>
+    <dimen name="CustomViewerLayoutMarginStartEnd">10sp</dimen>
+    <dimen name="CustomViewerLayoutMarginTopBottom">5sp</dimen>
+    <dimen name="CustomViewerParameterDrawSize">36sp</dimen>
+    <dimen name="CustomViewerParameterDrawColorPickerSize">65sp</dimen>
+    <dimen name="CustomViewerParameterDrawMargin">50sp</dimen>
+    <dimen name="CustomViewerParameterDrawTextSample">32sp</dimen>
+    <dimen name="CustomViewerDrawContainerMargin">65sp</dimen>
+
+<!--    Crop:-->
+<!--    <dimen name="crop__bar_height">56dp</dimen>-->
+</resources>

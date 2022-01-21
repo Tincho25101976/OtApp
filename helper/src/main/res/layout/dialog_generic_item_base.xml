@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogGenericDescription"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="@string/ModelTextDescription"
+            android:padding="@dimen/DialogCrudTextPadding"
+            android:textStyle="italic"
+            app:customLines="25"
+            app:customType="TEXT_MULTILINE" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/DialogGenericIsEnabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/DialogCrudTextPadding"
+                android:text="@string/ModelTextIsEnabled" />
+
+            <CheckBox
+                android:id="@+id/DialogGenericIsDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/DialogGenericIsEnabled"
+                android:layout_marginEnd="@dimen/DialogCrudTextPadding"
+                android:text="@string/ModelTextIsDefault" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

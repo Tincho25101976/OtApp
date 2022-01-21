@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomSpinner">
+        <attr name="customSpinnerStroke" format="integer"/>
+        <attr name="customSpinnerBackColor" format="color"/>
+        <attr name="customSpinnerTextColor" format="color"/>
+        <attr name="customSpinnerTextSize" format="float"/>
+        <attr name="customSpinnerColorStroke" format="color"/>
+        <attr name="customSpinnerMarginSpinner" format="integer"/>
+        <attr name="customSpinnerMarginTopStoke" format="integer"/>
+        <attr name="customSpinnerMargin" format="integer"/>
+        <attr name="customSpinnerHeight" format="integer"/>
+        <attr name="customSpinnerTitle" format="string"/>
+    </declare-styleable>
+</resources>

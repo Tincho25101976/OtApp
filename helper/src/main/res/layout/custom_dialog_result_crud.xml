@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shadow_view">
+
+    <LinearLayout
+        android:id="@+id/ll_custom_dialog_result_crud"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/CustomDialogActionResultMargin"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_custom_dialog_result_crud_insert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/CustomDialogActionResultMargin"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_custom_dialog_result_crud_insert"
+                android:layout_width="@dimen/CustomDialogActionResultCommandSize"
+                android:layout_height="@dimen/CustomDialogActionResultCommandSize"
+                android:src="@drawable/pic_add" />
+
+            <TextView
+                android:id="@+id/tv_custom_dialog_result_crud_insert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/CustomDialogActionResultMargin"
+                android:layout_gravity="center"
+                android:height="@dimen/CustomDialogActionResultCommandSize"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/text_insert"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_custom_dialog_result_crud_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/CustomDialogActionResultMargin"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_custom_dialog_result_crud_update"
+                android:layout_width="@dimen/CustomDialogActionResultCommandSize"
+                android:layout_height="@dimen/CustomDialogActionResultCommandSize"
+                android:src="@drawable/pic_edit" />
+
+            <TextView
+                android:id="@+id/tv_custom_dialog_result_crud_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/CustomDialogActionResultMargin"
+                android:layout_gravity="center"
+                android:height="@dimen/CustomDialogActionResultCommandSize"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/text_update"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_custom_dialog_result_crud_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/CustomDialogActionResultMargin"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_custom_dialog_result_crud_delete"
+                android:layout_width="@dimen/CustomDialogActionResultCommandSize"
+                android:layout_height="@dimen/CustomDialogActionResultCommandSize"
+                android:src="@drawable/pic_remove" />
+
+            <TextView
+                android:id="@+id/tv_custom_dialog_result_crud_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/CustomDialogActionResultMargin"
+                android:layout_gravity="center"
+                android:height="@dimen/CustomDialogActionResultCommandSize"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/text_delete"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_custom_dialog_result_crud_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/CustomDialogActionResultMargin"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_custom_dialog_result_crud_view"
+                android:layout_width="@dimen/CustomDialogActionResultCommandSize"
+                android:layout_height="@dimen/CustomDialogActionResultCommandSize"
+                android:src="@drawable/pic_view" />
+
+            <TextView
+                android:id="@+id/tv_custom_dialog_result_crud_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/CustomDialogActionResultMargin"
+                android:layout_gravity="center"
+                android:height="@dimen/CustomDialogActionResultCommandSize"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/text_view"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_custom_dialog_result_crud_export"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/CustomDialogActionResultMargin"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_custom_dialog_result_crud_export"
+                android:layout_width="@dimen/CustomDialogActionResultCommandSize"
+                android:layout_height="@dimen/CustomDialogActionResultCommandSize"
+                android:src="@drawable/pic_export" />
+
+            <TextView
+                android:id="@+id/tv_custom_dialog_result_crud_export"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/CustomDialogActionResultMargin"
+                android:layout_gravity="center"
+                android:height="@dimen/CustomDialogActionResultCommandSize"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/text_export"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_custom_dialog_result_crud_exit"
+        android:layout_width="@dimen/CustomDialogActionResultSizeExit"
+        android:layout_height="@dimen/CustomDialogActionResultSizeExit"
+        android:layout_gravity="bottom|end"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/CustomDialogActionResultPadding"
+        android:src="@drawable/pic_back" />
+</RelativeLayout>

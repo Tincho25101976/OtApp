@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/ActivityGenericLayoutSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/shadow_view"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:id="@+id/ActivityGenericSearchParameter"
+            android:layout_width="0sp"
+            android:layout_height="110sp"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/ActivityGenericSearchTextMargin"
+            android:layout_marginEnd="@dimen/ActivityGenericSearchTextMargin"
+            android:layout_marginBottom="@dimen/ActivityGenericSearchTextMargin"
+            android:orientation="vertical">
+
+            <AutoCompleteTextView
+                android:id="@+id/ActivityGenericSearchText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:hint="@string/ActivityGenericHintSearch"
+                android:padding="@dimen/ActivityGenericSearchTextPadding"
+                android:textStyle="italic" />
+
+            <com.vsg.helper.ui.widget.spinner.CustomSpinner
+                android:id="@+id/ActivityGenericSearchSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:customSpinnerTitle="@string/ActivityGenericFilter"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ActivityGenericSearchCommand"
+            android:layout_width="@dimen/ActivityGenericSearchSizeImage"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/ActivityGenericSearchMarginImage"
+            android:src="@drawable/pic_search" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ActivityGenericRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ActivityGenericLayoutSearch"
+        android:layout_margin="@dimen/ActivityGenericRecyclerMargin" />
+
+</RelativeLayout>

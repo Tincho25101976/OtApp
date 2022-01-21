@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/DialogGenericPictureChooseContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/DialogCrudTextMargin">
+
+        <RelativeLayout
+            android:id="@+id/DialogGenericPictureChoose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/DialogGenericPictureChoosePhoto"
+                android:layout_width="@dimen/DialogCrudPictureChooseSize"
+                android:layout_height="@dimen/DialogCrudPictureChooseSize"
+                android:layout_alignTop="@id/DialogGenericPicture"
+                android:layout_toStartOf="@id/DialogGenericPicture"
+                android:src="@drawable/pic_take_photo"/>
+            <ImageView
+                android:id="@+id/DialogGenericPictureChooseImage"
+                android:layout_width="@dimen/DialogCrudPictureChooseSize"
+                android:layout_height="@dimen/DialogCrudPictureChooseSize"
+                android:layout_alignBottom="@id/DialogGenericPicture"
+                android:layout_toEndOf="@id/DialogGenericPicture"
+                android:src="@drawable/pic_choose_image"/>
+            <ImageView
+                android:id="@+id/DialogGenericPictureChooseRotate"
+                android:layout_width="@dimen/DialogCrudPictureChooseSize"
+                android:layout_height="@dimen/DialogCrudPictureChooseSize"
+                android:layout_alignTop="@id/DialogGenericPicture"
+                android:layout_toEndOf="@id/DialogGenericPicture"
+                android:src="@drawable/pic_choose_rotate"/>
+            <ImageView
+                android:id="@+id/DialogGenericPictureChooseDelete"
+                android:layout_width="@dimen/DialogCrudPictureChooseSize"
+                android:layout_height="@dimen/DialogCrudPictureChooseSize"
+                android:layout_alignBottom="@id/DialogGenericPicture"
+                android:layout_toStartOf="@id/DialogGenericPicture"
+                android:src="@drawable/pic_choose_delete"/>
+
+            <com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
+                android:id="@+id/DialogGenericPicture"
+                android:layout_width="@dimen/DialogGenericChoosePictureSize"
+                android:layout_height="@dimen/DialogGenericChoosePictureSize"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/DialogCrudPictureMargin"
+                android:background="@drawable/shadow_view"
+                android:scaleType="center"
+                android:src="@drawable/pic_picture_choose_grayscale" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</FrameLayout>

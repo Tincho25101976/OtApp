@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shadow_view">
+
+    <LinearLayout
+        android:id="@+id/ll_custom_dialog_result_export"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/CustomDialogActionResultMargin"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_custom_dialog_result_export_xml"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/CustomDialogActionResultMargin"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_custom_dialog_result_export_xml"
+                android:layout_width="@dimen/CustomDialogActionResultCommandSize"
+                android:layout_height="@dimen/CustomDialogActionResultCommandSize"
+                android:src="@drawable/pic_export_xml" />
+
+            <TextView
+                android:id="@+id/tv_custom_dialog_result_export_xml"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/CustomDialogActionResultMargin"
+                android:height="@dimen/CustomDialogActionResultCommandSize"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/text_export_xml"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_custom_dialog_result_export_json"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/CustomDialogActionResultMargin"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_custom_dialog_result_export_json"
+                android:layout_width="@dimen/CustomDialogActionResultCommandSize"
+                android:layout_height="@dimen/CustomDialogActionResultCommandSize"
+                android:src="@drawable/pic_export_json" />
+
+            <TextView
+                android:id="@+id/tv_custom_dialog_result_export_json"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/CustomDialogActionResultMargin"
+                android:height="@dimen/CustomDialogActionResultCommandSize"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/text_export_json"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_custom_dialog_result_export_csv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/CustomDialogActionResultMargin"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_custom_dialog_result_export_csv"
+                android:layout_width="@dimen/CustomDialogActionResultCommandSize"
+                android:layout_height="@dimen/CustomDialogActionResultCommandSize"
+                android:src="@drawable/pic_export_csv" />
+
+            <TextView
+                android:id="@+id/tv_custom_dialog_result_export_csv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/CustomDialogActionResultMargin"
+                android:height="@dimen/CustomDialogActionResultCommandSize"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/text_export_csv"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_custom_dialog_result_export_exit"
+        android:layout_width="@dimen/CustomDialogActionResultSizeExit"
+        android:layout_height="@dimen/CustomDialogActionResultSizeExit"
+        android:layout_gravity="bottom|end"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/CustomDialogActionResultPadding"
+        android:src="@drawable/pic_back" />
+
+</RelativeLayout>

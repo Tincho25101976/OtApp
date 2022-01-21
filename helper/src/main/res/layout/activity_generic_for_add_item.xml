@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ActivityGenericForAddItemCardView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ActivityGenericForAddItemCardViewSize"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_margin="@dimen/ActivityGenericForAddItemCardViewMargin"
+        app:cardCornerRadius="@dimen/ActivityGenericForAddItemCardViewRound"
+        app:cardElevation="@dimen/ActivityGenericForAddItemCardViewElevation">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ActivityGenericForAddItemCardViewPicture"
+                android:layout_margin="@dimen/ActivityGenericForAddItemCardViewMarginImage"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/ActivityGenericForAddItemCardViewSizeImage"
+                android:layout_height="@dimen/ActivityGenericForAddItemCardViewSizeImage"
+                android:src="@drawable/pic_default" />
+
+            <TextView
+                android:id="@+id/ActivityGenericForAddItemCardViewText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ActivityGenericForAddItemCardViewTextMargin"
+                android:layout_marginStart="@dimen/ActivityGenericForAddItemCardViewTextMargin"
+                android:layout_marginEnd="@dimen/ActivityGenericForAddItemCardViewTextMargin"
+                android:paddingStart="@dimen/ActivityGenericForAddItemCardViewTextPadding"
+                android:paddingEnd="@dimen/ActivityGenericForAddItemCardViewTextPadding"
+
+                android:layout_toEndOf="@id/ActivityGenericForAddItemCardViewPicture"
+                android:textSize="@dimen/ActivityGenericForAddItemCardViewTextSize"
+                android:text="@string/text_suspenso" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ActivityGenericForAddItemRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/ActivityGenericForAddItemCardViewMargin"
+        android:layout_below="@id/ActivityGenericForAddItemCardView"/>
+
+    <ImageView
+        android:id="@+id/ActivityGenericForAddItemAdd"
+        android:layout_width="@dimen/CommandAddSizeImage"
+        android:layout_height="@dimen/CommandAddSizeImage"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/CommandAddMarginImage"
+        android:layout_marginEnd="@dimen/CommandAddMarginImage"
+        android:src="@drawable/pic_add"/>
+
+</RelativeLayout>

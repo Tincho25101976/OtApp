@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shadow_view">
+
+    <LinearLayout
+        android:id="@+id/SwipeMenuCrudItemLayoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="10sp"
+        android:layout_marginBottom="5sp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/SwipeMenuCrudItemUpdate"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/SwipeMenuCrudItemImageUpdate"
+                android:layout_width="48sp"
+                android:layout_height="48sp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/pic_edit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/SwipeMenuCrudItemImageUpdate"
+                android:layout_centerHorizontal="true"
+                android:text="@string/ActionResultForCrudUpdate" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/SwipeMenuCrudItemDelete"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/SwipeMenuCrudItemImageDelete"
+                android:layout_width="48sp"
+                android:layout_height="48sp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/pic_remove" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/SwipeMenuCrudItemImageDelete"
+                android:layout_centerHorizontal="true"
+                android:text="@string/ActionResultForCrudDelete" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/SwipeMenuCrudItemView"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/SwipeMenuCrudItemImageView"
+                android:layout_width="48sp"
+                android:layout_height="48sp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/pic_view" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/SwipeMenuCrudItemImageView"
+                android:layout_centerHorizontal="true"
+                android:text="@string/ActionResultForCrudView" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>

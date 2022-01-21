@@ -1,0 +1,48 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="msg_data">Data</string>
+    <string name="msg_operation">Operation</string>
+    <string name="msg_extra">Extra</string>
+
+    <string name="dbName">at.db</string>
+
+    <string name="text_suspenso">…</string>
+
+    //PopUp:
+    <string name="text_insert">Agregar</string>
+    <string name="text_update">Editar</string>
+    <string name="text_delete">Eliminar</string>
+    <string name="text_view">Ver</string>
+    <string name="text_export">Exportar</string>
+
+    //PopUpExport:
+    <string name="text_export_xml">XML</string>
+    <string name="text_export_json">Json</string>
+    <string name="text_export_csv">CSV</string>
+
+    //Custom Widget:
+    <string name="component_one">Custom Component 1</string>
+    <string name="component_two">Custom Component 2</string>
+    <string name="component_three">Custom Component 3</string>
+    <string name="hint_custom_text_edit">Type something for</string>
+
+    //SwipeMenuItemCrud:
+    <string name="ActionResultForCrudUpdate">Actualizar</string>
+    <string name="ActionResultForCrudDelete">Eliminar</string>
+    <string name="ActionResultForCrudView">Visualizar</string>
+
+    <!--    //Generic:-->
+    <string name="ActivityGenericHintSearch">Ingrese un criterio de búsqueda</string>
+    <string name="ActivityGenericFilter">Filtro</string>
+
+    <!--    //Model:-->
+    <string name="ModelTextIsEnabled">Activo</string>
+    <string name="ModelTextIsDefault">Defecto</string>
+    <string name="ModelTextDescription">Descripción</string>
+
+<!--    <string name="crop__saving">Saving picture…</string>-->
+<!--    <string name="crop__wait">Please wait…</string>-->
+<!--    <string name="crop__pick_error">No image sources available</string>-->
+
+<!--    <string name="crop__done">DONE</string>-->
+<!--    <string name="crop__cancel" tools:ignore="ButtonCase">CANCEL</string>-->
+</resources>

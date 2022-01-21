@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomInputText">
+        <attr name="customType" format="enum">
+            <enum name="TEXT" value="1" />
+            <enum name="TEXT_MULTILINE" value="2" />
+            <enum name="DATE" value="3" />
+            <enum name="DOUBLE" value="4" />
+            <enum name="INT" value="5" />
+            <enum name="PHONE" value="6" />
+            <enum name="READ_ONLY_TEXT" value="7"/>
+            <enum name="READ_ONLY_MULTILINE" value="8"/>
+        </attr>
+
+        <attr name="customSetText" format="string" />
+        <attr name="customSetDate" format="string" />
+        <attr name="customSetDouble" format="float" />
+
+        <attr name="customPadding" format="integer"/>
+        <attr name="customMargin" format="integer"/>
+        <attr name="customMaxLength" format="integer" />
+        <attr name="customMaxLine" format="integer" />
+        <attr name="customLines" format="integer" />
+        <attr name="customTextColor" format="color" />
+        <attr name="customDecimalPlace" format="integer" />
+
+        <attr name="customFormatDate" format="enum">
+            <enum name="SIMPLE" value="1" />
+            <enum name="COMPLETO" value="2" />
+            <enum name="CREATE_DATE" value="3" />
+            <enum name="FULL" value="4" />
+            <enum name="FILE" value="5" />
+            <enum name="AUDIT" value="6" />
+        </attr>
+    </declare-styleable>
+</resources>
