@@ -30,6 +30,8 @@ abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResult
     override val isEntityOnlyDefault: Boolean
         get() = false
 
+    val defaultTitle: String get() = ""
+
     @Ignore
     protected abstract fun aTitlePopUpData(): String
 

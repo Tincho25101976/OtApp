@@ -1,14 +1,16 @@
-package common.model
+package common.model.master
 
 import android.text.Spanned
 import androidx.room.Ignore
 import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
+import common.model.ItemOtBase
 
-class MasterUnit : ItemOtBase() {
+class MasterItem : ItemOtBase() {
     //region properties
     var item: String = ""
+    var unit: MasterUnit? = null
     //endregion
 
     //region reference
