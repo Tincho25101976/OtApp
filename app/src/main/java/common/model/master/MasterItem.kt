@@ -7,6 +7,7 @@ import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
 import common.enumType.TypeUnit
+import common.helper.HelperMaster.Companion.toMasterUnit
 import common.model.ItemOtBase
 
 class MasterItem : ItemOtBase() {
@@ -25,15 +26,15 @@ class MasterItem : ItemOtBase() {
         val sb = StringBuilder()
         sb.toTitleSpanned(item)
         sb.toLineSpanned("Producto", description)
-        if(unit != null) sb.toLineSpanned("Unidad", unit?.symbol)
+        if (unit != null) sb.toLineSpanned("Unidad", unit?.symbol)
         sb.getBaseDescriptionView()
         return sb.castToHtml()
     }
     //endregion
 
     //region funtion
-    public fun setUnit(unit: TypeUnit) {
-        this.unit = MasterUnit(unit)
+    public fun setUnit(unit: TypeUnit, precision: Int = 3) {
+        this.unit = unit.toMasterUnit(precision)
     }
     //endregion
 }

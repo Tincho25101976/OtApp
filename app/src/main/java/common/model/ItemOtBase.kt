@@ -1,25 +1,33 @@
 package common.model
 
 import androidx.room.Ignore
+import com.vsg.helper.common.adapter.IResultRecyclerAdapter
+import com.vsg.helper.common.model.IEntityPagingLayoutPosition
+import com.vsg.helper.common.model.IReference
+import com.vsg.helper.common.model.ItemBase
+import com.vsg.helper.common.model.ItemBasePagingAuditingCode
+import com.vsg.helper.common.util.addItem.IAddItemEntity
 import com.vsg.helper.common.util.addItem.ItemBaseAddItem
 import com.vsg.ot.R
-import common.enumType.TypeUnit
-import common.model.master.MasterUnit
 
-abstract class ItemOtBase: ItemBaseAddItem() {
+abstract class ItemOtBase<T> : ItemBasePagingAuditingCode<T>()
+        where T : ItemBase,
+              T : IResultRecyclerAdapter,
+              T : IAddItemEntity,
+              T : IReference,
+              T : IEntityPagingLayoutPosition
+{
     override val isEntityOnlyDefault: Boolean
         get() = true
 
     //region reference
     @Ignore
     override fun aTitleRecyclerAdapter(): String = defaultTitle
+
     @Ignore
-    override fun aPictureRecyclerAdapter(): Int = R.drawable.pic_default
+    //override fun aPictureRecyclerAdapter(): Int = R.drawable.pic_default
+
     @Ignore
     override fun aTitlePopUpData(): String = defaultTitle
     //endregion
-
-    companion object{
-        protected fun TypeUnit.toMasterUnit(presicion:Int = 3): MasterUnit = MasterUnit(this).apply { precision = presicion }
-    }
 }
