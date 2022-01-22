@@ -13,7 +13,7 @@ enum class TypeUnit(
     override val show: Boolean = true,
     override val default: Boolean = false,
     override val order: Int = -1,
-    override val precision: Int = 3,
+    override var precision: Int = 3,
     override val isInt: Boolean = false,
     override val isException: Boolean = false
 ) :

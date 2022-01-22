@@ -6,6 +6,7 @@ import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
+import common.enumType.TypeUnit
 import common.model.ItemOtBase
 
 class MasterItem : ItemOtBase() {
@@ -27,6 +28,12 @@ class MasterItem : ItemOtBase() {
         if(unit != null) sb.toLineSpanned("Unidad", unit?.symbol)
         sb.getBaseDescriptionView()
         return sb.castToHtml()
+    }
+    //endregion
+
+    //region funtion
+    public fun setUnit(unit: TypeUnit) {
+        this.unit = MasterUnit(unit)
     }
     //endregion
 }
