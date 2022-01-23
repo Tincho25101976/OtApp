@@ -33,8 +33,6 @@ import kotlin.math.abs
     tableName = MasterBatch.ENTITY_NAME
 )
 class MasterBatch {
-    override var number: Long = 0
-    override var prefix: String = ""
     var receiverQty: Double = 0.0
     var dueDate: Date? = null
 
