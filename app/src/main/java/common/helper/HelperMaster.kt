@@ -1,7 +1,7 @@
 package common.helper
 
 import common.enumType.TypeUnit
-import common.model.master.MasterUnit
+import common.model.master.unit.MasterUnit
 
 class HelperMaster {
     companion object {

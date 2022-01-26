@@ -1,11 +1,11 @@
-package common.model.master
+package common.model.master.batch
 
 import androidx.room.*
 import com.vsg.helper.common.format.FormatDateString
 import com.vsg.helper.common.model.EntityForeignKeyID
-import com.vsg.helper.common.model.EntityForeignKeyList
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
+import common.model.master.item.MasterItem
 import java.util.*
 import kotlin.math.abs
 

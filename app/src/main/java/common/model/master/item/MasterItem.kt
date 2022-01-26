@@ -1,4 +1,4 @@
-package common.model.master
+package common.model.master.item
 
 import android.text.Spanned
 import androidx.room.Ignore
@@ -9,6 +9,7 @@ import com.vsg.ot.R
 import common.enumType.TypeUnit
 import common.helper.HelperMaster.Companion.toMasterUnit
 import common.model.ItemOtBase
+import common.model.master.unit.MasterUnit
 
 class MasterItem : ItemOtBase() {
     //region properties
