@@ -79,14 +79,14 @@ class HelperString {
             return result.toString().castToHtml()
         }
 
-        fun String.toTag(tag: TypeTagHTML): String {
+        private fun String.toTag(tag: TypeTagHTML): String {
             if (tag == TypeTagHTML.BR) return StringBuilder().append(this)
                 .append(tag.data.toTagStart()).toString()
             return StringBuilder().append(tag.data.toTagStart()).append(this)
                 .append(tag.data.toTagEnd()).toString()
         }
 
-        fun String.toTag(vararg tag: TypeTagHTML): String {
+        private fun String.toTag(vararg tag: TypeTagHTML): String {
             if (tag.isEmpty()) return ""
             val tags = tag.toList().groupBy { it }.map { it.key }
             if (!tags.any()) return ""
@@ -106,7 +106,7 @@ class HelperString {
             StringBuilder().append(this).append(": ").toString()
 
         private fun String.toTagBold() = this.toTag(TypeTagHTML.B)
-        fun StringBuilder.toTagBold(text: String) = this.append(text.toTag(TypeTagHTML.B))
+        fun StringBuilder.toTagBold(text: String): StringBuilder = this.append(text.toTag(TypeTagHTML.B))
         private fun String.toTagCaption(underline: Boolean = true) = when (underline) {
             true -> this.toTag(TypeTagHTML.B, TypeTagHTML.U)
             false -> this.toTag(TypeTagHTML.B)
@@ -120,13 +120,13 @@ class HelperString {
             caption: String,
             item: String?,
             underline: Boolean = true
-        ) =
+        ):StringBuilder =
             this.append(caption.formatCaption().toTagCaption(underline)).append(item)
 
-        fun StringBuilder.toTitleSpanned(caption: String) =
+        fun StringBuilder.toTitleSpanned(caption: String): StringBuilder =
             this.append(caption.formatCaption().toTagTitle())
 
-        fun String.toTitleSpanned(puntos: Boolean = true): Spanned = when (puntos) {
+        fun String.toTitleSpanned(points: Boolean = true): Spanned = when (points) {
             true -> StringBuilder().append(this.formatCaption().toTagTitle()).castToHtml()
             false -> StringBuilder().append(this.toTagTitle()).castToHtml()
         }
@@ -183,8 +183,7 @@ class HelperString {
             val data2 = phoneNumberUtil.isPossibleNumberForType(number, PhoneNumberType.TOLL_FREE)
             val data3 = phoneNumberUtil.isPossibleNumberForType(number, PhoneNumberType.MOBILE)
             val data4 = phoneNumberUtil.isValidNumber(number)
-            val result = data1 || data2 || data3 || data4
-            return result
+            return data1 || data2 || data3 || data4
         }
 
         //endregion
@@ -204,7 +203,9 @@ class HelperString {
 
         //region util
         fun String.capitalizeWords(): String =
-            split(" ").joinToString(" ") { it.toLowerCase(Locale.ROOT).capitalize(Locale.ROOT) }
+            split(" ").joinToString(" ") { s ->
+                s.lowercase()
+                .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() } }
 
         //        fun String.capitalizeWords(): String = split(" ").map { it.toLowerCase().capitalize() }.joinToString(" ")
         fun String.removeAllSpace(): String = when (this.isEmpty()) {
