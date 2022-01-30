@@ -32,19 +32,21 @@ import common.model.master.unit.MasterUnit
 class MasterItem : ItemOtBaseCompany<MasterItem>() {
     //region properties
     var item: String = ""
+    var shellLife: Int = 0
+    var shellLifeAlert: Int = 0
     var unit: MasterUnit? = null
     override val title: String
         get() = item
     //endregion
 
-    //region reference
     @Ignore
-    override fun aPictureRecyclerAdapter(): Int = R.drawable.pic_product
+    override fun oGetDrawablePicture(): Int = R.drawable.pic_product
     override fun oGetSpannedGeneric(): StringBuilder {
         val sb = StringBuilder()
         sb.toTitleSpanned(item)
         sb.toLineSpanned("Producto", description)
         if (unit != null) sb.toLineSpanned("Unidad", unit?.symbol)
+        sb.toLineSpanned("Vida útil", shellLife)
         return sb
     }
 

@@ -1,10 +1,9 @@
 package com.vsg.helper.common.model
 
-import androidx.annotation.DrawableRes
 import androidx.room.Ignore
+import com.vsg.helper.common.model.util.DrawableShow
 
 interface IEntityDrawable {
     @Ignore
-    @DrawableRes
-    fun getDrawableShow(): Int
+    fun getDrawableShow(): DrawableShow
 }

@@ -3,8 +3,17 @@ package common.model.master.batch
 import androidx.room.*
 import com.vsg.helper.common.format.FormatDateString
 import com.vsg.helper.common.model.EntityForeignKeyID
+import com.vsg.helper.helper.Helper.Companion.toFormat
+import com.vsg.helper.helper.date.HelperDate
+import com.vsg.helper.helper.date.HelperDate.Companion.addDay
+import com.vsg.helper.helper.date.HelperDate.Companion.toDateString
+import com.vsg.helper.helper.date.HelperDate.Companion.toPeriod
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
+import com.vsg.ot.R
+import common.model.ItemOtBaseCompany
+import common.model.master.batch.type.TypeBatchStatus
+import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
 import java.util.*
 import kotlin.math.abs
@@ -19,7 +28,7 @@ import kotlin.math.abs
             onDelete = ForeignKey.RESTRICT
         ),
         ForeignKey(
-            entity = Company::class,
+            entity = MasterCompany::class,
             parentColumns = arrayOf("id"),
             childColumns = arrayOf("idCompany"),
             onDelete = ForeignKey.RESTRICT
@@ -32,38 +41,16 @@ import kotlin.math.abs
     inheritSuperIndices = true,
     tableName = MasterBatch.ENTITY_NAME
 )
-class MasterBatch {
+class MasterBatch: ItemOtBaseCompany<MasterBatch>() {
+
+    //region properties
     var receiverQty: Double = 0.0
     var dueDate: Date? = null
 
     @Ignore
     var quantity: Double = 0.0
+
     val absolute: Double get() = abs(quantity)
-
-    //region fk
-    @EntityForeignKeyID(10)
-    @ColumnInfo(index = true)
-    var idProduct: Int = 0
-
-    @EntityForeignKeyID(10)
-    @Ignore
-    var product: MasterItem? = null
-
-    //endregion
-
-    //region for add
-    fun isOKForAdd(): Boolean =
-        company != null && money != null && person != null && section != null
-
-    fun itemForAdd(quantity: Double): StockDTO? {
-        return when (isOKForAdd()) {
-            true -> StockDTO(this, section = section, quantity = quantity)
-            false -> null
-        }
-    }
-    //endregion
-
-    //region util
     val percentUsefulLife: Double
         get() {
             return try {
@@ -99,33 +86,48 @@ class MasterBatch {
                 TypeBatchStatus.UNDEFINED
             }
         }
+    override val title: String
+        get() = valueCode
 
-    fun setDueDate(product: Product) {
+    //region fk
+    @EntityForeignKeyID(10)
+    @ColumnInfo(index = true)
+    var idProduct: Int = 0
+
+    @EntityForeignKeyID(10)
+    @Ignore
+    var product: MasterItem? = null
+    //endregion
+
+    //endregion
+
+    //region methods
+
+    //region for add
+    fun isOKForAdd(): Boolean =
+        company != null && money != null && person != null && section != null
+
+    fun itemForAdd(quantity: Double): StockDTO? {
+        return when (isOKForAdd()) {
+            true -> StockDTO(this, section = section, quantity = quantity)
+            false -> null
+        }
+    }
+    //endregion
+
+    //endregion
+
+    //region util
+    fun setDueDate(product: MasterItem) {
         this.dueDate = createDate.addDay(product.shellLife)
     }
     //endregion
 
-    //region description
-    override val title: String
-        get() = valueCode
-
-    override fun getDrawableShow(): Int = when (this.isEnabled) {
-        true -> R.drawable.pic_batch
-        false -> R.drawable.pic_batch_grayscale
-    }
-
-    override fun reference(): Spanned {
-        val sb = StringBuilder().append(spannedData())
-        return sb.castToHtml()
-    }
-
-    override fun descriptionView(): Spanned {
-        val sb = StringBuilder().append(spannedData())
-        sb.getBaseDescriptionView()
-        return sb.castToHtml()
-    }
-
-    private fun spannedData(): StringBuilder {
+    //region reference
+    @Ignore
+    override fun oGetDrawablePicture(): Int = R.drawable.pic_batch
+    @Ignore
+    override fun oGetSpannedGeneric(): StringBuilder {
         val sb = StringBuilder()
         sb.toTitleSpanned(codename)
         sb.toLineSpanned("Recepción", receiverQty.toFormat())
@@ -135,7 +137,7 @@ class MasterBatch {
     }
 
     override fun aEquals(other: Any?): Boolean {
-        if (other !is Batch) return false
+        if (other !is MasterBatch) return false
         return dueDate?.time == other.dueDate?.time
                 && receiverQty == other.receiverQty
                 && idProduct == other.idProduct

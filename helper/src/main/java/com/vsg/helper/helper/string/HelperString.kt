@@ -113,7 +113,9 @@ class HelperString {
         }
 
         private fun String.toTagTitle() = this.toTag(TypeTagHTML.H2)
-        fun StringBuilder.toLineSpanned(caption: String, item: String?, underline: Boolean = true) =
+        fun StringBuilder.toLineSpanned(caption: String, item: String?, underline: Boolean = true): StringBuilder =
+            this.append(caption.formatCaption().toTagCaption(underline)).append(item).appendLine()
+        fun StringBuilder.toLineSpanned(caption: String, item: Int?, underline: Boolean = true): StringBuilder =
             this.append(caption.formatCaption().toTagCaption(underline)).append(item).appendLine()
 
         fun StringBuilder.toOneLineSpanned(

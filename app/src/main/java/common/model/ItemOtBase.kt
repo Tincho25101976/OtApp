@@ -1,12 +1,14 @@
 package common.model
 
 import android.text.Spanned
+import androidx.annotation.DrawableRes
 import androidx.room.Ignore
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
 import com.vsg.helper.common.model.IEntityPagingLayoutPosition
 import com.vsg.helper.common.model.IReference
 import com.vsg.helper.common.model.ItemBase
 import com.vsg.helper.common.model.ItemBasePagingAuditingCode
+import com.vsg.helper.common.model.util.DrawableShow
 import com.vsg.helper.common.util.addItem.IAddItemEntity
 import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.ot.R
@@ -28,10 +30,16 @@ abstract class ItemOtBase<T> : ItemBasePagingAuditingCode<T>()
     override fun aTitleRecyclerAdapter(): String = title
 
     @Ignore
-    open fun aPictureRecyclerAdapter(): Int = R.drawable.pic_default
+    @DrawableRes
+    open fun oGetDrawablePicture(): Int = R.drawable.pic_default
 
     @Ignore
-    override fun getDrawableShow(): Int = R.drawable.pic_default
+    fun getPictureRecyclerAdapter(): DrawableShow =
+        DrawableShow(oGetDrawablePicture(), this.isEnabled)
+
+    @Ignore
+    override fun getDrawableShow(): DrawableShow =
+        DrawableShow(oGetDrawablePicture(), this.isEnabled)
 
     @Ignore
     override fun aTitlePopUpData(): String = title
