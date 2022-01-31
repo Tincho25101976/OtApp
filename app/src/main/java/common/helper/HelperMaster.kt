@@ -1,6 +1,6 @@
 package common.helper
 
-import common.enumType.TypeUnit
+import common.model.master.unit.TypeUnit
 import common.model.master.unit.MasterUnit
 
 class HelperMaster {

@@ -14,6 +14,7 @@ class MasterCompany : ItemOtBase<MasterCompany>(), IEntityPicture {
 
     //region properties
     var name: String = ""
+
     @ColumnInfo(name = "picture", typeAffinity = ColumnInfo.BLOB)
     override var picture: ByteArray? = null
     override val title: String
@@ -26,7 +27,7 @@ class MasterCompany : ItemOtBase<MasterCompany>(), IEntityPicture {
 
     @Ignore
     @DrawableRes
-    override fun getDrawableShow(): Int = R.drawable.pic_company
+    override fun oGetDrawablePicture(): Int = R.drawable.pic_company
 
     override fun aTitleRecyclerAdapter(): String = "$title ${
         when (hasItems) {

@@ -1,4 +1,4 @@
-package common.enumType
+package common.model.master.unit
 
 import com.vsg.helper.helper.Helper.Companion.toFormat
 import com.vsg.helper.helper.Helper.Companion.toPadStart

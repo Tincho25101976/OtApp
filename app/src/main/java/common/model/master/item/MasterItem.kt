@@ -7,7 +7,7 @@ import androidx.room.Index
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
-import common.enumType.TypeUnit
+import common.model.master.unit.TypeUnit
 import common.helper.HelperMaster.Companion.toMasterUnit
 import common.model.ItemOtBaseCompany
 import common.model.master.company.MasterCompany
@@ -58,7 +58,7 @@ class MasterItem : ItemOtBaseCompany<MasterItem>() {
     }
     //endregion
 
-    //region funtion
+    //region function
     fun setUnit(unit: TypeUnit, precision: Int = 3) {
         this.unit = unit.toMasterUnit(precision)
     }

@@ -3,8 +3,7 @@ package common.model.master.unit
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
-import common.enumType.TypeUnit
-import common.enumType.TypeUnit.Companion.toUnitDetail
+import common.model.master.unit.TypeUnit.Companion.toUnitDetail
 import common.model.ItemOtBase
 
 class MasterUnit(val unit: TypeUnit) : ItemOtBase<MasterUnit>() {
@@ -20,7 +19,7 @@ class MasterUnit(val unit: TypeUnit) : ItemOtBase<MasterUnit>() {
     override fun oGetDrawablePicture(): Int = R.drawable.pic_unit
     override fun oGetSpannedGeneric(): StringBuilder =
         StringBuilder().toTitleSpanned(title)
-            .toLineSpanned("Simbolo", symbol)
+            .toLineSpanned("Símbolo", symbol)
 
     override fun aEquals(other: Any?): Boolean {
         if (other !is MasterUnit) return false
