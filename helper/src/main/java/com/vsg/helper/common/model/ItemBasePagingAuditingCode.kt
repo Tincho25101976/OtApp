@@ -12,11 +12,11 @@ abstract class ItemBasePagingAuditingCode<T> : ItemBasePagingAuditing<T>(), IEnt
               T : IReference,
               T : IEntityPagingLayoutPosition {
 
-    @Ignore
-    override var code: String = defaultCode
+    override val code: String
+        get() =  defaultCode
 
     @Ignore
-    override var number: Long = id
+    override var number: Int = this.id
 
     @Ignore
     override var prefix: String = ""

@@ -16,7 +16,7 @@ abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResult
     IDescriptionView {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    override var id: Long = 0
+    override var id: Int = 0
 
     @ColumnInfo(name = "isDefault")
     override var isDefault: Boolean = false

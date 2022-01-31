@@ -12,9 +12,10 @@ import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
 import common.model.ItemOtBaseCompany
-import common.model.master.batch.type.TypeBatchStatus
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
+import common.model.master.section.MasterSection
+import common.model.master.stock.MasterStockDTO
 import java.util.*
 import kotlin.math.abs
 
@@ -41,7 +42,7 @@ import kotlin.math.abs
     inheritSuperIndices = true,
     tableName = MasterBatch.ENTITY_NAME
 )
-class MasterBatch: ItemOtBaseCompany<MasterBatch>() {
+class MasterBatch : ItemOtBaseCompany<MasterBatch>() {
 
     //region properties
     var receiverQty: Double = 0.0
@@ -54,12 +55,12 @@ class MasterBatch: ItemOtBaseCompany<MasterBatch>() {
     val percentUsefulLife: Double
         get() {
             return try {
-                if (product == null) return 0.0
-                if (product!!.shellLife <= 0) return 0.0
+                if (item == null) return 0.0
+                if (item!!.shellLife <= 0) return 0.0
                 if (dueDate == null || createDate == null) return 0.0
                 val rango: Long = dueDate.toPeriod(createDate)
                 if (rango <= 0) return 0.0
-                ((rango * 100) / product!!.shellLife).toDouble()
+                ((rango * 100) / item!!.shellLife).toDouble()
             } catch (e: Exception) {
                 0.0
             }
@@ -74,13 +75,13 @@ class MasterBatch: ItemOtBaseCompany<MasterBatch>() {
         }
     val status: TypeBatchStatus
         get() {
-            if (dueDate == null || product == null) return TypeBatchStatus.UNDEFINED
+            if (dueDate == null || item == null) return TypeBatchStatus.UNDEFINED
             return try {
                 val fecha: Date = HelperDate.now()
                 if (fecha >= dueDate) TypeBatchStatus.EXPIRED
-                if (product!!.shellLifeAlert <= 0) TypeBatchStatus.RIGHT
+                if (item!!.shellLifeAlert <= 0) TypeBatchStatus.RIGHT
                 val rango: Long = dueDate.toPeriod(fecha)
-                if (product!!.shellLifeAlert >= rango) TypeBatchStatus.NEAR_EXPIRY
+                if (item!!.shellLifeAlert >= rango) TypeBatchStatus.NEAR_EXPIRY
                 TypeBatchStatus.RIGHT
             } catch (e: Exception) {
                 TypeBatchStatus.UNDEFINED
@@ -89,6 +90,9 @@ class MasterBatch: ItemOtBaseCompany<MasterBatch>() {
     override val title: String
         get() = valueCode
 
+    @Ignore
+    var section: MasterSection? = null
+
     //region fk
     @EntityForeignKeyID(10)
     @ColumnInfo(index = true)
@@ -96,7 +100,7 @@ class MasterBatch: ItemOtBaseCompany<MasterBatch>() {
 
     @EntityForeignKeyID(10)
     @Ignore
-    var product: MasterItem? = null
+    var item: MasterItem? = null
     //endregion
 
     //endregion
@@ -105,11 +109,11 @@ class MasterBatch: ItemOtBaseCompany<MasterBatch>() {
 
     //region for add
     fun isOKForAdd(): Boolean =
-        company != null && money != null && person != null && section != null
+        company != null && section != null
 
-    fun itemForAdd(quantity: Double): StockDTO? {
+    fun itemForAdd(quantity: Double): MasterStockDTO? {
         return when (isOKForAdd()) {
-            true -> StockDTO(this, section = section, quantity = quantity)
+            true -> MasterStockDTO(this, section = section, quantity = quantity)
             false -> null
         }
     }
@@ -126,6 +130,7 @@ class MasterBatch: ItemOtBaseCompany<MasterBatch>() {
     //region reference
     @Ignore
     override fun oGetDrawablePicture(): Int = R.drawable.pic_batch
+
     @Ignore
     override fun oGetSpannedGeneric(): StringBuilder {
         val sb = StringBuilder()

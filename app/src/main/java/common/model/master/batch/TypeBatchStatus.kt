@@ -1,4 +1,4 @@
-package common.model.master.batch.type
+package common.model.master.batch
 
 import android.graphics.Color
 
