@@ -14,7 +14,7 @@ interface IGenericDao<TEntity> :
         where TEntity : IEntity,
               TEntity : IIsEnabled {
     @Insert
-    suspend fun insert(item: TEntity): Long
+    suspend fun insert(item: TEntity): Int
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(item: TEntity): Int
@@ -23,5 +23,5 @@ interface IGenericDao<TEntity> :
     suspend fun delete(item: TEntity): Int
 
     fun viewAll(): LiveData<List<TEntity>>?
-    fun view(id: Long): TEntity?
+    fun view(id: Int): TEntity?
 }

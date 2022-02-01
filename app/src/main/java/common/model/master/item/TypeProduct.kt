@@ -1,16 +1,17 @@
-package common.model.master.section
+package common.model.master.item
 
 import com.vsg.helper.ui.adapter.IDataAdapterEnum
 
-enum class TypeSection(
+enum class TypeProduct(
     override val value: Int, override val title: String,
     override val order: Int, override val show: Boolean = true,
     override val default: Boolean = false, override val isException: Boolean = false
 ) : IDataAdapterEnum {
-    CONTROL(value = 1, title = "Control", order = 1, show = true, default = false),
-    RESTRICTED(value = 2, title = "Restringido", order = 2, show = true, default = false),
-    NORMAL(value = 3, title = "Normal", order = 3, show = true, default = true),
-    RESERVED(value = 4, title = "Reservado", order = 4, show = true, default = false),
+    RAW_MATERIAL(value = 1, title = "Materia Prima", order = 1),
+    PROCESS_PRODUCT(value = 2, title = "Intermedio", order = 2, default = true),
+    PROCESS_PRODUCT_BULK(value = 3, title = "Intermedio (Granel)", order = 3),
+    FINISH_PRODUCT(value = 4, title = "Final", order = 4),
+    RESALE(value = 5, title = "Reventa", order = 5),
     UNDEFINED(
         value = -1,
         title = "Indefinido",

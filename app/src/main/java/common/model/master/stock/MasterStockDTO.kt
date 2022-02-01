@@ -1,7 +1,8 @@
 package common.model.master.stock
 
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.TypeSection
+import common.model.master.section.TypeSection
 import com.vsg.helper.common.format.FormatDateString
+import com.vsg.helper.common.model.viewRoom.IEntityViewRoom
 import com.vsg.helper.helper.Helper.Companion.toFormat
 import com.vsg.helper.helper.Helper.Companion.toPadStart
 import com.vsg.helper.helper.date.HelperDate.Companion.toDateString
@@ -19,7 +20,8 @@ class MasterStockDTO(
     val batch: MasterBatch,
     var section: MasterSection? = null,
     quantity: Double = 0.0
-) : ItemOtBase<MasterStockDTO>() {
+) : ItemOtBase<MasterStockDTO>(), IEntityViewRoom<MasterStockDTO>
+{
 
     //region init
     init {
@@ -55,7 +57,7 @@ class MasterStockDTO(
     val idBatch: Int
         get() = batch.id
     val idProduct: Int
-        get() = batch.idProduct
+        get() = batch.idItem
     val idSection: Int
         get() = when (section == null) {
             false -> section!!.id
@@ -98,13 +100,13 @@ class MasterStockDTO(
     val productName: String
         get() = product?.description ?: ""
     val sectionName: String
-        get() = section?.name ?: ""
+        get() = section?.description ?: ""
     val warehouseName: String
         get() = when (section == null) {
             true -> ""
             false -> when (section?.warehouse == null) {
                 true -> ""
-                false -> section?.warehouse?.name!!
+                false -> section?.warehouse?.description!!
             }
         }
     val location: String

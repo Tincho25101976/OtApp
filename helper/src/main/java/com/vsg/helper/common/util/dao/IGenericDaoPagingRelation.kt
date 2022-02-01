@@ -11,5 +11,5 @@ interface IGenericDaoPagingRelation<T> : IGenericDao<T> where T : IResultRecycle
                                                               T : IEntity,
                                                               T : IIsEnabled,
                                                               T : Comparable<T> {
-    fun viewAllPaging(idRelation: Long): DataSource.Factory<Int, T>
+    fun viewAllPaging(idRelation: Int): DataSource.Factory<Int, T>
 }

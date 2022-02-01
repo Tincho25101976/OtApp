@@ -1,14 +1,13 @@
 package common.model.master.section
 
 import androidx.room.*
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.TypeSection
-import common.model.master.warehouse.MasterWarehouse
 import com.vsg.helper.common.model.EntityForeignKeyID
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
 import common.model.ItemOtBaseCompany
 import common.model.master.company.MasterCompany
+import common.model.master.warehouse.MasterWarehouse
 
 @Entity(
     foreignKeys =
@@ -29,13 +28,12 @@ import common.model.master.company.MasterCompany
     indices =
     [
         Index(value = arrayOf("idWarehouse", "idCompany"), name = "IX_SECTION_FK"),
-        Index(value = arrayOf("name", "isEnabled", "number"), name = "IX_SECTION_MAIN"),
+        Index(value = arrayOf("description", "isEnabled", "number"), name = "IX_SECTION_MAIN"),
     ],
     inheritSuperIndices = true,
     tableName = MasterSection.ENTITY_NAME
 )
 class MasterSection : ItemOtBaseCompany<MasterSection>() {
-    var name: String = ""
     override var number: Int = 0
     override var prefix: String = ""
     var type: TypeSection = TypeSection.NORMAL
@@ -53,7 +51,7 @@ class MasterSection : ItemOtBaseCompany<MasterSection>() {
 
     //region reference
     override val title: String
-        get() = name
+        get() = description
 
     override fun oGetDrawablePicture(): Int = R.drawable.pic_section
 

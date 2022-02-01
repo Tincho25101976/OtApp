@@ -8,6 +8,6 @@ import com.vsg.helper.common.util.dao.IDaoAllTextSearchRelation
 interface IGenericDaoPagingRelationViewRoom<TEntity, TViewRoom>: IDaoAllTextSearchRelation
         where TEntity : IEntityViewRoom<TEntity>,
               TViewRoom : IEntity {
-    fun viewAllPagingViewRoom(idRelation: Long): DataSource.Factory<Int, TViewRoom>
-    fun viewAllListViewRoom(idRelation: Long): List<TViewRoom>?
+    fun viewAllPagingViewRoom(idRelation: Int): DataSource.Factory<Int, TViewRoom>
+    fun viewAllListViewRoom(idRelation: Int): List<TViewRoom>?
 }

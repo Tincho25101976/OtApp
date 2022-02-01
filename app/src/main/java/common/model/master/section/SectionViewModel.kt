@@ -5,6 +5,7 @@ import com.vsg.agendaandpublication.common.data.AppDatabase
 import com.vsg.agendaandpublication.common.model.viewModel.ViewModelGenericForCode
 import com.vsg.utilities.common.util.viewModel.IViewModelUpdateIsDefault
 import common.model.master.section.MasterSection
+import common.model.master.section.SectionDao
 
 @ExperimentalStdlibApi
 class SectionViewModel(context: Application) :

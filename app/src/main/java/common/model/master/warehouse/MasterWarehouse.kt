@@ -24,13 +24,12 @@ import common.model.master.section.MasterSection
     ],
     indices = [
         Index(value = arrayOf("idCompany"), name = "IX_WAREHOUSE_FK"),
-        Index(value = arrayOf("name", "prefix", "isEnabled"), name = "IX_WAREHOUSE_MAIN"),
+        Index(value = arrayOf("description", "prefix", "isEnabled"), name = "IX_WAREHOUSE_MAIN"),
     ],
     inheritSuperIndices = true,
     tableName = MasterWarehouse.ENTITY_NAME
 )
 class MasterWarehouse : ItemOtBaseCompany<MasterWarehouse>() {
-    var name: String = ""
     override var prefix: String = ""
     var location: String = ""
     override var number: Int = 0
@@ -41,14 +40,12 @@ class MasterWarehouse : ItemOtBaseCompany<MasterWarehouse>() {
 
     //region reference
     override val title: String
-        get() = name
+        get() = description
 
     override fun oGetDrawablePicture(): Int = R.drawable.pic_warehouse
-    override fun aTitleRecyclerAdapter(): String = name
-    override fun aTitlePopUpData(): String = name
     override fun oGetSpannedGeneric(): StringBuilder {
         val sb = StringBuilder()
-        sb.toTitleSpanned(name)
+        sb.toTitleSpanned(description)
         sb.toLineSpanned("Abreviatura", prefix)
         if (location.isNotEmpty()) sb.toLineSpanned("Ubicación", location)
         return sb
@@ -56,7 +53,7 @@ class MasterWarehouse : ItemOtBaseCompany<MasterWarehouse>() {
 
     override fun aEquals(other: Any?): Boolean {
         if (other !is MasterWarehouse) return false
-        return name == other.name
+        return description == other.description
                 && location == other.location
     }
     //endregion

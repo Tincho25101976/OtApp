@@ -96,7 +96,7 @@ class MasterBatch : ItemOtBaseCompany<MasterBatch>() {
     //region fk
     @EntityForeignKeyID(10)
     @ColumnInfo(index = true)
-    var idProduct: Int = 0
+    var idItem: Int = 0
 
     @EntityForeignKeyID(10)
     @Ignore
@@ -145,7 +145,7 @@ class MasterBatch : ItemOtBaseCompany<MasterBatch>() {
         if (other !is MasterBatch) return false
         return dueDate?.time == other.dueDate?.time
                 && receiverQty == other.receiverQty
-                && idProduct == other.idProduct
+                && idItem == other.idItem
     }
     //endregion
 

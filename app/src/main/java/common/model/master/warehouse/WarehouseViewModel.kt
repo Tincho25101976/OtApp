@@ -8,6 +8,7 @@ import com.vsg.agendaandpublication.common.model.viewModel.ViewModelGenericForCo
 import com.vsg.utilities.common.util.viewModel.IViewModelHasItemsRelationType
 import com.vsg.utilities.common.util.viewModel.IViewModelUpdateIsDefault
 import common.model.master.warehouse.MasterWarehouse
+import common.model.master.warehouse.WarehouseDao
 
 @ExperimentalStdlibApi
 class WarehouseViewModel(context: Application) :

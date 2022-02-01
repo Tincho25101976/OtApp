@@ -20,11 +20,11 @@ abstract class ItemOtBaseCompany<T> : ItemOtBase<T>()
     //region properties
     @EntityForeignKeyID(10)
     @ColumnInfo(index = true)
-    val idCompany: Int = 0
+    var idCompany: Int = 0
 
     @EntityForeignKeyID(10)
     @Ignore
-    val company: MasterCompany? = null
+    var company: MasterCompany? = null
     //endregion
 
     //region methods

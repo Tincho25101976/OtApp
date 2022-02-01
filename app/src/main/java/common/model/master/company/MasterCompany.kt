@@ -13,12 +13,10 @@ import common.model.ItemOtBase
 class MasterCompany : ItemOtBase<MasterCompany>(), IEntityPicture {
 
     //region properties
-    var name: String = ""
-
     @ColumnInfo(name = "picture", typeAffinity = ColumnInfo.BLOB)
     override var picture: ByteArray? = null
     override val title: String
-        get() = name
+        get() = description
     //endregion
 
     //region methods
@@ -37,11 +35,11 @@ class MasterCompany : ItemOtBase<MasterCompany>(), IEntityPicture {
     }"
 
     override fun oGetSpannedGeneric(): StringBuilder =
-        StringBuilder().toTitleSpanned(name)
+        StringBuilder().toTitleSpanned(description)
 
     override fun aEquals(other: Any?): Boolean {
         if (other !is MasterCompany) return false
-        return name == other.name
+        return description == other.description
                 && picture.contentEquals(other.picture)
     }
     //endregion

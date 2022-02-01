@@ -35,6 +35,8 @@ class MasterItem : ItemOtBaseCompany<MasterItem>() {
     var shellLife: Int = 0
     var shellLifeAlert: Int = 0
     var unit: MasterUnit? = null
+    var typeProduct: TypeProduct = TypeProduct.UNDEFINED
+    var typePlant: TypePlant = TypePlant.UNDEFINED
     override val title: String
         get() = item
     //endregion
@@ -47,6 +49,8 @@ class MasterItem : ItemOtBaseCompany<MasterItem>() {
         sb.toLineSpanned("Producto", description)
         if (unit != null) sb.toLineSpanned("Unidad", unit?.symbol)
         sb.toLineSpanned("Vida útil", shellLife)
+        sb.toLineSpanned("Tipo de producto", typeProduct.title)
+        sb.toLineSpanned("Planta", typePlant.title)
         return sb
     }
 

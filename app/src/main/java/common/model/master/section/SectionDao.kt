@@ -1,51 +1,47 @@
-package com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.section
+package common.model.master.section
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
-import com.vsg.utilities.common.util.dao.IDaoAllUpdateIsDefault
-import com.vsg.utilities.common.util.dao.IGenericDaoPagingRelationCode
-import common.model.master.section.MasterSection
+import com.vsg.helper.common.util.dao.IDaoAllUpdateIsDefault
+import com.vsg.helper.common.util.dao.IGenericDaoPagingRelationCode
 
 @Dao
 abstract class SectionDao : IGenericDaoPagingRelationCode<MasterSection>, IDaoAllUpdateIsDefault {
     //region paging
     @Query("SELECT * FROM ${MasterSection.ENTITY_NAME} WHERE idWarehouse = :idRelation ORDER BY valueCode")
-    abstract override fun viewAllPaging(idRelation: Long): DataSource.Factory<Int, MasterSection>
-    //endregion
-
-    //region code
-    @Query("SELECT IFNULL(MAX(number), 0) + 1 FROM ${MasterSection.ENTITY_NAME} WHERE idWarehouse = :idRelation")
-    abstract override fun viewNextAutoCode(idRelation: Long): Long
+    abstract override fun viewAllPaging(idRelation: Int): DataSource.Factory<Int, MasterSection>
     //endregion
 
     //region items
     @Query("SELECT * FROM ${MasterSection.ENTITY_NAME} WHERE id = :id LIMIT 1")
-    abstract override fun view(id: Long): MasterSection?
+    abstract override fun view(id: Int): MasterSection?
     //endregion
 
     //region enabled
     @Query("UPDATE ${MasterSection.ENTITY_NAME} SET isEnabled = NOT isEnabled WHERE id = :data")
-    abstract override fun updateSetEnabled(data: Long)
+    abstract override fun updateSetEnabled(data: Int)
     //endregion
 
     //region search
     @Query("SELECT valueCode FROM ${MasterSection.ENTITY_NAME} WHERE idWarehouse = :idRelation GROUP BY valueCode ORDER BY valueCode")
-    abstract override fun viewGetAllTextSearch(idRelation: Long): LiveData<List<String>>
+    abstract override fun viewGetAllTextSearch(idRelation: Int): LiveData<List<String>>
     //endregion
 
     //region parameters
     @Query("SELECT EXISTS(SELECT * FROM ${MasterSection.ENTITY_NAME} WHERE idWarehouse = :idRelation)")
-    abstract override fun viewHasItems(idRelation: Long): Boolean
+    abstract override fun viewHasItems(idRelation: Int): Boolean
     //endregion
 
     //region list
     @Query("SELECT * FROM ${MasterSection.ENTITY_NAME} WHERE idWarehouse = :idRelation ORDER BY valueCode")
-    abstract override fun viewAllSimpleList(idRelation: Long): List<MasterSection>?
+    abstract override fun viewAllSimpleList(idRelation: Int): List<MasterSection>?
+
     @Query("SELECT * FROM ${MasterSection.ENTITY_NAME} WHERE idCompany = :idRelation ORDER BY valueCode")
-    abstract fun viewAllSimpleListByCompany(idRelation: Long): List<MasterSection>?
+    abstract fun viewAllSimpleListByCompany(idRelation: Int): List<MasterSection>?
+
     @Query("SELECT * FROM ${MasterSection.ENTITY_NAME} ORDER BY valueCode")
     abstract fun viewAllSimpleList(): List<MasterSection>?
     //endregion
@@ -57,12 +53,12 @@ abstract class SectionDao : IGenericDaoPagingRelationCode<MasterSection>, IDaoAl
 
     //region check
     @Query("SELECT EXISTS(SELECT * FROM ${MasterSection.ENTITY_NAME} WHERE id = :entity)")
-    abstract override fun checkExitsEntity(entity: Long): Boolean
+    abstract override fun checkExitsEntity(entity: Int): Boolean
     //endregion
 
     //region updateIsDefault
     @Transaction
     @Query("UPDATE ${MasterSection.ENTITY_NAME} SET isDefault = CASE id WHEN :idEntity THEN 1 ELSE 0 END WHERE idWarehouse = :idRelation ")
-    abstract override fun updateSetAllIsDefault(idEntity: Long, idRelation: Long)
+    abstract override fun updateSetAllIsDefault(idEntity: Int, idRelation: Int)
     //endregion
 }
