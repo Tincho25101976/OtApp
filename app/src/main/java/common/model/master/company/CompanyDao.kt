@@ -5,7 +5,7 @@ import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
-import common.model.master.relationship.CompanyProduct
+import common.model.master.relationship.CompanyItem
 import com.vsg.helper.common.util.dao.IGenericDaoPaging
     //region embebed
 
@@ -14,7 +14,7 @@ abstract class CompanyDao : IGenericDaoPaging<MasterCompany> {
     //region relationShip
     @Transaction
     @Query("SELECT * FROM ${MasterCompany.ENTITY_NAME} WHERE id = :id ORDER BY description")
-    abstract fun viewCompanyWithProduct(id: Int): DataSource.Factory<Int, CompanyProduct>
+    abstract fun viewCompanyWithProduct(id: Int): DataSource.Factory<Int, CompanyItem>
     //endregion
 
     //region paging

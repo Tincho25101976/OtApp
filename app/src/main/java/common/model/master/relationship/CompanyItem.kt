@@ -5,12 +5,12 @@ import androidx.room.Relation
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
 
-data class CompanyProduct(
+data class CompanyItem(
     @Embedded
     val company: MasterCompany,
     @Relation(
         parentColumn = "id",
         entityColumn = "idCompany"
     )
-    val product: List<MasterItem>
+    val items: List<MasterItem>
 )

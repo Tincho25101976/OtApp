@@ -7,10 +7,10 @@ enum class TypeSection(
     override val order: Int, override val show: Boolean = true,
     override val default: Boolean = false, override val isException: Boolean = false
 ) : IDataAdapterEnum {
-    CONTROL(value = 1, title = "Control", order = 1, show = true, default = false),
-    RESTRICTED(value = 2, title = "Restringido", order = 2, show = true, default = false),
-    NORMAL(value = 3, title = "Normal", order = 3, show = true, default = true),
-    RESERVED(value = 4, title = "Reservado", order = 4, show = true, default = false),
+    CONTROL(value = 1, title = "Control", order = 1),
+    RESTRICTED(value = 2, title = "Restringido", order = 2),
+    NORMAL(value = 3, title = "Normal", order = 3, default = true),
+    RESERVED(value = 4, title = "Reservado", order = 4),
     UNDEFINED(
         value = -1,
         title = "Indefinido",
