@@ -1,32 +1,30 @@
-package com.vsg.agendaandpublication.common.model.itemProduct.company
+package common.model.master.company
 
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import com.vsg.agendaandpublication.common.data.AppDatabase
-import com.vsg.agendaandpublication.common.model.itemOperation.operation.operation.OperationViewModel
 import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.WarehouseViewModel
-import com.vsg.agendaandpublication.common.model.itemPerson.PersonViewModel
-import com.vsg.agendaandpublication.common.model.itemProduct.filter.TypeFilterHasCompanyItems
-import com.vsg.agendaandpublication.common.model.itemProduct.product.ProductViewModel
-import com.vsg.agendaandpublication.common.model.viewModel.ViewModelGeneric
+import common.model.master.filter.TypeFilterHasCompanyItems
+import common.model.master.item.ProductViewModel
+import com.vsg.helper.common.model.viewModel.ViewModelGeneric
+import com.vsg.helper.common.util.viewModel.*
 import com.vsg.utilities.common.util.viewModel.*
-import common.model.master.company.CompanyDao
 import kotlinx.coroutines.runBlocking
 
 @ExperimentalStdlibApi
 class CompanyViewModel(application: Application) :
 //MakeGenericViewModelPaging
-    ViewModelGeneric<CompanyDao, Company>(
+    ViewModelGeneric<CompanyDao, MasterCompany>(
         AppDatabase.getInstance(application)?.companyDao()!!, application
     ),
     IViewModelAllTextSearch,
-    IViewModelView<Company>,
-    IViewModelAllSimpleList<Company>,
+    IViewModelView<MasterCompany>,
+    IViewModelAllSimpleList<MasterCompany>,
     IViewModelHasItemsRelationType<TypeFilterHasCompanyItems>,
     IViewModelHasItemsRelation {
 
-    fun viewModelGetViewProductWithPicture(id: Long) = runBlocking {
+    fun viewModelGetViewProductWithPicture(id: Int) = runBlocking {
         return@runBlocking Pager(
             pagingConfig,
             0,
@@ -38,10 +36,11 @@ class CompanyViewModel(application: Application) :
         return@runBlocking dao.viewAllTextSearch()
     }
 
-    override fun viewModelViewAllSimpleList(): List<Company> = dao.viewAllSimpleList() ?: listOf()
+    override fun viewModelViewAllSimpleList(): List<MasterCompany> =
+        dao.viewAllSimpleList() ?: listOf()
 
     override fun viewModelViewHasItems(
-        idRelation: Long,
+        idRelation: Int,
         filter: TypeFilterHasCompanyItems
     ): Boolean {
         return when (filter) {
@@ -51,15 +50,9 @@ class CompanyViewModel(application: Application) :
             TypeFilterHasCompanyItems.WAREHOUSE -> WarehouseViewModel(context).viewModelViewHasItems(
                 idRelation
             )
-            TypeFilterHasCompanyItems.OPERATION -> OperationViewModel(context).viewModelViewHasItems(
-                idRelation
-            )
-            TypeFilterHasCompanyItems.PERSON -> PersonViewModel(context).viewModelViewHasItems(
-                idRelation
-            )
         }
     }
 
-    override fun viewModelViewHasItems(idRelation: Long): Boolean =
+    override fun viewModelViewHasItems(idRelation: Int): Boolean =
         ProductViewModel(context).viewModelViewHasItems(idRelation)
 }

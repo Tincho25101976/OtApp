@@ -16,10 +16,9 @@ import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.sectio
 import com.vsg.agendaandpublication.common.model.itemPerson.Person
 import com.vsg.agendaandpublication.common.model.itemPerson.PersonViewModel
 import com.vsg.agendaandpublication.common.model.itemProduct.company.Company
-import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyViewModel
+import common.model.master.company.CompanyViewModel
 import com.vsg.agendaandpublication.common.model.itemProduct.product.Product
-import com.vsg.agendaandpublication.common.model.itemProduct.product.ProductViewModel
-import com.vsg.agendaandpublication.common.model.viewModel.ViewModelGenericForCode
+import common.model.master.item.ProductViewModel
 import com.vsg.utilities.common.model.IEntity
 import com.vsg.utilities.common.util.viewModel.IViewModelCRUD
 import com.vsg.utilities.common.util.viewModel.util.FilterMemberInclude

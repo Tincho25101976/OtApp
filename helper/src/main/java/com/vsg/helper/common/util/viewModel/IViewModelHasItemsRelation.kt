@@ -1,5 +1,5 @@
 package com.vsg.helper.common.util.viewModel
 
 interface IViewModelHasItemsRelation {
-    fun viewModelViewHasItems(idRelation: Long): Boolean
+    fun viewModelViewHasItems(idRelation: Int): Boolean
 }

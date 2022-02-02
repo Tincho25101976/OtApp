@@ -4,7 +4,6 @@ import android.app.Application
 import com.vsg.agendaandpublication.common.data.AppDatabase
 import com.vsg.agendaandpublication.common.model.itemOperation.filter.TypeFilterHasWarehouseItems
 import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.section.SectionViewModel
-import com.vsg.agendaandpublication.common.model.viewModel.ViewModelGenericForCode
 import com.vsg.utilities.common.util.viewModel.IViewModelHasItemsRelationType
 import com.vsg.utilities.common.util.viewModel.IViewModelUpdateIsDefault
 import common.model.master.warehouse.MasterWarehouse
