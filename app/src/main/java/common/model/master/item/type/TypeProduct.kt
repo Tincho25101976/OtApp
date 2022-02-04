@@ -1,4 +1,4 @@
-package common.model.master.item
+package common.model.master.item.type
 
 import com.vsg.helper.ui.adapter.IDataAdapterEnum
 

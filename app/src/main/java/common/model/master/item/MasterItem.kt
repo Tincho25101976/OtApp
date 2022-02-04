@@ -12,6 +12,8 @@ import common.helper.HelperMaster.Companion.toMasterUnit
 import common.model.init.entity.EntityOtCompany
 import common.model.master.batch.MasterBatch
 import common.model.master.company.MasterCompany
+import common.model.master.item.type.TypePlant
+import common.model.master.item.type.TypeProduct
 import common.model.master.unit.MasterUnit
 
 @Entity(

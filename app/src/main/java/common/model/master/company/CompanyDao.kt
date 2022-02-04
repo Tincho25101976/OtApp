@@ -5,16 +5,20 @@ import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
+import common.model.init.dao.DaoGenericOt
+import common.model.master.relationship.CompanyBatch
 import common.model.master.relationship.CompanyItem
-import com.vsg.helper.common.util.dao.IGenericDaoPaging
-    //region embebed
 
 @Dao
-abstract class CompanyDao : IGenericDaoPaging<MasterCompany> {
+abstract class CompanyDao : DaoGenericOt<MasterCompany>() {
     //region relationShip
     @Transaction
     @Query("SELECT * FROM ${MasterCompany.ENTITY_NAME} WHERE id = :id ORDER BY description")
     abstract fun viewCompanyWithProduct(id: Int): DataSource.Factory<Int, CompanyItem>
+
+    @Transaction
+    @Query("SELECT * FROM ${MasterCompany.ENTITY_NAME} WHERE id = :id ORDER BY description")
+    abstract fun viewCompanyWithBatch(id: Int): DataSource.Factory<Int, CompanyBatch>
     //endregion
 
     //region paging

@@ -2,7 +2,7 @@ package common.model.master.stock
 
 import androidx.room.DatabaseView
 import androidx.room.Ignore
-import common.model.master.section.TypeSection
+import common.model.master.section.type.TypeSection
 import com.vsg.helper.common.model.IEntity
 import common.helper.HelperMaster.Companion.toMasterUnit
 import common.model.master.batch.MasterBatch

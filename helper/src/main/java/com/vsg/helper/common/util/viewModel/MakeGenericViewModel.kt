@@ -341,6 +341,7 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
         data = when (type) {
             TypeFilterAnnotation.ENTITY -> data.filter { it.isEntityId }.toMutableList()
             TypeFilterAnnotation.LIST_OF_ENTITY -> data.filter { it.isEntityList }.toMutableList()
+            TypeFilterAnnotation.TITLE_UI -> mutableListOf()
         }
         if (names != null && names.any()) {
             data = data.filter {
@@ -359,7 +360,9 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
 
     private enum class TypeFilterAnnotation {
         ENTITY,
-        LIST_OF_ENTITY
+        LIST_OF_ENTITY,
+        // TODO: resolver
+        TITLE_UI
     }
     //endregion
 }

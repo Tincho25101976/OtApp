@@ -1,6 +1,6 @@
 package common.model.master.stock
 
-import common.model.master.section.TypeSection
+import common.model.master.section.type.TypeSection
 import com.vsg.helper.common.format.FormatDateString
 import com.vsg.helper.common.model.viewRoom.IEntityViewRoom
 import com.vsg.helper.helper.Helper.Companion.toFormat

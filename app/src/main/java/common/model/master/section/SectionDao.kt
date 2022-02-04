@@ -6,11 +6,11 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
 import com.vsg.helper.common.util.dao.IDaoAllUpdateIsDefault
-import com.vsg.helper.common.util.dao.IGenericDaoPagingRelationCode
-import common.model.init.dao.DaoGenericOt
+import common.model.init.dao.DaoGenericOtCompany
 
 @Dao
-abstract class SectionDao : DaoGenericOt<MasterSection>(), IDaoAllUpdateIsDefault {
+abstract class SectionDao : DaoGenericOtCompany<MasterSection>(),
+    IDaoAllUpdateIsDefault {
     //region paging
     @Query("SELECT * FROM ${MasterSection.ENTITY_NAME} WHERE idWarehouse = :idRelation ORDER BY valueCode")
     abstract override fun viewAllPaging(idRelation: Int): DataSource.Factory<Int, MasterSection>
@@ -44,7 +44,7 @@ abstract class SectionDao : DaoGenericOt<MasterSection>(), IDaoAllUpdateIsDefaul
     abstract fun viewAllSimpleListByCompany(idRelation: Int): List<MasterSection>?
 
     @Query("SELECT * FROM ${MasterSection.ENTITY_NAME} ORDER BY valueCode")
-    abstract fun viewAllSimpleList(): List<MasterSection>?
+    abstract override fun viewAllSimpleList(): List<MasterSection>?
     //endregion
 
     //region disabled

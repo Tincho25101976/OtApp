@@ -8,6 +8,11 @@ import com.vsg.helper.common.model.IEntityPicture
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
 import common.model.init.entity.EntityOt
+import common.model.master.batch.MasterBatch
+import common.model.master.item.MasterItem
+import common.model.master.section.MasterSection
+import common.model.master.stock.MasterStock
+import common.model.master.warehouse.MasterWarehouse
 
 @Entity(tableName = MasterCompany.ENTITY_NAME)
 class MasterCompany : EntityOt<MasterCompany>(), IEntityPicture {
@@ -17,6 +22,22 @@ class MasterCompany : EntityOt<MasterCompany>(), IEntityPicture {
     override var picture: ByteArray? = null
     override val title: String
         get() = description
+
+    @Ignore
+    val masterItem: MutableList<MasterItem> = mutableListOf()
+
+    @Ignore
+    val masterBatch: MutableList<MasterBatch> = mutableListOf()
+
+    @Ignore
+    val masterWarehouse: MutableList<MasterWarehouse> = mutableListOf()
+
+    @Ignore
+    val masterSection: MutableList<MasterSection> = mutableListOf()
+
+    @Ignore
+    val masterStock: MutableList<MasterStock> = mutableListOf()
+
     //endregion
 
     //region methods

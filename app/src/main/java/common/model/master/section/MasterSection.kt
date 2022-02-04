@@ -7,6 +7,7 @@ import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
 import common.model.init.entity.EntityOtCompany
 import common.model.master.company.MasterCompany
+import common.model.master.section.type.TypeSection
 import common.model.master.warehouse.MasterWarehouse
 
 @Entity(

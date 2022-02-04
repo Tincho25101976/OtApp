@@ -3,17 +3,11 @@ package common.model.init.viewModel
 import android.app.Application
 import com.vsg.agendaandpublication.common.data.AppDatabase
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
-import com.vsg.helper.common.model.IEntity
-import com.vsg.helper.common.model.IEntityPagingLayoutPosition
-import com.vsg.helper.common.model.IIsDefault
-import com.vsg.helper.common.model.IIsEnabled
-import com.vsg.helper.common.util.dao.IDaoAllSimpleListRelation
-import com.vsg.helper.common.util.dao.IDaoAllTextSearchRelation
-import com.vsg.helper.common.util.dao.IGenericDao
-import com.vsg.helper.common.util.dao.IGenericDaoPagingRelation
+import com.vsg.helper.common.model.*
+import com.vsg.helper.common.util.dao.*
 import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleListIdRelation
 import com.vsg.helper.common.util.viewModel.IViewModelView
-import com.vsg.helper.common.util.viewModel.MakeGenericViewModelPagingRelation
+import com.vsg.helper.common.util.viewModel.MakeGenericViewModelPagingRelationCode
 import common.model.master.batch.BatchViewModel
 import common.model.master.batch.MasterBatch
 import common.model.master.company.CompanyViewModel
@@ -28,14 +22,16 @@ import kotlin.reflect.KType
 
 @ExperimentalStdlibApi
 abstract class ViewModelGenericForCode<TDao, TEntity>(dao: TDao, context: Application) :
-    MakeGenericViewModelPagingRelation<TDao, TEntity>(
+    MakeGenericViewModelPagingRelationCode<TDao, TEntity>(
         dao, context
     )
         where TDao : IGenericDao<TEntity>,
               TDao : IGenericDaoPagingRelation<TEntity>,
               TDao : IDaoAllTextSearchRelation,
               TDao : IDaoAllSimpleListRelation<TEntity>,
+              TDao : IGenericDaoPagingRelationCode<TEntity>,
               TEntity : IEntity,
+              TEntity : IEntityCode,
               TEntity : IIsEnabled,
               TEntity : IIsDefault,
               TEntity : IResultRecyclerAdapter,
@@ -72,6 +68,8 @@ abstract class ViewModelGenericForCode<TDao, TEntity>(dao: TDao, context: Applic
         }
     }
     //endregion
+
+    override fun viewModelEncode(item: TEntity): TEntity? = item
 
     //region IViewModel
     override fun getInstanceOfIViewModelView(type: KType): IViewModelView<*>? {

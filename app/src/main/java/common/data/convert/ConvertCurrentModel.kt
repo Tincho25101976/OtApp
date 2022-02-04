@@ -3,9 +3,9 @@ package common.data.convert
 import androidx.room.TypeConverter
 import com.vsg.helper.common.utilEnum.IValue
 import common.model.master.batch.TypeBatchStatus
-import common.model.master.item.TypePlant
-import common.model.master.item.TypeProduct
-import common.model.master.section.TypeSection
+import common.model.master.item.type.TypePlant
+import common.model.master.item.type.TypeProduct
+import common.model.master.section.type.TypeSection
 import common.model.master.unit.TypeUnit
 
 class ConvertCurrentModel {

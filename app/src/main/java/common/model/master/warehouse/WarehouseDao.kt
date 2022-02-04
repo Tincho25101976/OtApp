@@ -6,10 +6,10 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
 import com.vsg.helper.common.util.dao.IDaoAllUpdateIsDefault
-import com.vsg.helper.common.util.dao.IGenericDaoPagingRelationCode
+import common.model.init.dao.DaoGenericOtCompany
 
 @Dao
-abstract class WarehouseDao : IGenericDaoPagingRelationCode<MasterWarehouse>,
+abstract class WarehouseDao : DaoGenericOtCompany<MasterWarehouse>(),
     IDaoAllUpdateIsDefault {
     //region paging
     @Query("SELECT * FROM ${MasterWarehouse.ENTITY_NAME} WHERE idCompany = :idRelation ORDER BY valueCode")
@@ -39,6 +39,12 @@ abstract class WarehouseDao : IGenericDaoPagingRelationCode<MasterWarehouse>,
     //region list
     @Query("SELECT * FROM ${MasterWarehouse.ENTITY_NAME} WHERE idCompany = :idRelation ORDER BY valueCode")
     abstract override fun viewAllSimpleList(idRelation: Int): List<MasterWarehouse>?
+
+    @Query("SELECT * FROM ${MasterWarehouse.ENTITY_NAME} ORDER BY valueCode")
+    abstract override fun viewAllPaging(): DataSource.Factory<Int, MasterWarehouse>
+
+    @Query("SELECT * FROM ${MasterWarehouse.ENTITY_NAME} ORDER BY valueCode")
+    abstract override fun viewAllSimpleList(): List<MasterWarehouse>?
     //endregion
 
     //region disabled
@@ -55,5 +61,6 @@ abstract class WarehouseDao : IGenericDaoPagingRelationCode<MasterWarehouse>,
     @Transaction
     @Query("UPDATE ${MasterWarehouse.ENTITY_NAME} SET isDefault = CASE id WHEN :idEntity THEN 1 ELSE 0 END WHERE idCompany = :idRelation ")
     abstract override fun updateSetAllIsDefault(idEntity: Int, idRelation: Int)
+
     //endregion
 }

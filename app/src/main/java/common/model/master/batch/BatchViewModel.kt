@@ -2,16 +2,15 @@ package common.model.master.batch
 
 import android.app.Application
 import com.vsg.agendaandpublication.common.data.AppDatabase
-import com.vsg.agendaandpublication.common.model.itemOperation.stock.StockViewModel
 import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.util.viewModel.IViewModelCRUD
 import com.vsg.helper.common.util.viewModel.util.FilterMemberInclude
 import com.vsg.helper.helper.Helper.Companion.toCount
-import common.model.master.item.ProductViewModel
+import common.model.init.viewModel.ViewModelGenericForCode
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
+import common.model.master.item.ProductViewModel
 import common.model.master.stock.MasterStockDTO
-import common.model.init.viewModel.ViewModelGenericForCode
 import kotlin.reflect.typeOf
 
 @ExperimentalStdlibApi
@@ -54,7 +53,7 @@ class BatchViewModel(context: Application) :
     }
     //endregion
 
-    fun viewModelGetProduct(idRelation: Long): MasterItem? =
+    fun viewModelGetProduct(idRelation: Int): MasterItem? =
         ProductViewModel(context).viewModelView(idRelation)
 
     //region transaction

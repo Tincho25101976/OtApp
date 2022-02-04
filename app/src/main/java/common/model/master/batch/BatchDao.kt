@@ -5,10 +5,10 @@ import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
-import com.vsg.helper.common.util.dao.IGenericDaoPagingRelationCode
+import common.model.init.dao.DaoGenericOtCompany
 
 @Dao
-abstract class BatchDao : IGenericDaoPagingRelationCode<MasterBatch> {
+abstract class BatchDao : DaoGenericOtCompany<MasterBatch>() {
     //region paging
     @Query("SELECT * FROM ${MasterBatch.ENTITY_NAME} WHERE idItem = :idRelation ORDER BY valueCode")
     abstract override fun viewAllPaging(idRelation: Int): DataSource.Factory<Int, MasterBatch>
@@ -37,6 +37,12 @@ abstract class BatchDao : IGenericDaoPagingRelationCode<MasterBatch> {
     //region list
     @Query("SELECT * FROM ${MasterBatch.ENTITY_NAME} WHERE idItem = :idRelation ORDER BY valueCode")
     abstract override fun viewAllSimpleList(idRelation: Int): List<MasterBatch>?
+
+    @Query("SELECT * FROM ${MasterBatch.ENTITY_NAME} ORDER BY valueCode")
+    abstract override fun viewAllPaging(): DataSource.Factory<Int, MasterBatch>
+
+    @Query("SELECT * FROM ${MasterBatch.ENTITY_NAME} ORDER BY valueCode")
+    abstract override fun viewAllSimpleList(): List<MasterBatch>?
     //endregion
 
     //region disabled

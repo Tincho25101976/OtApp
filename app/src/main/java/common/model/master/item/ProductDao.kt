@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
-import common.model.init.dao.DaoGenericOt
+import common.model.init.dao.DaoGenericOtCompany
 
 @Dao
- class ProductDao : DaoGenericOt<MasterItem>() {
+abstract class ProductDao : DaoGenericOtCompany<MasterItem>() {
 
     //region paging
     @Query("SELECT * FROM ${MasterItem.ENTITY_NAME} WHERE id < 0 ORDER BY description")
@@ -22,6 +22,9 @@ import common.model.init.dao.DaoGenericOt
 
     @Query("SELECT * FROM ${MasterItem.ENTITY_NAME} ORDER BY description")
     abstract override fun viewAll(): LiveData<List<MasterItem>>?
+
+    @Query("SELECT * FROM ${MasterItem.ENTITY_NAME} ORDER BY description")
+    abstract override fun viewAllSimpleList(): List<MasterItem>?
 
     @Query("UPDATE ${MasterItem.ENTITY_NAME} SET isEnabled = NOT isEnabled WHERE id = :data")
     abstract override fun updateSetEnabled(data: Int)

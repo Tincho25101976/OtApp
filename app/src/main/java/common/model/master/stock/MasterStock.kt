@@ -1,6 +1,7 @@
 package common.model.master.stock
 
 import androidx.room.*
+import com.vsg.helper.common.model.EntityForeignKeyID
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
@@ -37,8 +38,36 @@ import kotlin.math.abs
 class MasterStock : EntityOtCompany<MasterStock>() {
 
     //region properties
-    var itemCode: String = ""
-    var bathCode: String = ""
+    val itemCode: String
+        get() {
+            return item?.valueCode ?: ""
+        }
+    val bathCode: String
+        get() {
+            return when(batch == null) {true -> "" else -> batch?.valueCode ?: ""}
+        }
+
+
+
+    //region fk
+    @EntityForeignKeyID(10)
+    @ColumnInfo(index = true)
+    var idItem: Int = 0
+
+    @EntityForeignKeyID(10)
+    @Ignore
+    var item: MasterItem? = null
+
+    @EntityForeignKeyID(20)
+    @ColumnInfo(index = true)
+    var idBatch: Int = 0
+
+    @EntityForeignKeyID(20)
+    @Ignore
+    var batch: MasterBatch? = null
+    //endregion
+
+
 
     @Ignore
     override var valueCode: String = ""

@@ -43,5 +43,7 @@ class ProductViewModel(context: Application) :
             )
         }
     }
+
+
     //endregion
 }

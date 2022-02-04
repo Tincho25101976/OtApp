@@ -41,8 +41,8 @@ abstract class MakeGenericViewModelViewRoom<TDao, TEntity, TViewRoom>(
     //endregion
 
     //region view
-    override fun viewModelGetViewAllPaging(idRelation: Long) = runBlocking {
-        var i: Long = 0
+    override fun viewModelGetViewAllPaging(idRelation: Int) = runBlocking {
+        var i = 0
         val data: Flow<PagingData<TEntity>> = Pager(
             pagingConfig,
             0,
@@ -56,8 +56,8 @@ abstract class MakeGenericViewModelViewRoom<TDao, TEntity, TViewRoom>(
         return@runBlocking data
     }
 
-    override fun viewModelViewAllSimpleList(idRelation: Long): List<TEntity> {
-        var i: Long = 0
+    override fun viewModelViewAllSimpleList(idRelation: Int): List<TEntity> {
+        var i = 0
         val temp = dao.viewAllListViewRoom(idRelation)
         return when (temp == null) {
             true -> emptyList()
@@ -69,7 +69,7 @@ abstract class MakeGenericViewModelViewRoom<TDao, TEntity, TViewRoom>(
         }
     }
 
-    override fun viewModelGetAllTextSearch(idRelation: Long): LiveData<List<String>> =
+    override fun viewModelGetAllTextSearch(idRelation: Int): LiveData<List<String>> =
         dao.viewGetAllTextSearch(idRelation)
 
     abstract fun viewRoomToEntity(item: TViewRoom): TEntity
@@ -145,7 +145,7 @@ abstract class MakeGenericViewModelViewRoom<TDao, TEntity, TViewRoom>(
                 list.add(MappingInclude().apply {
                     groupId = it.valueId
                     name = it.name
-                    idEntity = it.toLong(data)
+                    idEntity = it.toInt(data)
                     isIdEntity = it.isLong
                     isEntity = include.javaTypeEntity == it.javaKType
                     type = it.kType
@@ -160,7 +160,7 @@ abstract class MakeGenericViewModelViewRoom<TDao, TEntity, TViewRoom>(
                 .forEach {
                     groupList.add(GroupMappingInclude().apply {
                         groupId = it.key
-                        idEntity = it.value.firstOrNull { s -> s.isIdEntity }?.idEntity ?: 0L
+                        idEntity = it.value.firstOrNull { s -> s.isIdEntity }?.idEntity ?: 0
                         name = it.value.firstOrNull { s -> s.isEntity }?.name ?: ""
                         type = it.value.firstOrNull { s -> s.isEntity }?.type
                     })
