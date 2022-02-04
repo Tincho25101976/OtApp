@@ -4,18 +4,17 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import com.vsg.agendaandpublication.common.data.AppDatabase
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.WarehouseViewModel
+import common.model.master.warehouse.WarehouseViewModel
 import common.model.master.filter.TypeFilterHasCompanyItems
 import common.model.master.item.ProductViewModel
-import com.vsg.helper.common.model.viewModel.ViewModelGeneric
 import com.vsg.helper.common.util.viewModel.*
-import com.vsg.utilities.common.util.viewModel.*
+import common.model.init.viewModel.ViewModelGenericForCode
 import kotlinx.coroutines.runBlocking
 
 @ExperimentalStdlibApi
 class CompanyViewModel(application: Application) :
 //MakeGenericViewModelPaging
-    ViewModelGeneric<CompanyDao, MasterCompany>(
+    ViewModelGenericForCode<CompanyDao, MasterCompany>(
         AppDatabase.getInstance(application)?.companyDao()!!, application
     ),
     IViewModelAllTextSearch,

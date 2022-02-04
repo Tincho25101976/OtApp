@@ -1,9 +1,9 @@
-package common.model.viewModel
+package common.model.init.viewModel
 
 import android.app.Application
-import com.vsg.agendaandpublication.common.model.itemOperation.batch.BatchViewModel
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.section.SectionViewModel
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.WarehouseViewModel
+import common.model.master.batch.BatchViewModel
+import common.model.master.section.SectionViewModel
+import common.model.master.warehouse.WarehouseViewModel
 import common.model.master.item.ProductViewModel
 import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleListIdRelation
 import com.vsg.helper.common.util.viewModel.IViewModelView

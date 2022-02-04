@@ -13,5 +13,5 @@ interface IViewModelAllPagingRelation<TEntity>
               TEntity : IResultRecyclerAdapter,
               TEntity : IEntityPagingLayoutPosition,
               TEntity : Comparable<TEntity> {
-    fun viewModelGetViewAllPaging(idRelation: Long): Flow<PagingData<TEntity>>
+    fun viewModelGetViewAllPaging(idRelation: Int): Flow<PagingData<TEntity>>
 }

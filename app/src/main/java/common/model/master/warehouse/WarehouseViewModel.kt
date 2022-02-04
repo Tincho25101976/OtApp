@@ -1,13 +1,12 @@
-package com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse
+package common.model.master.warehouse
 
 import android.app.Application
 import com.vsg.agendaandpublication.common.data.AppDatabase
-import com.vsg.agendaandpublication.common.model.itemOperation.filter.TypeFilterHasWarehouseItems
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.section.SectionViewModel
-import com.vsg.utilities.common.util.viewModel.IViewModelHasItemsRelationType
-import com.vsg.utilities.common.util.viewModel.IViewModelUpdateIsDefault
-import common.model.master.warehouse.MasterWarehouse
-import common.model.master.warehouse.WarehouseDao
+import com.vsg.helper.common.util.viewModel.IViewModelHasItemsRelationType
+import com.vsg.helper.common.util.viewModel.IViewModelUpdateIsDefault
+import common.model.master.filter.TypeFilterHasWarehouseItems
+import common.model.master.section.SectionViewModel
+import common.model.init.viewModel.ViewModelGenericForCode
 
 @ExperimentalStdlibApi
 class WarehouseViewModel(context: Application) :
@@ -15,21 +14,11 @@ class WarehouseViewModel(context: Application) :
         AppDatabase.getInstance(context)?.warehouseDao()!!, context
     ),
     IViewModelHasItemsRelationType<TypeFilterHasWarehouseItems>,
-    IViewModelUpdateIsDefault<MasterWarehouse>{
-    override fun viewModelInsert(item: MasterWarehouse): Boolean {
-        val code = viewModelEncode(item) ?: return false
-        return super.viewModelInsert(code)
-    }
+    IViewModelUpdateIsDefault<MasterWarehouse> {
 
-    override fun viewModelEncode(item: MasterWarehouse): MasterWarehouse? {
-        item.number = viewModelNextAutoCode(item.idCompany)
-        item.valueCode = item.code
-        if (item.valueCode.isEmpty()) return null
-        return item
-    }
 
     override fun viewModelViewHasItems(
-        idRelation: Long,
+        idRelation: Int,
         filter: TypeFilterHasWarehouseItems
     ): Boolean {
         return when (filter) {

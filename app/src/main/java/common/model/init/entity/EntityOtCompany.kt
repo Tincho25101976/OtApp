@@ -1,4 +1,4 @@
-package common.model
+package common.model.init.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Ignore
@@ -10,7 +10,7 @@ import com.vsg.helper.common.model.ItemBase
 import com.vsg.helper.common.util.addItem.IAddItemEntity
 import common.model.master.company.MasterCompany
 
-abstract class ItemOtBaseCompany<T> : ItemOtBase<T>()
+abstract class EntityOtCompany<T> : EntityOt<T>()
         where T : ItemBase,
               T : IResultRecyclerAdapter,
               T : IAddItemEntity,

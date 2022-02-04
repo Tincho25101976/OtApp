@@ -4,8 +4,13 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.paging.*
-import com.vsg.helper.common.model.*
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.PagingSource
+import com.vsg.helper.common.model.EntityForeignKeyID
+import com.vsg.helper.common.model.EntityForeignKeyList
+import com.vsg.helper.common.model.IEntity
+import com.vsg.helper.common.model.IIsEnabled
 import com.vsg.helper.common.util.dao.IDaoCheckExitsEntity
 import com.vsg.helper.common.util.dao.IGenericDao
 import com.vsg.helper.common.util.viewModel.util.FilterMemberInclude
@@ -15,7 +20,6 @@ import com.vsg.helper.common.util.viewModel.util.MappingMembers
 import com.vsg.helper.helper.Helper.Companion.toCount
 import com.vsg.helper.helper.Helper.Companion.toPadStart
 import kotlinx.coroutines.runBlocking
-import java.util.*
 import kotlin.reflect.KType
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.hasAnnotation
@@ -39,7 +43,7 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
 
     //region crud
     override fun viewModelInsert(item: TEntity): Boolean = runBlocking {
-        val tempId: Long = dao.insert(item)
+        val tempId: Int = dao.insert(item)
         item.id = tempId
         return@runBlocking tempId > 0
     }
@@ -68,7 +72,7 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
     //endregion
 
     //region view
-    override fun viewModelView(id: Long): TEntity? = dao.view(id)
+    override fun viewModelView(id: Int): TEntity? = dao.view(id)
     open fun viewModelView(item: TEntity): TEntity? = dao.view(item.id)
     open fun viewModelViewAll(): LiveData<List<TEntity>> =
         runBlocking {
@@ -77,7 +81,7 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
 
     //region withInclude
     fun viewModelView(
-        id: Long,
+        id: Int,
         include: Array<FilterMemberInclude>? = null
     ): TEntity? {
         val data: TEntity = dao.view(id) ?: return null
@@ -161,7 +165,7 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
                 list.add(MappingInclude().apply {
                     groupId = it.valueId
                     name = it.name
-                    idEntity = it.toLong(data)
+                    idEntity = it.toInt(data)
                     isIdEntity = it.isLong
                     isEntity = include.javaTypeEntity == it.javaKType
                     type = it.kType
@@ -176,7 +180,7 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
                 .forEach {
                     groupList.add(GroupMappingInclude().apply {
                         groupId = it.key
-                        idEntity = it.value.firstOrNull { s -> s.isIdEntity }?.idEntity ?: 0L
+                        idEntity = it.value.firstOrNull { s -> s.isIdEntity }?.idEntity ?: 0
                         name = it.value.firstOrNull { s -> s.isEntity }?.name ?: ""
                         type = it.value.firstOrNull { s -> s.isEntity }?.type
                     })
@@ -248,19 +252,21 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
 
     //region check
     override fun checkExistsEntity(entity: TEntity?): Boolean {
+        var data: Boolean
         if (entity == null) {
             onRaiseException("La entidad no puede ser nula...", -1)
             return false
         }
-        val data = dao.checkExitsEntity(entity.id)
+        data = dao.checkExitsEntity(entity.id)
         try {
             if (!data) onRaiseException(
                 "El id de la entidad ${entity.javaClass.simpleName} no existe...",
                 -2
             )
-        } finally {
-            return data
+        } catch(e: Exception) {
+            data = false
         }
+        return data
     }
 
     override fun isEntity(entity: TEntity?): Boolean {

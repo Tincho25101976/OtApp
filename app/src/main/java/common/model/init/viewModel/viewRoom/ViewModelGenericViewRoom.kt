@@ -14,7 +14,7 @@ import com.vsg.agendaandpublication.common.model.itemOperation.accountingSeat.de
 import com.vsg.agendaandpublication.common.model.itemOperation.accountingSeat.seat.AccountingSeat
 import com.vsg.agendaandpublication.common.model.itemOperation.accountingSeat.seat.AccountingSeatViewModel
 import com.vsg.agendaandpublication.common.model.itemOperation.batch.Batch
-import com.vsg.agendaandpublication.common.model.itemOperation.batch.BatchViewModel
+import common.model.master.batch.BatchViewModel
 import com.vsg.agendaandpublication.common.model.itemOperation.money.Money
 import com.vsg.agendaandpublication.common.model.itemOperation.money.MoneyViewModel
 import com.vsg.agendaandpublication.common.model.itemOperation.operation.detail.OperationDetail
@@ -24,9 +24,9 @@ import com.vsg.agendaandpublication.common.model.itemOperation.operation.operati
 import com.vsg.agendaandpublication.common.model.itemOperation.transaction.Transaction
 import com.vsg.agendaandpublication.common.model.itemOperation.transaction.TransactionViewModel
 import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.section.Section
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.section.SectionViewModel
+import common.model.master.section.SectionViewModel
 import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.Warehouse
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.WarehouseViewModel
+import common.model.master.warehouse.WarehouseViewModel
 import com.vsg.agendaandpublication.common.model.itemPerson.Person
 import com.vsg.agendaandpublication.common.model.itemPerson.PersonViewModel
 import com.vsg.agendaandpublication.common.model.itemProduct.category.Category
@@ -40,7 +40,7 @@ import com.vsg.agendaandpublication.common.model.itemProduct.price.PriceViewMode
 import com.vsg.agendaandpublication.common.model.itemProduct.product.Product
 import common.model.master.item.ProductViewModel
 import com.vsg.agendaandpublication.common.model.itemProduct.unit.UnitViewModel
-import common.model.viewModel.ViewModelStoredMap
+import common.model.init.viewModel.ViewModelStoredMap
 import com.vsg.utilities.common.model.IEntity
 import com.vsg.utilities.common.model.viewRoom.IEntityViewRoom
 import com.vsg.utilities.common.util.dao.viewRoom.IGenericDaoPagingRelationViewRoom

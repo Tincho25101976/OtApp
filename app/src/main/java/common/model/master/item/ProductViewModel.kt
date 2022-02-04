@@ -5,18 +5,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.Pager
 import com.vsg.agendaandpublication.common.data.AppDatabase
-import com.vsg.agendaandpublication.common.model.itemOperation.batch.BatchViewModel
 import com.vsg.helper.common.util.viewModel.*
+import common.model.master.batch.BatchViewModel
 import common.model.master.filter.TypeFilterHasProductItems
-import common.model.viewModel.ViewModelGenericForCode
+import common.model.init.viewModel.ViewModelGenericForCode
 import kotlinx.coroutines.runBlocking
 
 @ExperimentalStdlibApi
 class ProductViewModel(context: Application) :
     ViewModelGenericForCode<ProductDao, MasterItem>(
         AppDatabase.getInstance(context)?.productDao()!!, context
-    ), IViewModelAllTextSearch, IViewModelAllSimpleListIdRelation<MasterItem>,
-    IViewModelHasItemsRelation, IViewModelAllPaging<MasterItem>,
+    ),
+    IViewModelAllTextSearch,
+    IViewModelAllSimpleListIdRelation<MasterItem>,
+    IViewModelHasItemsRelation,
+    IViewModelAllPaging<MasterItem>,
     IViewModelHasItemsRelationType<TypeFilterHasProductItems> {
 
     //region list
@@ -28,12 +31,6 @@ class ProductViewModel(context: Application) :
             dao.viewAllPaging().asPagingSourceFactory()
         ).flow
     }
-
-    //region add
-    override fun viewModelInsert(item: MasterItem): Boolean {
-        return super.viewModelInsert(item)
-    }
-    //endregion
 
     //region search
     override fun viewModelViewHasItems(

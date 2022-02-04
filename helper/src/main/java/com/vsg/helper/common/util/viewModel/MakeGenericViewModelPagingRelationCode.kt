@@ -32,10 +32,10 @@ abstract class MakeGenericViewModelPagingRelationCode<TDao, TEntity>(
     protected abstract fun viewModelEncode(item: TEntity): TEntity?
 
     //region nextCode
-    override fun viewModelNextAutoCode(idRelation: Long): Long = dao.viewNextAutoCode(idRelation)
+    override fun viewModelNextAutoCode(idRelation: Int): Int = dao.viewNextAutoCode(idRelation)
     //endregion
 
     //region has
-    override fun viewModelViewHasItems(idRelation: Long): Boolean = dao.viewHasItems(idRelation)
+    override fun viewModelViewHasItems(idRelation: Int): Boolean = dao.viewHasItems(idRelation)
     //endregion
 }

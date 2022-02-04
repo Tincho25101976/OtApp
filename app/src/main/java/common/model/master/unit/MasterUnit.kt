@@ -4,9 +4,9 @@ import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
 import common.model.master.unit.TypeUnit.Companion.toUnitDetail
-import common.model.ItemOtBase
+import common.model.init.entity.EntityOt
 
-class MasterUnit(val unit: TypeUnit) : ItemOtBase<MasterUnit>() {
+class MasterUnit(val unit: TypeUnit) : EntityOt<MasterUnit>() {
     //region properties
     val symbol: String get() = unit.toUnitDetail()
     val order: Int get() = unit.order

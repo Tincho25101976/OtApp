@@ -5,7 +5,7 @@ import com.vsg.helper.common.model.EntityForeignKeyID
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
-import common.model.ItemOtBaseCompany
+import common.model.init.entity.EntityOtCompany
 import common.model.master.company.MasterCompany
 import common.model.master.warehouse.MasterWarehouse
 
@@ -33,7 +33,7 @@ import common.model.master.warehouse.MasterWarehouse
     inheritSuperIndices = true,
     tableName = MasterSection.ENTITY_NAME
 )
-class MasterSection : ItemOtBaseCompany<MasterSection>() {
+class MasterSection : EntityOtCompany<MasterSection>() {
     override var number: Int = 0
     override var prefix: String = ""
     var type: TypeSection = TypeSection.NORMAL

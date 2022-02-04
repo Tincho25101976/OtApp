@@ -9,7 +9,7 @@ import com.vsg.helper.helper.date.HelperDate.Companion.toDateString
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
-import common.model.ItemOtBase
+import common.model.init.entity.EntityOt
 import common.model.master.batch.MasterBatch
 import common.model.master.batch.TypeBatchStatus
 import common.model.master.item.MasterItem
@@ -20,7 +20,7 @@ class MasterStockDTO(
     val batch: MasterBatch,
     var section: MasterSection? = null,
     quantity: Double = 0.0
-) : ItemOtBase<MasterStockDTO>(), IEntityViewRoom<MasterStockDTO>
+) : EntityOt<MasterStockDTO>(), IEntityViewRoom<MasterStockDTO>
 {
 
     //region init

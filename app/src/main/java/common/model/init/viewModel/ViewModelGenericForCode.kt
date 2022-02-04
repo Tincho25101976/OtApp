@@ -1,39 +1,41 @@
-package common.model.viewModel
+package common.model.init.viewModel
 
 import android.app.Application
 import com.vsg.agendaandpublication.common.data.AppDatabase
-import com.vsg.agendaandpublication.common.model.itemOperation.batch.BatchViewModel
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.section.SectionViewModel
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.WarehouseViewModel
-import common.model.master.item.ProductViewModel
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
-import com.vsg.helper.common.model.*
+import com.vsg.helper.common.model.IEntity
+import com.vsg.helper.common.model.IEntityPagingLayoutPosition
+import com.vsg.helper.common.model.IIsDefault
+import com.vsg.helper.common.model.IIsEnabled
+import com.vsg.helper.common.util.dao.IDaoAllSimpleListRelation
 import com.vsg.helper.common.util.dao.IDaoAllTextSearchRelation
-import com.vsg.helper.common.util.dao.IDaoNextCode
 import com.vsg.helper.common.util.dao.IGenericDao
-import com.vsg.helper.common.util.dao.IGenericDaoPagingRelationCode
+import com.vsg.helper.common.util.dao.IGenericDaoPagingRelation
 import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleListIdRelation
 import com.vsg.helper.common.util.viewModel.IViewModelView
-import com.vsg.helper.common.util.viewModel.MakeGenericViewModelPagingRelationCode
+import com.vsg.helper.common.util.viewModel.MakeGenericViewModelPagingRelation
+import common.model.master.batch.BatchViewModel
 import common.model.master.batch.MasterBatch
 import common.model.master.company.CompanyViewModel
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
+import common.model.master.item.ProductViewModel
 import common.model.master.section.MasterSection
+import common.model.master.section.SectionViewModel
 import common.model.master.warehouse.MasterWarehouse
+import common.model.master.warehouse.WarehouseViewModel
 import kotlin.reflect.KType
 
 @ExperimentalStdlibApi
 abstract class ViewModelGenericForCode<TDao, TEntity>(dao: TDao, context: Application) :
-    MakeGenericViewModelPagingRelationCode<TDao, TEntity>(
+    MakeGenericViewModelPagingRelation<TDao, TEntity>(
         dao, context
     )
         where TDao : IGenericDao<TEntity>,
-              TDao : IGenericDaoPagingRelationCode<TEntity>,
-              TDao : IDaoNextCode,
+              TDao : IGenericDaoPagingRelation<TEntity>,
               TDao : IDaoAllTextSearchRelation,
+              TDao : IDaoAllSimpleListRelation<TEntity>,
               TEntity : IEntity,
-              TEntity : IEntityCode,
               TEntity : IIsEnabled,
               TEntity : IIsDefault,
               TEntity : IResultRecyclerAdapter,

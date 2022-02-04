@@ -7,10 +7,10 @@ import androidx.room.Ignore
 import com.vsg.helper.common.model.IEntityPicture
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
-import common.model.ItemOtBase
+import common.model.init.entity.EntityOt
 
 @Entity(tableName = MasterCompany.ENTITY_NAME)
-class MasterCompany : ItemOtBase<MasterCompany>(), IEntityPicture {
+class MasterCompany : EntityOt<MasterCompany>(), IEntityPicture {
 
     //region properties
     @ColumnInfo(name = "picture", typeAffinity = ColumnInfo.BLOB)

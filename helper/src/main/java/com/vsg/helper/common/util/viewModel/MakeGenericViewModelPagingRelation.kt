@@ -28,7 +28,7 @@ abstract class MakeGenericViewModelPagingRelation<TDao, TEntity>(
               TEntity : IEntityPagingLayoutPosition,
               TEntity : Comparable<TEntity> {
 
-    override fun viewModelGetViewAllPaging(idRelation: Long) = runBlocking {
+    override fun viewModelGetViewAllPaging(idRelation: Int) = runBlocking {
         return@runBlocking Pager(
             pagingConfig,
             0,
@@ -36,10 +36,10 @@ abstract class MakeGenericViewModelPagingRelation<TDao, TEntity>(
         ).flow
     }
 
-    override fun viewModelGetAllTextSearch(idRelation: Long): LiveData<List<String>> = runBlocking {
+    override fun viewModelGetAllTextSearch(idRelation: Int): LiveData<List<String>> = runBlocking {
         return@runBlocking dao.viewGetAllTextSearch(idRelation)
     }
 
-    override fun viewModelViewAllSimpleList(idRelation: Long): List<TEntity> =
+    override fun viewModelViewAllSimpleList(idRelation: Int): List<TEntity> =
         dao.viewAllSimpleList(idRelation) ?: listOf()
 }

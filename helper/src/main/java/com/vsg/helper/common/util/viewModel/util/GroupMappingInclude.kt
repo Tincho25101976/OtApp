@@ -7,7 +7,7 @@ import kotlin.reflect.jvm.javaType
 open class GroupMappingInclude {
     var groupId: Int = 0
     var name: String = ""
-    var idEntity: Long = 0L
+    var idEntity: Int = 0
 
     var type: KType? = null
     val javaType: Type?

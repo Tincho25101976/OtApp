@@ -4,18 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
-import com.vsg.helper.common.util.dao.IDaoAllTextSearchRelation
-import com.vsg.helper.common.util.dao.IDaoHastItemRelation
-import com.vsg.helper.common.util.dao.IDaoNextCode
-import com.vsg.helper.common.util.dao.IGenericDaoPagingRelationCode
+import common.model.init.dao.DaoGenericOt
 
 @Dao
-abstract class ProductDao : IGenericDaoPagingRelationCode<MasterItem>,
-    IDaoHastItemRelation, IDaoAllTextSearchRelation, IDaoNextCode {
+ class ProductDao : DaoGenericOt<MasterItem>() {
 
     //region paging
     @Query("SELECT * FROM ${MasterItem.ENTITY_NAME} WHERE id < 0 ORDER BY description")
-    abstract fun viewAllPaging(): DataSource.Factory<Int, MasterItem>
+    abstract override fun viewAllPaging(): DataSource.Factory<Int, MasterItem>
 
     @Query("SELECT * FROM ${MasterItem.ENTITY_NAME} WHERE idCompany = :idRelation ORDER BY description")
     abstract override fun viewAllPaging(idRelation: Int): DataSource.Factory<Int, MasterItem>

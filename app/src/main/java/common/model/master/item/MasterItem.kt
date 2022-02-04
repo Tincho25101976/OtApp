@@ -9,7 +9,8 @@ import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
 import common.model.master.unit.TypeUnit
 import common.helper.HelperMaster.Companion.toMasterUnit
-import common.model.ItemOtBaseCompany
+import common.model.init.entity.EntityOtCompany
+import common.model.master.batch.MasterBatch
 import common.model.master.company.MasterCompany
 import common.model.master.unit.MasterUnit
 
@@ -29,7 +30,7 @@ import common.model.master.unit.MasterUnit
     inheritSuperIndices = true,
     tableName = MasterItem.ENTITY_NAME
 )
-class MasterItem : ItemOtBaseCompany<MasterItem>() {
+class MasterItem : EntityOtCompany<MasterItem>() {
     //region properties
     var item: String = ""
     var shellLife: Int = 0
@@ -37,10 +38,16 @@ class MasterItem : ItemOtBaseCompany<MasterItem>() {
     var unit: MasterUnit? = null
     var typeProduct: TypeProduct = TypeProduct.UNDEFINED
     var typePlant: TypePlant = TypePlant.UNDEFINED
+
+    @Ignore
+    val masterBatch: MutableList<MasterBatch> = mutableListOf()
     override val title: String
         get() = item
     //endregion
 
+    //region methods
+
+    //region implementation
     @Ignore
     override fun oGetDrawablePicture(): Int = R.drawable.pic_product
     override fun oGetSpannedGeneric(): StringBuilder {
@@ -66,6 +73,8 @@ class MasterItem : ItemOtBaseCompany<MasterItem>() {
     fun setUnit(unit: TypeUnit, precision: Int = 3) {
         this.unit = unit.toMasterUnit(precision)
     }
+    //endregion
+
     //endregion
 
     companion object {

@@ -1,23 +1,14 @@
 package common.model.master.stock
 
 import androidx.room.*
-import com.vsg.helper.common.format.FormatDateString
-import com.vsg.helper.common.model.EntityForeignKeyID
-import com.vsg.helper.helper.Helper.Companion.toFormat
-import com.vsg.helper.helper.date.HelperDate
-import com.vsg.helper.helper.date.HelperDate.Companion.addDay
-import com.vsg.helper.helper.date.HelperDate.Companion.toDateString
-import com.vsg.helper.helper.date.HelperDate.Companion.toPeriod
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
-import common.model.ItemOtBaseCompany
+import common.model.init.entity.EntityOtCompany
 import common.model.master.batch.MasterBatch
-import common.model.master.batch.TypeBatchStatus
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
 import common.model.master.section.MasterSection
-import java.util.*
 import kotlin.math.abs
 
 @Entity(
@@ -43,7 +34,7 @@ import kotlin.math.abs
     inheritSuperIndices = true,
     tableName = MasterBatch.ENTITY_NAME
 )
-class MasterStock : ItemOtBaseCompany<MasterStock>() {
+class MasterStock : EntityOtCompany<MasterStock>() {
 
     //region properties
     var itemCode: String = ""

@@ -46,7 +46,7 @@ class MappingMembers(private val map: KCallable<*>) {
     val kType: KType
         get() = map.returnType
 
-//    val javaType: Type
+    //    val javaType: Type
 //        get() = type.javaType
     val javaKType: Type
         get() = kType.javaType
@@ -58,6 +58,16 @@ class MappingMembers(private val map: KCallable<*>) {
         return when (isLong) {
             true -> (map as KProperty1<TEntity, *>).get(data) as Long
             false -> 0L
+        }
+    }
+
+    val isInt: Boolean
+        get() = kType.javaType == Int::class.createType().javaType
+
+    fun <TEntity> toInt(data: TEntity): Int {
+        return when (isInt) {
+            true -> (map as KProperty1<TEntity, *>).get(data) as Int
+            false -> 0
         }
     }
 
@@ -107,7 +117,7 @@ class MappingMembers(private val map: KCallable<*>) {
         return vm.viewModelView(groupMappingInclude!!.idEntity)
     }
 
-    fun getValue(id: Long, vm: IViewModelAllSimpleListIdRelation<*>?): List<IEntity>? {
+    fun getValue(id: Int, vm: IViewModelAllSimpleListIdRelation<*>?): List<IEntity>? {
         if (vm == null || !isGroupMappingInclude) return null
         return vm.viewModelViewAllSimpleList(id)
     }

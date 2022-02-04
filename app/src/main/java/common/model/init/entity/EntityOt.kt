@@ -1,4 +1,4 @@
-package common.model
+package common.model.init.entity
 
 import android.text.Spanned
 import androidx.annotation.DrawableRes
@@ -13,7 +13,7 @@ import com.vsg.helper.common.util.addItem.IAddItemEntity
 import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.ot.R
 
-abstract class ItemOtBase<T> : ItemBasePagingAuditingCode<T>()
+abstract class EntityOt<T> : ItemBasePagingAuditingCode<T>()
         where T : ItemBase,
               T : IResultRecyclerAdapter,
               T : IAddItemEntity,

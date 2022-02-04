@@ -7,9 +7,10 @@ import androidx.room.Query
 import androidx.room.Transaction
 import com.vsg.helper.common.util.dao.IDaoAllUpdateIsDefault
 import com.vsg.helper.common.util.dao.IGenericDaoPagingRelationCode
+import common.model.init.dao.DaoGenericOt
 
 @Dao
-abstract class SectionDao : IGenericDaoPagingRelationCode<MasterSection>, IDaoAllUpdateIsDefault {
+abstract class SectionDao : DaoGenericOt<MasterSection>(), IDaoAllUpdateIsDefault {
     //region paging
     @Query("SELECT * FROM ${MasterSection.ENTITY_NAME} WHERE idWarehouse = :idRelation ORDER BY valueCode")
     abstract override fun viewAllPaging(idRelation: Int): DataSource.Factory<Int, MasterSection>
