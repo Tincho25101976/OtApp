@@ -3,11 +3,11 @@ package common.model.master.section
 import android.app.Application
 import com.vsg.agendaandpublication.common.data.AppDatabase
 import com.vsg.helper.common.util.viewModel.IViewModelUpdateIsDefault
-import common.model.init.viewModel.ViewModelGenericForCode
+import common.model.init.viewModel.ViewModelGenericOt
 
 @ExperimentalStdlibApi
 class SectionViewModel(context: Application) :
-    ViewModelGenericForCode<SectionDao, MasterSection>(
+    ViewModelGenericOt<SectionDao, MasterSection>(
         AppDatabase.getInstance(context)?.sectionDao()!!, context
     ),
     IViewModelUpdateIsDefault<MasterSection> {

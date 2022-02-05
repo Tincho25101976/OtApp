@@ -7,13 +7,12 @@ import com.vsg.agendaandpublication.common.data.AppDatabase
 import com.vsg.helper.common.model.viewModel.ViewModelGeneric
 import com.vsg.helper.common.util.viewModel.*
 import common.model.master.filter.TypeFilterHasCompanyItems
-import common.model.master.item.ProductViewModel
+import common.model.master.item.ItemViewModel
 import common.model.master.warehouse.WarehouseViewModel
 import kotlinx.coroutines.runBlocking
 
 @ExperimentalStdlibApi
 class CompanyViewModel(application: Application) :
-//MakeGenericViewModelPaging
     ViewModelGeneric<CompanyDao, MasterCompany>(
         AppDatabase.getInstance(application)?.companyDao()!!, application
     ),
@@ -43,7 +42,7 @@ class CompanyViewModel(application: Application) :
         filter: TypeFilterHasCompanyItems
     ): Boolean {
         return when (filter) {
-            TypeFilterHasCompanyItems.PRODUCT -> ProductViewModel(context).viewModelViewHasItems(
+            TypeFilterHasCompanyItems.PRODUCT -> ItemViewModel(context).viewModelViewHasItems(
                 idRelation
             )
             TypeFilterHasCompanyItems.WAREHOUSE -> WarehouseViewModel(context).viewModelViewHasItems(
@@ -53,5 +52,5 @@ class CompanyViewModel(application: Application) :
     }
 
     override fun viewModelViewHasItems(idRelation: Int): Boolean =
-        ProductViewModel(context).viewModelViewHasItems(idRelation)
+        ItemViewModel(context).viewModelViewHasItems(idRelation)
 }

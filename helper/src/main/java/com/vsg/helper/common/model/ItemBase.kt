@@ -65,18 +65,6 @@ abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResult
     protected fun formatId(): String = id.toString().padStart(5, '0')
 
     companion object {
-//        private fun bindReflectionValue(target: Any):String {
-//            val declaredFields = target::class.java.declaredFields
-//            for (field in declaredFields) {
-//                for (annotation in field.annotations) {
-//                    when(annotation) {
-//                        is TitleUI -> {
-//                            field.isAccessible = true
-//                            field.set(target, annotation.title)
-//                        }
-//                    }
-//                }
-//            }
-//        }
+
     }
 }

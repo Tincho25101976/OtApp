@@ -2,6 +2,7 @@ package common.model.master.stock
 
 import androidx.room.*
 import com.vsg.helper.common.model.EntityForeignKeyID
+import com.vsg.helper.helper.Helper.Companion.toFormat
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
@@ -10,11 +11,19 @@ import common.model.master.batch.MasterBatch
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
 import common.model.master.section.MasterSection
+import common.model.master.warehouse.MasterWarehouse
+import java.util.*
 import kotlin.math.abs
 
 @Entity(
     foreignKeys =
     [
+        ForeignKey(
+            entity = MasterCompany::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("idCompany"),
+            onDelete = ForeignKey.RESTRICT
+        ),
         ForeignKey(
             entity = MasterItem::class,
             parentColumns = arrayOf("id"),
@@ -22,65 +31,107 @@ import kotlin.math.abs
             onDelete = ForeignKey.RESTRICT
         ),
         ForeignKey(
-            entity = MasterCompany::class,
+            entity = MasterBatch::class,
             parentColumns = arrayOf("id"),
-            childColumns = arrayOf("idCompany"),
+            childColumns = arrayOf("idBatch"),
+            onDelete = ForeignKey.RESTRICT
+        ),
+        ForeignKey(
+            entity = MasterWarehouse::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("idWarehouse"),
+            onDelete = ForeignKey.RESTRICT
+        ),
+        ForeignKey(
+            entity = MasterSection::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("idSection"),
             onDelete = ForeignKey.RESTRICT
         )
     ],
     indices = [
-        Index(value = arrayOf("idProduct", "idCompany"), name = "IX_BATCH_FK"),
-        Index(value = arrayOf("createDate"), name = "IX_BATCH_CREATE"),
-        Index(value = arrayOf("receiverQty", "createDate", "dueDate"), name = "IX_BATCH_ITEMS")],
+        Index(
+            value = arrayOf("idProduct", "idCompany", "idBatch", "idSection", "idWarehouse"),
+            name = "IX_STOCK_FK"
+        ),
+        Index(value = arrayOf("mprController", "materialGrouping"), name = "IX_STOCK_TYPE"),
+        Index(value = arrayOf("quantity", "createDate"), name = "IX_STOCK_QTY_DATE")],
     inheritSuperIndices = true,
     tableName = MasterBatch.ENTITY_NAME
 )
 class MasterStock : EntityOtCompany<MasterStock>() {
 
     //region properties
+
+    //region fk
+    @EntityForeignKeyID(20)
+    @ColumnInfo(index = true)
+    var idItem: Int = 0
+
+    @EntityForeignKeyID(20)
+    @Ignore
+    var item: MasterItem? = null
+
+    @EntityForeignKeyID(30)
+    @ColumnInfo(index = true)
+    var idBatch: Int = 0
+
+    @EntityForeignKeyID(30)
+    @Ignore
+    var batch: MasterBatch? = null
+
+    @EntityForeignKeyID(40)
+    @ColumnInfo(index = true)
+    var idSection: Int = 0
+
+    @EntityForeignKeyID(40)
+    @Ignore
+    var section: MasterSection? = null
+
+    @EntityForeignKeyID(50)
+    @ColumnInfo(index = true)
+    var idWarehouse: Int = 0
+
+    @EntityForeignKeyID(50)
+    @Ignore
+    var warehouse: MasterWarehouse? = null
+    //endregion
+
+    var mprController: String = ""
+    var materialGrouping: String = ""
+    var quantity: Double = 0.0
+
     val itemCode: String
         get() {
             return item?.valueCode ?: ""
         }
     val bathCode: String
         get() {
-            return when(batch == null) {true -> "" else -> batch?.valueCode ?: ""}
+            return when (batch == null) {
+                true -> ""
+                else -> batch?.valueCode ?: ""
+            }
+        }
+    val warehouseCode: String
+        get() {
+            return warehouse?.valueCode ?: ""
+        }
+    val sectionCode: String
+        get() {
+            return section?.valueCode ?: ""
         }
 
-
-
-    //region fk
-    @EntityForeignKeyID(10)
-    @ColumnInfo(index = true)
-    var idItem: Int = 0
-
-    @EntityForeignKeyID(10)
-    @Ignore
-    var item: MasterItem? = null
-
-    @EntityForeignKeyID(20)
-    @ColumnInfo(index = true)
-    var idBatch: Int = 0
-
-    @EntityForeignKeyID(20)
-    @Ignore
-    var batch: MasterBatch? = null
-    //endregion
-
-
+    val location: String get() = "$warehouseCode/$sectionCode"
 
     @Ignore
     override var valueCode: String = ""
         get() = "$itemCode/$bathCode"
-    @Ignore
-    var quantity: Double = 0.0
+
     val absolute: Double get() = abs(quantity)
 
     override val title: String
         get() = valueCode
 
-    @Ignore
-    var section: MasterSection? = null
     //endregion
 
     //region methods
@@ -92,7 +143,11 @@ class MasterStock : EntityOtCompany<MasterStock>() {
         val sb = StringBuilder()
         sb.toTitleSpanned(codename)
         sb.toLineSpanned("Ítem", itemCode)
+        sb.toLineSpanned("Product", item?.description ?: "")
         sb.toLineSpanned("Batch", bathCode)
+        sb.toLineSpanned("Warehouse", warehouseCode)
+        sb.toLineSpanned("Section", sectionCode)
+        sb.toLineSpanned("Qty", quantity.toFormat())
         return sb
     }
 
@@ -100,6 +155,8 @@ class MasterStock : EntityOtCompany<MasterStock>() {
         if (other !is MasterStock) return false
         return itemCode == other.itemCode
                 && bathCode == other.bathCode
+                && idWarehouse == other.idWarehouse
+                && idSection == other.idSection
                 && quantity == other.quantity
     }
     //endregion

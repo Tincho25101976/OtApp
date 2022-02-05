@@ -21,7 +21,8 @@ class MasterCompany : EntityOt<MasterCompany>(), IEntityPicture {
     @ColumnInfo(name = "picture", typeAffinity = ColumnInfo.BLOB)
     override var picture: ByteArray? = null
     override val title: String
-        get() = description
+        get() = valueCode
+
 
     @Ignore
     val masterItem: MutableList<MasterItem> = mutableListOf()

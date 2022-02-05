@@ -13,7 +13,7 @@ interface IRecyclerAdapter {
 
     var sizePictureHeight: Int
     var sizePictureWidth: Int
-    var id: Long
+    var id: Int
 
     var textSizeTitle: Int
     var textSizeBody: Int

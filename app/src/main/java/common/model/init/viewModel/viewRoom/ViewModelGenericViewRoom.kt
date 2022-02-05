@@ -38,7 +38,7 @@ import com.vsg.agendaandpublication.common.model.itemProduct.picture.PictureView
 import com.vsg.agendaandpublication.common.model.itemProduct.price.Price
 import com.vsg.agendaandpublication.common.model.itemProduct.price.PriceViewModel
 import com.vsg.agendaandpublication.common.model.itemProduct.product.Product
-import common.model.master.item.ProductViewModel
+import common.model.master.item.ItemViewModel
 import com.vsg.agendaandpublication.common.model.itemProduct.unit.UnitViewModel
 import common.model.init.viewModel.ViewModelStoredMap
 import com.vsg.utilities.common.model.IEntity
@@ -80,7 +80,7 @@ abstract class ViewModelGenericViewRoom<TDao, TEntity, TViewRoom>(dao: TDao, con
             is Mail -> MailViewModel(context).isEntity(entity)
             is Address -> AddressViewModel(context).isEntity(entity)
 
-            is Product -> ProductViewModel(context).isEntity(entity)
+            is Product -> ItemViewModel(context).isEntity(entity)
             is Company -> CompanyViewModel(context).isEntity(entity)
             is Category -> CategoryViewModel(context).isEntity(entity)
             is Picture -> PictureViewModel(context).isEntity(entity)
@@ -112,7 +112,7 @@ abstract class ViewModelGenericViewRoom<TDao, TEntity, TViewRoom>(dao: TDao, con
             is Mail -> MailViewModel(context).checkExistsEntity(entity)
             is Address -> AddressViewModel(context).checkExistsEntity(entity)
 
-            is Product -> ProductViewModel(context).checkExistsEntity(entity)
+            is Product -> ItemViewModel(context).checkExistsEntity(entity)
             is Company -> CompanyViewModel(context).checkExistsEntity(entity)
             is Category -> CategoryViewModel(context).checkExistsEntity(entity)
             is Picture -> PictureViewModel(context).checkExistsEntity(entity)

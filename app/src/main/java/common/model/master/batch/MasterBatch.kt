@@ -15,7 +15,9 @@ import common.model.init.entity.EntityOtCompany
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
 import common.model.master.section.MasterSection
+import common.model.master.stock.MasterStock
 import common.model.master.stock.MasterStockDTO
+import common.model.master.warehouse.MasterWarehouse
 import java.util.*
 import kotlin.math.abs
 
@@ -87,18 +89,18 @@ class MasterBatch : EntityOtCompany<MasterBatch>() {
                 TypeBatchStatus.UNDEFINED
             }
         }
-    override val title: String
-        get() = valueCode
 
     @Ignore
     var section: MasterSection? = null
+    @Ignore
+    var warehouse: MasterWarehouse? = null
 
     //region fk
-    @EntityForeignKeyID(10)
+    @EntityForeignKeyID(20)
     @ColumnInfo(index = true)
     var idItem: Int = 0
 
-    @EntityForeignKeyID(10)
+    @EntityForeignKeyID(20)
     @Ignore
     var item: MasterItem? = null
     //endregion
@@ -109,11 +111,17 @@ class MasterBatch : EntityOtCompany<MasterBatch>() {
 
     //region for add
     fun isOKForAdd(): Boolean =
-        company != null && section != null
+        company !=  null && item != null && warehouse != null && section != null
 
-    fun itemForAdd(quantity: Double): MasterStockDTO? {
+    fun itemForAdd(quantity: Double): MasterStock? {
         return when (isOKForAdd()) {
-            true -> MasterStockDTO(this, section = section, quantity = quantity)
+            true -> MasterStock().apply {
+                item = this@MasterBatch.item!!
+                batch = this@MasterBatch
+                section = this@MasterBatch.section!!
+                warehouse = this@MasterBatch.warehouse!!
+                this.quantity = quantity
+            }
             false -> null
         }
     }

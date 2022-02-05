@@ -7,7 +7,7 @@ import androidx.room.Query
 import common.model.init.dao.DaoGenericOtCompany
 
 @Dao
-abstract class ProductDao : DaoGenericOtCompany<MasterItem>() {
+abstract class ItemDao : DaoGenericOtCompany<MasterItem>() {
 
     //region paging
     @Query("SELECT * FROM ${MasterItem.ENTITY_NAME} WHERE id < 0 ORDER BY description")

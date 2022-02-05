@@ -4,7 +4,7 @@ import android.app.Application
 import common.model.master.batch.BatchViewModel
 import common.model.master.section.SectionViewModel
 import common.model.master.warehouse.WarehouseViewModel
-import common.model.master.item.ProductViewModel
+import common.model.master.item.ItemViewModel
 import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleListIdRelation
 import com.vsg.helper.common.util.viewModel.IViewModelView
 import com.vsg.helper.common.util.viewModel.util.DataMakeViewModelView
@@ -22,7 +22,7 @@ class ViewModelStoredMap {
     companion object {
         private fun storedInstanceOfViewModelView(context: Application): MutableList<DataMakeViewModelView<*, *>> {
             val data: MutableList<DataMakeViewModelView<*, *>> = mutableListOf()
-            data.add(DataMakeViewModelView(typeOf<MasterItem>(), ProductViewModel(context)))
+            data.add(DataMakeViewModelView(typeOf<MasterItem>(), ItemViewModel(context)))
             data.add(DataMakeViewModelView(typeOf<MasterCompany>(), CompanyViewModel(context)))
             data.add(DataMakeViewModelView(typeOf<MasterBatch>(), BatchViewModel(context)))
             data.add(DataMakeViewModelView(typeOf<MasterWarehouse>(), WarehouseViewModel(context)))

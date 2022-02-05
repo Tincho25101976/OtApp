@@ -28,32 +28,28 @@ import common.model.master.warehouse.MasterWarehouse
     ],
     indices =
     [
-        Index(value = arrayOf("idWarehouse", "idCompany"), name = "IX_SECTION_FK"),
-        Index(value = arrayOf("description", "isEnabled", "number"), name = "IX_SECTION_MAIN"),
+        Index(value = arrayOf("id", "idWarehouse", "idCompany"), name = "IX_SECTION_FK"),
+        Index(value = arrayOf("valueCode", "isEnabled", "type"), name = "IX_SECTION_MAIN"),
     ],
     inheritSuperIndices = true,
     tableName = MasterSection.ENTITY_NAME
 )
 class MasterSection : EntityOtCompany<MasterSection>() {
-    override var number: Int = 0
-    override var prefix: String = ""
+
     var type: TypeSection = TypeSection.NORMAL
 
     // region fk
-    @EntityForeignKeyID(10)
+    @EntityForeignKeyID(20)
     @ColumnInfo(index = true)
     var idWarehouse: Int = 0
 
-    @EntityForeignKeyID(10)
+    @EntityForeignKeyID(20)
     @Ignore
     var warehouse: MasterWarehouse? = null
     //endregion
 
 
     //region reference
-    override val title: String
-        get() = description
-
     override fun oGetDrawablePicture(): Int = R.drawable.pic_section
 
     override fun oGetSpannedGeneric(): StringBuilder {

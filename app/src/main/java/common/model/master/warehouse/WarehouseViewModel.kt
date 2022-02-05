@@ -6,11 +6,11 @@ import com.vsg.helper.common.util.viewModel.IViewModelHasItemsRelationType
 import com.vsg.helper.common.util.viewModel.IViewModelUpdateIsDefault
 import common.model.master.filter.TypeFilterHasWarehouseItems
 import common.model.master.section.SectionViewModel
-import common.model.init.viewModel.ViewModelGenericForCode
+import common.model.init.viewModel.ViewModelGenericOt
 
 @ExperimentalStdlibApi
 class WarehouseViewModel(context: Application) :
-    ViewModelGenericForCode<WarehouseDao, MasterWarehouse>(
+    ViewModelGenericOt<WarehouseDao, MasterWarehouse>(
         AppDatabase.getInstance(context)?.warehouseDao()!!, context
     ),
     IViewModelHasItemsRelationType<TypeFilterHasWarehouseItems>,

@@ -19,6 +19,7 @@ abstract class ItemBasePagingAuditing<T> : ItemBasePagingWithoutPicture<T>(),
     override val formatDate: FormatDateString
         get() = FormatDateString.AUDIT
 
+
     val toCreateDate: String
         get() = createDate.toDateString(FormatDateString.CREATE_DATE)
 

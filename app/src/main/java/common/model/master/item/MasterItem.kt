@@ -7,7 +7,6 @@ import androidx.room.Index
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
-import common.model.master.unit.TypeUnit
 import common.helper.HelperMaster.Companion.toMasterUnit
 import common.model.init.entity.EntityOtCompany
 import common.model.master.batch.MasterBatch
@@ -15,6 +14,7 @@ import common.model.master.company.MasterCompany
 import common.model.master.item.type.TypePlant
 import common.model.master.item.type.TypeProduct
 import common.model.master.unit.MasterUnit
+import common.model.master.unit.TypeUnit
 
 @Entity(
     foreignKeys =
@@ -28,23 +28,29 @@ import common.model.master.unit.MasterUnit
     ],
     indices = [
         Index(value = arrayOf("id", "idCompany"), name = "IX_ITEM_FK"),
-        Index(value = arrayOf("id", "item", "unit"), name = "IX_ITEM")],
+        Index(value = arrayOf("id", "valueCode", "typeUnit"), name = "IX_ITEM")],
     inheritSuperIndices = true,
     tableName = MasterItem.ENTITY_NAME
 )
 class MasterItem : EntityOtCompany<MasterItem>() {
     //region properties
-    var item: String = ""
     var shellLife: Int = 0
     var shellLifeAlert: Int = 0
-    var unit: MasterUnit? = null
+
+    @Ignore
+    var precision: Int = DEFAULT_VALUE_PRECISION
+        get() = when (field <= 0) {
+            true -> DEFAULT_VALUE_PRECISION
+            else -> field
+        }
+    val unit: MasterUnit get() = typeUnit.toMasterUnit(precision)
+
+    var typeUnit: TypeUnit = TypeUnit.UNDEFINED
     var typeProduct: TypeProduct = TypeProduct.UNDEFINED
     var typePlant: TypePlant = TypePlant.UNDEFINED
 
     @Ignore
     val masterBatch: MutableList<MasterBatch> = mutableListOf()
-    override val title: String
-        get() = item
     //endregion
 
     //region methods
@@ -54,9 +60,9 @@ class MasterItem : EntityOtCompany<MasterItem>() {
     override fun oGetDrawablePicture(): Int = R.drawable.pic_product
     override fun oGetSpannedGeneric(): StringBuilder {
         val sb = StringBuilder()
-        sb.toTitleSpanned(item)
+        sb.toTitleSpanned(valueCode)
         sb.toLineSpanned("Producto", description)
-        if (unit != null) sb.toLineSpanned("Unidad", unit?.symbol)
+        sb.toLineSpanned("Unidad", unit.symbol)
         sb.toLineSpanned("Vida útil", shellLife)
         sb.toLineSpanned("Tipo de producto", typeProduct.title)
         sb.toLineSpanned("Planta", typePlant.title)
@@ -65,15 +71,11 @@ class MasterItem : EntityOtCompany<MasterItem>() {
 
     override fun aEquals(other: Any?): Boolean {
         if (other !is MasterItem) return false
-        return item == other.item
+        return valueCode == other.valueCode
                 && description == other.description
                 && unit == other.unit
-    }
-    //endregion
-
-    //region function
-    fun setUnit(unit: TypeUnit, precision: Int = 3) {
-        this.unit = unit.toMasterUnit(precision)
+                && typeProduct == other.typeProduct
+                && typePlant == other.typePlant
     }
     //endregion
 
@@ -81,5 +83,6 @@ class MasterItem : EntityOtCompany<MasterItem>() {
 
     companion object {
         const val ENTITY_NAME = "masterItem"
+        const val DEFAULT_VALUE_PRECISION: Int = 3
     }
 }

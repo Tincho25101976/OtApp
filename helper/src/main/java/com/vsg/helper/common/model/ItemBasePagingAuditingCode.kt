@@ -13,7 +13,7 @@ abstract class ItemBasePagingAuditingCode<T> : ItemBasePagingAuditing<T>(), IEnt
               T : IEntityPagingLayoutPosition {
 
     override val code: String
-        get() =  defaultCode
+        get() = defaultCode
 
     @Ignore
     override var number: Int = this.id
@@ -23,6 +23,8 @@ abstract class ItemBasePagingAuditingCode<T> : ItemBasePagingAuditing<T>(), IEnt
 
     override var valueCode: String = ""
 
+    override val title: String
+        get() = codename
     private val defaultCode: String
         get() = number.toPadStart(LARGE_NUMBER_FORMAT)
     open val codename: String
@@ -34,7 +36,8 @@ abstract class ItemBasePagingAuditingCode<T> : ItemBasePagingAuditing<T>(), IEnt
     override val lenCode: Int
         get() = LARGE_NUMBER_FORMAT
 
-    fun makeGenericValueCode(): String = "${prefix}-${defaultCode}"
+
+    private fun makeGenericValueCode(): String = "${prefix}-${defaultCode}"
 
     override fun aTitleRecyclerAdapter(): String = codename
     override fun aTitlePopUpData(): String = codename

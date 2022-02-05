@@ -30,23 +30,17 @@ import common.model.master.section.MasterSection
     tableName = MasterWarehouse.ENTITY_NAME
 )
 class MasterWarehouse : EntityOtCompany<MasterWarehouse>() {
-    override var prefix: String = ""
     var location: String = ""
-    override var number: Int = 0
 
     @EntityForeignKeyList
     @Ignore
     val section: MutableList<MasterSection> = mutableListOf()
 
     //region reference
-    override val title: String
-        get() = description
-
     override fun oGetDrawablePicture(): Int = R.drawable.pic_warehouse
     override fun oGetSpannedGeneric(): StringBuilder {
         val sb = StringBuilder()
-        sb.toTitleSpanned(description)
-        sb.toLineSpanned("Abreviatura", prefix)
+        sb.toTitleSpanned(valueCode)
         if (location.isNotEmpty()) sb.toLineSpanned("Ubicación", location)
         return sb
     }
@@ -55,6 +49,7 @@ class MasterWarehouse : EntityOtCompany<MasterWarehouse>() {
         if (other !is MasterWarehouse) return false
         return description == other.description
                 && location == other.location
+                && valueCode == other.valueCode
     }
     //endregion
 

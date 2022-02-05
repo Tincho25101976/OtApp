@@ -12,7 +12,7 @@ import common.model.master.batch.MasterBatch
 import common.model.master.company.CompanyDao
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
-import common.model.master.item.ProductDao
+import common.model.master.item.ItemDao
 import common.model.master.section.MasterSection
 import common.model.master.section.SectionDao
 import common.model.master.stock.StockDao
@@ -37,7 +37,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     //region dataSource
     abstract fun companyDao(): CompanyDao
-    abstract fun productDao(): ProductDao
+    abstract fun itemDao(): ItemDao
     abstract fun batchDao(): BatchDao
     abstract fun warehouseDao(): WarehouseDao
     abstract fun sectionDao(): SectionDao

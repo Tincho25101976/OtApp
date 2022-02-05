@@ -6,16 +6,16 @@ import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.util.viewModel.IViewModelCRUD
 import com.vsg.helper.common.util.viewModel.util.FilterMemberInclude
 import com.vsg.helper.helper.Helper.Companion.toCount
-import common.model.init.viewModel.ViewModelGenericForCode
+import common.model.init.viewModel.ViewModelGenericOt
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
-import common.model.master.item.ProductViewModel
+import common.model.master.item.ItemViewModel
 import common.model.master.stock.MasterStockDTO
 import kotlin.reflect.typeOf
 
 @ExperimentalStdlibApi
 class BatchViewModel(context: Application) :
-    ViewModelGenericForCode<BatchDao, MasterBatch>(
+    ViewModelGenericOt<BatchDao, MasterBatch>(
         AppDatabase.getInstance(context)?.batchDao()!!, context
     ) {
 
@@ -54,7 +54,7 @@ class BatchViewModel(context: Application) :
     //endregion
 
     fun viewModelGetProduct(idRelation: Int): MasterItem? =
-        ProductViewModel(context).viewModelView(idRelation)
+        ItemViewModel(context).viewModelView(idRelation)
 
     //region transaction
 

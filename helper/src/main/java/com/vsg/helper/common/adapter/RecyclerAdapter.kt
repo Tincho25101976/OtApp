@@ -5,7 +5,7 @@ import android.text.Spanned
 import androidx.annotation.DrawableRes
 
 class RecyclerAdapter(
-    override var id: Long,
+    override var id: Int,
     override var title: String,
     override var body: Spanned
 ) :

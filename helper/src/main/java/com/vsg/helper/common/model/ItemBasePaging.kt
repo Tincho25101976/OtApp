@@ -2,10 +2,10 @@ package com.vsg.helper.common.model
 
 import android.graphics.Bitmap
 import android.text.Spanned
-import androidx.annotation.DrawableRes
 import androidx.room.Ignore
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
 import com.vsg.helper.common.adapter.RecyclerAdapter
+import com.vsg.helper.common.model.util.DrawableShow
 import com.vsg.helper.common.util.addItem.IAddItemEntity
 import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
@@ -18,6 +18,8 @@ abstract class ItemBasePaging<T> : ItemBase(), IResultRecyclerAdapter, IAddItemE
               T : IAddItemEntity,
               T : IReference,
               T : IEntityPagingLayoutPosition {
+
+    override val title: String  get() = ""
 
     @Ignore
     override var layoutPosition: Int = 0
@@ -36,9 +38,8 @@ abstract class ItemBasePaging<T> : ItemBase(), IResultRecyclerAdapter, IAddItemE
     @Ignore
     protected abstract fun aTitleRecyclerAdapter(): String
 
-    @DrawableRes
     @Ignore
-    protected open fun aDrawableRecyclerAdapter(): Int = getDrawableShow()
+    protected open fun aDrawableRecyclerAdapter(): DrawableShow = getDrawableShow()
 
     @Ignore
     protected abstract fun aBitmapRecyclerAdapter(): Bitmap?
@@ -47,7 +48,7 @@ abstract class ItemBasePaging<T> : ItemBase(), IResultRecyclerAdapter, IAddItemE
     override fun getRecyclerAdapter(): RecyclerAdapter =
         RecyclerAdapter(id, aTitleRecyclerAdapter(), descriptionSpanned()).apply {
             rating = -1.0F
-            picture = aDrawableRecyclerAdapter()
+            picture = aDrawableRecyclerAdapter().drawable
             bitmap = aBitmapRecyclerAdapter()
             sizePictureHeight = 32
             sizePictureWidth = 32
@@ -61,7 +62,9 @@ abstract class ItemBasePaging<T> : ItemBase(), IResultRecyclerAdapter, IAddItemE
         if (this === other) return true
         if (other !is ItemBase) return false
         val basic =
-            isEnabled == other.isEnabled && isDefault == isDefault && description == description
+            isEnabled == other.isEnabled
+                    && isDefault == isDefault
+                    && description == description
                     && id == other.id
         if (!basic) return false
         return aEquals(other)
