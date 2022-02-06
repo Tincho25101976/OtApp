@@ -7,10 +7,12 @@ import com.vsg.helper.common.util.viewModel.IViewModelCRUD
 import com.vsg.helper.common.util.viewModel.util.FilterMemberInclude
 import com.vsg.helper.helper.Helper.Companion.toCount
 import common.model.init.viewModel.ViewModelGenericOt
+import common.model.master.batch.type.TypeBatchStatus
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
 import common.model.master.item.ItemViewModel
-import common.model.master.stock.MasterStockDTO
+import common.model.master.stock.MasterStock
+import common.model.master.stock.StockViewModel
 import kotlin.reflect.typeOf
 
 @ExperimentalStdlibApi
@@ -59,8 +61,8 @@ class BatchViewModel(context: Application) :
     //region transaction
 
     //region alertaVencimiento
-    fun viewModelGetDueDateAlert(empresa: MasterCompany): List<MasterStockDTO>? {
-        var e: List<MasterStockDTO>?
+    fun viewModelGetDueDateAlert(empresa: MasterCompany): List<MasterStock>? {
+        var e: List<MasterStock>?
         try {
             e = StockViewModel(context).getStock(empresa)
             if (e == null || !e.any()) {

@@ -1,4 +1,4 @@
-package common.model.master.batch
+package common.model.master.batch.type
 
 import android.graphics.Color
 import com.vsg.helper.ui.adapter.IDataAdapterEnum

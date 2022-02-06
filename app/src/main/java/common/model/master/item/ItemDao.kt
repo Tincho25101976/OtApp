@@ -39,7 +39,7 @@ abstract class ItemDao : DaoGenericOtCompany<MasterItem>() {
     abstract override fun viewAllSimpleList(idRelation: Int): List<MasterItem>?
 
     //region check
-    @Query("SELECT EXISTS(SELECT * FROM ${MasterItem.ENTITY_NAME} WHERE id = :entity)")
-    abstract override fun checkExitsEntity(entity: Int): Boolean
+    @Query("SELECT EXISTS(SELECT * FROM ${MasterItem.ENTITY_NAME} WHERE id = :id)")
+    abstract override fun checkExitsEntity(id: Int): Boolean
     //endregion
 }

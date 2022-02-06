@@ -53,14 +53,13 @@ abstract class WarehouseDao : DaoGenericOtCompany<MasterWarehouse>(),
     //endregion
 
     //region check
-    @Query("SELECT EXISTS(SELECT * FROM ${MasterWarehouse.ENTITY_NAME} WHERE id = :entity)")
-    abstract override fun checkExitsEntity(entity: Int): Boolean
+    @Query("SELECT EXISTS(SELECT * FROM ${MasterWarehouse.ENTITY_NAME} WHERE id = :id)")
+    abstract override fun checkExitsEntity(id: Int): Boolean
     //endregion
 
     //region updateIsDefault
     @Transaction
     @Query("UPDATE ${MasterWarehouse.ENTITY_NAME} SET isDefault = CASE id WHEN :idEntity THEN 1 ELSE 0 END WHERE idCompany = :idRelation ")
     abstract override fun updateSetAllIsDefault(idEntity: Int, idRelation: Int)
-
     //endregion
 }

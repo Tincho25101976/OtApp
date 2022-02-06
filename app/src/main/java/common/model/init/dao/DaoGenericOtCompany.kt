@@ -36,5 +36,5 @@ abstract class DaoGenericOtCompany<T> :
     abstract override fun viewAllSimpleList(idRelation: Int): List<T>?
     abstract override fun viewAllSimpleList(): List<T>?
 
-    abstract override fun checkExitsEntity(entity: Int): Boolean
+    abstract override fun checkExitsEntity(id: Int): Boolean
 }

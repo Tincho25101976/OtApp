@@ -8,6 +8,7 @@ import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
 import common.model.init.entity.EntityOtCompany
 import common.model.master.batch.MasterBatch
+import common.model.master.batch.type.TypeBatchStatus
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
 import common.model.master.section.MasterSection
@@ -122,6 +123,8 @@ class MasterStock : EntityOtCompany<MasterStock>() {
         }
 
     val location: String get() = "$warehouseCode/$sectionCode"
+
+    val expirationStatus: TypeBatchStatus get() = batch?.status ?: TypeBatchStatus.UNDEFINED
 
     @Ignore
     override var valueCode: String = ""

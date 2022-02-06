@@ -53,8 +53,8 @@ abstract class SectionDao : DaoGenericOtCompany<MasterSection>(),
     //endregion
 
     //region check
-    @Query("SELECT EXISTS(SELECT * FROM ${MasterSection.ENTITY_NAME} WHERE id = :entity)")
-    abstract override fun checkExitsEntity(entity: Int): Boolean
+    @Query("SELECT EXISTS(SELECT * FROM ${MasterSection.ENTITY_NAME} WHERE id = :id)")
+    abstract override fun checkExitsEntity(id: Int): Boolean
     //endregion
 
     //region updateIsDefault

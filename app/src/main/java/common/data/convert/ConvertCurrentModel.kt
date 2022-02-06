@@ -2,11 +2,11 @@ package common.data.convert
 
 import androidx.room.TypeConverter
 import com.vsg.helper.common.utilEnum.IValue
-import common.model.master.batch.TypeBatchStatus
+import common.model.master.batch.type.TypeBatchStatus
 import common.model.master.item.type.TypePlant
 import common.model.master.item.type.TypeProduct
 import common.model.master.section.type.TypeSection
-import common.model.master.unit.TypeUnit
+import common.model.master.unit.type.TypeUnit
 
 class ConvertCurrentModel {
     //region generic

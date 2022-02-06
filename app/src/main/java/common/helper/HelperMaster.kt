@@ -1,6 +1,6 @@
 package common.helper
 
-import common.model.master.unit.TypeUnit
+import common.model.master.unit.type.TypeUnit
 import common.model.master.unit.MasterUnit
 
 class HelperMaster {

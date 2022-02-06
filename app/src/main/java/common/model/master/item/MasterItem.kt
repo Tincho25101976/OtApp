@@ -14,7 +14,7 @@ import common.model.master.company.MasterCompany
 import common.model.master.item.type.TypePlant
 import common.model.master.item.type.TypeProduct
 import common.model.master.unit.MasterUnit
-import common.model.master.unit.TypeUnit
+import common.model.master.unit.type.TypeUnit
 
 @Entity(
     foreignKeys =
