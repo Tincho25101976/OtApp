@@ -24,7 +24,7 @@ abstract class ItemBasePagingAuditingCode<T> : ItemBasePagingAuditing<T>(), IEnt
     override var valueCode: String = ""
 
     override val title: String
-        get() = codename
+        get() = valueCode
     private val defaultCode: String
         get() = number.toPadStart(LARGE_NUMBER_FORMAT)
     open val codename: String

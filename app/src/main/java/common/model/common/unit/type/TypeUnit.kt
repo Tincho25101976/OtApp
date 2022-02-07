@@ -1,4 +1,4 @@
-package common.model.master.unit.type
+package common.model.common.unit.type
 
 import com.vsg.helper.helper.Helper.Companion.toFormat
 import com.vsg.helper.helper.Helper.Companion.toPadStart

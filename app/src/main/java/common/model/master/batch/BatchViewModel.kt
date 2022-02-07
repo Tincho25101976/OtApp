@@ -9,6 +9,7 @@ import com.vsg.helper.helper.Helper.Companion.toCount
 import common.model.init.viewModel.ViewModelGenericOt
 import common.model.master.batch.type.TypeBatchStatus
 import common.model.master.company.MasterCompany
+import common.model.master.filter.TypeFilterNearExpired
 import common.model.master.item.MasterItem
 import common.model.master.item.ItemViewModel
 import common.model.master.stock.MasterStock
@@ -62,16 +63,15 @@ class BatchViewModel(context: Application) :
 
     //region alertaVencimiento
     fun viewModelGetDueDateAlert(empresa: MasterCompany): List<MasterStock>? {
-        var e: List<MasterStock>?
+        var e: List<MasterStock>? = null
         try {
-            e = StockViewModel(context).getStock(empresa)
-            if (e == null || !e.any()) {
+            e = StockViewModel(context).getNearExpired(empresa.id, TypeFilterNearExpired.COMPANY)
+            if (!e.any()) {
                 onRaiseException("No hay stock disponible para esta empresa", 2)
                 return null
             }
             e = e.filter { s -> s.expirationStatus == TypeBatchStatus.NEAR_EXPIRY }.toList()
         } catch (ex: Exception) {
-            e = null
             onRaiseException(ex, 3)
         }
         return e

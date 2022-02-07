@@ -1,13 +1,13 @@
-package common.model.master.unit
+package common.model.common.unit
 
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
-import common.model.master.unit.type.TypeUnit.Companion.toUnitDetail
+import common.model.common.unit.type.TypeUnit.Companion.toUnitDetail
 import common.model.init.entity.EntityOt
-import common.model.master.unit.type.TypeUnit
+import common.model.common.unit.type.TypeUnit
 
-class MasterUnit(val unit: TypeUnit) : EntityOt<MasterUnit>() {
+class Unit(val unit: TypeUnit) : EntityOt<Unit>() {
     //region properties
     val symbol: String get() = unit.toUnitDetail()
     val order: Int get() = unit.order
@@ -23,8 +23,14 @@ class MasterUnit(val unit: TypeUnit) : EntityOt<MasterUnit>() {
             .toLineSpanned("Símbolo", symbol)
 
     override fun aEquals(other: Any?): Boolean {
-        if (other !is MasterUnit) return false
+        if (other !is Unit) return false
         return unit == other.unit
     }
-    //endregion
+    //
+
+    companion object{
+        const val DEFAULT_VALUE_PRECISION: Int = 3
+
+        fun getDefaultUnit(): Unit = TypeUnit.UNDEFINED.toUnitDetail()
+    }
 }

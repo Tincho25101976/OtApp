@@ -12,14 +12,7 @@ class ItemViewModel(context: Application) :
     ViewModelGenericOt<ItemDao, MasterItem>(
         AppDatabase.getInstance(context)?.itemDao()!!, context
     ),
-//    IViewModelAllTextSearch,
-//    IViewModelAllSimpleListIdRelation<MasterItem>,
-//    IViewModelHasItemsRelation,
-//    IViewModelAllPaging<MasterItem>,
     IViewModelHasItemsRelationType<TypeFilterHasProductItems> {
-
-    //region list
-
 
     //region search
     override fun viewModelViewHasItems(

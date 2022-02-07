@@ -11,10 +11,11 @@ import common.model.master.batch.BatchDao
 import common.model.master.batch.MasterBatch
 import common.model.master.company.CompanyDao
 import common.model.master.company.MasterCompany
-import common.model.master.item.MasterItem
 import common.model.master.item.ItemDao
+import common.model.master.item.MasterItem
 import common.model.master.section.MasterSection
 import common.model.master.section.SectionDao
+import common.model.master.stock.MasterStock
 import common.model.master.stock.StockDao
 import common.model.master.warehouse.MasterWarehouse
 import common.model.master.warehouse.WarehouseDao
@@ -23,7 +24,8 @@ import common.model.master.warehouse.WarehouseDao
     entities =
     [
         MasterCompany::class, MasterItem::class,
-        MasterBatch::class, MasterWarehouse::class, MasterSection::class,
+        MasterBatch::class, MasterWarehouse::class,
+        MasterSection::class, MasterStock::class
     ],
     //views = [
     //    ProvisioningViewRoom::class, TrackingViewRoom::class,

@@ -27,7 +27,12 @@ abstract class EntityOt<T> : ItemBasePagingAuditingCode<T>()
 
     //region methods
     @Ignore
-    override fun aTitleRecyclerAdapter(): String = title
+    override fun aTitleRecyclerAdapter(): String = "$title ${
+        when (hasItems) {
+            true -> "*"
+            false -> ""
+        }
+    }"
 
     @Ignore
     @DrawableRes

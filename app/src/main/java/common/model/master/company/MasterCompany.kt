@@ -20,9 +20,6 @@ class MasterCompany : EntityOt<MasterCompany>(), IEntityPicture {
     //region properties
     @ColumnInfo(name = "picture", typeAffinity = ColumnInfo.BLOB)
     override var picture: ByteArray? = null
-    override val title: String
-        get() = valueCode
-
 
     @Ignore
     val masterItem: MutableList<MasterItem> = mutableListOf()
@@ -49,19 +46,13 @@ class MasterCompany : EntityOt<MasterCompany>(), IEntityPicture {
     @DrawableRes
     override fun oGetDrawablePicture(): Int = R.drawable.pic_company
 
-    override fun aTitleRecyclerAdapter(): String = "$title ${
-        when (hasItems) {
-            true -> "*"
-            false -> ""
-        }
-    }"
-
     override fun oGetSpannedGeneric(): StringBuilder =
         StringBuilder().toTitleSpanned(description)
 
     override fun aEquals(other: Any?): Boolean {
         if (other !is MasterCompany) return false
-        return description == other.description
+        return valueCode == other.valueCode
+                && description == other.description
                 && picture.contentEquals(other.picture)
     }
     //endregion

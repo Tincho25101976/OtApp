@@ -7,14 +7,14 @@ import androidx.room.Index
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
-import common.helper.HelperMaster.Companion.toMasterUnit
+import common.helper.HelperMaster.Companion.toUnit
+import common.model.common.unit.Unit
+import common.model.common.unit.type.TypeUnit
 import common.model.init.entity.EntityOtCompany
 import common.model.master.batch.MasterBatch
 import common.model.master.company.MasterCompany
 import common.model.master.item.type.TypePlant
 import common.model.master.item.type.TypeProduct
-import common.model.master.unit.MasterUnit
-import common.model.master.unit.type.TypeUnit
 
 @Entity(
     foreignKeys =
@@ -38,12 +38,12 @@ class MasterItem : EntityOtCompany<MasterItem>() {
     var shellLifeAlert: Int = 0
 
     @Ignore
-    var precision: Int = DEFAULT_VALUE_PRECISION
+    var precision: Int = Unit.DEFAULT_VALUE_PRECISION
         get() = when (field <= 0) {
-            true -> DEFAULT_VALUE_PRECISION
+            true -> Unit.DEFAULT_VALUE_PRECISION
             else -> field
         }
-    val unit: MasterUnit get() = typeUnit.toMasterUnit(precision)
+    val unit: Unit get() = typeUnit.toUnit(precision)
 
     var typeUnit: TypeUnit = TypeUnit.UNDEFINED
     var typeProduct: TypeProduct = TypeProduct.UNDEFINED
@@ -83,6 +83,5 @@ class MasterItem : EntityOtCompany<MasterItem>() {
 
     companion object {
         const val ENTITY_NAME = "masterItem"
-        const val DEFAULT_VALUE_PRECISION: Int = 3
     }
 }

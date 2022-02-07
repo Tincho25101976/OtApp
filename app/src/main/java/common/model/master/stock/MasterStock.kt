@@ -58,7 +58,7 @@ import kotlin.math.abs
         Index(value = arrayOf("mprController", "materialGrouping"), name = "IX_STOCK_TYPE"),
         Index(value = arrayOf("quantity", "createDate"), name = "IX_STOCK_QTY_DATE")],
     inheritSuperIndices = true,
-    tableName = MasterBatch.ENTITY_NAME
+    tableName = MasterStock.ENTITY_NAME
 )
 class MasterStock : EntityOtCompany<MasterStock>() {
 
