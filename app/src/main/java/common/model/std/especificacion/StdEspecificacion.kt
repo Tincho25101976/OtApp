@@ -5,11 +5,13 @@ import androidx.room.*
 import com.vsg.helper.common.model.EntityForeignKeyID
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
-import common.helper.HelperMaster.Companion.toUnit
 import common.model.common.unit.Unit
 import common.model.common.unit.type.TypeUnit
 import common.model.init.entity.EntityOt
 import common.model.master.company.MasterCompany
+import common.model.master.item.MasterItem
+import common.model.std.common.IStdEspecificacion
+import common.model.std.common.type.TypeEtapa
 import common.model.std.ensayo.StdEnsayo
 import common.model.std.ensayo.type.TypeEnsayo
 
@@ -33,12 +35,15 @@ import common.model.std.ensayo.type.TypeEnsayo
     inheritSuperIndices = true,
     tableName = StdEspecificacion.ENTITY_NAME
 )
-class StdEspecificacion : EntityOt<StdEspecificacion>() {
+class StdEspecificacion : EntityOt<StdEspecificacion>(), IStdEspecificacion {
 
     //region properties
-    override var idKeyEnsayo: String = ""
-    var typeUnit: TypeUnit = TypeUnit.UNDEFINED
-    var typeEnsayo: TypeEnsayo = TypeEnsayo.UNDEFINED
+    var valueMinimo: Double = 0.0
+    var valueMaximo: Double = 0.0
+    var obligatorio: Boolean = false
+    var certificado: Boolean = false
+    var revision: Int = 0
+    override var idEtapa: TypeEtapa = TypeEtapa.UNDEFINED
 
     //region fk
     @EntityForeignKeyID(20)
@@ -48,17 +53,24 @@ class StdEspecificacion : EntityOt<StdEspecificacion>() {
     @EntityForeignKeyID(20)
     @Ignore
     var ensayo: StdEnsayo? = null
+
+    @EntityForeignKeyID(30)
+    @ColumnInfo(index = true)
+    var idItem: Int = 0
+
+    @EntityForeignKeyID(30)
+    @Ignore
+    override var item: MasterItem? = null
     //endregion
 
-    val unit: Unit
-        get() = when (this.ensayo == null) {
-            true -> typeUnit.toUnit()
-            else -> ensayo!!.unit
-        }
+    val override idKeyEnsayo: String get() = ensayo?.idKeyEnsayo ?: ""
+    var typeUnit: TypeUnit = TypeUnit.UNDEFINED
+    var typeEnsayo: TypeEnsayo = TypeEnsayo.UNDEFINED
+    val unit: Unit? get() = ensayo?.unit
     val isCualitativa: Boolean get() = typeEnsayo == TypeEnsayo.CUANTITATIVO
 
     @Ignore
-    val stdEspecificacion: MutableList<StdEspecificacion> = mutableListOf()
+    val stdMedicion: MutableList<StdEspecificacion> = mutableListOf()
     //endregion
 
     //region methods

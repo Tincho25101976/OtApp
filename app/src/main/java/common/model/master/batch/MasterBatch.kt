@@ -14,6 +14,7 @@ import com.vsg.ot.R
 import common.model.init.entity.EntityOtCompany
 import common.model.master.batch.type.TypeBatchStatus
 import common.model.master.company.MasterCompany
+import common.model.master.item.IMasterItem
 import common.model.master.item.MasterItem
 import common.model.master.section.MasterSection
 import common.model.master.stock.MasterStock
@@ -44,7 +45,7 @@ import kotlin.math.abs
     inheritSuperIndices = true,
     tableName = MasterBatch.ENTITY_NAME
 )
-class MasterBatch : EntityOtCompany<MasterBatch>() {
+class MasterBatch : EntityOtCompany<MasterBatch>(), IMasterItem {
 
     //region properties
     var receiverQty: Double = 0.0
@@ -102,7 +103,7 @@ class MasterBatch : EntityOtCompany<MasterBatch>() {
 
     @EntityForeignKeyID(20)
     @Ignore
-    var item: MasterItem? = null
+    override var item: MasterItem? = null
     //endregion
 
     //endregion

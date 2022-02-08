@@ -9,7 +9,7 @@ import common.helper.HelperMaster.Companion.toUnit
 import common.model.common.unit.Unit
 import common.model.common.unit.type.TypeUnit
 import common.model.init.entity.EntityOt
-import common.model.init.entity.std.IStdIdKeyEnsayo
+import common.model.std.common.IStdIdKeyEnsayo
 import common.model.master.company.MasterCompany
 import common.model.std.ensayo.type.TypeEnsayo
 import common.model.std.especificacion.StdEspecificacion
