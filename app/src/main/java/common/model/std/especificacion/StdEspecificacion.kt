@@ -43,6 +43,11 @@ class StdEspecificacion : EntityOt<StdEspecificacion>(), IStdEspecificacion {
     var obligatorio: Boolean = false
     var certificado: Boolean = false
     var revision: Int = 0
+
+//    override var idKeyEnsayo: String
+//        get() = TODO("Not yet implemented")
+//        set(value) {}
+
     override var idEtapa: TypeEtapa = TypeEtapa.UNDEFINED
 
     //region fk
@@ -63,7 +68,10 @@ class StdEspecificacion : EntityOt<StdEspecificacion>(), IStdEspecificacion {
     override var item: MasterItem? = null
     //endregion
 
-    val override idKeyEnsayo: String get() = ensayo?.idKeyEnsayo ?: ""
+    override var idKeyEnsayo: String
+        get() = ensayo?.idKeyEnsayo ?: ""
+        set(value) {}
+
     var typeUnit: TypeUnit = TypeUnit.UNDEFINED
     var typeEnsayo: TypeEnsayo = TypeEnsayo.UNDEFINED
     val unit: Unit? get() = ensayo?.unit
