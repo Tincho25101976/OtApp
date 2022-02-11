@@ -50,6 +50,7 @@ class StdEspecificacion : EntityOt<StdEspecificacion>(), IStdEspecificacion {
 
     override var idEtapa: TypeEtapa = TypeEtapa.UNDEFINED
 
+
     //region fk
     @EntityForeignKeyID(20)
     @ColumnInfo(index = true)

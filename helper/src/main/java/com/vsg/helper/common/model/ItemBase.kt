@@ -8,12 +8,13 @@ import androidx.room.PrimaryKey
 import com.vsg.helper.common.popup.IPopUpData
 import com.vsg.helper.common.popup.IResultPopUpData
 import com.vsg.helper.common.popup.PopUpData
+import com.vsg.helper.helper.Helper.Companion.toPadStart
 import com.vsg.helper.helper.Helper.Companion.toSiNo
 import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 
 abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResultPopUpData,
-    IDescriptionView {
+    IDescriptionView, IEntityKeySearch {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     override var id: Int = 0
@@ -29,6 +30,9 @@ abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResult
 
     override val isEntityOnlyDefault: Boolean
         get() = false
+
+
+    override val keySearch: String get() = id.toPadStart(10)
 
     @Ignore
     protected abstract fun aTitlePopUpData(): String
