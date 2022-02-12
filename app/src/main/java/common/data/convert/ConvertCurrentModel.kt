@@ -6,7 +6,7 @@ import common.model.master.batch.type.TypeBatchStatus
 import common.model.master.item.type.TypePlant
 import common.model.master.item.type.TypeProduct
 import common.model.master.section.type.TypeSection
-import common.model.common.unit.type.TypeUnit
+import com.vsg.helper.util.unit.type.TypeUnit
 
 class ConvertCurrentModel {
     //region generic

@@ -1,4 +1,4 @@
-package common.model.common.unit.type
+package com.vsg.helper.util.unit.type
 
 import com.vsg.helper.helper.Helper.Companion.toFormat
 import com.vsg.helper.helper.Helper.Companion.toPadStart
@@ -15,13 +15,21 @@ enum class TypeUnit(
     override val order: Int = -1,
     override var precision: Int = 3,
     override val isInt: Boolean = false,
-    override val isException: Boolean = false
+    override val isException: Boolean = false,
+    val typeFormatUnit: TypeFormatUnit = TypeFormatUnit.DECIMALS
 ) :
     IDataAdapterEnum, IDataAdapterSymbol, IDataAdapterDecimals {
+
     KG(value = 1, title = "Kilogramos", symbol = "kg", order = 1, default = true),
     PERCENT(value = 2, title = "Porcentaje", symbol = "%", order = 2),
     LITER(value = 3, title = "Litros", symbol = "lts", order = 3),
-    UNDEFINED(value = -1, title = "Indefinido", show = false, isException = true);
+    UNDEFINED(
+        value = -1,
+        title = "Indefinido",
+        show = false,
+        isException = true,
+        typeFormatUnit = TypeFormatUnit.UNDEFINED
+    );
 
     companion object {
         fun TypeUnit.toFormat(value: Number): String =
@@ -30,6 +38,6 @@ enum class TypeUnit(
                 false -> value.toFormat(precision)
             }
 
-        fun TypeUnit.toUnitDetail() = "[${this.symbol}]"
+        fun TypeUnit.toUnitDetail(): String = "[${this.symbol}]"
     }
 }

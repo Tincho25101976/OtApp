@@ -6,10 +6,10 @@ import androidx.room.Ignore
 import androidx.room.Index
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
+import com.vsg.helper.util.helper.HelperUtil.Companion.toUnit
+import com.vsg.helper.util.unit.Unit
+import com.vsg.helper.util.unit.type.TypeUnit
 import com.vsg.ot.R
-import common.helper.HelperMaster.Companion.toUnit
-import common.model.common.unit.Unit
-import common.model.common.unit.type.TypeUnit
 import common.model.init.entity.EntityOtCompany
 import common.model.master.batch.MasterBatch
 import common.model.master.company.MasterCompany

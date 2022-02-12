@@ -6,8 +6,8 @@ import com.vsg.helper.common.model.EntityForeignKeyID
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
 import common.helper.HelperMaster.Companion.toUnit
-import common.model.common.unit.Unit
-import common.model.common.unit.type.TypeUnit
+import com.vsg.helper.util.unit.Unit
+import com.vsg.helper.util.unit.type.TypeUnit
 import common.model.init.entity.EntityOt
 import common.model.std.common.IStdIdKeyEnsayo
 import common.model.master.company.MasterCompany

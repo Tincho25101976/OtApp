@@ -63,24 +63,6 @@ class Helper {
         }
         //endregion
 
-        //region numeric
-        fun Number.toFormat(decimalPlace: Int = 2): String {
-            val df = DecimalFormat()
-            df.maximumFractionDigits = decimalPlace
-            df.minimumFractionDigits = decimalPlace
-            return df.format(this)
-        }
-
-        fun Number.toPadStart(@IntRange(from = 2, to = 10) length: Int = 4): String =
-            this.toString().padStart(length, '0')
-
-        fun Double.toRound(decimals: Int): Double {
-            var multiplier = 1.0
-            repeat(decimals) { multiplier *= 10 }
-            return round(this * multiplier) / multiplier
-        }
-        //endregion
-
         //region reflection
 //        fun kTypeOf(type: KClass<*>): KType = type.createType()
 //        inline fun <reified T : Any> kTypeOf(): KType {
