@@ -11,7 +11,7 @@ class PopUpData(override var title: String, override var body: String) : IPopUpD
     @DrawableRes
     override var icon: Int = 0
     override var bitmap: Bitmap? = null
-    override var isBitmap: Boolean = false
+    override val isBitmap: Boolean
         get() = bitmap != null && bitmap!!.byteCount > 0
     override var factorWidth: Double = 0.8
         get() {
@@ -43,7 +43,8 @@ class PopUpData(override var title: String, override var body: String) : IPopUpD
     override var canceledOnTouchOutside: Boolean = false
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<PopUpData> =
+        @JvmField
+        val CREATOR: Parcelable.Creator<PopUpData> =
             object : Parcelable.Creator<PopUpData> {
                 override fun newArray(size: Int): Array<PopUpData?> = arrayOfNulls(size)
                 override fun createFromParcel(source: Parcel): PopUpData = PopUpData(source)
@@ -51,8 +52,10 @@ class PopUpData(override var title: String, override var body: String) : IPopUpD
         const val FACTOR: Double = 0.8
     }
 
-    constructor(source: Parcel) : this(source.readString().toString(),
-                                       source.readString().toString()) {
+    constructor(source: Parcel) : this(
+        source.readString().toString(),
+        source.readString().toString()
+    ) {
         this.icon = source.readInt()
         this.factorWidth = source.readDouble()
         this.factorHeight = source.readDouble()

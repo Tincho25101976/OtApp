@@ -2,12 +2,12 @@ package com.vsg.helper.common.model.viewRoom
 
 import android.graphics.Bitmap
 import android.text.Spanned
-import androidx.annotation.DrawableRes
 import com.vsg.helper.common.adapter.RecyclerAdapter
 import com.vsg.helper.common.model.IEntityDrawable
 import com.vsg.helper.common.model.IEntityHasItem
 import com.vsg.helper.common.model.IReference
 import com.vsg.helper.common.model.ItemBase
+import com.vsg.helper.common.model.util.DrawableShow
 import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.helper.ui.adapter.IDataAdapterTitle
 
@@ -29,19 +29,19 @@ abstract class ItemBasePagingViewRoom<T> : ItemBase(),
         if (description.isNotEmpty()) sb.append(description)
         return sb.castToHtml()
     }
+
     override var hasItems: Boolean = false
     protected open fun aTitleRecyclerAdapter(): String = description
     override fun aTitlePopUpData(): String = description
     override fun descriptionView(): Spanned = description.castToHtml()
     override fun getPictureShow(): Bitmap? = null
 
-    @DrawableRes
-    protected open fun aDrawableRecyclerAdapter(): Int = getDrawableShow()
+    protected open fun aDrawableRecyclerAdapter(): DrawableShow = getDrawableShow()
 
     override fun getRecyclerAdapter(): RecyclerAdapter =
         RecyclerAdapter(id, aTitleRecyclerAdapter(), reference()).apply {
             rating = -1.0F
-            picture = aDrawableRecyclerAdapter()
+            picture = aDrawableRecyclerAdapter().drawable
             bitmap = null
             sizePictureHeight = 32
             sizePictureWidth = 32
@@ -61,10 +61,12 @@ abstract class ItemBasePagingViewRoom<T> : ItemBase(),
         if (!basic) return false
         return aEquals(other)
     }
+
     override fun compareTo(other: T): Int = when (this == other) {
         true -> 0
         false -> 1
     }
+
     override fun hashCode(): Int = layoutPosition
     //endregion
 }

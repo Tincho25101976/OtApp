@@ -9,7 +9,7 @@ interface IPopUpData : IPopUpParameter {
     var toHtml: Spanned
     var icon: Int
     var bitmap: Bitmap?
-    var isBitmap: Boolean
+    val isBitmap: Boolean
     var commandOK: Boolean
     fun isSpanned(): Boolean
 }

@@ -1,12 +1,14 @@
 package com.vsg.helper.util.helper
 
 import androidx.annotation.IntRange
+import com.vsg.helper.helper.Helper.Companion.or
+import com.vsg.helper.helper.Helper.Companion.then
 import java.text.DecimalFormat
 import kotlin.math.round
 
 class HelperNumeric {
     companion object {
-        const val TO_PIXEL: Double = 0.264583333
+        private const val TO_PIXEL: Double = 0.264583333
 
         fun Double.toRound(decimals: Int): Double {
             var multiplier = 1.0
@@ -24,42 +26,46 @@ class HelperNumeric {
         fun Number.toPadStart(@IntRange(from = 2, to = 10) length: Int = 4): String =
             this.toString().padStart(length, '0')
 
-        public fun Number.getMayor(superior: Number, defecto: Number): Number =
+        public fun Double.getMayor(superior: Double, defecto: Double): Double =
             try {
-                when (this => superior) {
-                    true -> defecto
-                    else -> this
-                }
+                (this >= superior) then defecto or this
             } catch (ex: Exception) {
                 this
             }
 
-        public fun Number.getMenor(inferior: Number, defecto: Number): Number =
+        public fun Double.getMenor(inferior: Double, defecto: Double): Double =
             try {
-                when (this <= inferior) {
-                    true -> defecto
-                    else -> this
-                }
+                (this <= inferior) then defecto or this
             } catch (ex: Exception) {
                 this
             }
 
-        public fun Number.getLimite(minimo: Number, maximo: Number): Boolean =
+        public fun Double.getLimite(minimo: Double, maximo: Double): Boolean =
             this in minimo..maximo
 
-        public fun Number.getLimite(minimo: Number, maximo: Number, defecto: Number): Number =
+        public fun Double.getLimite(minimo: Double, maximo: Double, defecto: Double): Double =
             try {
-                when (this.getLimite(minimo, maximo)) {
-                    true -> this
-                    else -> defecto
-                }
+                this.getLimite(minimo, maximo) then this or defecto
             } catch (ex: Exception) {
                 this
             }
 
-        public fun Number.getLimite( inferior:Number, superior:Number,  positivo:Number,  negativo:Number):Number =
+        public fun Double.getLimite(
+            inferior: Double,
+            superior: Double,
+            positivo: Double,
+            negativo: Double
+        ): Double =
             try {
-                when (this.getMayor(superior, positivo).equals(this){ true -> this.getMenor(inferior, negativo) else -> valor}
-            } catch(ex: Exception) {this}
+                this.getMayor(superior, positivo).equals(this) then this.getMenor(
+                    inferior,
+                    negativo
+                ) or this
+            } catch (ex: Exception) {
+                this
+            }
+
+        public fun Int.milimeterToPixel(): Int = (this / TO_PIXEL).toInt()
+        public fun Int.pixelToMilimeter(): Int = (this * TO_PIXEL).toInt()
     }
 }

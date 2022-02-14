@@ -1,13 +1,10 @@
 package com.vsg.helper.helper
 
-import androidx.annotation.IntRange
 import com.vsg.helper.common.format.FormatDateString
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.helper.date.HelperDate.Companion.now
 import com.vsg.helper.helper.date.HelperDate.Companion.toDateString
-import java.text.DecimalFormat
 import java.util.*
-import kotlin.math.round
 
 class Helper {
     companion object {
@@ -63,6 +60,10 @@ class Helper {
         }
         //endregion
 
+//        infix fun <T: Any?> Boolean.then(param: () -> T): T? = if (this) param() else null
+//        infix fun T?.or<T>(default: T): T = if (this == null) default else this
+//        infix fun T?.or<T>(compute: () -> T): T = if (this == null) compute() else this
+
         //region reflection
 //        fun kTypeOf(type: KClass<*>): KType = type.createType()
 //        inline fun <reified T : Any> kTypeOf(): KType {
@@ -70,5 +71,10 @@ class Helper {
 //            return type
 //        }
         //endregion
+
+        data class Ternary<T>(val target: T, val result: Boolean)
+
+        infix fun <T> Boolean.then(target: T): Ternary<T> = Ternary(target, this)
+        infix fun <T> Ternary<T>.or(target: T): T = if (this.result) this.target else target
     }
 }

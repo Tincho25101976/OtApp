@@ -8,10 +8,10 @@ import androidx.room.PrimaryKey
 import com.vsg.helper.common.popup.IPopUpData
 import com.vsg.helper.common.popup.IResultPopUpData
 import com.vsg.helper.common.popup.PopUpData
-import com.vsg.helper.helper.Helper.Companion.toPadStart
 import com.vsg.helper.helper.Helper.Companion.toSiNo
 import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
+import com.vsg.helper.util.helper.HelperNumeric.Companion.toPadStart
 
 abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResultPopUpData,
     IDescriptionView, IEntityKeySearch {

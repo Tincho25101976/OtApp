@@ -1,12 +1,12 @@
 package com.vsg.helper.util.quantity
 
-import com.vsg.helper.helper.Helper.Companion.toPadStart
-import com.vsg.helper.helper.Helper.Companion.toRound
+import com.vsg.helper.util.helper.HelperNumeric.Companion.toPadStart
+import com.vsg.helper.util.helper.HelperNumeric.Companion.toRound
 import kotlin.math.abs
 import kotlin.math.round
 import kotlin.math.truncate
 
-class QtyValue {
+class QtyValue(value: Double, decimalPlace:Int = 2) {
     //region properties
     var valor: Double = 0.0
         private set
@@ -36,5 +36,12 @@ class QtyValue {
     }
 
     public fun format(format: String): String = genericFormat(format, valor)
+    //endregion
+
+    //region constructor
+    init {
+        this.valor = value.toRound(decimalPlace)
+        this.decimalPlace = decimalPlace
+    }
     //endregion
 }
