@@ -82,46 +82,35 @@ class Quantity : IQty {
     val invertir: Quantity
         get() {
             when (this.typeValue) {
-                case TypeValue . Negativo : return this.Positivo;
-                case TypeValue . Cero : return this;
-                case TypeValue . Positivo : return this.Negativo;
-                NEGATIVO -> TODO()
-                CERO -> TODO()
-                POSITIVO -> TODO()
+                NEGATIVO -> this.negativo
+                CERO -> this
+                POSITIVO -> this.Positivo
             }
-            return null;
         }
     private val negativo: Quantity
         get() {
             when (this.typeValue) {
                 NEGATIVO -> return this
                 CERO -> return this
-
-                case TypeValue . Negativo : return this;
-                case TypeValue . Cero : return this;
-                case TypeValue . Positivo :
-                        ObjetoCantidad x = this.Clonado();
-                    x.Cantidad = this.Absoluto * -1;
-                return x;
+                POSITIVO -> {
+                    val x: Quantity = this.clonado();
+                    x.quantity = this.absolute * -1;
+                    return x;
+                }
             }
-            return null;
         }
-    public ObjetoCantidad Positivo
-    {
-        get
-        {
-            switch(this.TypeValue)
-            {
-                case TypeValue . Negativo :
-                ObjetoCantidad x = this.Clonado();
-                x.Cantidad = this.Absoluto;
-                return x;
-                case TypeValue . Cero : return this;
-                case TypeValue . Positivo : return this;
+    public val Positivo: Quantity
+        get() {
+            return when (this.typeValue) {
+                NEGATIVO -> {
+                    val x: Quantity = this.clonado()
+                    x.quantity = this.absolute;
+                    x;
+                }
+                CERO -> this;
+                POSITIVO -> this;
             }
-            return null;
         }
-    }
 
     val tipoUnidad: TypeUnit
         get() = (this.unit == null) then TypeUnit.UNDEFINED or unit!!.unit
@@ -131,17 +120,15 @@ class Quantity : IQty {
     val toLong: Long get() = this.quantity.toLong()
     val valor: QtyValue get() = QtyValue(this.quantity)
 
-    public string Detalle
-    {
-        get
-        {
-            string x = string . Empty;
+    public val Detalle: String
+        get() {
+            var x: String = ""
             try {
-                x = string.Format("{0} {1}", this.Cantidad, this.Unidad.Unidad.ToUpper()); } catch {
+                x = "${this.quantity} ${this.unit?.unit?.title}"
+            } catch (ex: Exception) {
                 x = "???"; }
             return x;
         }
-    }
     //endregion
 
     //endregion
@@ -175,7 +162,7 @@ class Quantity : IQty {
         val c: string = string.Format(
             "El valor ${} esta fuera de los límites establecido | límites: {1}-{2}",
             this.toString(),
-            this.Minimo.ToString(this.Formato),
+            this.minimo.ToString(this.Formato),
             this.Maximo.ToString(this.Formato)
         )
         this.EventAdvertenciaFueraLimites(c)
