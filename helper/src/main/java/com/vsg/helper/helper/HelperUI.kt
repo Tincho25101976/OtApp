@@ -632,9 +632,9 @@ class HelperUI {
                 where T : IDataAdapterTitle {
             this.apply {
                 adapter = dataAdapter.apply {
-                    onSetTextView = {
-                            t -> callBackSetTextView?.invoke(t)
-                            t.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
+                    onSetTextView = { t ->
+                        callBackSetTextView?.invoke(t)
+                        t.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
                     }
                 }
                 setPopupBackgroundDrawable(ColorDrawable(Color.WHITE))
@@ -686,7 +686,10 @@ class HelperUI {
             }
         }
 
-        fun <T> Spinner.setItem(item: T, action: (() -> Unit)? = null) where T : IDataAdapterTitle, T : IEntity {
+        fun <T> Spinner.setItem(
+            item: T,
+            action: (() -> Unit)? = null
+        ) where T : IDataAdapterTitle, T : IEntity {
             try {
                 val position = (this.adapter as UIDataAdapterGenericEntity<T>).getPosition(item)
                 if (position >= 0) {
@@ -708,14 +711,17 @@ class HelperUI {
         }
 
         fun <T> Spinner.setItem(
-            id: Long,
+            id: Int,
             adapter: UIDataAdapterGenericEntity<T>
         ) where T : IDataAdapterTitle, T : IEntity {
             val item: T = adapter.dataSource.firstOrNull { it.id == id } ?: return
             this.setItem(item, adapter)
         }
 
-        fun <T> Spinner.setItem(id: Long, action: (() -> Unit)? = null) where T : IDataAdapterTitle, T : IEntity {
+        fun <T> Spinner.setItem(
+            id: Int,
+            action: (() -> Unit)? = null
+        ) where T : IDataAdapterTitle, T : IEntity {
             if (this.adapter == null) return
             val item: T =
                 (this.adapter as UIDataAdapterGenericEntity<T>).dataSource.firstOrNull { it.id == id }

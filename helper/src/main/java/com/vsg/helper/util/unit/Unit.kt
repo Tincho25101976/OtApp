@@ -17,17 +17,6 @@ class Unit(val unit: TypeUnit) : IDataAdapterTitle {
         get() = unit.title
     //endregion
 
-//    override fun oGetDrawablePicture(): Int = R.drawable.pic_unit
-//    override fun oGetSpannedGeneric(): StringBuilder =
-//        StringBuilder().toTitleSpanned(title)
-//            .toLineSpanned("Símbolo", symbol)
-//
-//    override fun aEquals(other: Any?): Boolean {
-//        if (other !is Unit) return false
-//        return unit == other.unit
-//    }
-    //
-
     companion object {
         const val DEFAULT_VALUE_PRECISION: Int = 3
 

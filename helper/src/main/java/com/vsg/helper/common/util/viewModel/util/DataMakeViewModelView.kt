@@ -13,7 +13,6 @@ class DataMakeViewModelView<TDao, TEntity>(
     val type: KType,
     val viewModel: MakeGenericViewModel<TDao, TEntity>
 
-
 ) where TDao : IGenericDao<TEntity>,
         TDao : IDaoCheckExitsEntity,
         TEntity : IEntity,

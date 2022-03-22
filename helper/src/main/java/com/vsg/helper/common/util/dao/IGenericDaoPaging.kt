@@ -16,5 +16,4 @@ interface IGenericDaoPaging<T> : IGenericDao<T>
               T : Comparable<T> {
     fun viewAllPaging(): DataSource.Factory<Int, T>
 
-
 }

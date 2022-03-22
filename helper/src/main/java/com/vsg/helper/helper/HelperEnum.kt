@@ -46,7 +46,7 @@ class HelperEnum {
         fun <T> getDefault(type: Class<T>): T where T : IDataAdapterEnum, T : Enum<T> {
             val temp: T? = EnumIterator(type).toList().firstOrNull { it.show && it.default }
             return when (temp == null) {
-                true -> EnumIterator(type).toList().sortedBy { it.order }.first()
+                true -> EnumIterator(type).toList().minByOrNull { it.order }!!
                 false -> temp
             }
         }
@@ -54,11 +54,11 @@ class HelperEnum {
         fun <T> getIsException(type: Class<T>): T where T : IDataAdapterEnum, T : Enum<T> {
             var temp: T? = EnumIterator(type).toList().firstOrNull { it.isException }
             if (temp != null) return temp
-            temp = EnumIterator(type).toList().filter { it.name == "UNDEFINED" }.firstOrNull()
+            temp = EnumIterator(type).toList().firstOrNull { it.name == "UNDEFINED" }
             if (temp != null) return temp
-            temp = EnumIterator(type).toList().filter { !it.show && !it.default }.firstOrNull()
+            temp = EnumIterator(type).toList().firstOrNull { !it.show && !it.default }
             if (temp != null) return temp
-            return EnumIterator(type).toList().sortedBy { it.order }.last()
+            return EnumIterator(type).toList().maxByOrNull { it.order }!!
         }
     }
 }

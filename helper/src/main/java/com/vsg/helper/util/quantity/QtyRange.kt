@@ -1,7 +1,7 @@
 package com.vsg.helper.util.quantity
 
 import com.vsg.helper.common.model.IEntityKeySearch
-import com.vsg.helper.helper.Helper.Companion.toFormat
+import com.vsg.helper.util.helper.HelperNumeric.Companion.toFormat
 import com.vsg.helper.util.quantity.interfaces.IQtyRange
 
 class QtyRange(from: Double, to: Double) : IQtyRange, IEntityKeySearch {

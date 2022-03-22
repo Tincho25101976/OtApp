@@ -5,9 +5,10 @@ import com.vsg.helper.helper.phone.HelperPhone.Companion.formatPhoneNumber
 import com.vsg.helper.helper.phone.HelperPhone.Companion.isPhoneNumberValidate
 import com.vsg.helper.ui.adapter.IDataAdapterTitle
 
-data class CodeCountryPhone(val code: String, val countryNumber: Int, val country: String,
-                            override var id: Long = 1
-): IDataAdapterTitle, IEntity {
+data class CodeCountryPhone(
+    val code: String, val countryNumber: Int, val country: String,
+    override var id: Int = 1
+) : IDataAdapterTitle, IEntity {
     val codeCountry: String
         get() = "+$countryNumber"
     val isValid: Boolean
@@ -21,5 +22,6 @@ data class CodeCountryPhone(val code: String, val countryNumber: Int, val countr
 
     val numberFormat: String
         get() = number.formatPhoneNumber(country)
+
     fun isNumberValid(): Boolean = number.isPhoneNumberValidate(code)
 }

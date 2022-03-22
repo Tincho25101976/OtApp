@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.model.IIsEnabled
 import com.vsg.helper.common.util.dao.IGenericDao
-import kotlinx.coroutines.*
+import kotlinx.coroutines.runBlocking
 
 abstract class MakeGenericRepository<TDao, TEntity>(protected val dao: TDao?)
         where TDao : IGenericDao<TEntity>,
@@ -13,8 +13,8 @@ abstract class MakeGenericRepository<TDao, TEntity>(protected val dao: TDao?)
               TEntity : IIsEnabled {
     var isDao: Boolean = (dao != null)
 
-    open fun repositoryInsert(item: TEntity): Long =
-        runBlocking { return@runBlocking dao?.insert(item) ?: RESULT_NULL_LONG }
+    open fun repositoryInsert(item: TEntity): Int =
+        runBlocking { return@runBlocking dao?.insert(item) ?: RESULT_NULL_INT }
 
     open fun repositoryUpdate(item: TEntity): Int = dao?.update(item) ?: RESULT_NULL_INT
 
@@ -22,7 +22,7 @@ abstract class MakeGenericRepository<TDao, TEntity>(protected val dao: TDao?)
         runBlocking { return@runBlocking dao?.delete(item) ?: RESULT_NULL_INT }
 
     // Queries:
-    open fun repositoryView(id: Long): TEntity? =
+    open fun repositoryView(id: Int): TEntity? =
         runBlocking { return@runBlocking dao?.view(id) }
 
     open fun repositoryView(id: TEntity): TEntity? =
@@ -33,7 +33,6 @@ abstract class MakeGenericRepository<TDao, TEntity>(protected val dao: TDao?)
     }
 
     companion object {
-        const val RESULT_NULL_LONG: Long = -1
         const val RESULT_NULL_INT: Int = -1
         val RESULT_NULL_ENTITY = null
     }

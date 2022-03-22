@@ -15,5 +15,4 @@ interface IGenericDaoPagingRelationCode<T> :
               T : IEntityPagingLayoutPosition,
               T : IEntity,
               T : IIsEnabled,
-              T : Comparable<T> {
-}
+              T : Comparable<T>

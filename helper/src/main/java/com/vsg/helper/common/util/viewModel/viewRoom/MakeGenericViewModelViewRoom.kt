@@ -12,12 +12,14 @@ import com.vsg.helper.common.model.EntityForeignKeyList
 import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.model.viewRoom.IEntityViewRoom
 import com.vsg.helper.common.util.dao.viewRoom.IGenericDaoPagingRelationViewRoom
-import com.vsg.helper.common.util.viewModel.*
+import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleListIdRelation
+import com.vsg.helper.common.util.viewModel.IViewModelAllTextSearchRelation
+import com.vsg.helper.common.util.viewModel.IViewModelView
 import com.vsg.helper.common.util.viewModel.util.FilterMemberInclude
 import com.vsg.helper.common.util.viewModel.util.GroupMappingInclude
 import com.vsg.helper.common.util.viewModel.util.MappingInclude
 import com.vsg.helper.common.util.viewModel.util.MappingMembers
-import com.vsg.helper.helper.Helper.Companion.toPadStart
+import com.vsg.helper.util.helper.HelperNumeric.Companion.toPadStart
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.runBlocking
 import kotlin.reflect.KType
@@ -37,7 +39,7 @@ abstract class MakeGenericViewModelViewRoom<TDao, TEntity, TViewRoom>(
               TViewRoom : IEntity {
 
     //region handler
-    var onEventProcesando: ((String) -> Unit)? = null
+    var onEventProcess: ((String) -> Unit)? = null
     //endregion
 
     //region view
@@ -229,7 +231,7 @@ abstract class MakeGenericViewModelViewRoom<TDao, TEntity, TViewRoom>(
     //region utilHandler
     protected fun onProcess(message: String) {
         if (message.isEmpty()) return
-        onEventProcesando?.invoke(message)
+        onEventProcess?.invoke(message)
     }
     //endregion
 

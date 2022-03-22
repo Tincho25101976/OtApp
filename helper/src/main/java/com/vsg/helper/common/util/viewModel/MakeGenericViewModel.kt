@@ -18,7 +18,7 @@ import com.vsg.helper.common.util.viewModel.util.GroupMappingInclude
 import com.vsg.helper.common.util.viewModel.util.MappingInclude
 import com.vsg.helper.common.util.viewModel.util.MappingMembers
 import com.vsg.helper.helper.Helper.Companion.toCount
-import com.vsg.helper.helper.Helper.Companion.toPadStart
+import com.vsg.helper.util.helper.HelperNumeric.Companion.toPadStart
 import kotlinx.coroutines.runBlocking
 import kotlin.reflect.KType
 import kotlin.reflect.full.findAnnotation
@@ -38,7 +38,7 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
               TEntity : IIsEnabled {
 
     //region handler
-    var onEventProcesando: ((String) -> Unit)? = null
+    var onEventProcess: ((String) -> Unit)? = null
     //endregion
 
     //region crud
@@ -263,7 +263,7 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
                 "El id de la entidad ${entity.javaClass.simpleName} no existe...",
                 -2
             )
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             data = false
         }
         return data
@@ -282,7 +282,7 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
     //region utilHandler
     protected fun onProcess(message: String) {
         if (message.isEmpty()) return
-        onEventProcesando?.invoke(message)
+        onEventProcess?.invoke(message)
     }
     //endregion
 
@@ -361,6 +361,7 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
     private enum class TypeFilterAnnotation {
         ENTITY,
         LIST_OF_ENTITY,
+
         // TODO: resolver
         TITLE_UI
     }
