@@ -217,7 +217,7 @@ class MainItemsLayoutScroll(private val activity: BaseActivity) {
         private var actionForParent: (() -> IEntity?)? = null
         private var actionForExtra: (() -> IEntity?)? = null
 
-        val parentId: Long
+        val parentId: Int
             get() = try {
                 if (typeDataClass.hasParent) {
                     if (typeDataClass.hasAction) this.parent = actionForParent?.invoke()
@@ -230,7 +230,7 @@ class MainItemsLayoutScroll(private val activity: BaseActivity) {
                 0
             }
 
-        val extraId: Long
+        val extraId: Int
             get() = try {
                 if (typeDataClass.hasExtra) {
                     if (typeDataClass.hasAction) this.extra = actionForExtra?.invoke()

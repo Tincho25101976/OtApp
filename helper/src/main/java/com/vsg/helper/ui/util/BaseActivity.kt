@@ -98,7 +98,7 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
     //endregion
 
     //region launch
-    fun loadActivity(data: Class<*>, id: Long = 0, result: Int = 0, extra: Long = 0) {
+    fun loadActivity(data: Class<*>, id: Int = 0, result: Int = 0, extra: Int = 0) {
         val intent = Intent(this, data)
         if (id > 0) intent.putExtra(getString(R.string.msg_data), id)
         if (extra > 0) intent.putExtra(getString(R.string.msg_extra), extra)
