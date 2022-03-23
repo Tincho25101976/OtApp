@@ -1,10 +1,10 @@
 package com.vsg.helper.util.unit.type
 
-import com.vsg.helper.helper.Helper.Companion.toFormat
-import com.vsg.helper.helper.Helper.Companion.toPadStart
 import com.vsg.helper.ui.adapter.IDataAdapterDecimals
 import com.vsg.helper.ui.adapter.IDataAdapterEnum
 import com.vsg.helper.ui.adapter.IDataAdapterSymbol
+import com.vsg.helper.util.helper.HelperNumeric.Companion.toFormat
+import com.vsg.helper.util.helper.HelperNumeric.Companion.toPadStart
 
 enum class TypeUnit(
     override val value: Int,

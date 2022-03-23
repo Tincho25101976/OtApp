@@ -11,6 +11,7 @@ import com.vsg.helper.common.model.EntityForeignKeyID
 import com.vsg.helper.common.model.EntityForeignKeyList
 import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.model.IIsEnabled
+import com.vsg.helper.common.model.viewModel.IViewModelStoredMap
 import com.vsg.helper.common.util.dao.IDaoCheckExitsEntity
 import com.vsg.helper.common.util.dao.IGenericDao
 import com.vsg.helper.common.util.viewModel.util.FilterMemberInclude
@@ -26,7 +27,8 @@ import kotlin.reflect.full.hasAnnotation
 
 abstract class MakeGenericViewModel<TDao, TEntity>(
     protected val dao: TDao,
-    val context: Application
+    val context: Application,
+    val stored: IViewModelStoredMap
 ) : AndroidViewModel(context),
     IViewModelUpdateSetEnabled<TEntity>,
     IViewModelView<TEntity>,

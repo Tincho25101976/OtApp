@@ -19,8 +19,8 @@ class UIRecyclerAdapter<T>(private val list: List<T>) :
     RecyclerView.Adapter<UIRecyclerAdapter<T>.ViewHolder>() where T : IRecyclerAdapter {
 
     //region handler
-    var onEventClickItem: ((View, Long) -> Unit)? = null
-    var onEventClickLongItem: ((View, Long) -> Unit)? = null
+    var onEventClickItem: ((View, Int) -> Unit)? = null
+    var onEventClickLongItem: ((View, Int) -> Unit)? = null
     var onEventSetTextViewTitle: ((TextView) -> Unit)? = null
     //endregion
 
@@ -54,9 +54,9 @@ class UIRecyclerAdapter<T>(private val list: List<T>) :
             else rating.rating = data.rating * (5 / 100)
             tag = data.id
 
-            setOnClickListener { onEventClickItem?.invoke(itemView, itemView.tag as Long) }
+            setOnClickListener { onEventClickItem?.invoke(itemView, itemView.tag as Int) }
             setOnLongClickListener {
-                onEventClickLongItem?.invoke(itemView, itemView.tag as Long)
+                onEventClickLongItem?.invoke(itemView, itemView.tag as Int)
                 true
             }
         }

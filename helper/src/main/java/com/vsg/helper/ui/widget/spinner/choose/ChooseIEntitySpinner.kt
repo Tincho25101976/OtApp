@@ -80,7 +80,7 @@ abstract class ChooseIEntitySpinner<TEntity, TViewModel>(
         tSpinner.setItem<TEntity>(item.id)
     }
 
-    fun setItem(item: Long) {
+    fun setItem(item: Int) {
         if (item <= 0) return
         val company = makeViewModel(type).viewModelView(item) ?: return
         setItem(company)

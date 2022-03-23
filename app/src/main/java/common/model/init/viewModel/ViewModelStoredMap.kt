@@ -1,6 +1,7 @@
 package common.model.init.viewModel
 
 import android.app.Application
+import com.vsg.helper.common.model.viewModel.IViewModelStoredMap
 import common.model.master.batch.BatchViewModel
 import common.model.master.section.SectionViewModel
 import common.model.master.warehouse.WarehouseViewModel
@@ -18,41 +19,43 @@ import kotlin.reflect.KType
 import kotlin.reflect.typeOf
 
 @ExperimentalStdlibApi
-class ViewModelStoredMap {
+class ViewModelStoredMap: IViewModelStoredMap {
+
+    private fun storedInstanceOfViewModelView(context: Application): MutableList<DataMakeViewModelView<*, *>> {
+        val data: MutableList<DataMakeViewModelView<*, *>> = mutableListOf()
+        data.add(DataMakeViewModelView(typeOf<MasterItem>(), ItemViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<MasterCompany>(), CompanyViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<MasterBatch>(), BatchViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<MasterWarehouse>(), WarehouseViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<MasterSection>(), SectionViewModel(context)))
+        return data
+    }
+
+    override fun getInstanceOfIViewModelView(type: KType, context: Application): IViewModelView<*>? {
+        val temp = storedInstanceOfViewModelView(context)
+            .filter { it.viewModel is IViewModelView<*> }
+            .firstOrNull { it.isType(type) }
+
+        return when (temp == null) {
+            true -> null
+            false -> temp.viewModel as IViewModelView<*>
+        }
+    }
+
+    override fun getInstanceOfIViewModelAllSimpleListIdRelation(
+        type: KType,
+        context: Application
+    ): IViewModelAllSimpleListIdRelation<*>? {
+        val temp = storedInstanceOfViewModelView(context)
+            .filter { it.viewModel is IViewModelAllSimpleListIdRelation<*> }
+            .firstOrNull { it.isType(type) }
+
+        return when (temp == null) {
+            true -> null
+            false -> temp.viewModel as IViewModelAllSimpleListIdRelation<*>
+        }
+    }
     companion object {
-        private fun storedInstanceOfViewModelView(context: Application): MutableList<DataMakeViewModelView<*, *>> {
-            val data: MutableList<DataMakeViewModelView<*, *>> = mutableListOf()
-            data.add(DataMakeViewModelView(typeOf<MasterItem>(), ItemViewModel(context)))
-            data.add(DataMakeViewModelView(typeOf<MasterCompany>(), CompanyViewModel(context)))
-            data.add(DataMakeViewModelView(typeOf<MasterBatch>(), BatchViewModel(context)))
-            data.add(DataMakeViewModelView(typeOf<MasterWarehouse>(), WarehouseViewModel(context)))
-            data.add(DataMakeViewModelView(typeOf<MasterSection>(), SectionViewModel(context)))
-            return data
-        }
 
-        fun getInstanceOfIViewModelView(type: KType, context: Application): IViewModelView<*>? {
-            val temp = storedInstanceOfViewModelView(context)
-                .filter { it.viewModel is IViewModelView<*> }
-                .firstOrNull { it.isType(type) }
-
-            return when (temp == null) {
-                true -> null
-                false -> temp.viewModel as IViewModelView<*>
-            }
-        }
-
-        fun getInstanceOfIViewModelAllSimpleListIdRelation(
-            type: KType,
-            context: Application
-        ): IViewModelAllSimpleListIdRelation<*>? {
-            val temp = storedInstanceOfViewModelView(context)
-                .filter { it.viewModel is IViewModelAllSimpleListIdRelation<*> }
-                .firstOrNull { it.isType(type) }
-
-            return when (temp == null) {
-                true -> null
-                false -> temp.viewModel as IViewModelAllSimpleListIdRelation<*>
-            }
-        }
     }
 }

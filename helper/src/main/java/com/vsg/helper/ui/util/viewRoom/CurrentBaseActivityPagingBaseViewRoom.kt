@@ -76,7 +76,7 @@ abstract class CurrentBaseActivityPagingBaseViewRoom<TActivity, TViewModel, TDao
                   TViewModelParent : IViewModelView<TParent>,
                   TParent : IEntity {
         val viewModelParent = makeViewModel(type)
-        val id = intent.getLongExtra(getString(R.string.msg_data), 0)
+        val id = intent.getIntExtra(getString(R.string.msg_data), 0)
         if (id <= 0) return null
         return viewModelParent.viewModelView(id)
     }
@@ -86,7 +86,7 @@ abstract class CurrentBaseActivityPagingBaseViewRoom<TActivity, TViewModel, TDao
                   TViewModelExtraParameter : IViewModelView<TExtraParameter>,
                   TExtraParameter : IEntity {
         val viewModelExtraParameter = makeViewModel(type)
-        val id = intent.getLongExtra(getString(R.string.msg_extra), 0)
+        val id = intent.getIntExtra(getString(R.string.msg_extra), 0)
         if (id <= 0) return null
         return viewModelExtraParameter.viewModelView(id)
     }

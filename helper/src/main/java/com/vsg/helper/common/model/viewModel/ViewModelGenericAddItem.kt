@@ -11,19 +11,19 @@ import com.vsg.helper.common.util.viewModel.IViewModelView
 import kotlin.reflect.KType
 
 @ExperimentalStdlibApi
-abstract class ViewModelGenericAddItem<TDao, TEntity>(dao: TDao, context: Application) :
-    MakeGenericAddItemViewModel<TDao, TEntity>(dao, context),
+abstract class ViewModelGenericAddItem<TDao, TEntity>(dao: TDao, context: Application, stored: IViewModelStoredMap) :
+    MakeGenericAddItemViewModel<TDao, TEntity>(dao, context, stored),
     IViewModelUpdateIsDefault<TEntity>
         where TDao : IAddItemDao<TEntity>,
               TDao : IDaoAllUpdateIsDefault,
               TEntity : ItemBaseAddItem {
     //region IViewModel
     override fun getInstanceOfIViewModelView(type: KType): IViewModelView<*>? {
-        return ViewModelStoredMap.getInstanceOfIViewModelView(type, context)
+        return stored.getInstanceOfIViewModelView(type, context)
     }
 
     override fun getInstanceOfIViewModelAllSimpleListIdRelation(type: KType): IViewModelAllSimpleListIdRelation<*>? {
-        return ViewModelStoredMap.getInstanceOfIViewModelAllSimpleListIdRelation(type, context)
+        return stored.getInstanceOfIViewModelAllSimpleListIdRelation(type, context)
     }
     //endregion
 }

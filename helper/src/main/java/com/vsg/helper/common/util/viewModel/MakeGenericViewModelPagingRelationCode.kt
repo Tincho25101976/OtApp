@@ -6,6 +6,7 @@ import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.model.IEntityCode
 import com.vsg.helper.common.model.IEntityPagingLayoutPosition
 import com.vsg.helper.common.model.IIsEnabled
+import com.vsg.helper.common.model.viewModel.IViewModelStoredMap
 import com.vsg.helper.common.util.dao.IDaoAllTextSearchRelation
 import com.vsg.helper.common.util.dao.IDaoNextCode
 import com.vsg.helper.common.util.dao.IGenericDao
@@ -13,8 +14,9 @@ import com.vsg.helper.common.util.dao.IGenericDaoPagingRelationCode
 
 abstract class MakeGenericViewModelPagingRelationCode<TDao, TEntity>(
     dao: TDao,
-    context: Application
-) : MakeGenericViewModelPagingRelation<TDao, TEntity>(dao, context),
+    context: Application,
+    stored: IViewModelStoredMap
+) : MakeGenericViewModelPagingRelation<TDao, TEntity>(dao, context, stored),
     IViewModelUpdateSetEnabled<TEntity>,
     IViewModelNextCode,
     IViewModelHasItemsRelation

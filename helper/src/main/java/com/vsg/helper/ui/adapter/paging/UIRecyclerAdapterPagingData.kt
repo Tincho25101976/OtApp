@@ -30,7 +30,7 @@ class UIRecyclerAdapterPagingData<TEntity> :
               TEntity: Comparable<TEntity>  {
 
     //region handler
-    var onEventClickItem: ((View, Long, Int) -> Unit)? = null
+    var onEventClickItem: ((View, Int, Int) -> Unit)? = null
     var onEventClickLongItem: ((View, Long) -> Unit)? = null
     var onEventSetTextViewTitle: ((TextView) -> Unit)? = null
     var onEventGetViewForMenu: ((TEntity) -> Unit)? = null
@@ -139,7 +139,7 @@ class UIRecyclerAdapterPagingData<TEntity> :
             tag = data.id
 
             setOnClickListener {
-                onEventClickItem?.invoke(itemView, itemView.tag as Long, item?.layoutPosition ?: 0)
+                onEventClickItem?.invoke(itemView, itemView.tag as Int, item?.layoutPosition ?: 0)
             }
             setOnLongClickListener {
                 onEventClickLongItem?.invoke(itemView, itemView.tag as Long)

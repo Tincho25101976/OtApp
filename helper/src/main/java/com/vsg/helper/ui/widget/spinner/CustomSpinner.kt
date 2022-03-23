@@ -414,7 +414,7 @@ class CustomSpinner @JvmOverloads constructor(
     }
 
     fun <T> setItem(
-        id: Long,
+        id: Int,
         action: (() -> Unit)? = null
     ) where T : IDataAdapterTitle, T : IEntity {
         this.tSpinner.setItem<T>(id, action)

@@ -20,8 +20,8 @@ import kotlinx.coroutines.runBlocking
 import kotlin.reflect.KType
 
 @ExperimentalStdlibApi
-abstract class ViewModelGenericPagingAddItem<TDao, TEntity>(dao: TDao, context: Application) :
-    MakeGenericViewModelPagingAddItem<TDao, TEntity>(dao, context),
+abstract class ViewModelGenericPagingAddItem<TDao, TEntity>(dao: TDao, context: Application,  stored: IViewModelStoredMap) :
+    MakeGenericViewModelPagingAddItem<TDao, TEntity>(dao, context, stored),
     IViewModelAllSimpleListIdRelation<TEntity>
         where TDao : IGenericDao<TEntity>,
               TDao : IGenericDaoPaging<TEntity>,
@@ -37,11 +37,11 @@ abstract class ViewModelGenericPagingAddItem<TDao, TEntity>(dao: TDao, context: 
               TEntity : Comparable<TEntity> {
     //region IViewModel
     override fun getInstanceOfIViewModelView(type: KType): IViewModelView<*>? {
-        return ViewModelStoredMap.getInstanceOfIViewModelView(type, context)
+        return stored.getInstanceOfIViewModelView(type, context)
     }
 
     override fun getInstanceOfIViewModelAllSimpleListIdRelation(type: KType): IViewModelAllSimpleListIdRelation<*>? {
-        return ViewModelStoredMap.getInstanceOfIViewModelAllSimpleListIdRelation(type, context)
+        return stored.getInstanceOfIViewModelAllSimpleListIdRelation(type, context)
     }
     //endregion
 

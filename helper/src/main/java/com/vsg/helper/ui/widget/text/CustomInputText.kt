@@ -23,7 +23,6 @@ import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy
 import com.vsg.helper.R
 import com.vsg.helper.common.format.FormatDateString
-import com.vsg.helper.helper.Helper.Companion.toFormat
 import com.vsg.helper.helper.HelperUI.Static.addTextWatcher
 import com.vsg.helper.helper.HelperUI.Static.getCustomLayoutRelativeLayout
 import com.vsg.helper.helper.HelperUI.Static.makeCustomLayoutLinealLayout
@@ -42,6 +41,7 @@ import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
 import com.vsg.helper.ui.widget.ICustomViewSetTypeface
 import com.vsg.helper.ui.widget.datePicker.DatePickerFragment
 import com.vsg.helper.ui.widget.text.type.TypeCustomInputText
+import com.vsg.helper.util.helper.HelperNumeric.Companion.toFormat
 import java.util.*
 import kotlin.math.floor
 

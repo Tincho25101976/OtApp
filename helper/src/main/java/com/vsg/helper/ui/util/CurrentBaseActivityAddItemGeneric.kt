@@ -68,7 +68,7 @@ abstract class CurrentBaseActivityAddItemGeneric<TActivity, TViewModel, TDao, TE
             val p = this@CurrentBaseActivityAddItemGeneric.parent
             if (p != null) {
                 if (p.isBitmap) setImageBitmap(p.getPictureShow())
-                else setImageBitmap(BitmapFactory.decodeResource(resources, p.getDrawableShow()))
+                else setImageBitmap(BitmapFactory.decodeResource(resources, p.getDrawableShow().drawable))
             }
         }
         tCardViewText.apply {

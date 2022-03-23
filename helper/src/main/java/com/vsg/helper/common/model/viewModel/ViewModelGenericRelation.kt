@@ -13,8 +13,13 @@ import com.vsg.helper.common.util.viewModel.MakeGenericViewModelPagingRelation
 import kotlin.reflect.KType
 
 @ExperimentalStdlibApi
-abstract class ViewModelGenericRelation<TDao, TEntity>(dao: TDao, context: Application) :
-    MakeGenericViewModelPagingRelation<TDao, TEntity>(dao, context), IViewModelHasItemsRelation
+abstract class ViewModelGenericRelation<TDao, TEntity>(
+    dao: TDao,
+    context: Application,
+    stored: IViewModelStoredMap
+) :
+    MakeGenericViewModelPagingRelation<TDao, TEntity>(dao, context, stored),
+    IViewModelHasItemsRelation
         where TDao : IGenericDao<TEntity>,
               TDao : IGenericDaoPagingRelation<TEntity>,
               TDao : IDaoAllTextSearchRelation,
@@ -27,11 +32,11 @@ abstract class ViewModelGenericRelation<TDao, TEntity>(dao: TDao, context: Appli
               TEntity : Comparable<TEntity> {
     //region IViewModel
     override fun getInstanceOfIViewModelView(type: KType): IViewModelView<*>? {
-        return ViewModelStoredMap.getInstanceOfIViewModelView(type, context)
+        return stored.getInstanceOfIViewModelView(type, context)
     }
 
     override fun getInstanceOfIViewModelAllSimpleListIdRelation(type: KType): IViewModelAllSimpleListIdRelation<*>? {
-        return ViewModelStoredMap.getInstanceOfIViewModelAllSimpleListIdRelation(type, context)
+        return stored.getInstanceOfIViewModelAllSimpleListIdRelation(type, context)
     }
     //endregion
 

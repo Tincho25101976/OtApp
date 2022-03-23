@@ -7,13 +7,15 @@ import com.vsg.helper.common.adapter.IResultRecyclerAdapter
 import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.model.IEntityPagingLayoutPosition
 import com.vsg.helper.common.model.IIsEnabled
+import com.vsg.helper.common.model.viewModel.IViewModelStoredMap
 import com.vsg.helper.common.util.dao.*
 import kotlinx.coroutines.runBlocking
 
 abstract class MakeGenericViewModelPagingRelation<TDao, TEntity>(
     dao: TDao,
-    context: Application
-) : MakeGenericViewModel<TDao, TEntity>(dao, context),
+    context: Application,
+    stored: IViewModelStoredMap
+) : MakeGenericViewModel<TDao, TEntity>(dao, context, stored),
     IViewModelUpdateSetEnabled<TEntity>,
     IViewModelAllPagingRelation<TEntity>,
     IViewModelAllSimpleListIdRelation<TEntity>,

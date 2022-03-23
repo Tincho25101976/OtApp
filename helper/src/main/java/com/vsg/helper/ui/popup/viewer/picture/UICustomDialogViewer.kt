@@ -10,15 +10,14 @@ import android.view.ViewGroup
 import android.widget.*
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler
 import com.vsg.helper.R
-import com.vsg.helper.helper.Helper.Companion.toFormat
 import com.vsg.helper.helper.HelperUI.Static.getBitmap
 import com.vsg.helper.helper.HelperUI.Static.getCustomLayoutRelativeLayout
 import com.vsg.helper.helper.HelperUI.Static.makeCustomLayoutRelativeLayout
 import com.vsg.helper.helper.HelperUI.Static.toEditable
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.makeMapRotate
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.nextRotation
-import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toRotate
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toArray
+import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toRotate
 import com.vsg.helper.helper.file.HelperFile.Static.sendFile
 import com.vsg.helper.helper.font.FontManager.Static.typeFaceCustom
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.getTempFileStoreViewer
@@ -28,6 +27,7 @@ import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.helper.ui.widget.colorPicker.ColorPicker
 import com.vsg.helper.ui.widget.cropImage.CropImageView
 import com.vsg.helper.ui.widget.imageView.DrawLineImage
+import com.vsg.helper.util.helper.HelperNumeric.Companion.toFormat
 import java.io.File
 
 
@@ -130,7 +130,8 @@ class UICustomDialogViewer<TActivity>(activity: TActivity) :
                 dialogView.findViewById<RelativeLayout>(R.id.CustomViewerCommandSend).apply {
                     setOnClickListener {
                         val temp: Bitmap = getBitmap() ?: return@setOnClickListener
-                        val file: File = temp.getTempFileStoreViewer(activity) ?: return@setOnClickListener
+                        val file: File =
+                            temp.getTempFileStoreViewer(activity) ?: return@setOnClickListener
                         activity.sendFile(file)
                     }
                 }
@@ -293,6 +294,7 @@ class UICustomDialogViewer<TActivity>(activity: TActivity) :
         }
         return bitmapProcess.copy(Bitmap.Config.ARGB_8888, true)
     }
+
     fun getArray(): ByteArray? = getBitmap().toArray()
     //endregion
 

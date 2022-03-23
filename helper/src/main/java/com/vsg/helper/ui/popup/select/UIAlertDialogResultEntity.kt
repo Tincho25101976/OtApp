@@ -73,7 +73,7 @@ abstract class UIAlertDialogResultEntity<TActivity, TViewModel, TEntity, TFilter
             }
             tSearchText.apply {
                 clearWidget()
-                currentViewModelResult.viewModelGetAllTextSearch().observe(activity, { list ->
+                currentViewModelResult.viewModelGetAllTextSearch().observe(activity) { list ->
                     this.setCustomAdapter(
                         context = activity,
                         adapter = list,
@@ -83,7 +83,7 @@ abstract class UIAlertDialogResultEntity<TActivity, TViewModel, TEntity, TFilter
                         callbackOnKeyPressEnter = { _, t -> search(t) },
                         commandImageView = tSearchCommand
                     )
-                })
+                }
                 addTextWatcher(after = { _, e ->
                     if (!e) fillAdapter()
                 })

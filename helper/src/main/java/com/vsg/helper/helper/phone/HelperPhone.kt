@@ -29,7 +29,7 @@ class HelperPhone {
                 "es-pe", "es-pr", "es-es", "es-uy", "es-ve", "pt-br"
             )
             PhoneNumberUtil.getInstance().apply {
-                var id: Long = 0
+                var id: Int = 0
                 Locale.getAvailableLocales().filter {
                     countries.map { s -> s.toLowerCase(Locale.ROOT) }.contains(
                         it.toLanguageTag().toLowerCase(
@@ -47,7 +47,7 @@ class HelperPhone {
         fun Locale.toCodeCountryPhone(): CodeCountryPhone? =
             this.toCodeCountryPhone(PhoneNumberUtil.getInstance())
 
-        fun Locale.toCodeCountryPhone(phone: PhoneNumberUtil, id: Long = 1): CodeCountryPhone? {
+        fun Locale.toCodeCountryPhone(phone: PhoneNumberUtil, id: Int = 1): CodeCountryPhone? {
             val temp = CodeCountryPhone(
                 this.country,
                 phone.getCountryCodeForRegion(this.country),
