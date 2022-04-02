@@ -6,8 +6,8 @@ import com.vsg.helper.common.util.viewModel.IViewModelUpdateIsDefault
 import common.model.init.viewModel.ViewModelGenericOt
 
 @ExperimentalStdlibApi
-class SectionViewModel(context: Application) :
-    ViewModelGenericOt<SectionDao, MasterSection>(
+class MasterSectionViewModel(context: Application) :
+    ViewModelGenericOt<MasterSectionDao, MasterSection>(
         AppDatabase.getInstance(context)?.sectionDao()!!, context
     ),
     IViewModelUpdateIsDefault<MasterSection> {

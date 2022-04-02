@@ -24,7 +24,7 @@ import common.model.master.section.MasterSection
     ],
     indices = [
         Index(value = arrayOf("idCompany"), name = "IX_WAREHOUSE_FK"),
-        Index(value = arrayOf("description", "prefix", "isEnabled"), name = "IX_WAREHOUSE_MAIN"),
+        Index(value = arrayOf("description", "isEnabled"), name = "IX_WAREHOUSE_MAIN"),
     ],
     inheritSuperIndices = true,
     tableName = MasterWarehouse.ENTITY_NAME
@@ -54,7 +54,7 @@ class MasterWarehouse : EntityOtCompany<MasterWarehouse>() {
     //endregion
 
     companion object {
-        const val ENTITY_NAME: String = "warehouse"
+        const val ENTITY_NAME: String = "masterWarehouse"
         const val DEFAULT_PREFIX: String = "W"
     }
 }

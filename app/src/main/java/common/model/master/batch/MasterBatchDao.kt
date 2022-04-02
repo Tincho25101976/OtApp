@@ -8,7 +8,7 @@ import androidx.room.Transaction
 import common.model.init.dao.DaoGenericOtCompany
 
 @Dao
-abstract class BatchDao : DaoGenericOtCompany<MasterBatch>() {
+abstract class MasterBatchDao : DaoGenericOtCompany<MasterBatch>() {
     //region paging
     @Query("SELECT * FROM ${MasterBatch.ENTITY_NAME} WHERE idItem = :idRelation ORDER BY valueCode")
     abstract override fun viewAllPaging(idRelation: Int): DataSource.Factory<Int, MasterBatch>

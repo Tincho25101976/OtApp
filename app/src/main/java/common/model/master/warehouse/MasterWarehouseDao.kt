@@ -9,7 +9,7 @@ import com.vsg.helper.common.util.dao.IDaoAllUpdateIsDefault
 import common.model.init.dao.DaoGenericOtCompany
 
 @Dao
-abstract class WarehouseDao : DaoGenericOtCompany<MasterWarehouse>(),
+abstract class MasterWarehouseDao : DaoGenericOtCompany<MasterWarehouse>(),
     IDaoAllUpdateIsDefault {
     //region paging
     @Query("SELECT * FROM ${MasterWarehouse.ENTITY_NAME} WHERE idCompany = :idRelation ORDER BY valueCode")

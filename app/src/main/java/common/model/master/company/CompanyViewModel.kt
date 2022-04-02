@@ -6,15 +6,18 @@ import androidx.paging.Pager
 import com.vsg.agendaandpublication.common.data.AppDatabase
 import com.vsg.helper.common.model.viewModel.ViewModelGeneric
 import com.vsg.helper.common.util.viewModel.*
+import common.model.init.viewModel.ViewModelStoredMap
 import common.model.master.filter.TypeFilterHasCompanyItems
-import common.model.master.item.ItemViewModel
+import common.model.master.item.MasterItemViewModel
 import common.model.master.warehouse.WarehouseViewModel
 import kotlinx.coroutines.runBlocking
 
 @ExperimentalStdlibApi
 class CompanyViewModel(application: Application) :
-    ViewModelGeneric<CompanyDao, MasterCompany>(
-        AppDatabase.getInstance(application)?.companyDao()!!, application
+    ViewModelGeneric<MasterCompanyDao, MasterCompany>(
+        AppDatabase.getInstance(application)?.companyDao()!!,
+        application,
+        ViewModelStoredMap()
     ),
     IViewModelAllTextSearch,
     IViewModelView<MasterCompany>,
@@ -42,7 +45,7 @@ class CompanyViewModel(application: Application) :
         filter: TypeFilterHasCompanyItems
     ): Boolean {
         return when (filter) {
-            TypeFilterHasCompanyItems.PRODUCT -> ItemViewModel(context).viewModelViewHasItems(
+            TypeFilterHasCompanyItems.PRODUCT -> MasterItemViewModel(context).viewModelViewHasItems(
                 idRelation
             )
             TypeFilterHasCompanyItems.WAREHOUSE -> WarehouseViewModel(context).viewModelViewHasItems(
@@ -52,5 +55,5 @@ class CompanyViewModel(application: Application) :
     }
 
     override fun viewModelViewHasItems(idRelation: Int): Boolean =
-        ItemViewModel(context).viewModelViewHasItems(idRelation)
+        MasterItemViewModel(context).viewModelViewHasItems(idRelation)
 }

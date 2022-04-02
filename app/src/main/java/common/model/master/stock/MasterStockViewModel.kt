@@ -6,8 +6,8 @@ import common.model.init.viewModel.ViewModelGenericOt
 import common.model.master.filter.TypeFilterNearExpired
 
 @ExperimentalStdlibApi
-class StockViewModel(context: Application) :
-    ViewModelGenericOt<StockDao, MasterStock>(
+class MasterStockViewModel(context: Application) :
+    ViewModelGenericOt<MasterStockDao, MasterStock>(
         AppDatabase.getInstance(context)?.stockDao()!!, context
     ) {
     fun getNearExpired(idRelation: Int, filter: TypeFilterNearExpired): List<MasterStock> {

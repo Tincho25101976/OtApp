@@ -3,13 +3,13 @@ package common.model.master.batch
 import androidx.room.*
 import com.vsg.helper.common.format.FormatDateString
 import com.vsg.helper.common.model.EntityForeignKeyID
-import com.vsg.helper.helper.Helper.Companion.toFormat
 import com.vsg.helper.helper.date.HelperDate
 import com.vsg.helper.helper.date.HelperDate.Companion.addDay
 import com.vsg.helper.helper.date.HelperDate.Companion.toDateString
 import com.vsg.helper.helper.date.HelperDate.Companion.toPeriod
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
+import com.vsg.helper.util.helper.HelperNumeric.Companion.toFormat
 import com.vsg.ot.R
 import common.model.init.entity.EntityOtCompany
 import common.model.master.batch.type.TypeBatchStatus
@@ -39,7 +39,7 @@ import kotlin.math.abs
         )
     ],
     indices = [
-        Index(value = arrayOf("idProduct", "idCompany"), name = "IX_BATCH_FK"),
+        Index(value = arrayOf("idItem", "idCompany"), name = "IX_BATCH_FK"),
         Index(value = arrayOf("createDate"), name = "IX_BATCH_CREATE"),
         Index(value = arrayOf("receiverQty", "createDate", "dueDate"), name = "IX_BATCH_ITEMS")],
     inheritSuperIndices = true,
@@ -93,6 +93,7 @@ class MasterBatch : EntityOtCompany<MasterBatch>(), IMasterItem {
 
     @Ignore
     var section: MasterSection? = null
+
     @Ignore
     var warehouse: MasterWarehouse? = null
 
@@ -112,7 +113,7 @@ class MasterBatch : EntityOtCompany<MasterBatch>(), IMasterItem {
 
     //region for add
     fun isOKForAdd(): Boolean =
-        company !=  null && item != null && warehouse != null && section != null
+        company != null && item != null && warehouse != null && section != null
 
     fun itemForAdd(quantity: Double): MasterStock? {
         return when (isOKForAdd()) {

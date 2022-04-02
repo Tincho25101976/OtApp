@@ -9,14 +9,14 @@ import com.vsg.helper.common.adapter.IResultRecyclerAdapter
 import com.vsg.helper.common.model.*
 import com.vsg.helper.common.util.dao.*
 import com.vsg.helper.common.util.viewModel.*
-import common.model.master.batch.BatchViewModel
 import common.model.master.batch.MasterBatch
+import common.model.master.batch.MasterBatchViewModel
 import common.model.master.company.CompanyViewModel
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
-import common.model.master.item.ItemViewModel
+import common.model.master.item.MasterItemViewModel
 import common.model.master.section.MasterSection
-import common.model.master.section.SectionViewModel
+import common.model.master.section.MasterSectionViewModel
 import common.model.master.warehouse.MasterWarehouse
 import common.model.master.warehouse.WarehouseViewModel
 import kotlinx.coroutines.runBlocking
@@ -24,7 +24,7 @@ import kotlin.reflect.KType
 
 @ExperimentalStdlibApi
 abstract class ViewModelGenericOt<TDao, TEntity>(dao: TDao, context: Application) :
-    MakeGenericViewModelPagingRelationCode<TDao, TEntity>(        dao, context    ),
+    MakeGenericViewModelPagingRelationCode<TDao, TEntity>(dao, context, ViewModelStoredMap()),
     IViewModelAllTextSearch,
     IViewModelAllSimpleListIdRelation<TEntity>,
     IViewModelHasItemsRelation,
@@ -50,11 +50,11 @@ abstract class ViewModelGenericOt<TDao, TEntity>(dao: TDao, context: Application
     fun isEntityCheck(entity: IEntity?): Boolean {
         if (entity == null) return false
         return when (entity) {
-            is MasterItem -> ItemViewModel(context).isEntity(entity)
+            is MasterItem -> MasterItemViewModel(context).isEntity(entity)
             is MasterCompany -> CompanyViewModel(context).isEntity(entity)
-            is MasterBatch -> BatchViewModel(context).isEntity(entity)
+            is MasterBatch -> MasterBatchViewModel(context).isEntity(entity)
             is MasterWarehouse -> WarehouseViewModel(context).isEntity(entity)
-            is MasterSection -> SectionViewModel(context).isEntity(entity)
+            is MasterSection -> MasterSectionViewModel(context).isEntity(entity)
 
             else -> false
         }
@@ -63,11 +63,11 @@ abstract class ViewModelGenericOt<TDao, TEntity>(dao: TDao, context: Application
     fun checkExistsEntityCheck(entity: IEntity?): Boolean {
         if (entity == null) return false
         return when (entity) {
-            is MasterItem -> ItemViewModel(context).checkExistsEntity(entity)
+            is MasterItem -> MasterItemViewModel(context).checkExistsEntity(entity)
             is MasterCompany -> CompanyViewModel(context).checkExistsEntity(entity)
-            is MasterBatch -> BatchViewModel(context).checkExistsEntity(entity)
+            is MasterBatch -> MasterBatchViewModel(context).checkExistsEntity(entity)
             is MasterWarehouse -> WarehouseViewModel(context).checkExistsEntity(entity)
-            is MasterSection -> SectionViewModel(context).checkExistsEntity(entity)
+            is MasterSection -> MasterSectionViewModel(context).checkExistsEntity(entity)
 
             else -> false
         }
@@ -89,11 +89,11 @@ abstract class ViewModelGenericOt<TDao, TEntity>(dao: TDao, context: Application
 
     //region IViewModel
     override fun getInstanceOfIViewModelView(type: KType): IViewModelView<*>? {
-        return ViewModelStoredMap.getInstanceOfIViewModelView(type, context)
+        return stored.getInstanceOfIViewModelView(type, context)
     }
 
     override fun getInstanceOfIViewModelAllSimpleListIdRelation(type: KType): IViewModelAllSimpleListIdRelation<*>? {
-        return ViewModelStoredMap.getInstanceOfIViewModelAllSimpleListIdRelation(type, context)
+        return stored.getInstanceOfIViewModelAllSimpleListIdRelation(type, context)
     }
     //endregion
 }

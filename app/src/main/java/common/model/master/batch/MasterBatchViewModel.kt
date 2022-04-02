@@ -11,14 +11,14 @@ import common.model.master.batch.type.TypeBatchStatus
 import common.model.master.company.MasterCompany
 import common.model.master.filter.TypeFilterNearExpired
 import common.model.master.item.MasterItem
-import common.model.master.item.ItemViewModel
+import common.model.master.item.MasterItemViewModel
 import common.model.master.stock.MasterStock
-import common.model.master.stock.StockViewModel
+import common.model.master.stock.MasterStockViewModel
 import kotlin.reflect.typeOf
 
 @ExperimentalStdlibApi
-class BatchViewModel(context: Application) :
-    ViewModelGenericOt<BatchDao, MasterBatch>(
+class MasterBatchViewModel(context: Application) :
+    ViewModelGenericOt<MasterBatchDao, MasterBatch>(
         AppDatabase.getInstance(context)?.batchDao()!!, context
     ) {
 
@@ -57,7 +57,7 @@ class BatchViewModel(context: Application) :
     //endregion
 
     fun viewModelGetProduct(idRelation: Int): MasterItem? =
-        ItemViewModel(context).viewModelView(idRelation)
+        MasterItemViewModel(context).viewModelView(idRelation)
 
     //region transaction
 
@@ -65,7 +65,7 @@ class BatchViewModel(context: Application) :
     fun viewModelGetDueDateAlert(empresa: MasterCompany): List<MasterStock>? {
         var e: List<MasterStock>? = null
         try {
-            e = StockViewModel(context).getNearExpired(empresa.id, TypeFilterNearExpired.COMPANY)
+            e = MasterStockViewModel(context).getNearExpired(empresa.id, TypeFilterNearExpired.COMPANY)
             if (!e.any()) {
                 onRaiseException("No hay stock disponible para esta empresa", 2)
                 return null

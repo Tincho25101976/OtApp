@@ -9,7 +9,7 @@ import common.model.master.batch.MasterBatch
 import common.model.master.item.MasterItem
 
 @Dao
-abstract class StockDao : DaoGenericOtCompany<MasterStock>() {
+abstract class MasterStockDao : DaoGenericOtCompany<MasterStock>() {
     //region paging
     @Query("SELECT * FROM ${MasterStock.ENTITY_NAME} ORDER BY createDate")
     abstract override fun viewAllPaging(): DataSource.Factory<Int, MasterStock>

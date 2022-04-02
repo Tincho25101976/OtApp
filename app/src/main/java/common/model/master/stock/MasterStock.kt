@@ -2,9 +2,9 @@ package common.model.master.stock
 
 import androidx.room.*
 import com.vsg.helper.common.model.EntityForeignKeyID
-import com.vsg.helper.helper.Helper.Companion.toFormat
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
+import com.vsg.helper.util.helper.HelperNumeric.Companion.toFormat
 import com.vsg.ot.R
 import common.model.init.entity.EntityOtCompany
 import common.model.master.batch.MasterBatch
@@ -13,7 +13,6 @@ import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
 import common.model.master.section.MasterSection
 import common.model.master.warehouse.MasterWarehouse
-import java.util.*
 import kotlin.math.abs
 
 @Entity(
@@ -52,7 +51,7 @@ import kotlin.math.abs
     ],
     indices = [
         Index(
-            value = arrayOf("idProduct", "idCompany", "idBatch", "idSection", "idWarehouse"),
+            value = arrayOf("idItem", "idCompany", "idBatch", "idSection", "idWarehouse"),
             name = "IX_STOCK_FK"
         ),
         Index(value = arrayOf("mprController", "materialGrouping"), name = "IX_STOCK_TYPE"),

@@ -9,15 +9,15 @@ abstract class MakeGenericAddItemRepository<TDao, TEntity>(value: TDao?) :
     IAddItemRepository<TEntity>
         where TDao : IAddItemDao<TEntity>,
               TEntity : ItemBaseAddItem {
-    override fun repositoryAny(id: Long): Boolean = runBlocking {
+    override fun repositoryAny(id: Int): Boolean = runBlocking {
         return@runBlocking dao?.any(id) ?: false
     }
 
-    override fun repositoryViewAll(id: Long): LiveData<List<TEntity>>? = runBlocking {
+    override fun repositoryViewAll(id: Int): LiveData<List<TEntity>>? = runBlocking {
         return@runBlocking dao?.viewAll(id)
     }
 
-    override fun repositoryViewDefault(id: Long): LiveData<List<TEntity>>? = runBlocking {
+    override fun repositoryViewDefault(id: Int): LiveData<List<TEntity>>? = runBlocking {
         return@runBlocking dao?.viewDefault(id)
     }
 }

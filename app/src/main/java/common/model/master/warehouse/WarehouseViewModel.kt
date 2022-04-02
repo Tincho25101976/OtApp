@@ -5,12 +5,12 @@ import com.vsg.agendaandpublication.common.data.AppDatabase
 import com.vsg.helper.common.util.viewModel.IViewModelHasItemsRelationType
 import com.vsg.helper.common.util.viewModel.IViewModelUpdateIsDefault
 import common.model.master.filter.TypeFilterHasWarehouseItems
-import common.model.master.section.SectionViewModel
+import common.model.master.section.MasterSectionViewModel
 import common.model.init.viewModel.ViewModelGenericOt
 
 @ExperimentalStdlibApi
 class WarehouseViewModel(context: Application) :
-    ViewModelGenericOt<WarehouseDao, MasterWarehouse>(
+    ViewModelGenericOt<MasterWarehouseDao, MasterWarehouse>(
         AppDatabase.getInstance(context)?.warehouseDao()!!, context
     ),
     IViewModelHasItemsRelationType<TypeFilterHasWarehouseItems>,
@@ -22,7 +22,7 @@ class WarehouseViewModel(context: Application) :
         filter: TypeFilterHasWarehouseItems
     ): Boolean {
         return when (filter) {
-            TypeFilterHasWarehouseItems.SECTION -> SectionViewModel(context).viewModelViewHasItems(
+            TypeFilterHasWarehouseItems.SECTION -> MasterSectionViewModel(context).viewModelViewHasItems(
                 idRelation
             )
         }

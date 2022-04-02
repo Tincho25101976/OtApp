@@ -7,18 +7,18 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.vsg.helper.common.cast.Convert
 import common.data.convert.ConvertCurrentModel
-import common.model.master.batch.BatchDao
+import common.model.master.batch.MasterBatchDao
 import common.model.master.batch.MasterBatch
-import common.model.master.company.CompanyDao
+import common.model.master.company.MasterCompanyDao
 import common.model.master.company.MasterCompany
-import common.model.master.item.ItemDao
+import common.model.master.item.MasterItemDao
 import common.model.master.item.MasterItem
 import common.model.master.section.MasterSection
-import common.model.master.section.SectionDao
+import common.model.master.section.MasterSectionDao
 import common.model.master.stock.MasterStock
-import common.model.master.stock.StockDao
+import common.model.master.stock.MasterStockDao
 import common.model.master.warehouse.MasterWarehouse
-import common.model.master.warehouse.WarehouseDao
+import common.model.master.warehouse.MasterWarehouseDao
 
 @Database(
     entities =
@@ -38,12 +38,12 @@ import common.model.master.warehouse.WarehouseDao
 abstract class AppDatabase : RoomDatabase() {
 
     //region dataSource
-    abstract fun companyDao(): CompanyDao
-    abstract fun itemDao(): ItemDao
-    abstract fun batchDao(): BatchDao
-    abstract fun warehouseDao(): WarehouseDao
-    abstract fun sectionDao(): SectionDao
-    abstract fun stockDao(): StockDao
+    abstract fun companyDao(): MasterCompanyDao
+    abstract fun itemDao(): MasterItemDao
+    abstract fun batchDao(): MasterBatchDao
+    abstract fun warehouseDao(): MasterWarehouseDao
+    abstract fun sectionDao(): MasterSectionDao
+    abstract fun stockDao(): MasterStockDao
     //endregion
 
     companion object {

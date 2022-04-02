@@ -31,8 +31,8 @@ class HelperPhone {
             PhoneNumberUtil.getInstance().apply {
                 var id: Int = 0
                 Locale.getAvailableLocales().filter {
-                    countries.map { s -> s.toLowerCase(Locale.ROOT) }.contains(
-                        it.toLanguageTag().toLowerCase(
+                    countries.map { s -> s.lowercase(Locale.ROOT) }.contains(
+                        it.toLanguageTag().lowercase(
                             Locale.ROOT
                         )
                     )
