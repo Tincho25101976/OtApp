@@ -7,7 +7,7 @@ import com.vsg.helper.common.model.IIsEnabled
 
 interface IGenericDaoPagingRelationCode<T> :
     IGenericDaoPagingRelation<T>,
-    IDaoNextCode,
+//    IDaoNextCode,
     IDaoAllTextSearchRelation,
     IDaoAllSimpleListRelation<T>,
     IDaoHastItemRelation

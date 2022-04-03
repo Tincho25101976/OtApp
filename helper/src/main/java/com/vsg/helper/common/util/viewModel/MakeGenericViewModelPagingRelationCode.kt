@@ -18,11 +18,11 @@ abstract class MakeGenericViewModelPagingRelationCode<TDao, TEntity>(
     stored: IViewModelStoredMap
 ) : MakeGenericViewModelPagingRelation<TDao, TEntity>(dao, context, stored),
     IViewModelUpdateSetEnabled<TEntity>,
-    IViewModelNextCode,
+//    IViewModelNextCode,
     IViewModelHasItemsRelation
         where TDao : IGenericDao<TEntity>,
               TDao : IGenericDaoPagingRelationCode<TEntity>,
-              TDao : IDaoNextCode,
+//              TDao : IDaoNextCode,
               TDao : IDaoAllTextSearchRelation,
               TEntity : IEntity,
               TEntity : IEntityCode,
@@ -34,7 +34,7 @@ abstract class MakeGenericViewModelPagingRelationCode<TDao, TEntity>(
     protected abstract fun viewModelEncode(item: TEntity): TEntity?
 
     //region nextCode
-    override fun viewModelNextAutoCode(idRelation: Int): Int = dao.viewNextAutoCode(idRelation)
+//    override fun viewModelNextAutoCode(idRelation: Int): Int = dao.viewNextAutoCode(idRelation)
     //endregion
 
     //region has

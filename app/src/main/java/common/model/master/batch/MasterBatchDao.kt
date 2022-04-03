@@ -10,6 +10,8 @@ import common.model.init.dao.DaoGenericOtCompany
 @Dao
 abstract class MasterBatchDao : DaoGenericOtCompany<MasterBatch>() {
     //region paging
+    @Query("SELECT * FROM ${MasterBatch.ENTITY_NAME} ORDER BY valueCode")
+    abstract override fun viewAllPaging(): DataSource.Factory<Int, MasterBatch>
     @Query("SELECT * FROM ${MasterBatch.ENTITY_NAME} WHERE idItem = :idRelation ORDER BY valueCode")
     abstract override fun viewAllPaging(idRelation: Int): DataSource.Factory<Int, MasterBatch>
     //endregion
@@ -39,9 +41,6 @@ abstract class MasterBatchDao : DaoGenericOtCompany<MasterBatch>() {
     abstract override fun viewAllSimpleList(idRelation: Int): List<MasterBatch>?
 
     @Query("SELECT * FROM ${MasterBatch.ENTITY_NAME} ORDER BY valueCode")
-    abstract override fun viewAllPaging(): DataSource.Factory<Int, MasterBatch>
-
-    @Query("SELECT * FROM ${MasterBatch.ENTITY_NAME} ORDER BY valueCode")
     abstract override fun viewAllSimpleList(): List<MasterBatch>?
     //endregion
 
@@ -64,4 +63,5 @@ abstract class MasterBatchDao : DaoGenericOtCompany<MasterBatch>() {
     @Query("SELECT * FROM ${MasterBatch.ENTITY_NAME}  WHERE id = :idRelation ORDER BY valueCode")
     abstract fun viewAllSimpleBatchProductByBatch(idRelation: Int): MasterBatch?
     //endregion
+
 }

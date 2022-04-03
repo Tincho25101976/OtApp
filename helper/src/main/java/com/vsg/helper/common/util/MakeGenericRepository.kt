@@ -13,10 +13,11 @@ abstract class MakeGenericRepository<TDao, TEntity>(protected val dao: TDao?)
               TEntity : IIsEnabled {
     var isDao: Boolean = (dao != null)
 
-    open fun repositoryInsert(item: TEntity): Int =
-        runBlocking { return@runBlocking dao?.insert(item) ?: RESULT_NULL_INT }
+    open fun repositoryInsert(item: TEntity): Long =
+        runBlocking { return@runBlocking dao?.insert(item) ?: RESULT_NULL_LONG }
 
-    open fun repositoryUpdate(item: TEntity): Int = dao?.update(item) ?: RESULT_NULL_INT
+    open fun repositoryUpdate(item: TEntity): Int =
+        runBlocking { dao?.update(item) ?: RESULT_NULL_INT }
 
     open fun repositoryDelete(item: TEntity): Int =
         runBlocking { return@runBlocking dao?.delete(item) ?: RESULT_NULL_INT }
@@ -34,6 +35,7 @@ abstract class MakeGenericRepository<TDao, TEntity>(protected val dao: TDao?)
 
     companion object {
         const val RESULT_NULL_INT: Int = -1
+        const val RESULT_NULL_LONG: Long = -1
         val RESULT_NULL_ENTITY = null
     }
 }

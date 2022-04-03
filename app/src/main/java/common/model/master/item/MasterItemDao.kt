@@ -10,7 +10,7 @@ import common.model.init.dao.DaoGenericOtCompany
 abstract class MasterItemDao : DaoGenericOtCompany<MasterItem>() {
 
     //region paging
-    @Query("SELECT * FROM ${MasterItem.ENTITY_NAME} WHERE id < 0 ORDER BY description")
+    @Query("SELECT * FROM ${MasterItem.ENTITY_NAME} WHERE id > 0 ORDER BY description")
     abstract override fun viewAllPaging(): DataSource.Factory<Int, MasterItem>
 
     @Query("SELECT * FROM ${MasterItem.ENTITY_NAME} WHERE idCompany = :idRelation ORDER BY description")

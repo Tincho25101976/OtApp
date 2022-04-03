@@ -14,10 +14,10 @@ interface IGenericDao<TEntity> :
         where TEntity : IEntity,
               TEntity : IIsEnabled {
     @Insert
-    suspend fun insert(item: TEntity): Int
+    suspend fun insert(item: TEntity): Long
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update(item: TEntity): Int
+    suspend fun update(item: TEntity): Int
 
     @Delete
     suspend fun delete(item: TEntity): Int

@@ -30,7 +30,7 @@ abstract class MasterStockDao : DaoGenericOtCompany<MasterStock>() {
     @Query("UPDATE ${MasterStock.ENTITY_NAME} SET isEnabled = NOT isEnabled WHERE id = :data")
     abstract override fun updateSetEnabled(data: Int)
 
-    //@Query("SELECT description FROM ${MasterStock.ENTITY_NAME} WHERE idCompany = :idRelation GROUP BY description ORDER BY description")
+    @Query("SELECT description FROM ${MasterStock.ENTITY_NAME} WHERE idCompany = :idRelation GROUP BY description ORDER BY description")
     abstract override fun viewGetAllTextSearch(idRelation: Int): LiveData<List<String>>
 
     @Query("SELECT EXISTS(SELECT * FROM ${MasterStock.ENTITY_NAME} WHERE idCompany = :idRelation)")

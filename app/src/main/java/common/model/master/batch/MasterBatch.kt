@@ -160,6 +160,6 @@ class MasterBatch : EntityOtCompany<MasterBatch>(), IMasterItem {
     //endregion
 
     companion object {
-        const val ENTITY_NAME: String = "batch"
+        const val ENTITY_NAME: String = "masterBatch"
     }
 }

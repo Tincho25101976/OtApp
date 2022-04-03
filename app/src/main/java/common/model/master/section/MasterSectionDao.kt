@@ -11,7 +11,9 @@ import common.model.init.dao.DaoGenericOtCompany
 @Dao
 abstract class MasterSectionDao : DaoGenericOtCompany<MasterSection>(),
     IDaoAllUpdateIsDefault {
-    //region paging
+    @Query("SELECT * FROM ${MasterSection.ENTITY_NAME} ORDER BY valueCode")
+    abstract override fun viewAllPaging(): DataSource.Factory<Int, MasterSection>
+
     @Query("SELECT * FROM ${MasterSection.ENTITY_NAME} WHERE idWarehouse = :idRelation ORDER BY valueCode")
     abstract override fun viewAllPaging(idRelation: Int): DataSource.Factory<Int, MasterSection>
     //endregion

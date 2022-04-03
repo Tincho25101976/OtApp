@@ -45,8 +45,8 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
 
     //region crud
     override fun viewModelInsert(item: TEntity): Boolean = runBlocking {
-        val tempId: Int = dao.insert(item)
-        item.id = tempId
+        val tempId: Long = dao.insert(item)
+        item.id = tempId.toInt()
         return@runBlocking tempId > 0
     }
 

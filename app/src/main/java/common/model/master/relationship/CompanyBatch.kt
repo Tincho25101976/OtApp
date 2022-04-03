@@ -10,7 +10,8 @@ data class CompanyBatch(
     val parent: MasterCompany,
     @Relation(
         parentColumn = "id",
-        entityColumn = "idCompany"
+        entityColumn = "idCompany",
+        entity = MasterBatch::class
     )
     val children: List<MasterBatch>
 )
