@@ -35,7 +35,7 @@ import common.model.std.metodo.StdMetodo
     inheritSuperIndices = true,
     tableName = StdEnsayo.ENTITY_NAME
 )
-class StdEnsayo : EntityOt<StdMetodo>(), IStdIdKeyEnsayo {
+class StdEnsayo : EntityOt<StdEnsayo>(), IStdIdKeyEnsayo {
 
     //region properties
     override var idKeyEnsayo: String = ""

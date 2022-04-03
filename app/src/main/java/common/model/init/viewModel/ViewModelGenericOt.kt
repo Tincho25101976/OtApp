@@ -11,7 +11,7 @@ import com.vsg.helper.common.util.dao.*
 import com.vsg.helper.common.util.viewModel.*
 import common.model.master.batch.MasterBatch
 import common.model.master.batch.MasterBatchViewModel
-import common.model.master.company.CompanyViewModel
+import common.model.master.company.MasterCompanyViewModel
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
 import common.model.master.item.MasterItemViewModel
@@ -51,7 +51,7 @@ abstract class ViewModelGenericOt<TDao, TEntity>(dao: TDao, context: Application
         if (entity == null) return false
         return when (entity) {
             is MasterItem -> MasterItemViewModel(context).isEntity(entity)
-            is MasterCompany -> CompanyViewModel(context).isEntity(entity)
+            is MasterCompany -> MasterCompanyViewModel(context).isEntity(entity)
             is MasterBatch -> MasterBatchViewModel(context).isEntity(entity)
             is MasterWarehouse -> WarehouseViewModel(context).isEntity(entity)
             is MasterSection -> MasterSectionViewModel(context).isEntity(entity)
@@ -64,7 +64,7 @@ abstract class ViewModelGenericOt<TDao, TEntity>(dao: TDao, context: Application
         if (entity == null) return false
         return when (entity) {
             is MasterItem -> MasterItemViewModel(context).checkExistsEntity(entity)
-            is MasterCompany -> CompanyViewModel(context).checkExistsEntity(entity)
+            is MasterCompany -> MasterCompanyViewModel(context).checkExistsEntity(entity)
             is MasterBatch -> MasterBatchViewModel(context).checkExistsEntity(entity)
             is MasterWarehouse -> WarehouseViewModel(context).checkExistsEntity(entity)
             is MasterSection -> MasterSectionViewModel(context).checkExistsEntity(entity)
