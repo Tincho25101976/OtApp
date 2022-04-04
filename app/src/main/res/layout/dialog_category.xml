@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/DialogCrudTextMargin"
+    android:layout_marginTop="@dimen/DialogCrudTextMargin"
+    android:layout_marginEnd="@dimen/DialogCrudTextMargin">
+
+    <RelativeLayout
+        android:id="@+id/DialogCategoryMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
+            android:id="@+id/DialogCategoryPicture"
+            android:layout_width="@dimen/DialogCategoryPictureSize"
+            android:layout_height="@dimen/DialogCategoryPictureSize"
+            android:layout_margin="@dimen/DialogCrudPictureMargin"
+            android:background="@drawable/shadow_view"
+            android:scaleType="fitCenter"
+            android:src="@drawable/pic_camera_alpha" />
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogCategoryName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/DialogCrudPictureMargin"
+            android:layout_toEndOf="@+id/DialogCategoryPicture"
+            android:hint="@string/DialogCategoryName"
+            android:padding="@dimen/DialogCrudTextPadding" />
+    </RelativeLayout>
+
+    <include layout="@layout/dialog_generic_item_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DialogCategoryMain"/>
+
+</RelativeLayout>

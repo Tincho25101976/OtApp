@@ -23,7 +23,7 @@ import common.model.securityDialog.xact.XactViewModel
 import java.io.File
 
 @ExperimentalStdlibApi
-class UICRUXact<TActivity>(activity: TActivity, operation: DBOperation) :
+class UICRUDXact<TActivity>(activity: TActivity, operation: DBOperation) :
     UICustomCRUDViewModel<TActivity, XactViewModel, XactDao, Xact>(
         activity,
         operation,
