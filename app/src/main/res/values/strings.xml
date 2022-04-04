@@ -3,4 +3,5 @@
 
     <!--Xact:-->
     <string name="DialogCategoryName">Categoría</string>
+    <string name="ActivityItemProductCategoryText">Categorías</string>
 </resources>
