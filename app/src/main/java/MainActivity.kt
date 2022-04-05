@@ -1,8 +1,8 @@
-package com.vsg.agendaandpublication
+package com.vsg.ot
 
 import android.widget.ScrollView
 import com.vsg.helper.ui.util.BaseActivity
-import com.vsg.ot.R
+import com.vsg.ot.ui.activities.securityDialog.main.MainSecurityDialog
 import ui.activities.securityDialog.xact.XactActivity
 
 //TODO Path app:  /data/data/com.vsg.ot
@@ -14,15 +14,15 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         onEventMakeActivityForSelector = {
             val view: ScrollView = it.apply {
                 add(
-                    R.drawable.pic_contact,
+                    R.drawable.pic_xact,
                     getString(R.string.ActivityItemProductCategoryText),
-                    dataClass = XactActivity::class.java
+                    dataClass = MainSecurityDialog::class.java
                 )
-//                add(
-//                    R.drawable.pic_product,
-//                    getString(R.string.ActivityMainCommandProduct),
-//                    dataClass = MainItemProducto::class.java
-//                )
+                add(
+                    R.drawable.pic_product,
+                    getString(R.string.ActivityMainCommandProduct),
+                    dataClass = MainItemProducto::class.java
+                )
 //                add(
 //                    R.drawable.pic_person,
 //                    getString(R.string.ActivityMainCommandPerson),

@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="ui.activities.securityDialog.xact.XactActivity" />
 
     <provider
         android:name="androidx.core.content.FileProvider"
