@@ -1,45 +1,47 @@
-package com.vsg.agendaandpublication.ui.activities.itemOperation.batch
+package com.vsg.ot.ui.activities.master
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
 import androidx.paging.filter
-import com.vsg.agendaandpublication.R
-import com.vsg.agendaandpublication.common.model.itemOperation.batch.Batch
-import com.vsg.agendaandpublication.common.model.itemOperation.batch.BatchDao
-import com.vsg.agendaandpublication.common.model.itemOperation.batch.BatchViewModel
-import com.vsg.agendaandpublication.common.model.itemOperation.filter.TypeFilterHasProductItems
-import com.vsg.agendaandpublication.common.model.itemProduct.company.Company
-import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyViewModel
-import com.vsg.agendaandpublication.common.model.itemProduct.product.Product
-import com.vsg.agendaandpublication.common.model.itemProduct.product.ProductDao
-import com.vsg.agendaandpublication.common.model.itemProduct.product.ProductViewModel
-import com.vsg.agendaandpublication.ui.activities.itemOperation.util.FilterTypeActivityBatch
-import com.vsg.agendaandpublication.ui.activities.itemProducto.util.FilterTypeActivityProduct
-import com.vsg.agendaandpublication.ui.common.itemOperation.batch.UICRUDBatch
-import com.vsg.utilities.ui.util.CurrentBaseActivityPagingGenericRelationParentWithRelation
+import com.vsg.helper.ui.util.CurrentBaseActivityPagingGenericRelationParentWithRelation
+import com.vsg.ot.R
+import com.vsg.ot.ui.activities.master.util.FilterTypeActivityBatch
+import com.vsg.ot.ui.activities.master.util.FilterTypeActivityProduct
+import com.vsg.ot.ui.common.master.batch.UICRUDBatch
+import common.model.master.batch.MasterBatch
+import common.model.master.batch.MasterBatchDao
+import common.model.master.batch.MasterBatchViewModel
+import common.model.master.company.MasterCompany
+import common.model.master.company.MasterCompanyViewModel
+import common.model.master.filter.TypeFilterHasProductItems
+import common.model.master.item.MasterItem
+import common.model.master.item.MasterItemDao
+import common.model.master.item.MasterItemViewModel
 import kotlinx.coroutines.flow.Flow
 
 @ExperimentalStdlibApi
 class BatchActivity :
-    CurrentBaseActivityPagingGenericRelationParentWithRelation<BatchActivity, BatchViewModel, BatchDao, Batch, FilterTypeActivityBatch, UICRUDBatch<BatchActivity>,
-            FilterTypeActivityProduct, ProductViewModel, ProductDao, Product, TypeFilterHasProductItems,
-            Company>(
-        BatchViewModel::class.java, ProductViewModel::class.java,
-        FilterTypeActivityBatch::class.java, FilterTypeActivityProduct::class.java
+    CurrentBaseActivityPagingGenericRelationParentWithRelation<BatchActivity, MasterBatchViewModel, MasterBatchDao, MasterBatch, FilterTypeActivityBatch, UICRUDBatch<BatchActivity>,
+            FilterTypeActivityProduct, MasterItemViewModel, MasterItemDao, MasterItem, TypeFilterHasProductItems,
+            MasterCompany>(
+        MasterBatchViewModel::class.java,
+        MasterItemViewModel::class.java,
+        FilterTypeActivityBatch::class.java,
+        FilterTypeActivityProduct::class.java
     ) {
     override var factorHeightForCustomViewer: Double = 0.75
     override fun oSetStringTitleForActionBar(): Int = R.string.ActivityItemOperationBatchText
     override fun aSetActivity(): BatchActivity = this
     override fun aFinishExecutePagingGenericRelationParent() {
         onEventMakeFilter = { item, find, it ->
-            val filter: PagingData<Batch> =
+            val filter: PagingData<MasterBatch> =
                 when (item) {
                     FilterTypeActivityBatch.PRODUCT -> it.filter { s ->
-                        if (s.product == null) s.product =
-                            currentViewModel().viewModelGetProduct(s.idProduct)
+                        if (s.item == null) s.item =
+                            currentViewModel().viewModelGetProduct(s.idItem)
                         var data = false
-                        if (s.product != null) {
-                            data = s.product?.name!!.contains(
+                        if (s.item != null) {
+                            data = s.item?.description!!.contains(
                                 find,
                                 true
                             )
@@ -57,16 +59,15 @@ class BatchActivity :
             filter
         }
         onEventMakeFilterResult = { item, find, it ->
-            val filter: PagingData<Product> =
+            val filter: PagingData<MasterItem> =
                 when (item) {
-                    FilterTypeActivityProduct.NAME -> it.filter { s -> s.name.contains(find, true) }
-                    FilterTypeActivityProduct.CODE -> it.filter { s -> s.code.contains(find, true) }
-                    FilterTypeActivityProduct.PROVIDER_CODE -> it.filter { s ->
-                        s.providerCode.contains(
+                    FilterTypeActivityProduct.NAME -> it.filter { s ->
+                        s.description.contains(
                             find,
                             true
                         )
                     }
+                    FilterTypeActivityProduct.CODE -> it.filter { s -> s.code.contains(find, true) }
                     else -> it
                 }
             filter
@@ -100,7 +101,7 @@ class BatchActivity :
             data
         }
         onEventGetViewAllPaging = {
-            val data: Flow<PagingData<Batch>>? = when (parent == null) {
+            val data: Flow<PagingData<MasterBatch>>? = when (parent == null) {
                 true -> null
                 false -> currentViewModel().viewModelGetViewAllPaging(parent?.id!!)
             }
@@ -108,14 +109,15 @@ class BatchActivity :
         }
         onEventSetParentFilterHasItems = { TypeFilterHasProductItems.BATCH }
     }
+
     override fun oHintForParent(): String = this.getString(R.string.HintParentForProduct)
 
-    override fun aRelation(): Company? = getExtraParameter(CompanyViewModel::class.java)
-    override fun aCurrentListOfParent(): List<Product>? {
+    override fun aRelation(): MasterCompany? = getExtraParameter(MasterCompanyViewModel::class.java)
+    override fun aCurrentListOfParent(): List<MasterItem>? {
         relation = aRelation()
         return when (relation == null) {
             true -> null
-            false -> makeViewModel(ProductViewModel::class.java)
+            false -> makeViewModel(MasterItemViewModel::class.java)
                 .viewModelViewAllSimpleList(relation!!.id)
         }
     }

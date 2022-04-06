@@ -1,6 +1,6 @@
-package com.vsg.agendaandpublication.ui.activities.itemProducto.util
+package com.vsg.ot.ui.activities.master.util
 
-import com.vsg.utilities.ui.adapter.IDataAdapterEnum
+import com.vsg.helper.ui.adapter.IDataAdapterEnum
 
 enum class FilterTypeActivityProduct(
     override val title: String, override val value: Int,
@@ -9,6 +9,5 @@ enum class FilterTypeActivityProduct(
 ) : IDataAdapterEnum {
     NAME(value = 1, title = "Nombre del producto", order = 1, default = true),
     CODE(value = 2, title = "Código del producto", order = 3),
-    PROVIDER_CODE(value = 3, title = "Código del proveedor", order = 3),
     UNDEFINED(value = -1, title = "Indefinido", show = false, isException = true);
 }

@@ -1,5 +1,6 @@
 package com.vsg.agendaandpublication.ui.activities.itemProducto.util
 
+import com.vsg.ot.ui.activities.master.util.FilterTypeActivityCompany
 import com.vsg.utilities.common.model.IEntity
 import com.vsg.utilities.ui.adapter.IDataAdapterTitle
 

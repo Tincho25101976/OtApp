@@ -1,43 +1,44 @@
-package com.vsg.agendaandpublication.ui.common.itemOperation.batch
+package com.vsg.ot.ui.common.master.batch
 
 import android.view.Gravity
-import com.vsg.agendaandpublication.R
-import com.vsg.agendaandpublication.common.model.itemOperation.batch.Batch
-import com.vsg.agendaandpublication.common.model.itemOperation.batch.BatchDao
-import com.vsg.agendaandpublication.common.model.itemOperation.batch.BatchViewModel
-import com.vsg.agendaandpublication.common.model.itemProduct.price.Price
-import com.vsg.agendaandpublication.common.model.itemProduct.product.Product
-import com.vsg.utilities.common.operation.DBOperation
-import com.vsg.utilities.helper.date.HelperDate
-import com.vsg.utilities.helper.date.HelperDate.Companion.addDay
-import com.vsg.utilities.helper.date.HelperDate.Companion.toDateString
-import com.vsg.utilities.ui.crud.UICustomCRUDViewModelRelation
-import com.vsg.utilities.ui.util.CurrentBaseActivity
-import com.vsg.utilities.ui.widget.text.CustomInputText
+import com.vsg.helper.common.format.FormatDateString
+import com.vsg.helper.common.operation.DBOperation
+import com.vsg.helper.helper.date.HelperDate
+import com.vsg.helper.helper.date.HelperDate.Companion.addDay
+import com.vsg.helper.helper.date.HelperDate.Companion.toDateString
+import com.vsg.helper.ui.crud.UICustomCRUDViewModelRelation
+import com.vsg.helper.ui.util.CurrentBaseActivity
+import com.vsg.helper.ui.widget.text.CustomInputText
+import com.vsg.ot.R
+import common.model.master.batch.MasterBatch
+import common.model.master.batch.MasterBatchDao
+import common.model.master.batch.MasterBatchViewModel
+import common.model.master.item.MasterItem
+
 
 @ExperimentalStdlibApi
 class UICRUDBatch<TActivity>(
     activity: TActivity,
     operation: DBOperation,
-    product: Product
+    product: MasterItem
 ) :
-    UICustomCRUDViewModelRelation<TActivity, BatchViewModel, BatchDao, Batch, Product>(
+    UICustomCRUDViewModelRelation<TActivity, MasterBatchViewModel, MasterBatchDao, MasterBatch, MasterItem>(
         activity,
         operation,
         R.layout.dialog_batch,
         idTextParent = R.id.DialogBatchRelation,
         parent = product
     )
-        where TActivity : CurrentBaseActivity<BatchViewModel, BatchDao, Batch> {
+        where TActivity : CurrentBaseActivity<MasterBatchViewModel, MasterBatchDao, MasterBatch> {
 
     //region widget
     private lateinit var tDueDate: CustomInputText
     private lateinit var tCreateDate: CustomInputText
     private lateinit var tReceiverQty: CustomInputText
-    private val formatDate = Price().formatDate
+    private val formatDate = FormatDateString.CREATE_DATE
     //endregion
 
-    override fun aGetTextParent(): String = parent.name
+    override fun aGetTextParent(): String = parent.description
 
     init {
         onEventSetInit = {
@@ -56,12 +57,12 @@ class UICRUDBatch<TActivity>(
             this.tReceiverQty = it.findViewById(R.id.DialogBatchReceiverQty)
         }
         onEventGetNewOrUpdateEntity = {
-            val data: Batch = it ?: Batch()
+            val data: MasterBatch = it ?: MasterBatch()
             data.apply {
                 this.dueDate = tDueDate.date
                 this.createDate = tCreateDate.date
                 this.receiverQty = tReceiverQty.toDouble()
-                this.idProduct = parent.id
+                this.idItem = parent.id
                 this.idCompany = parent.idCompany
             }
             data
@@ -100,7 +101,7 @@ class UICRUDBatch<TActivity>(
         onEventGetPopUpDataParameter = { p, item ->
             p?.factorHeight = 0.25
             if (item != null) {
-                p?.icon = item.getDrawableShow()
+                p?.icon = item.getDrawableShow().drawable
                 p?.bitmap = item.getPictureShow()
             }
             p

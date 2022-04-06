@@ -7,9 +7,7 @@ import com.vsg.agendaandpublication.common.model.itemProduct.price.Price
 import com.vsg.agendaandpublication.common.model.itemProduct.price.PriceViewModel
 import com.vsg.agendaandpublication.common.model.itemProduct.product.Product
 import com.vsg.agendaandpublication.common.model.itemProduct.product.ProductViewModel
-import com.vsg.agendaandpublication.common.model.itemProduct.unit.Unit
-import com.vsg.agendaandpublication.ui.activities.itemProducto.CategoryActivity
-import com.vsg.agendaandpublication.ui.activities.itemProducto.CompanyActivity
+import com.vsg.ot.ui.activities.master.CompanyActivity
 import com.vsg.agendaandpublication.ui.activities.itemProducto.ProductActivity
 import com.vsg.agendaandpublication.ui.activities.itemProducto.UnitActivity
 import com.vsg.utilities.common.util.viewModel.util.FilterMemberInclude

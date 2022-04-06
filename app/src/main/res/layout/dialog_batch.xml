@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/DialogCrudTextMargin"
+    android:layout_marginTop="@dimen/DialogCrudTextMargin"
+    android:layout_marginEnd="@dimen/DialogCrudTextMargin">
+
+    <RelativeLayout
+        android:id="@+id/DialogBatchMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogBatchRelation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/DialogBatchRelation"
+            android:layout_alignParentTop="true"
+            app:customType="READ_ONLY_TEXT"/>
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogBatchCreateDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/DialogBatchRelation"
+            android:hint="@string/DialogBatchCreateDate"
+            app:customType="DATE" />
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogBatchDueDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/DialogBatchCreateDate"
+            android:hint="@string/DialogBatchDueDate"
+            app:customType="DATE" />
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogBatchReceiverQty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/DialogBatchDueDate"
+            android:hint="@string/DialogBatchReceiverQty"
+            app:customType="DOUBLE" />
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/dialog_generic_item_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DialogBatchMain" />
+
+</RelativeLayout>

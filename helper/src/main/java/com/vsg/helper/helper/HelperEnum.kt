@@ -30,6 +30,10 @@ class HelperEnum {
             val data = EnumIterator(type).toList()
             return data.toRandom() ?: defaultValue
         }
+        fun <T : Enum<T>> Class<T>.toRandomEnum(defaultValue: T): T {
+            val data = EnumIterator(this).toList()
+            return data.toRandom() ?: defaultValue
+        }
 
         fun <T> getList(type: Class<T>): List<T> where T : IDataAdapterEnum, T : Enum<T> {
             val default = EnumIterator(type).toList().firstOrNull { it.show && it.default }

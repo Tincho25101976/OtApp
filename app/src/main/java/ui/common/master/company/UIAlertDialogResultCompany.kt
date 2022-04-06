@@ -1,10 +1,9 @@
 package com.vsg.agendaandpublication.ui.common.itemProduct.company
 
 import androidx.paging.PagingData
-import androidx.paging.filter
 import com.vsg.agendaandpublication.common.model.itemProduct.company.Company
 import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyViewModel
-import com.vsg.agendaandpublication.ui.activities.itemProducto.util.FilterTypeActivityCompany
+import com.vsg.ot.ui.activities.master.util.FilterTypeActivityCompany
 import com.vsg.utilities.ui.popup.select.UIAlertDialogResultEntity
 import com.vsg.utilities.ui.util.BaseActivity
 

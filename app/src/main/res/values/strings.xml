@@ -4,4 +4,22 @@
     <!--Xact:-->
     <string name="DialogCategoryName">Categoría</string>
     <string name="ActivityItemProductCategoryText">Categorías</string>
+
+    <!--Batch:-->
+    <string name="DialogBatchDueDate">Vencimiento</string>
+    <string name="DialogBatchReceiverQty">Recepción</string>
+    <string name="DialogBatchCreateDate">Creación</string>
+    <string name="DialogBatchRelation">Producto</string>
+
+    <!--ActivityItemOperation-->
+    <string name="ActivityItemOperationBatchText">Lotes</string>
+    <string name="ActivityItemOperationMoneyText">Divisas</string>
+    <string name="ActivityItemOperationOperationText">Operaciones</string>
+    <string name="ActivityItemOperationOperationDetailText">Operaciones (detalle)</string>
+    <string name="ActivityItemOperationWarehouseText">Depósitos</string>
+    <string name="ActivityItemOperationSectionText">Localizaciones</string>
+
+    <!--    HintForParent-->
+    <string name="HintParentForCompany">Empresa</string>
+    <string name="HintParentForProduct">Producto</string>
 </resources>

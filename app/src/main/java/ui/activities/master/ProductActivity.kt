@@ -3,7 +3,6 @@ package com.vsg.agendaandpublication.ui.activities.itemProducto
 import android.widget.RelativeLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
-import androidx.paging.filter
 import com.vsg.agendaandpublication.R
 import com.vsg.agendaandpublication.common.model.itemProduct.company.Company
 import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyDao
@@ -12,9 +11,9 @@ import com.vsg.agendaandpublication.common.model.itemProduct.filter.TypeFilterHa
 import com.vsg.agendaandpublication.common.model.itemProduct.product.Product
 import com.vsg.agendaandpublication.common.model.itemProduct.product.ProductDao
 import com.vsg.agendaandpublication.common.model.itemProduct.product.ProductViewModel
-import com.vsg.agendaandpublication.ui.activities.itemOperation.batch.BatchActivity
-import com.vsg.agendaandpublication.ui.activities.itemProducto.util.FilterTypeActivityCompany
-import com.vsg.agendaandpublication.ui.activities.itemProducto.util.FilterTypeActivityProduct
+import com.vsg.ot.ui.activities.master.BatchActivity
+import com.vsg.ot.ui.activities.master.util.FilterTypeActivityCompany
+import com.vsg.ot.ui.activities.master.util.FilterTypeActivityProduct
 import com.vsg.agendaandpublication.ui.common.itemProduct.product.UICRUDProduct
 import com.vsg.utilities.ui.util.CurrentBaseActivityPagingGenericRelationParent
 import kotlinx.coroutines.flow.Flow

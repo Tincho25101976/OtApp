@@ -1,23 +1,17 @@
-package com.vsg.agendaandpublication.ui.activities.itemProducto
+package com.vsg.ot.ui.activities.master
 
 import android.widget.RelativeLayout
 import androidx.paging.PagingData
-import androidx.paging.filter
-import com.vsg.agendaandpublication.R
-import com.vsg.agendaandpublication.common.model.itemProduct.company.Company
-import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyDao
-import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyViewModel
-import com.vsg.agendaandpublication.ui.activities.itemOperation.MoneyActivity
-import com.vsg.agendaandpublication.ui.activities.itemOperation.WarehouseActivity
-import com.vsg.agendaandpublication.ui.activities.itemPerson.PersonActivity
-import com.vsg.agendaandpublication.ui.activities.itemProducto.util.FilterSearchCompany
-import com.vsg.agendaandpublication.ui.activities.itemProducto.util.FilterTypeActivityCompany
-import com.vsg.agendaandpublication.ui.common.itemProduct.company.UICRUDCompany
-import com.vsg.utilities.ui.util.CurrentBaseActivityPagingGeneric
+import com.vsg.ot.ui.activities.master.util.FilterTypeActivityCompany
+
+import com.vsg.helper.ui.util.CurrentBaseActivityPagingGeneric
+import common.model.master.company.MasterCompany
+import common.model.master.company.MasterCompanyDao
+import common.model.master.company.MasterCompanyViewModel
 
 @ExperimentalStdlibApi
 class CompanyActivity :
-    CurrentBaseActivityPagingGeneric<CompanyActivity, CompanyViewModel, CompanyDao, Company, FilterTypeActivityCompany, UICRUDCompany<CompanyActivity>>(
+    CurrentBaseActivityPagingGeneric<CompanyActivity, MasterCompanyViewModel, MasterCompanyDao, MasterCompany, FilterTypeActivityCompany, UICRUDCompany<CompanyActivity>>(
         CompanyViewModel::class.java,
         FilterTypeActivityCompany::class.java
     ) {
