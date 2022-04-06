@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shadow_view">
+
+    <LinearLayout
+        android:id="@+id/SwipeMenuProductItemLayoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/SwipeMenuItemsLayoutMarginStartEnd"
+        android:layout_marginTop="@dimen/SwipeMenuItemsLayoutTopBottom"
+        android:layout_marginEnd="@dimen/SwipeMenuItemsLayoutMarginStartEnd"
+        android:layout_marginBottom="@dimen/SwipeMenuItemsLayoutTopBottom"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.vsg.helper.ui.widget.imageWithText.CustomImagenWithText
+            android:id="@+id/SwipeMenuProductItemMail"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:customResourceImage="@drawable/pic_picture"
+            app:customResourceString="@string/ActionResultForProductPicture" />
+
+        <com.vsg.helper.ui.widget.imageWithText.CustomImagenWithText
+            android:id="@+id/SwipeMenuProductItemBatch"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:customResourceImage="@drawable/pic_batch"
+            app:customResourceString="@string/ActionResultForProductBatch" />
+
+    </LinearLayout>
+</RelativeLayout>

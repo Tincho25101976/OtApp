@@ -8,7 +8,7 @@ import com.vsg.agendaandpublication.common.model.itemProduct.price.PriceViewMode
 import com.vsg.agendaandpublication.common.model.itemProduct.product.Product
 import com.vsg.agendaandpublication.common.model.itemProduct.product.ProductViewModel
 import com.vsg.ot.ui.activities.master.CompanyActivity
-import com.vsg.agendaandpublication.ui.activities.itemProducto.ProductActivity
+import com.vsg.ot.ui.activities.master.ProductActivity
 import com.vsg.agendaandpublication.ui.activities.itemProducto.UnitActivity
 import com.vsg.utilities.common.util.viewModel.util.FilterMemberInclude
 import com.vsg.utilities.ui.util.BaseActivity

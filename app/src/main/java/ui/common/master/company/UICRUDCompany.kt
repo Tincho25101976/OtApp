@@ -1,35 +1,35 @@
-package com.vsg.agendaandpublication.ui.common.itemProduct.company
+package com.vsg.ot.ui.common.master.company
 
 import android.app.Activity
-import com.vsg.agendaandpublication.R
-import com.vsg.agendaandpublication.common.model.itemProduct.company.Company
-import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyDao
-import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyViewModel
-import com.vsg.utilities.common.operation.DBOperation
-import com.vsg.utilities.helper.HelperUI
-import com.vsg.utilities.helper.HelperUI.Static.getArray
-import com.vsg.utilities.helper.HelperUI.Static.setPictureFromFile
-import com.vsg.utilities.helper.array.HelperArray.Companion.toBitmap
-import com.vsg.utilities.helper.file.HelperFile
-import com.vsg.utilities.helper.file.HelperFile.Static.chooserFile
-import com.vsg.utilities.helper.file.HelperFile.Static.getTempFileFromUri
-import com.vsg.utilities.helper.file.TypeTempFile
-import com.vsg.utilities.ui.crud.UICustomCRUDViewModel
-import com.vsg.utilities.ui.popup.viewer.picture.UICustomDialogViewer
-import com.vsg.utilities.ui.popup.viewer.picture.UICustomDialogViewerParameter
-import com.vsg.utilities.ui.util.CurrentBaseActivity
-import com.vsg.utilities.ui.widget.imageView.CustomImageViewDobleTap
-import com.vsg.utilities.ui.widget.text.CustomInputText
+import com.vsg.helper.common.operation.DBOperation
+import com.vsg.helper.helper.HelperUI
+import com.vsg.helper.helper.HelperUI.Static.getArray
+import com.vsg.helper.helper.HelperUI.Static.setPictureFromFile
+import com.vsg.helper.helper.array.HelperArray.Companion.toBitmap
+import com.vsg.helper.helper.file.HelperFile
+import com.vsg.helper.helper.file.HelperFile.Static.chooserFile
+import com.vsg.helper.helper.file.HelperFile.Static.getTempFileFromUri
+import com.vsg.helper.helper.file.TypeTempFile
+import com.vsg.helper.ui.crud.UICustomCRUDViewModel
+import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewer
+import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewerParameter
+import com.vsg.helper.ui.util.CurrentBaseActivity
+import com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
+import com.vsg.helper.ui.widget.text.CustomInputText
+import com.vsg.ot.R
+import common.model.master.company.MasterCompany
+import common.model.master.company.MasterCompanyDao
+import common.model.master.company.MasterCompanyViewModel
 import java.io.File
 
 @ExperimentalStdlibApi
 class UICRUDCompany<TActivity>(activity: TActivity, operation: DBOperation) :
-    UICustomCRUDViewModel<TActivity, CompanyViewModel, CompanyDao, Company>(
+    UICustomCRUDViewModel<TActivity, MasterCompanyViewModel, MasterCompanyDao, MasterCompany>(
         activity,
         operation,
         R.layout.dialog_company
     )
-        where TActivity : CurrentBaseActivity<CompanyViewModel, CompanyDao, Company> {
+        where TActivity : CurrentBaseActivity<MasterCompanyViewModel, MasterCompanyDao, MasterCompany> {
 
     //region widget
     private lateinit var tName: CustomInputText
@@ -68,15 +68,15 @@ class UICRUDCompany<TActivity>(activity: TActivity, operation: DBOperation) :
             }
         }
         onEventGetNewOrUpdateEntity = {
-            val data = it ?: Company()
+            val data = it ?: MasterCompany()
             data.apply {
-                this.name = tName.text
+                this.description = tName.text
                 this.picture = tPicture.getArray()
             }
             data
         }
         onEventSetItem = {
-            tName.text = it.name
+            tName.text = it.description
             tPicture.setImageBitmap(it.picture.toBitmap())
         }
         onEventSetItemsForClean = {
@@ -85,7 +85,7 @@ class UICRUDCompany<TActivity>(activity: TActivity, operation: DBOperation) :
         onEventValidate = { item, _ ->
             var result = false
             try {
-                if (item.name.isEmpty()) throw Exception("El nombre de la Empresa no puede ser nulo...")
+                if (item.description.isEmpty()) throw Exception("El nombre de la Empresa no puede ser nulo...")
                 if (item.picture == null || item.picture!!.isEmpty()) throw Exception("El logo no fue asignado...")
                 result = true
             } catch (e: Exception) {
@@ -96,7 +96,7 @@ class UICRUDCompany<TActivity>(activity: TActivity, operation: DBOperation) :
         onEventGetPopUpDataParameter = { p, item ->
             p?.factorHeight = 0.25
             if (item != null) {
-                p?.icon = item.getDrawableShow()
+                p?.icon = item.getDrawableShow().drawable
                 p?.bitmap = item.getPictureShow()
             }
             p

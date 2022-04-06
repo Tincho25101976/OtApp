@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/DialogCrudTextMargin"
+    android:layout_marginTop="@dimen/DialogCrudTextMargin"
+    android:layout_marginEnd="@dimen/DialogCrudTextMargin">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/DialogProductMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.vsg.helper.ui.widget.text.CustomInputText
+                android:id="@+id/DialogProductRelation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:hint="@string/DialogProductRelation"
+                app:customType="READ_ONLY_TEXT" />
+
+            <include
+                android:id="@+id/DialogProductPictureChoose"
+                layout="@layout/dialog_generic_picture_choose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/DialogProductRelation" />
+
+            <RelativeLayout
+                android:id="@+id/DialogProductFields"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/DialogProductPictureChoose"
+                android:layout_marginStart="@dimen/DialogCrudLayoutMargin">
+
+                <com.vsg.helper.ui.widget.text.CustomInputText
+                    android:id="@+id/DialogProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/DialogProductName" />
+
+                <RelativeLayout
+                    android:id="@+id/DialogProductParameterUnitHasStock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/DialogProductName"
+                    android:orientation="horizontal">
+
+                    <com.vsg.helper.ui.widget.spinner.CustomSpinner
+                        android:id="@+id/DialogProductUnit"
+                        android:layout_width="230sp"
+                        android:layout_height="wrap_content"
+                        app:customSpinnerTitle="@string/ActivityItemProductUnitText" />
+
+                    <CheckBox
+                        android:id="@+id/DialogProductHasStock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/DialogCrudLayoutMargin"
+                        android:layout_toEndOf="@id/DialogProductUnit"
+                        android:text="@string/DialogProductHasStock" />
+                </RelativeLayout>
+
+                <include
+                    android:id="@+id/DialogProductSelectSection"
+                    layout="@layout/select_section_by_warehouse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/DialogProductParameterUnitHasStock" />
+
+            </RelativeLayout>
+
+            <include
+                layout="@layout/dialog_generic_item_base"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/DialogProductFields" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

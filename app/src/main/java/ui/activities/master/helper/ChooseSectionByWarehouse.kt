@@ -1,25 +1,24 @@
-package com.vsg.agendaandpublication.ui.activities.itemOperation.helper
+package com.vsg.ot.ui.activities.master.helper
 
 import android.app.Application
 import android.view.View
-import com.vsg.agendaandpublication.R
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.section.Section
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.section.SectionViewModel
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.Warehouse
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.WarehouseViewModel
-import com.vsg.agendaandpublication.common.model.itemProduct.company.Company
-import com.vsg.utilities.ui.widget.spinner.CustomSpinner
-
+import com.vsg.helper.ui.widget.spinner.CustomSpinner
+import com.vsg.ot.R
+import common.model.master.company.MasterCompany
+import common.model.master.section.MasterSection
+import common.model.master.section.MasterSectionViewModel
+import common.model.master.warehouse.MasterWarehouse
+import common.model.master.warehouse.MasterWarehouseViewModel
 
 @ExperimentalStdlibApi
 class ChooseSectionByWarehouse(
     view: View,
     private val app: Application,
-    private val company: Company
+    private val company: MasterCompany
 ) {
     //region handler
-    var onEventSectionSelected: ((Section?) -> Unit)? = null
-    private var onEventPauseCallBackItemSelect: (() -> Section?)? = null
+    var onEventSectionSelected: ((MasterSection?) -> Unit)? = null
+    private var onEventPauseCallBackItemSelect: (() -> MasterSection?)? = null
     //endregion
 
     //region widget
@@ -28,8 +27,8 @@ class ChooseSectionByWarehouse(
     //endregion
 
     //region properties
-    private var warehouse: Warehouse? = null
-    private var section: Section? = null
+    private var warehouse: MasterWarehouse? = null
+    private var section: MasterSection? = null
     //endregion
 
     //region init
@@ -37,14 +36,14 @@ class ChooseSectionByWarehouse(
         tWarehouse =
             view.findViewById<CustomSpinner>(R.id.SelectSectionByWarehouseWarehouse).apply {
                 setCustomAdapter(
-                    WarehouseViewModel(app).viewModelViewAllSimpleList(company.id),
+                    MasterWarehouseViewModel(app).viewModelViewAllSimpleList(company.id),
                     callBackItemSelect = {
                         this@ChooseSectionByWarehouse.warehouse = it
                         if (it != null) {
                             val setItem = onEventPauseCallBackItemSelect?.invoke()
                             tSection.apply {
                                 setCustomAdapter(
-                                    data = SectionViewModel(app).viewModelViewAllSimpleList(it.id),
+                                    data = MasterSectionViewModel(app).viewModelViewAllSimpleList(it.id),
                                     callBackItemSelect = { sec ->
                                         this@ChooseSectionByWarehouse.section = sec
                                         onEventSectionSelected?.invoke(sec)
@@ -60,17 +59,18 @@ class ChooseSectionByWarehouse(
     //endregion
 
     //region function
-    fun setSection(item: Section?) {
+    fun setSection(item: MasterSection?) {
         if (item == null) return
-        tWarehouse.setItem<Warehouse>(item.idWarehouse) {
+        tWarehouse.setItem<MasterWarehouse>(item.idWarehouse) {
             onEventPauseCallBackItemSelect = {
                 item
             }
         }
     }
-    fun setSection(item: Long) {
+
+    fun setSection(item: Int) {
         if (item <= 0) return
-        val section = SectionViewModel(app).viewModelView(item) ?: return
+        val section = MasterSectionViewModel(app).viewModelView(item) ?: return
         setSection(section)
     }
     //endregion

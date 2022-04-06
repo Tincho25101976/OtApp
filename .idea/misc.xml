@@ -5,8 +5,12 @@
       <map>
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/activity_main.xml" value="0.24818840579710144" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/dialog_category.xml" value="0.24818840579710144" />
+        <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/dialog_company.xml" value="0.23007246376811594" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/main_item_producto.xml" value="0.1" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/main_security_dialog.xml" value="0.12360688956433637" />
+        <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/select_section_by_warehouse.xml" value="0.23007246376811594" />
+        <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/swipe_menu_company_item.xml" value="0.23007246376811594" />
+        <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/swipe_menu_product_item.xml" value="0.23007246376811594" />
       </map>
     </option>
   </component>

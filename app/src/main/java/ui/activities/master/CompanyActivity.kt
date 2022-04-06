@@ -2,9 +2,12 @@ package com.vsg.ot.ui.activities.master
 
 import android.widget.RelativeLayout
 import androidx.paging.PagingData
+import androidx.paging.filter
 import com.vsg.ot.ui.activities.master.util.FilterTypeActivityCompany
 
 import com.vsg.helper.ui.util.CurrentBaseActivityPagingGeneric
+import com.vsg.ot.R
+import com.vsg.ot.ui.common.master.company.UICRUDCompany
 import common.model.master.company.MasterCompany
 import common.model.master.company.MasterCompanyDao
 import common.model.master.company.MasterCompanyViewModel
@@ -12,17 +15,17 @@ import common.model.master.company.MasterCompanyViewModel
 @ExperimentalStdlibApi
 class CompanyActivity :
     CurrentBaseActivityPagingGeneric<CompanyActivity, MasterCompanyViewModel, MasterCompanyDao, MasterCompany, FilterTypeActivityCompany, UICRUDCompany<CompanyActivity>>(
-        CompanyViewModel::class.java,
+        MasterCompanyViewModel::class.java,
         FilterTypeActivityCompany::class.java
     ) {
     override fun oSetSwipeMenuItems(): Int = R.layout.swipe_menu_company_item
     override fun oSetStringTitleForActionBar(): Int = R.string.ActivityItemProductCompanyText
     override fun aFinishExecute() {
         onEventMakeFilter = { item, find, it ->
-            val filter: PagingData<Company> =
+            val filter: PagingData<MasterCompany> =
                 when (item) {
                     FilterTypeActivityCompany.NAME -> it.filter { s ->
-                        s.name.contains(
+                        s.description.contains(
                             find,
                             true
                         )
@@ -39,22 +42,10 @@ class CompanyActivity :
                         loadActivity(ProductActivity::class.java, getItem()!!)
                     }
                 }
-            it.findViewById<RelativeLayout>(R.id.SwipeMenuCompanyItemMoney)
-                .setOnClickListener {
-                    if (getItem() != null) {
-                        loadActivity(MoneyActivity::class.java, getItem()!!)
-                    }
-                }
             it.findViewById<RelativeLayout>(R.id.SwipeMenuCompanyItemWarehouse)
                 .setOnClickListener {
                     if (getItem() != null) {
                         loadActivity(WarehouseActivity::class.java, getItem()!!)
-                    }
-                }
-            it.findViewById<RelativeLayout>(R.id.SwipeMenuCompanyItemPerson)
-                .setOnClickListener {
-                    if (getItem() != null) {
-                        loadActivity(PersonActivity::class.java, getItem()!!)
                     }
                 }
         }

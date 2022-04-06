@@ -18,7 +18,7 @@ import common.model.master.item.MasterItemViewModel
 import common.model.master.section.MasterSection
 import common.model.master.section.MasterSectionViewModel
 import common.model.master.warehouse.MasterWarehouse
-import common.model.master.warehouse.WarehouseViewModel
+import common.model.master.warehouse.MasterWarehouseViewModel
 import kotlinx.coroutines.runBlocking
 import kotlin.reflect.KType
 
@@ -53,7 +53,7 @@ abstract class ViewModelGenericOt<TDao, TEntity>(dao: TDao, context: Application
             is MasterItem -> MasterItemViewModel(context).isEntity(entity)
             is MasterCompany -> MasterCompanyViewModel(context).isEntity(entity)
             is MasterBatch -> MasterBatchViewModel(context).isEntity(entity)
-            is MasterWarehouse -> WarehouseViewModel(context).isEntity(entity)
+            is MasterWarehouse -> MasterWarehouseViewModel(context).isEntity(entity)
             is MasterSection -> MasterSectionViewModel(context).isEntity(entity)
 
             else -> false
@@ -66,7 +66,7 @@ abstract class ViewModelGenericOt<TDao, TEntity>(dao: TDao, context: Application
             is MasterItem -> MasterItemViewModel(context).checkExistsEntity(entity)
             is MasterCompany -> MasterCompanyViewModel(context).checkExistsEntity(entity)
             is MasterBatch -> MasterBatchViewModel(context).checkExistsEntity(entity)
-            is MasterWarehouse -> WarehouseViewModel(context).checkExistsEntity(entity)
+            is MasterWarehouse -> MasterWarehouseViewModel(context).checkExistsEntity(entity)
             is MasterSection -> MasterSectionViewModel(context).checkExistsEntity(entity)
 
             else -> false

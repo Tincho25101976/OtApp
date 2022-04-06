@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shadow_view">
+
+    <LinearLayout
+        android:id="@+id/SwipeMenuContactItemLayoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/SwipeMenuItemsLayoutMarginStartEnd"
+        android:layout_marginTop="@dimen/SwipeMenuItemsLayoutTopBottom"
+        android:layout_marginEnd="@dimen/SwipeMenuItemsLayoutMarginStartEnd"
+        android:layout_marginBottom="@dimen/SwipeMenuItemsLayoutTopBottom"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/SwipeMenuContactItemPhone"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/SwipeMenuContactItemImagePhone"
+                android:layout_width="@dimen/SwipeMenuItemsPictureSize"
+                android:layout_height="@dimen/SwipeMenuItemsPictureSize"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/pic_phone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/SwipeMenuContactItemImagePhone"
+                android:layout_centerHorizontal="true"
+                android:text="@string/ActionResultForContactPhone" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/SwipeMenuContactItemMail"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/SwipeMenuContactItemMailPhone"
+                android:layout_width="@dimen/SwipeMenuItemsPictureSize"
+                android:layout_height="@dimen/SwipeMenuItemsPictureSize"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/pic_mail" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/SwipeMenuContactItemMailPhone"
+                android:layout_centerHorizontal="true"
+                android:text="@string/ActionResultForContactMail" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/SwipeMenuContactItemAddress"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/SwipeMenuContactItemImageAddress"
+                android:layout_width="@dimen/SwipeMenuItemsPictureSize"
+                android:layout_height="@dimen/SwipeMenuItemsPictureSize"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/pic_address" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/SwipeMenuContactItemImageAddress"
+                android:layout_centerHorizontal="true"
+                android:text="@string/ActionResultForContactAddress" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>

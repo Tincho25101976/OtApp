@@ -8,7 +8,7 @@ import com.vsg.helper.common.util.viewModel.*
 import common.model.init.viewModel.ViewModelStoredMap
 import common.model.master.filter.TypeFilterHasCompanyItems
 import common.model.master.item.MasterItemViewModel
-import common.model.master.warehouse.WarehouseViewModel
+import common.model.master.warehouse.MasterWarehouseViewModel
 import kotlinx.coroutines.runBlocking
 
 @ExperimentalStdlibApi
@@ -47,7 +47,7 @@ class XactViewModel(application: Application) :
             TypeFilterHasCompanyItems.PRODUCT -> MasterItemViewModel(context).viewModelViewHasItems(
                 idRelation
             )
-            TypeFilterHasCompanyItems.WAREHOUSE -> WarehouseViewModel(context).viewModelViewHasItems(
+            TypeFilterHasCompanyItems.WAREHOUSE -> MasterWarehouseViewModel(context).viewModelViewHasItems(
                 idRelation
             )
         }

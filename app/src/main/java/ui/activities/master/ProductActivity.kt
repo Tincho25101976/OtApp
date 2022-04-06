@@ -1,31 +1,31 @@
-package com.vsg.agendaandpublication.ui.activities.itemProducto
+package com.vsg.ot.ui.activities.master
 
 import android.widget.RelativeLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
-import com.vsg.agendaandpublication.R
-import com.vsg.agendaandpublication.common.model.itemProduct.company.Company
-import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyDao
-import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyViewModel
-import com.vsg.agendaandpublication.common.model.itemProduct.filter.TypeFilterHasCompanyItems
-import com.vsg.agendaandpublication.common.model.itemProduct.product.Product
-import com.vsg.agendaandpublication.common.model.itemProduct.product.ProductDao
-import com.vsg.agendaandpublication.common.model.itemProduct.product.ProductViewModel
-import com.vsg.ot.ui.activities.master.BatchActivity
+import androidx.paging.filter
 import com.vsg.ot.ui.activities.master.util.FilterTypeActivityCompany
 import com.vsg.ot.ui.activities.master.util.FilterTypeActivityProduct
-import com.vsg.agendaandpublication.ui.common.itemProduct.product.UICRUDProduct
-import com.vsg.utilities.ui.util.CurrentBaseActivityPagingGenericRelationParent
+import com.vsg.ot.ui.common.master.product.UICRUDProduct
+import com.vsg.helper.ui.util.CurrentBaseActivityPagingGenericRelationParent
+import com.vsg.ot.R
+import common.model.master.company.MasterCompany
+import common.model.master.company.MasterCompanyDao
+import common.model.master.company.MasterCompanyViewModel
+import common.model.master.filter.TypeFilterHasCompanyItems
+import common.model.master.item.MasterItem
+import common.model.master.item.MasterItemDao
+import common.model.master.item.MasterItemViewModel
 import kotlinx.coroutines.flow.Flow
 
 @ExperimentalStdlibApi
 class ProductActivity :
     CurrentBaseActivityPagingGenericRelationParent
-        <ProductActivity, ProductViewModel, ProductDao, Product, FilterTypeActivityProduct, UICRUDProduct<ProductActivity>,
-                FilterTypeActivityCompany, CompanyViewModel, CompanyDao, Company, TypeFilterHasCompanyItems>
+        <ProductActivity, MasterItemViewModel, MasterItemDao, MasterItem, FilterTypeActivityProduct, UICRUDProduct<ProductActivity>,
+                FilterTypeActivityCompany, MasterCompanyViewModel, MasterCompanyDao, MasterCompany, TypeFilterHasCompanyItems>
         (
-        ProductViewModel::class.java,
-        CompanyViewModel::class.java,
+        MasterItemViewModel::class.java,
+        MasterCompanyViewModel::class.java,
         FilterTypeActivityProduct::class.java,
         FilterTypeActivityCompany::class.java
     ) {
@@ -35,21 +35,18 @@ class ProductActivity :
     override fun oSetSwipeMenuItems(): Int = R.layout.swipe_menu_product_item
     override fun aFinishExecutePagingGenericRelationParent() {
         onEventMakeFilter = { item, find, it ->
-            val filter: PagingData<Product> =
+            val filter: PagingData<MasterItem> =
                 when (item) {
-                    FilterTypeActivityProduct.NAME -> it.filter { s -> s.name.contains(find, true) }
+                    FilterTypeActivityProduct.NAME -> it.filter { s -> s.description.contains(find, true) }
                     FilterTypeActivityProduct.CODE -> it.filter { s -> s.code.contains(find, true) }
-                    FilterTypeActivityProduct.PROVIDER_CODE -> it.filter { s ->
-                        s.providerCode.contains(find, true)
-                    }
                     else -> it
                 }
             filter
         }
         onEventMakeFilterResult = { item, find, it ->
-            val filter: PagingData<Company> =
+            val filter: PagingData<MasterCompany> =
                 when (item) {
-                    FilterTypeActivityCompany.NAME -> it.filter { s -> s.name.contains(find, true) }
+                    FilterTypeActivityCompany.NAME -> it.filter { s -> s.description.contains(find, true) }
                     else -> it
                 }
             filter
@@ -90,7 +87,7 @@ class ProductActivity :
             data
         }
         onEventGetViewAllPaging = {
-            val data: Flow<PagingData<Product>>? = when (parent == null) {
+            val data: Flow<PagingData<MasterItem>>? = when (parent == null) {
                 true -> null
                 false -> currentViewModel().viewModelGetViewAllPaging(parent?.id!!)
             }
@@ -98,7 +95,7 @@ class ProductActivity :
         }
         onEventSetParentFilterHasItems = { TypeFilterHasCompanyItems.PRODUCT }
     }
-    override fun aCurrentListOfParent(): List<Company> = makeViewModel(CompanyViewModel::class.java)
+    override fun aCurrentListOfParent(): List<MasterCompany> = makeViewModel(CompanyViewModel::class.java)
         .viewModelViewAllSimpleList()
 
 
@@ -136,7 +133,7 @@ class ProductActivity :
 
 //    override fun aFinishExecute() {
 //        onEventMakeFilter = { item, find, it ->
-//            val filter: PagingData<Product> =
+//            val filter: PagingData<MasterItem> =
 //                when (item) {
 //                    FilterTypeActivityProduct.NAME -> it.filter { s -> s.name.contains(find, true) }
 //                    FilterTypeActivityProduct.CODE -> it.filter { s -> s.code.contains(find, true) }
@@ -183,7 +180,7 @@ class ProductActivity :
 //            data
 //        }
 //        onEventGetViewAllPaging = {
-//            val data: Flow<PagingData<Product>>? = when (company == null) {
+//            val data: Flow<PagingData<MasterItem>>? = when (company == null) {
 //                true -> null
 //                false -> currentViewModel().viewModelGetViewAllPaging(company?.id!!)
 //            }
@@ -191,7 +188,7 @@ class ProductActivity :
 //        }
 //        setParent(this.company)
 //    }
-//    private fun setParent(it: Company?) {
+//    private fun setParent(it: MasterCompany?) {
 //        if (it == null) return
 //        company = it
 //        if (company != null) {
