@@ -32,7 +32,7 @@ import com.vsg.helper.common.format.FormatDateString
 import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.model.IEntityPagingLayoutPosition
 import com.vsg.helper.common.util.viewModel.IViewModelUpdateSetEnabled
-import com.vsg.helper.helper.HelperEnum.Companion.getDefault
+import com.vsg.helper.helper.HelperEnum.Companion.getDefaultEnum
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toArray
 import com.vsg.helper.helper.date.HelperDate.Companion.formatDate
 import com.vsg.helper.helper.date.HelperDate.Companion.toDate
@@ -524,42 +524,6 @@ class HelperUI {
                 callBackSetTextView = callBackSetTextView,
                 selectItem = selectItem
             )
-//            this.apply {
-//                adapter = dataAdapter.apply {
-//                    onSetTextView = { t -> callBackSetTextView?.invoke(t) }
-//                }
-//                setPopupBackgroundDrawable(ColorDrawable(Color.WHITE))
-//
-//                onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//                    override fun onItemSelected(
-//                        parent: AdapterView<*>,
-//                        view: View,
-//                        position: Int,
-//                        id: Long
-//                    ) {
-//                        try {
-//                            val temp: T? =
-//                                (this@apply.adapter as UIDataAdapterGenericEnum<T>).getItem(position)
-//                            callBackItemSelect?.invoke(temp)
-//                        } catch (e: Exception) {
-//                            e.printStackTrace()
-//                        }
-//                    }
-//
-//                    override fun onNothingSelected(parent: AdapterView<*>) {}
-//                }
-//                if (selectItem != null) {
-//                    try {
-//                        val position =
-//                            (this@apply.adapter as UIDataAdapterGenericEnum<T>).getPosition(
-//                                selectItem
-//                            )
-//                        if (position >= 0) this.setSelection(position)
-//                    } catch (e: Exception) {
-//                        e.printStackTrace()
-//                    }
-//                }
-//            }
             return dataAdapter
         }
 
@@ -580,44 +544,6 @@ class HelperUI {
                 callBackSetTextView = callBackSetTextView,
                 selectItem = selectItem
             )
-//            this.apply {
-//                adapter = dataAdapter.apply {
-//                    onSetTextView = { t -> callBackSetTextView?.invoke(t) }
-//                }
-//                setPopupBackgroundDrawable(ColorDrawable(Color.WHITE))
-//
-//                onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//                    override fun onItemSelected(
-//                        parent: AdapterView<*>,
-//                        view: View,
-//                        position: Int,
-//                        id: Long
-//                    ) {
-//                        try {
-//                            val temp: T? =
-//                                (this@apply.adapter as UIDataAdapterGenericEntity<T>).getItem(
-//                                    position
-//                                )
-//                            callBackItemSelect?.invoke(temp)
-//                        } catch (e: Exception) {
-//                            e.printStackTrace()
-//                        }
-//                    }
-//
-//                    override fun onNothingSelected(parent: AdapterView<*>) {}
-//                }
-//                if (selectItem != null) {
-//                    try {
-//                        val position =
-//                            (this@apply.adapter as UIDataAdapterGenericEntity<T>).getPosition(
-//                                selectItem
-//                            )
-//                        if (position >= 0) this.setSelection(position)
-//                    } catch (e: Exception) {
-//                        e.printStackTrace()
-//                    }
-//                }
-//            }
             return dataAdapter
         }
 
@@ -738,7 +664,7 @@ class HelperUI {
             val ad: UIDataAdapterGenericEnum<T> = (adapter as UIDataAdapterGenericEnum<T>)
             val data: T? = ad.getItem(selectedItemPosition)
             return when (data == null) {
-                true -> getDefault(ad.type)
+                true -> ad.type.getDefaultEnum()
                 false -> data
             }
         }

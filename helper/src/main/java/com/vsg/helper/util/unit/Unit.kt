@@ -1,13 +1,16 @@
 package com.vsg.helper.util.unit
 
+import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.ui.adapter.IDataAdapterTitle
 import com.vsg.helper.util.helper.HelperUtil.Companion.toUnit
 import com.vsg.helper.util.unit.type.TypeFormatUnit
 import com.vsg.helper.util.unit.type.TypeUnit
 import com.vsg.helper.util.unit.type.TypeUnit.Companion.toUnitDetail
 
-class Unit(val unit: TypeUnit) : IDataAdapterTitle {
-    //region properties
+class Unit(val unit: TypeUnit) : IEntity, IDataAdapterTitle {
+    override var id: Int
+        get() = unit.value
+        set(value) {}
     val symbol: String get() = unit.toUnitDetail()
     val order: Int get() = unit.order
     val value: Int get() = unit.value

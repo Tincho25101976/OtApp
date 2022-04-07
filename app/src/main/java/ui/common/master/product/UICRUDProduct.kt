@@ -1,23 +1,19 @@
 package com.vsg.ot.ui.common.master.product
 
-import android.widget.*
-import com.vsg.ot.R
-
-import com.vsg.ot.ui.activities.master.helper.ChooseSectionByWarehouse
-import com.vsg.helper.ui.crud.UICustomCRUDViewModelRelation
 import com.vsg.helper.common.operation.DBOperation
-import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toArray
-import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toBitmap
-import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
-import com.vsg.helper.ui.crud.helper.ChoosePicture
+import com.vsg.helper.helper.HelperEnum.Companion.getListEnum
+import com.vsg.helper.ui.crud.UICustomCRUDViewModelRelation
 import com.vsg.helper.ui.util.CurrentBaseActivity
 import com.vsg.helper.ui.widget.spinner.CustomSpinner
 import com.vsg.helper.ui.widget.text.CustomInputText
+import com.vsg.helper.util.helper.HelperUtil.Companion.toUnit
+import com.vsg.helper.util.unit.type.TypeUnit
+import com.vsg.ot.R
 import common.model.master.company.MasterCompany
 import common.model.master.item.MasterItem
 import common.model.master.item.MasterItemDao
 import common.model.master.item.MasterItemViewModel
-import common.model.master.section.MasterSection
+import com.vsg.helper.util.unit.Unit as MasterUnit
 
 @ExperimentalStdlibApi
 class UICRUDProduct<TActivity>(
@@ -39,15 +35,21 @@ class UICRUDProduct<TActivity>(
     //region widget
     private lateinit var tName: CustomInputText
     private lateinit var tUnit: CustomSpinner
+    private var unit: MasterUnit? = null
     //endregion
 
     override fun aGetTextParent(): String = parent.description
 
     init {
-        onEventSetInit = {
+        onEventSetInit = { it ->
             this.tName = it.findViewById(R.id.DialogProductName)
+//            this.tUnit = it.findViewById<CustomSpinner>(R.id.DialogProductUnit).apply {
+//                setCustomAdapter(, { ce -> unit = ce })
+//            }
             this.tUnit = it.findViewById<CustomSpinner>(R.id.DialogProductUnit).apply {
-                setCustomAdapter(viewModel.viewModelGetUnits(), { c -> unit = c })
+                val dataSource: List<MasterUnit> =
+                    TypeUnit::class.java.getListEnum().map { c -> c.toUnit() }
+                setCustomAdapter(dataSource, { c -> unit = c })
             }
         }
         onEventGetNewOrUpdateEntity = {
@@ -60,7 +62,7 @@ class UICRUDProduct<TActivity>(
         }
         onEventSetItem = {
             tName.text = it.description
-            tUnit.setItem<Unit>(it.idUnit)
+            tUnit.setItem<MasterUnit>(it.unit)
         }
         onEventSetItemsForClean = {
             mutableListOf(tName)
@@ -80,16 +82,7 @@ class UICRUDProduct<TActivity>(
             if (item != null && p != null) {
                 p.icon = item.getDrawableShow().drawable
                 p.bitmap = item.getPictureShow()
-
-                val it = viewModel.viewModelGetViewProductContext(item.id)
-                if (it != null) {
-                    val sb = StringBuilder()
-                    sb.toLineSpanned("Empresa", it.company.name)
-                    sb.toLineSpanned("Categoría", it.category.name)
-                    sb.toLineSpanned("Unidad", it.unit.name)
-                    sb.toLineSpanned("Localización", it.section.name)
-                    p.toHtml = item.extendedToHTMLPopUp(sb)
-                }
+                p.toHtml = item.reference()
             }
             p
         }

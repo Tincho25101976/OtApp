@@ -60,18 +60,6 @@ class ProductActivity :
             ).apply { factorHeight = 0.8 }
         }
         onEventSwipeGetViewForMenu = {
-            it.findViewById<RelativeLayout>(R.id.SwipeMenuProductItemPrice)
-                .setOnClickListener {
-                    if (getItem() != null) loadActivity(
-                        PriceActivity::class.java, getItem()!!
-                    )
-                }
-            it.findViewById<RelativeLayout>(R.id.SwipeMenuProductItemMail)
-                .setOnClickListener {
-                    if (getItem() != null) loadActivity(
-                        PictureActivity::class.java, getItem()!!
-                    )
-                }
             it.findViewById<RelativeLayout>(R.id.SwipeMenuProductItemBatch)
                 .setOnClickListener {
                     if (getItem() != null) loadActivity(
@@ -95,7 +83,7 @@ class ProductActivity :
         }
         onEventSetParentFilterHasItems = { TypeFilterHasCompanyItems.PRODUCT }
     }
-    override fun aCurrentListOfParent(): List<MasterCompany> = makeViewModel(CompanyViewModel::class.java)
+    override fun aCurrentListOfParent(): List<MasterCompany> = makeViewModel(MasterCompanyViewModel::class.java)
         .viewModelViewAllSimpleList()
 
 

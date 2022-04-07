@@ -26,14 +26,12 @@ class HelperEnum {
             }
         }
 
-        fun <T : Enum<T>> toRandom(type: Class<T>, defaultValue: T): T {
+        private fun <T : Enum<T>> toRandom(type: Class<T>, defaultValue: T): T {
             val data = EnumIterator(type).toList()
             return data.toRandom() ?: defaultValue
         }
-        fun <T : Enum<T>> Class<T>.toRandomEnum(defaultValue: T): T {
-            val data = EnumIterator(this).toList()
-            return data.toRandom() ?: defaultValue
-        }
+
+        fun <T : Enum<T>> Class<T>.toRandomEnum(defaultValue: T): T = toRandom(this, defaultValue)
 
         fun <T> getList(type: Class<T>): List<T> where T : IDataAdapterEnum, T : Enum<T> {
             val default = EnumIterator(type).toList().firstOrNull { it.show && it.default }
@@ -47,15 +45,20 @@ class HelperEnum {
             return data
         }
 
-        fun <T> getDefault(type: Class<T>): T where T : IDataAdapterEnum, T : Enum<T> {
+        fun <T> Class<T>.getListEnum(): List<T> where T : IDataAdapterEnum, T : Enum<T> =
+            getList(this)
+
+
+        private fun <T> getDefault(type: Class<T>): T where T : IDataAdapterEnum, T : Enum<T> {
             val temp: T? = EnumIterator(type).toList().firstOrNull { it.show && it.default }
             return when (temp == null) {
                 true -> EnumIterator(type).toList().minByOrNull { it.order }!!
                 false -> temp
             }
         }
+        fun <T> Class<T>.getDefaultEnum(): T where T : IDataAdapterEnum, T : Enum<T> = getDefault(this)
 
-        fun <T> getIsException(type: Class<T>): T where T : IDataAdapterEnum, T : Enum<T> {
+        private fun <T> getIsException(type: Class<T>): T where T : IDataAdapterEnum, T : Enum<T> {
             var temp: T? = EnumIterator(type).toList().firstOrNull { it.isException }
             if (temp != null) return temp
             temp = EnumIterator(type).toList().firstOrNull { it.name == "UNDEFINED" }
@@ -64,5 +67,6 @@ class HelperEnum {
             if (temp != null) return temp
             return EnumIterator(type).toList().maxByOrNull { it.order }!!
         }
+        fun <T> Class<T>.getIsExceptionEnum(): T where T : IDataAdapterEnum, T : Enum<T> = getIsException(this)
     }
 }
