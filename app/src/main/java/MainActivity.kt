@@ -2,8 +2,8 @@ package com.vsg.ot
 
 import android.widget.ScrollView
 import com.vsg.helper.ui.util.BaseActivity
+import com.vsg.ot.ui.activities.master.main.MainMaster
 import com.vsg.ot.ui.activities.securityDialog.main.MainSecurityDialog
-import ui.activities.securityDialog.xact.XactActivity
 
 //TODO Path app:  /data/data/com.vsg.ot
 
@@ -15,13 +15,13 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
             val view: ScrollView = it.apply {
                 add(
                     R.drawable.pic_xact,
-                    getString(R.string.ActivityItemProductCategoryText),
+                    getString(R.string.ActivityMainCommandSecurityDialog),
                     dataClass = MainSecurityDialog::class.java
                 )
                 add(
                     R.drawable.pic_product,
-                    getString(R.string.ActivityMainCommandProduct),
-                    dataClass = MainItemProducto::class.java
+                    getString(R.string.ActivityMainCommandMaster),
+                    dataClass = MainMaster::class.java
                 )
 //                add(
 //                    R.drawable.pic_person,

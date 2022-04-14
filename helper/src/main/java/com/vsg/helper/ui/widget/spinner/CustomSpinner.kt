@@ -186,7 +186,7 @@ class CustomSpinner @JvmOverloads constructor(
             layoutParams =
                 HelperUI.makeCustomLayoutRelativeLayout(TypeMakeLayoutParameter.WIDTH_WRAP_HEIGHT_WRAP)
                     .apply {
-                        setMargins(35, -3, 0, 0)
+                        setMargins(35, -15, 0, 0)
                     }
         }
         tContainer = RelativeLayout(ctx).apply {
@@ -330,7 +330,8 @@ class CustomSpinner @JvmOverloads constructor(
         data: List<T>,
         callBackItemSelect: ((T?) -> Unit)? = null,
         callBackSetTextView: ((TextView) -> Unit)? = { t -> t.setTextColor(customTextColor) },
-        selectItem: T? = null
+        selectItem: T? = null,
+        customTextSize: Int = resources.getInteger(R.integer.CustomSpinnerTitleTextSize)
     ): UIDataAdapterGenericEntity<T>? where T : IDataAdapterTitle, T : IEntity {
         if (ctx !is BaseActivity) return null
         var temp: UIDataAdapterGenericEntity<T>? = null
@@ -342,6 +343,7 @@ class CustomSpinner @JvmOverloads constructor(
                 callBackSetTextView,
                 selectItem
             )
+            this.customTextSize = customTextSize.toFloat()
             this.adapterType = AdapterType.ENTITY
         } catch (ex: Exception) {
             this.adapterType = AdapterType.UNDEFINED
@@ -475,7 +477,7 @@ class CustomSpinner @JvmOverloads constructor(
         private const val DEFAULT_HEIGHT: Int = 35
         private const val DEFAULT_MINIMUM_HEIGHT: Int = 30
         private const val DEFAULT_CUSTOM_STOKE: Int = 1
-        private const val DEFAULT_TEXT_SIZE: Float = 15F
+        private const val DEFAULT_TEXT_SIZE: Float = 20F
         private const val DEFAULT_MARGIN: Int = 10
     }
 }

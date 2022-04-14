@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="@dimen/DialogCrudTextMargin"
+    android:layout_marginTop="@dimen/DialogCrudTextMargin"
+    android:layout_marginEnd="@dimen/DialogCrudTextMargin">
+
+    <RelativeLayout
+        android:id="@+id/DialogWarehouseMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogWarehouseRelation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/DialogWarehouseRelation"
+            android:layout_alignParentTop="true"
+            app:customType="READ_ONLY_TEXT"/>
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogWarehouseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/DialogWarehouseRelation"
+            android:hint="@string/DialogWarehouseName"/>
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogWarehousePrefix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/DialogWarehouseName"
+            app:customMaxLength="5"
+            android:hint="@string/DialogWarehousePrefix"/>
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogWarehouseLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/DialogWarehousePrefix"
+            android:hint="@string/DialogWarehouseLocation"/>
+    </RelativeLayout>
+
+    <include
+        layout="@layout/dialog_generic_item_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DialogWarehouseMain" />
+
+</RelativeLayout>

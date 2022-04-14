@@ -100,8 +100,8 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
     //region launch
     fun loadActivity(data: Class<*>, id: Int = 0, result: Int = 0, extra: Int = 0) {
         val intent = Intent(this, data)
-        if (id > 0) intent.putExtra(getString(R.string.msg_data), id)
-        if (extra > 0) intent.putExtra(getString(R.string.msg_extra), extra)
+        if (id > 0) intent.putExtra(getString(R.string.MsgData), id)
+        if (extra > 0) intent.putExtra(getString(R.string.MsgExtra), extra)
         when (result == 0) {
             true -> this.startActivity(intent)
             false -> this.startActivityForResult(intent, result)
@@ -130,7 +130,7 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
                     if (fileCapture != null) {
                         s.putExtra(MediaStore.EXTRA_OUTPUT, this.getURI(fileCapture))
                         val bundle = Bundle()
-                        bundle.putString(getString(R.string.msg_data), fileCapture.absolutePath)
+                        bundle.putString(getString(R.string.MsgData), fileCapture.absolutePath)
                         result = fileCapture
                         onEventPathForTakePhoto?.invoke(fileCapture)
                         this.startActivityForResult(s, REQUEST_FOR_TAKE_PHOTO, bundle)

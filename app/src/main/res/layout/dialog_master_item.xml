@@ -68,7 +68,7 @@
 
                 <include
                     android:id="@+id/DialogProductSelectSection"
-                    layout="@layout/select_section_by_warehouse"
+                    layout="@layout/select_master_section_by_warehouse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/DialogProductParameterUnitHasStock" />

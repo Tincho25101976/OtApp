@@ -57,6 +57,8 @@ class HelperUI {
         const val REQUEST_FOR_TAKE_SCREENSHOT = 102
         const val REQUEST_FOR_TAKE_PHOTO = 103
 
+        const val DEFAULT_TEXT_SIZE_FOR_SPINNER = 20
+
         //region textView
         fun EditText.isEmpty(): Boolean = this.text.isEmpty()
         fun EditText.isChecked(group: String): Boolean {
@@ -231,7 +233,8 @@ class HelperUI {
         fun <T> AutoCompleteTextView.setCustomAdapter(
             context: T,
             adapter: List<String>?,
-            @IntRange(from = 10, to = 48) textSize: Int = 20,
+            @IntRange(from = 10, to = 48)
+            textSize: Int = resources.getInteger(R.integer.CustomAdapterTextSize),
             ignoreCase: Boolean = false,
             callbackOnItemClick: ((T, String) -> Unit)? = null,
             callbackOnKeyPressEnter: ((T, String) -> Unit)? = null,
@@ -522,7 +525,8 @@ class HelperUI {
                 dataAdapter = dataAdapter,
                 callBackItemSelect = callBackItemSelect,
                 callBackSetTextView = callBackSetTextView,
-                selectItem = selectItem
+                selectItem = selectItem,
+                textSize = resources.getInteger(R.integer.CustomSpinnerTextSize)
             )
             return dataAdapter
         }
@@ -542,7 +546,8 @@ class HelperUI {
                 dataAdapter = dataAdapter,
                 callBackItemSelect = callBackItemSelect,
                 callBackSetTextView = callBackSetTextView,
-                selectItem = selectItem
+                selectItem = selectItem,
+                textSize = resources.getInteger(R.integer.CustomSpinnerTextSize)
             )
             return dataAdapter
         }
@@ -550,7 +555,7 @@ class HelperUI {
         private fun <T> Spinner.setCustomAdapterBase(
             dataAdapter: UIDataAdapterGenericBase<T>,
             @IntRange(from = 10, to = 48)
-            textSize: Int = 24,
+            textSize: Int = 18,
             callBackItemSelect: ((T?) -> Unit)? = null,
             callBackSetTextView: ((TextView) -> Unit)? = null,
             selectItem: T? = null

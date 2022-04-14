@@ -1,5 +1,6 @@
 package com.vsg.helper.common.model
 
+import android.R
 import android.graphics.Bitmap
 import android.text.Spanned
 import androidx.room.Ignore

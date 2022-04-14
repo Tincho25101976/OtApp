@@ -1,6 +1,6 @@
-package com.vsg.agendaandpublication.ui.activities.itemOperation.util
+package com.vsg.ot.ui.activities.master.util
 
-import com.vsg.utilities.ui.adapter.IDataAdapterEnum
+import com.vsg.helper.ui.adapter.IDataAdapterEnum
 
 enum class FilterTypeActivityWarehouse(
     override val title: String, override val value: Int,

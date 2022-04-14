@@ -9,12 +9,9 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/CustomViewerDrawContainerMargin"
         android:background="@drawable/shadow_view"
-        android:backgroundTint="@color/crop__button_text"
+        android:backgroundTint="@color/CropButtonText"
         android:layout_alignParentTop="true"
         android:elevation="999sp">
-
-
-
     </RelativeLayout>
 
     <LinearLayout

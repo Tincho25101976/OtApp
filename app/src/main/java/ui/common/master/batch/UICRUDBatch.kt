@@ -25,7 +25,7 @@ class UICRUDBatch<TActivity>(
     UICustomCRUDViewModelRelation<TActivity, MasterBatchViewModel, MasterBatchDao, MasterBatch, MasterItem>(
         activity,
         operation,
-        R.layout.dialog_batch,
+        R.layout.dialog_master_batch,
         idTextParent = R.id.DialogBatchRelation,
         parent = product
     )

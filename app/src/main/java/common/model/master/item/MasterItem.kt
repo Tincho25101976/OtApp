@@ -76,6 +76,7 @@ class MasterItem : EntityOtCompany<MasterItem>() {
                 && unit == other.unit
                 && typeProduct == other.typeProduct
                 && typePlant == other.typePlant
+                && createDate.time == other.createDate.time
     }
     //endregion
 

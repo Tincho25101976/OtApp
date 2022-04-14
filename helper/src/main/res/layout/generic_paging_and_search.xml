@@ -15,7 +15,7 @@
         <LinearLayout
             android:id="@+id/ActivityGenericSearchParameter"
             android:layout_width="0sp"
-            android:layout_height="110sp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginStart="@dimen/ActivityGenericSearchTextMargin"
             android:layout_marginEnd="@dimen/ActivityGenericSearchTextMargin"
@@ -35,7 +35,9 @@
                 android:id="@+id/ActivityGenericSearchSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:customSpinnerTitle="@string/ActivityGenericFilter"/>
+                android:layout_marginStart="5sp"
+                app:customSpinnerTitle="@string/ActivityGenericFilter"
+                app:customSpinnerTextSize="17"/>
 
         </LinearLayout>
 
@@ -43,7 +45,8 @@
             android:id="@+id/ActivityGenericSearchCommand"
             android:layout_width="@dimen/ActivityGenericSearchSizeImage"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:contentDescription="@string/CustomDescriptionSearch"
+            android:layout_gravity="fill"
             android:layout_margin="@dimen/ActivityGenericSearchMarginImage"
             android:src="@drawable/pic_search" />
 

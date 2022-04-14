@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import com.vsg.helper.common.model.IEntityPicture
+import com.vsg.helper.helper.date.HelperDate
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
 import common.model.init.entity.EntityOt
@@ -36,6 +37,7 @@ class MasterCompany : EntityOt<MasterCompany>(), IEntityPicture {
     @Ignore
     val masterStock: MutableList<MasterStock> = mutableListOf()
 
+    override var valueCode: String = ""
     //endregion
 
     //region methods
@@ -53,11 +55,12 @@ class MasterCompany : EntityOt<MasterCompany>(), IEntityPicture {
         if (other !is MasterCompany) return false
         return valueCode == other.valueCode
                 && description == other.description
+                && createDate.time == other.createDate.time
                 && picture.contentEquals(other.picture)
     }
     //endregion
 
     companion object {
-        const val ENTITY_NAME = "company"
+        const val ENTITY_NAME = "masterCompany"
     }
 }

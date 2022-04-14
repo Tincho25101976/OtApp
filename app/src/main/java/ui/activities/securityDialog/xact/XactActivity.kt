@@ -17,7 +17,7 @@ class XactActivity:
         FilterTypeActivityXact::class.java
     ) {
 
-    override fun oSetStringTitleForActionBar(): Int = R.string.ActivityItemProductCategoryText
+    override fun oSetStringTitleForActionBar(): Int = R.string.ActivityMainCommandSecurityDialog
     override fun aFinishExecute() {
         onEventMakeFilter = { item, find, it ->
             val filter: PagingData<Xact> =

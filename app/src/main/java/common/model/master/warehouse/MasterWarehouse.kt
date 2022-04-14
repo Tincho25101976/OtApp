@@ -50,6 +50,7 @@ class MasterWarehouse : EntityOtCompany<MasterWarehouse>() {
         return description == other.description
                 && location == other.location
                 && valueCode == other.valueCode
+                && createDate.time == other.createDate.time
     }
     //endregion
 

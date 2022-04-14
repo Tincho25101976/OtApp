@@ -33,7 +33,7 @@
                 android:height="@dimen/CustomDialogActionResultCommandSize"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:text="@string/text_insert"
+                android:text="@string/TitleInsert"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
         </LinearLayout>
@@ -60,7 +60,7 @@
                 android:height="@dimen/CustomDialogActionResultCommandSize"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:text="@string/text_update"
+                android:text="@string/TitleUpdate"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
         </LinearLayout>
@@ -87,7 +87,7 @@
                 android:height="@dimen/CustomDialogActionResultCommandSize"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:text="@string/text_delete"
+                android:text="@string/TitleDelete"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
         </LinearLayout>
@@ -114,7 +114,7 @@
                 android:height="@dimen/CustomDialogActionResultCommandSize"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:text="@string/text_view"
+                android:text="@string/TitleView"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
         </LinearLayout>
@@ -141,7 +141,7 @@
                 android:height="@dimen/CustomDialogActionResultCommandSize"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:text="@string/text_export"
+                android:text="@string/TitleExport"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
         </LinearLayout>

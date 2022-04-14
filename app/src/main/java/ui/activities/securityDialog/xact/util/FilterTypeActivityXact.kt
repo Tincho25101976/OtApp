@@ -10,6 +10,6 @@ enum class FilterTypeActivityXact (
     override val default: Boolean = false,
     override val isException: Boolean = false
 ) : IDataAdapterEnum {
-    NAME(value = 1, title = "Categoría", order = 1, show = true, default = true),
+    NAME(value = 1, title = "Diálogo", order = 1, show = true, default = true),
     UNDEFINED(value = -1, title = "Indefinido", show = false, isException = true)
 }

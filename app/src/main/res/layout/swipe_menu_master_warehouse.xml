@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/shadow_view">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/SwipeMenuItemsLayoutMarginStartEnd"
+        android:layout_marginTop="@dimen/SwipeMenuItemsLayoutTopBottom"
+        android:layout_marginEnd="@dimen/SwipeMenuItemsLayoutMarginStartEnd"
+        android:layout_marginBottom="@dimen/SwipeMenuItemsLayoutTopBottom"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.vsg.helper.ui.widget.imageWithText.CustomImagenWithText
+            android:id="@+id/SwipeMenuOperationItemSection"
+            app:customResourceImage="@drawable/pic_section"
+            app:customResourceString="@string/ActionResultForSection"
+            app:customSizeImage="48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+</RelativeLayout>

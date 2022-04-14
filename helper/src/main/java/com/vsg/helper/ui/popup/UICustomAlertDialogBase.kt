@@ -47,6 +47,7 @@ abstract class UICustomAlertDialogBase<TActivity, TParameter>(
         alertDialog?.show()
         val dm = DisplayMetrics()
         activity.windowManager.defaultDisplay.getMetrics(dm)
+
         currentWidth = (dm.widthPixels * data.factorWidth).toInt()
         currentHeight = (dm.heightPixels * data.factorHeight).toInt()
         alertDialog?.window?.setLayout(currentWidth, currentHeight)

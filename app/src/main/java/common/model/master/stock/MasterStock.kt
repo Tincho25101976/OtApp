@@ -164,6 +164,6 @@ class MasterStock : EntityOtCompany<MasterStock>() {
     //endregion
 
     companion object {
-        const val ENTITY_NAME: String = "stock"
+        const val ENTITY_NAME: String = "masterStock"
     }
 }

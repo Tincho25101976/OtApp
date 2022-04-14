@@ -19,9 +19,9 @@ import common.model.master.item.MasterItemViewModel
 import kotlinx.coroutines.flow.Flow
 
 @ExperimentalStdlibApi
-class ProductActivity :
+class MasterItemActivity :
     CurrentBaseActivityPagingGenericRelationParent
-        <ProductActivity, MasterItemViewModel, MasterItemDao, MasterItem, FilterTypeActivityProduct, UICRUDProduct<ProductActivity>,
+        <MasterItemActivity, MasterItemViewModel, MasterItemDao, MasterItem, FilterTypeActivityProduct, UICRUDProduct<MasterItemActivity>,
                 FilterTypeActivityCompany, MasterCompanyViewModel, MasterCompanyDao, MasterCompany, TypeFilterHasCompanyItems>
         (
         MasterItemViewModel::class.java,
@@ -30,9 +30,9 @@ class ProductActivity :
         FilterTypeActivityCompany::class.java
     ) {
 
-    override fun oSetStringTitleForActionBar(): Int = R.string.ActivityItemProductProductoText
-    override fun aSetActivity(): ProductActivity = this
-    override fun oSetSwipeMenuItems(): Int = R.layout.swipe_menu_product_item
+    override fun oSetStringTitleForActionBar(): Int = R.string.ActivityMasterItemText
+    override fun aSetActivity(): MasterItemActivity = this
+    override fun oSetSwipeMenuItems(): Int = R.layout.swipe_menu_master_item
     override fun aFinishExecutePagingGenericRelationParent() {
         onEventMakeFilter = { item, find, it ->
             val filter: PagingData<MasterItem> =
@@ -63,7 +63,7 @@ class ProductActivity :
             it.findViewById<RelativeLayout>(R.id.SwipeMenuProductItemBatch)
                 .setOnClickListener {
                     if (getItem() != null) loadActivity(
-                        BatchActivity::class.java, getItem()!!, extra = parent
+                        MasterBatchActivity::class.java, getItem()!!, extra = parent
                     )
                 }
         }

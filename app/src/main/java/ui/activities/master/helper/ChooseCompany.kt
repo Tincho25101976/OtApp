@@ -1,15 +1,15 @@
-package com.vsg.agendaandpublication.ui.activities.itemProducto.helper
+package com.vsg.ot.ui.activities.master.helper
 
-import com.vsg.agendaandpublication.R
-import com.vsg.agendaandpublication.common.model.itemProduct.company.Company
-import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyViewModel
-import com.vsg.utilities.ui.util.BaseActivity
-import com.vsg.utilities.ui.widget.spinner.choose.ChooseIEntitySpinner
+import com.vsg.helper.ui.util.BaseActivity
+import com.vsg.helper.ui.widget.spinner.choose.ChooseIEntitySpinner
+import com.vsg.ot.R
+import common.model.master.company.MasterCompany
+import common.model.master.company.MasterCompanyViewModel
 
 @ExperimentalStdlibApi
 class ChooseCompany(app: BaseActivity) :
-    ChooseIEntitySpinner<Company, CompanyViewModel>(
+    ChooseIEntitySpinner<MasterCompany, MasterCompanyViewModel>(
         app,
-        text = R.string.ActivityItemProductCompanyText,
-        type = CompanyViewModel::class.java
+        text = R.string.ActivityMasterCompanyText,
+        type = MasterCompanyViewModel::class.java
     )

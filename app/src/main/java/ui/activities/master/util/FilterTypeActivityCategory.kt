@@ -1,6 +1,6 @@
-package com.vsg.agendaandpublication.ui.activities.itemProducto.util
+package com.vsg.ot.ui.activities.master.util
 
-import com.vsg.utilities.ui.adapter.IDataAdapterEnum
+import com.vsg.helper.ui.adapter.IDataAdapterEnum
 
 enum class FilterTypeActivityCategory(
     override val value: Int,
@@ -13,6 +13,3 @@ enum class FilterTypeActivityCategory(
     NAME(value = 1, title = "Categoría", order = 1, show = true, default = true),
     UNDEFINED(value = -1, title = "Indefinido", show = false, isException = true)
 }
-//enum class FilterTypeActivityCategory(val data: String) {
-//    NAME("Categoría")
-//}

@@ -27,18 +27,20 @@ class UICRUDCompany<TActivity>(activity: TActivity, operation: DBOperation) :
     UICustomCRUDViewModel<TActivity, MasterCompanyViewModel, MasterCompanyDao, MasterCompany>(
         activity,
         operation,
-        R.layout.dialog_company
+        R.layout.dialog_master_company
     )
         where TActivity : CurrentBaseActivity<MasterCompanyViewModel, MasterCompanyDao, MasterCompany> {
 
     //region widget
     private lateinit var tName: CustomInputText
+    private lateinit var tDescription: CustomInputText
     private lateinit var tPicture: CustomImageViewDobleTap
     //endregion
 
     init {
         onEventSetInit = {
             this.tName = it.findViewById(R.id.DialogCompanyName)
+            this.tDescription = it.findViewById(R.id.DialogGenericDescription)
             this.tPicture =
                 it.findViewById<CustomImageViewDobleTap>(R.id.DialogCompanyPicture).apply {
                     setOnLongClickListener {
@@ -70,22 +72,24 @@ class UICRUDCompany<TActivity>(activity: TActivity, operation: DBOperation) :
         onEventGetNewOrUpdateEntity = {
             val data = it ?: MasterCompany()
             data.apply {
-                this.description = tName.text
+                this.valueCode = tName.text
+                this.description = tDescription.text
                 this.picture = tPicture.getArray()
             }
             data
         }
         onEventSetItem = {
-            tName.text = it.description
+            tName.text = it.valueCode
+            tDescription.text = it.description
             tPicture.setImageBitmap(it.picture.toBitmap())
         }
         onEventSetItemsForClean = {
-            mutableListOf(tName, tPicture)
+            mutableListOf(tName, tDescription, tPicture)
         }
         onEventValidate = { item, _ ->
             var result = false
             try {
-                if (item.description.isEmpty()) throw Exception("El nombre de la Empresa no puede ser nulo...")
+                if (item.valueCode.isEmpty()) throw Exception("El nombre de la Empresa no puede ser nulo...")
                 if (item.picture == null || item.picture!!.isEmpty()) throw Exception("El logo no fue asignado...")
                 result = true
             } catch (e: Exception) {
@@ -94,7 +98,7 @@ class UICRUDCompany<TActivity>(activity: TActivity, operation: DBOperation) :
             result
         }
         onEventGetPopUpDataParameter = { p, item ->
-            p?.factorHeight = 0.25
+            p?.factorHeight = 0.30
             if (item != null) {
                 p?.icon = item.getDrawableShow().drawable
                 p?.bitmap = item.getPictureShow()

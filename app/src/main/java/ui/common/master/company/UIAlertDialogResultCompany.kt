@@ -1,23 +1,27 @@
-package com.vsg.agendaandpublication.ui.common.itemProduct.company
+package com.vsg.ot.ui.common.master.company
 
 import androidx.paging.PagingData
-import com.vsg.agendaandpublication.common.model.itemProduct.company.Company
-import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyViewModel
+import androidx.paging.filter
+import com.vsg.helper.ui.popup.select.UIAlertDialogResultEntity
+import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.ot.ui.activities.master.util.FilterTypeActivityCompany
-import com.vsg.utilities.ui.popup.select.UIAlertDialogResultEntity
-import com.vsg.utilities.ui.util.BaseActivity
+import common.model.master.company.MasterCompany
+import common.model.master.company.MasterCompanyViewModel
 
 @ExperimentalStdlibApi
-class UIAlertDialogResultCompany<TActivity>(activity: TActivity, viewModel: CompanyViewModel) :
-    UIAlertDialogResultEntity<TActivity, CompanyViewModel, Company, FilterTypeActivityCompany>(
+class UIAlertDialogResultCompany<TActivity>(
+    activity: TActivity,
+    viewModel: MasterCompanyViewModel
+) :
+    UIAlertDialogResultEntity<TActivity, MasterCompanyViewModel, MasterCompany, FilterTypeActivityCompany>(
         activity, viewModel, FilterTypeActivityCompany::class.java
     ) where TActivity : BaseActivity {
     init {
         onEventMakeFilter = { item, find, it ->
-            val filter: PagingData<Company> =
+            val filter: PagingData<MasterCompany> =
                 when (item) {
                     FilterTypeActivityCompany.NAME -> it.filter { s ->
-                        s.name.contains(
+                        s.valueCode.contains(
                             find,
                             true
                         )

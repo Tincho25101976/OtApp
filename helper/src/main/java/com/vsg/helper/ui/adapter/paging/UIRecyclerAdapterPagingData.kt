@@ -27,7 +27,7 @@ class UIRecyclerAdapterPagingData<TEntity> :
         where TEntity : IResultRecyclerAdapter,
               TEntity : IEntityPagingLayoutPosition,
               TEntity : IEntity,
-              TEntity: Comparable<TEntity>  {
+              TEntity : Comparable<TEntity> {
 
     //region handler
     var onEventClickItem: ((View, Int, Int) -> Unit)? = null
@@ -112,11 +112,14 @@ class UIRecyclerAdapterPagingData<TEntity> :
             pic.setImageBitmap(null)
             if (data.isBitmap) pic.setImageBitmap(data.bitmap)
             else if (data.picture > 0) pic.setImageResource(data.picture)
+            data.sizePictureHeight = resources.getInteger(R.integer.CustomSizePictureHeight)
+            data.sizePictureWidth = resources.getInteger(R.integer.CustomSizePictureWidth)
             val layoutParams: LinearLayout.LayoutParams =
                 LinearLayout.LayoutParams(
                     data.sizePictureWidth.toPixel(),
                     data.sizePictureHeight.toPixel()
                 )
+
             pic.layoutParams = layoutParams
             pic.scaleType = ImageView.ScaleType.FIT_END
 
@@ -180,7 +183,7 @@ class UIRecyclerAdapterPagingData<TEntity> :
     //endregion
 
     companion object {
-        class Diff<T> where T : IEntity, T: Comparable<T> {
+        class Diff<T> where T : IEntity, T : Comparable<T> {
             val diffCallback = object : DiffUtil.ItemCallback<T>() {
                 override fun areItemsTheSame(oldItem: T, newItem: T): Boolean =
                     oldItem.id == newItem.id

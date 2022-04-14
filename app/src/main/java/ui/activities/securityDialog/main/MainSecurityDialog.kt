@@ -12,7 +12,7 @@ class MainSecurityDialog : BaseActivity(R.layout.main_security_dialog) {
             val view: ScrollView = it.apply {
                 add(
                     R.drawable.pic_xact,
-                    getString(R.string.ActivityItemProductCategoryText),
+                    getString(R.string.ActivityMainCommandSecurityDialog),
                     dataClass = XactActivity::class.java
                 )
 //                add(

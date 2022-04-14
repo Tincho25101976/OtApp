@@ -27,7 +27,7 @@ class UICRUDXact<TActivity>(activity: TActivity, operation: DBOperation) :
     UICustomCRUDViewModel<TActivity, XactViewModel, XactDao, Xact>(
         activity,
         operation,
-        R.layout.dialog_category
+        R.layout.dialog_security_dialog_xact
     )
         where TActivity : CurrentBaseActivity<XactViewModel, XactDao, Xact> {
 
@@ -38,9 +38,9 @@ class UICRUDXact<TActivity>(activity: TActivity, operation: DBOperation) :
 
     init {
         onEventSetInit = {
-            this.tName = it.findViewById(R.id.DialogCategoryName)
+            this.tName = it.findViewById(R.id.DialogXactName)
             this.tPicture =
-                it.findViewById<CustomImageViewDobleTap>(R.id.DialogCategoryPicture).apply {
+                it.findViewById<CustomImageViewDobleTap>(R.id.DialogXactPicture).apply {
                     setOnLongClickListener {
                         activity.chooserFile(TypeTempFile.IMAGE_CHOOSER_FILE)
                         true

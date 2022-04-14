@@ -63,11 +63,13 @@ class MasterSection : EntityOtCompany<MasterSection>() {
     override fun aEquals(other: Any?): Boolean {
         if (other !is MasterSection) return false
         return type == other.type
+                && description == other.description
+                && createDate.time == other.createDate.time
     }
     //endregion
 
     companion object {
-        const val ENTITY_NAME: String = "section"
+        const val ENTITY_NAME: String = "masterSection"
         const val DEFAULT_PREFIX: String = "SW"
     }
 }

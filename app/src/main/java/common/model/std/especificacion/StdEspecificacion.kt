@@ -26,11 +26,10 @@ import common.model.std.ensayo.type.TypeEnsayo
         )
     ],
     indices = [
-        Index(value = arrayOf("id", "idEnsayo"), name = "IX_STD_METODO_FK"),
-        Index(value = arrayOf("idMetodo", "idKeyEnsayo"), name = "IX_STD_METODO_KEY"),
+        Index(value = arrayOf("id", "idEnsayo"), name = "IX_STD_ESPECIFICACION_FK"),
         Index(
-            value = arrayOf("idKeyEnsayo", "typeUnit", "typeEnsayo"),
-            name = "IX_STD_METODO_TYPE"
+            value = arrayOf("valueMinimo", "valueMaximo", "revision", "idEtapa"),
+            name = "IX_STD_ESPECIFICACION_TYPE"
         )],
     inheritSuperIndices = true,
     tableName = StdEspecificacion.ENTITY_NAME
@@ -44,9 +43,7 @@ class StdEspecificacion : EntityOt<StdEspecificacion>(), IStdEspecificacion {
     var certificado: Boolean = false
     var revision: Int = 0
 
-
     override var idEtapa: TypeEtapa = TypeEtapa.UNDEFINED
-
 
     //region fk
     @EntityForeignKeyID(20)
@@ -70,8 +67,8 @@ class StdEspecificacion : EntityOt<StdEspecificacion>(), IStdEspecificacion {
         get() = ensayo?.idKeyEnsayo ?: ""
         set(value) {}
 
-    var typeUnit: TypeUnit = TypeUnit.UNDEFINED
-    var typeEnsayo: TypeEnsayo = TypeEnsayo.UNDEFINED
+    val typeUnit: TypeUnit = ensayo?.typeUnit ?: TypeUnit.UNDEFINED
+    val typeEnsayo: TypeEnsayo = ensayo?.typeEnsayo ?: TypeEnsayo.UNDEFINED
     val unit: Unit? get() = ensayo?.unit
     val isCualitativo: Boolean get() = typeEnsayo == TypeEnsayo.CUANTITATIVO
 
@@ -91,8 +88,19 @@ class StdEspecificacion : EntityOt<StdEspecificacion>(), IStdEspecificacion {
         StringBuilder().toTitleSpanned(description)
 
     override fun aEquals(other: Any?): Boolean {
-        if (other !is MasterCompany) return false
+        if (other !is StdEspecificacion) return false
         return description == other.description
+                && valueMaximo == other.valueMaximo
+                && valueMinimo == other.valueMinimo
+                && obligatorio == other.obligatorio
+                && certificado == other.certificado
+                && revision == other.revision
+                && idEtapa == other.idEtapa
+                && idEnsayo == other.idEnsayo
+                && idItem == other.idItem
+                && typeUnit == other.typeUnit
+                && typeEnsayo == other.typeEnsayo
+                && createDate.time == other.createDate.time
     }
     //endregion
 

@@ -1,23 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="msg_data">Data</string>
-    <string name="msg_operation">Operation</string>
-    <string name="msg_extra">Extra</string>
+    <string name="MsgData">Data</string>
+    <string name="MsgOperation">Operation</string>
+    <string name="MsgExtra">Extra</string>
 
     <string name="dbName">ot.db</string>
 
-    <string name="text_suspenso">…</string>
+    <string name="TextSuspenso">…</string>
 
     //PopUp:
-    <string name="text_insert">Agregar</string>
-    <string name="text_update">Editar</string>
-    <string name="text_delete">Eliminar</string>
-    <string name="text_view">Ver</string>
-    <string name="text_export">Exportar</string>
+    <string name="TitleInsert">Agregar</string>
+    <string name="TitleUpdate">Editar</string>
+    <string name="TitleDelete">Eliminar</string>
+    <string name="TitleView">Ver</string>
+    <string name="TitleExport">Exportar</string>
 
     //PopUpExport:
-    <string name="text_export_xml">XML</string>
-    <string name="text_export_json">Json</string>
-    <string name="text_export_csv">CSV</string>
+    <string name="TitleExportXML">XML</string>
+    <string name="TitleExportJSON">Json</string>
+    <string name="TitleExportCSV">CSV</string>
 
     //Custom Widget:
     <string name="component_one">Custom Component 1</string>
@@ -39,10 +39,6 @@
     <string name="ModelTextIsDefault">Defecto</string>
     <string name="ModelTextDescription">Descripción</string>
 
-<!--    <string name="crop__saving">Saving picture…</string>-->
-<!--    <string name="crop__wait">Please wait…</string>-->
-<!--    <string name="crop__pick_error">No image sources available</string>-->
-
-<!--    <string name="crop__done">DONE</string>-->
-<!--    <string name="crop__cancel" tools:ignore="ButtonCase">CANCEL</string>-->
+    <!--GenericSearch:-->
+    <string name="CustomDescriptionSearch">Search</string>
 </resources>

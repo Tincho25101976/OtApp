@@ -7,12 +7,12 @@
     android:layout_marginEnd="@dimen/DialogCrudTextMargin">
 
     <RelativeLayout
-        android:id="@+id/DialogCategoryMain"
+        android:id="@+id/DialogXactMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
-            android:id="@+id/DialogCategoryPicture"
+            android:id="@+id/DialogXactPicture"
             android:layout_width="@dimen/DialogCategoryPictureSize"
             android:layout_height="@dimen/DialogCategoryPictureSize"
             android:layout_margin="@dimen/DialogCrudPictureMargin"
@@ -21,19 +21,19 @@
             android:src="@drawable/pic_camera_alpha" />
 
         <com.vsg.helper.ui.widget.text.CustomInputText
-            android:id="@+id/DialogCategoryName"
+            android:id="@+id/DialogXactName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/DialogCrudPictureMargin"
-            android:layout_toEndOf="@+id/DialogCategoryPicture"
-            android:hint="@string/DialogCategoryName"
+            android:layout_toEndOf="@+id/DialogXactPicture"
+            android:hint="@string/DialogXactName"
             android:padding="@dimen/DialogCrudTextPadding" />
     </RelativeLayout>
 
     <include layout="@layout/dialog_generic_item_base"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/DialogCategoryMain"/>
+        android:layout_below="@+id/DialogXactMain"/>
 
 </RelativeLayout>

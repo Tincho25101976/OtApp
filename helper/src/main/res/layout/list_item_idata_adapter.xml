@@ -13,8 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:text="@string/text_suspenso"
-            android:textSize="20sp"
+            android:text="@string/TextSuspenso"
             android:textStyle="bold|italic" />
 
         <TextView
@@ -22,7 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:text="@string/text_suspenso"
-            android:textSize="14sp" />
+            android:text="@string/TextSuspenso" />
     </LinearLayout>
 </RelativeLayout>

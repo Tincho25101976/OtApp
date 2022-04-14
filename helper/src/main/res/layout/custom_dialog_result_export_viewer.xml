@@ -15,7 +15,7 @@
         android:layout_width="@dimen/CustomDialogActionResultSizeExit"
         android:layout_height="@dimen/CustomDialogActionResultSizeExit"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/command_end_bottom_margin"
+        android:layout_margin="@dimen/CommandEndBottomMargin"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:src="@drawable/pic_export" />

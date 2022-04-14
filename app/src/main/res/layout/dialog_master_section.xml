@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="@dimen/DialogCrudTextMargin"
+    android:layout_marginTop="@dimen/DialogCrudTextMargin"
+    android:layout_marginEnd="@dimen/DialogCrudTextMargin">
+
+    <RelativeLayout
+        android:id="@+id/DialogSectionMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogSectionRelation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/DialogSectionRelation"
+            android:layout_alignParentTop="true"
+            app:customType="READ_ONLY_TEXT"/>
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogSectionName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/DialogSectionRelation"
+            android:hint="@string/DialogSectionName"/>
+
+        <com.vsg.helper.ui.widget.spinner.CustomSpinner
+            android:id="@+id/DialogSectionType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:customSpinnerTitle="@string/DialogSectionType"
+            android:layout_below="@+id/DialogSectionName" />
+    </RelativeLayout>
+
+    <include
+        layout="@layout/dialog_generic_item_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DialogSectionMain" />
+
+</RelativeLayout>

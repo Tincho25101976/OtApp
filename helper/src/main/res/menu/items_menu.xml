@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_bar_item_update_db"
-        android:title="@string/text_suspenso"
+        android:title="@string/TextSuspenso"
         app:actionViewClass="android.widget.Button"/>
 </menu>

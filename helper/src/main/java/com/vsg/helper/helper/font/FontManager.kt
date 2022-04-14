@@ -50,8 +50,7 @@ class FontManager(val context: Context) {
     ) {
         val childCount = viewTree.childCount
         for (i in 0 until childCount) {
-            val child: View = viewTree.getChildAt(i)
-            when (child) {
+            when (val child: View = viewTree.getChildAt(i)) {
                 is ViewGroup -> replaceFonts(child)
                 is ICustomViewSetTypeface -> {
                     child.customSetTypeface(getTypeface(Typeface.BOLD_ITALIC))

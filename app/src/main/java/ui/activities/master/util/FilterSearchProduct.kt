@@ -1,15 +1,10 @@
-package com.vsg.agendaandpublication.ui.activities.itemProducto.util
+package com.vsg.ot.ui.activities.master.util
 
-import com.vsg.ot.ui.activities.master.util.FilterTypeActivityProduct
-import com.vsg.utilities.common.model.IEntity
-import com.vsg.utilities.ui.adapter.IDataAdapterTitle
+import com.vsg.helper.common.model.IEntity
+import com.vsg.helper.ui.adapter.IDataAdapterTitle
 
-class FilterSearchProduct(val type: FilterTypeActivityProduct, override var id: Long) :
+class FilterSearchProduct(val type: FilterTypeActivityProduct, override var id: Int) :
     IEntity, IDataAdapterTitle {
     override val title: String
         get() = type.title
-
-//    suspend fun query(find: String): (Product) -> Boolean = runBlocking {
-//        return@runBlocking type.query(find)
-//    }
 }

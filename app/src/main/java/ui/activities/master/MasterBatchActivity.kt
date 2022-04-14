@@ -20,8 +20,8 @@ import common.model.master.item.MasterItemViewModel
 import kotlinx.coroutines.flow.Flow
 
 @ExperimentalStdlibApi
-class BatchActivity :
-    CurrentBaseActivityPagingGenericRelationParentWithRelation<BatchActivity, MasterBatchViewModel, MasterBatchDao, MasterBatch, FilterTypeActivityBatch, UICRUDBatch<BatchActivity>,
+class MasterBatchActivity :
+    CurrentBaseActivityPagingGenericRelationParentWithRelation<MasterBatchActivity, MasterBatchViewModel, MasterBatchDao, MasterBatch, FilterTypeActivityBatch, UICRUDBatch<MasterBatchActivity>,
             FilterTypeActivityProduct, MasterItemViewModel, MasterItemDao, MasterItem, TypeFilterHasProductItems,
             MasterCompany>(
         MasterBatchViewModel::class.java,
@@ -31,7 +31,7 @@ class BatchActivity :
     ) {
     override var factorHeightForCustomViewer: Double = 0.75
     override fun oSetStringTitleForActionBar(): Int = R.string.ActivityItemOperationBatchText
-    override fun aSetActivity(): BatchActivity = this
+    override fun aSetActivity(): MasterBatchActivity = this
     override fun aFinishExecutePagingGenericRelationParent() {
         onEventMakeFilter = { item, find, it ->
             val filter: PagingData<MasterBatch> =

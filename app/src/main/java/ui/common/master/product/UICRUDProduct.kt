@@ -25,7 +25,7 @@ class UICRUDProduct<TActivity>(
     UICustomCRUDViewModelRelation<TActivity, MasterItemViewModel, MasterItemDao, MasterItem, MasterCompany>(
         activity,
         operation,
-        R.layout.dialog_product,
+        R.layout.dialog_master_item,
         viewModel,
         idTextParent = R.id.DialogProductRelation,
         parent = company

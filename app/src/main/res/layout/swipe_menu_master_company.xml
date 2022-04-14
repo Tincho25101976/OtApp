@@ -17,12 +17,12 @@
         android:orientation="horizontal">
 
         <com.vsg.helper.ui.widget.imageWithText.CustomImagenWithText
-            android:id="@+id/SwipeMenuCompanyItemProduct"
+            android:id="@+id/SwipeMenuMasterCompany"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:customResourceImage="@drawable/pic_product"
-            app:customResourceString="@string/ActionResultForCompanyProduct" />
+            app:customResourceString="@string/ActionResultForCompanyItem" />
 
         <com.vsg.helper.ui.widget.imageWithText.CustomImagenWithText
             android:id="@+id/SwipeMenuCompanyItemWarehouse"
@@ -31,14 +31,6 @@
             android:layout_weight="1"
             app:customResourceImage="@drawable/pic_warehouse"
             app:customResourceString="@string/ActionResultForCompanyWarehouse" />
-
-        <com.vsg.helper.ui.widget.imageWithText.CustomImagenWithText
-            android:id="@+id/SwipeMenuCompanyItemPerson"
-            android:layout_width="0sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:customResourceImage="@drawable/pic_person"
-            app:customResourceString="@string/ActionResultForCompanyPerson" />
 
     </LinearLayout>
 </RelativeLayout>

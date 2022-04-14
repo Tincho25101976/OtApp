@@ -1,45 +1,50 @@
-package com.vsg.agendaandpublication.ui.activities.itemOperation
+package com.vsg.ot.ui.activities.master
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
 import androidx.paging.filter
-import com.vsg.agendaandpublication.R
-import com.vsg.agendaandpublication.common.model.itemOperation.filter.TypeFilterHasWarehouseItems
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.section.Section
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.section.SectionDao
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.section.SectionViewModel
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.Warehouse
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.WarehouseDao
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.WarehouseViewModel
-import com.vsg.agendaandpublication.common.model.itemProduct.company.Company
-import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyViewModel
-import com.vsg.agendaandpublication.ui.activities.itemOperation.util.FilterTypeActivitySection
-import com.vsg.agendaandpublication.ui.activities.itemOperation.util.FilterTypeActivityWarehouse
-import com.vsg.agendaandpublication.ui.common.itemOperation.warehouse.UICRUDSection
-import com.vsg.utilities.ui.util.CurrentBaseActivityPagingGenericRelationParentWithRelation
+import com.vsg.helper.ui.util.CurrentBaseActivityPagingGenericRelationParentWithRelation
+import com.vsg.ot.R
+import com.vsg.ot.ui.activities.master.util.FilterTypeActivitySection
+import com.vsg.ot.ui.activities.master.util.FilterTypeActivityWarehouse
+import com.vsg.ot.ui.common.master.warehouse.UICRUDSection
+import common.model.master.company.MasterCompany
+import common.model.master.company.MasterCompanyViewModel
+import common.model.master.filter.TypeFilterHasWarehouseItems
+import common.model.master.section.MasterSection
+import common.model.master.section.MasterSectionDao
+import common.model.master.section.MasterSectionViewModel
+import common.model.master.warehouse.MasterWarehouse
+import common.model.master.warehouse.MasterWarehouseDao
+import common.model.master.warehouse.MasterWarehouseViewModel
 import kotlinx.coroutines.flow.Flow
 
 @ExperimentalStdlibApi
-class SectionActivity :
+class MasterSectionActivity :
     CurrentBaseActivityPagingGenericRelationParentWithRelation<
-            SectionActivity, SectionViewModel, SectionDao, Section, FilterTypeActivitySection, UICRUDSection<SectionActivity>,
-            FilterTypeActivityWarehouse, WarehouseViewModel, WarehouseDao, Warehouse, TypeFilterHasWarehouseItems,
-            Company>(
-        SectionViewModel::class.java,
-        WarehouseViewModel::class.java,
+            MasterSectionActivity, MasterSectionViewModel, MasterSectionDao, MasterSection, FilterTypeActivitySection, UICRUDSection<MasterSectionActivity>,
+            FilterTypeActivityWarehouse, MasterWarehouseViewModel, MasterWarehouseDao, MasterWarehouse, TypeFilterHasWarehouseItems,
+            MasterCompany>(
+        MasterSectionViewModel::class.java,
+        MasterWarehouseViewModel::class.java,
         FilterTypeActivitySection::class.java,
         FilterTypeActivityWarehouse::class.java,
     ) {
     override fun oSetStringTitleForActionBar(): Int =
         R.string.ActivityItemOperationSectionText
 
-    override fun aSetActivity(): SectionActivity = this
-    override fun aRelation(): Company? = getExtraParameter(CompanyViewModel::class.java)
+    override fun aSetActivity(): MasterSectionActivity = this
+    override fun aRelation(): MasterCompany? = getExtraParameter(MasterCompanyViewModel::class.java)
     override fun aFinishExecutePagingGenericRelationParent() {
         onEventMakeFilter = { item, find, it ->
-            val filter: PagingData<Section> =
+            val filter: PagingData<MasterSection> =
                 when (item) {
-                    FilterTypeActivitySection.NAME -> it.filter { s -> s.name.contains(find, true) }
+                    FilterTypeActivitySection.NAME -> it.filter { s ->
+                        s.description.contains(
+                            find,
+                            true
+                        )
+                    }
                     FilterTypeActivitySection.PREFIX -> it.filter { s ->
                         s.prefix.contains(
                             find,
@@ -51,10 +56,10 @@ class SectionActivity :
             filter
         }
         onEventMakeFilterResult = { item, find, it ->
-            val filter: PagingData<Warehouse> =
+            val filter: PagingData<MasterWarehouse> =
                 when (item) {
                     FilterTypeActivityWarehouse.NAME -> it.filter { s ->
-                        s.name.contains(
+                        s.description.contains(
                             find,
                             true
                         )
@@ -79,7 +84,7 @@ class SectionActivity :
             data
         }
         onEventGetViewAllPaging = {
-            val data: Flow<PagingData<Section>>? = when (parent == null) {
+            val data: Flow<PagingData<MasterSection>>? = when (parent == null) {
                 true -> null
                 false -> currentViewModel().viewModelGetViewAllPaging(parent?.id!!)
             }
@@ -87,12 +92,13 @@ class SectionActivity :
         }
         onEventSetParentFilterHasItems = { TypeFilterHasWarehouseItems.SECTION }
     }
+
     override fun oHintForParent(): String = this.getString(R.string.HintParentForCompany)
-    override fun aCurrentListOfParent(): List<Warehouse>? {
+    override fun aCurrentListOfParent(): List<MasterWarehouse>? {
         this.relation = aRelation()
         return when (relation == null) {
             true -> null
-            false -> makeViewModel(WarehouseViewModel::class.java)
+            false -> makeViewModel(MasterWarehouseViewModel::class.java)
                 .viewModelViewAllSimpleList(relation!!.id)
         }
     }

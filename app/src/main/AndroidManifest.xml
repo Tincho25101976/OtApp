@@ -21,7 +21,15 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.activities.securityDialog.main.MainSecurityDialog"/>
         <activity android:name="ui.activities.securityDialog.xact.XactActivity" />
+
+        <activity android:name=".ui.activities.master.main.MainMaster"/>
+        <activity android:name=".ui.activities.master.MasterBatchActivity"/>
+        <activity android:name=".ui.activities.master.MasterCompanyActivity"/>
+        <activity android:name=".ui.activities.master.MasterItemActivity"/>
+        <activity android:name=".ui.activities.master.MasterSectionActivity"/>
+        <activity android:name=".ui.activities.master.MasterWarehouseActivity"/>
 
     <provider
         android:name="androidx.core.content.FileProvider"

@@ -1,10 +1,9 @@
-package com.vsg.agendaandpublication.ui.activities.itemProducto.util
+package com.vsg.ot.ui.activities.master.util
 
-import com.vsg.ot.ui.activities.master.util.FilterTypeActivityCompany
-import com.vsg.utilities.common.model.IEntity
-import com.vsg.utilities.ui.adapter.IDataAdapterTitle
+import com.vsg.helper.common.model.IEntity
+import com.vsg.helper.ui.adapter.IDataAdapterTitle
 
-class FilterSearchCompany(val type: FilterTypeActivityCompany, override var id: Long) :
+class FilterSearchCompany(val type: FilterTypeActivityCompany, override var id: Int) :
     IEntity, IDataAdapterTitle {
     override val title: String
         get() = type.title

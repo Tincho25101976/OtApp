@@ -4,6 +4,6 @@ import com.vsg.helper.common.format.FormatDateString
 import java.util.*
 
 interface IEntityCreateDate {
-    var createDate: Date?
+    var createDate: Date
     val formatDate: FormatDateString
 }

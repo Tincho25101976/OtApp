@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="CustomSpinnerTextSize">14</integer>
+    <integer name="CustomSpinnerTitleTextSize">12</integer>
+
+    <integer name="CustomAdapterTextSize">16</integer>
+
+    <!--Picture Size for recyclerView-->
+    <integer name="CustomSizePictureHeight">64</integer>
+    <integer name="CustomSizePictureWidth">64</integer>
+</resources>

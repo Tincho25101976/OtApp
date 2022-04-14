@@ -13,18 +13,24 @@ import common.model.master.company.MasterCompanyDao
 import common.model.master.company.MasterCompanyViewModel
 
 @ExperimentalStdlibApi
-class CompanyActivity :
-    CurrentBaseActivityPagingGeneric<CompanyActivity, MasterCompanyViewModel, MasterCompanyDao, MasterCompany, FilterTypeActivityCompany, UICRUDCompany<CompanyActivity>>(
+class MasterCompanyActivity :
+    CurrentBaseActivityPagingGeneric<MasterCompanyActivity, MasterCompanyViewModel, MasterCompanyDao, MasterCompany, FilterTypeActivityCompany, UICRUDCompany<MasterCompanyActivity>>(
         MasterCompanyViewModel::class.java,
         FilterTypeActivityCompany::class.java
     ) {
-    override fun oSetSwipeMenuItems(): Int = R.layout.swipe_menu_company_item
-    override fun oSetStringTitleForActionBar(): Int = R.string.ActivityItemProductCompanyText
+    override fun oSetSwipeMenuItems(): Int = R.layout.swipe_menu_master_company
+    override fun oSetStringTitleForActionBar(): Int = R.string.ActivityMasterCompanyText
     override fun aFinishExecute() {
         onEventMakeFilter = { item, find, it ->
             val filter: PagingData<MasterCompany> =
                 when (item) {
                     FilterTypeActivityCompany.NAME -> it.filter { s ->
+                        s.valueCode.contains(
+                            find,
+                            true
+                        )
+                    }
+                    FilterTypeActivityCompany.DESCRIPTION -> it.filter { s ->
                         s.description.contains(
                             find,
                             true
@@ -36,16 +42,16 @@ class CompanyActivity :
         }
         onEventSetCRUDForApply = { context, operation -> UICRUDCompany(context, operation) }
         onEventSwipeGetViewForMenu = {
-            it.findViewById<RelativeLayout>(R.id.SwipeMenuCompanyItemProduct)
+            it.findViewById<RelativeLayout>(R.id.SwipeMenuMasterCompany)
                 .setOnClickListener {
                     if (getItem() != null) {
-                        loadActivity(ProductActivity::class.java, getItem()!!)
+                        loadActivity(MasterItemActivity::class.java, getItem()!!)
                     }
                 }
             it.findViewById<RelativeLayout>(R.id.SwipeMenuCompanyItemWarehouse)
                 .setOnClickListener {
                     if (getItem() != null) {
-                        loadActivity(WarehouseActivity::class.java, getItem()!!)
+                        loadActivity(MasterWarehouseActivity::class.java, getItem()!!)
                     }
                 }
         }

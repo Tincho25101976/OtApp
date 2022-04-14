@@ -38,7 +38,7 @@ abstract class MasterCompanyDao: DaoGenericOt<MasterCompany>() {
     @Query("UPDATE ${MasterCompany.ENTITY_NAME} SET isEnabled = NOT isEnabled WHERE id = :data")
     abstract override fun updateSetEnabled(data: Int)
 
-    @Query("SELECT description FROM ${MasterCompany.ENTITY_NAME} GROUP BY description ORDER BY description")
+    @Query("SELECT valueCode FROM ${MasterCompany.ENTITY_NAME} GROUP BY description ORDER BY description")
     abstract fun viewAllTextSearch(): LiveData<List<String>>
 
     //region check

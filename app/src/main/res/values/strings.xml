@@ -1,14 +1,27 @@
 <resources>
     <string name="app_name">Ot</string>
 
+
+    <!--ActivitySecurityDialog-->
+    <string name="ActivityMainCommandSecurityDialog">Diálogos de seguridad</string>
+
     <!--Xact:-->
-    <string name="DialogCategoryName">Categoría</string>
+    <string name="DialogXactName">Categoría</string>
+
+    <!--ActivityMain:-->
+    <string name="ActivityMainCommandMaster">Master</string>
+    <string name="ActivityMainCommandContact">Contactos</string>
+
+    <string name="ActivityMainCommandPerson">Personas</string>
+    <string name="ActivityMainCommandOperation">Operaciones</string>
+    <string name="ActivityMainCommandAutoFillData">Auto data</string>
+    <string name="ActivityMainCommandAutoFillDataBatch">Auto data (add batch)</string>
 
     <!--Batch:-->
     <string name="DialogBatchDueDate">Vencimiento</string>
     <string name="DialogBatchReceiverQty">Recepción</string>
     <string name="DialogBatchCreateDate">Creación</string>
-    <string name="DialogBatchRelation">Producto</string>
+    <string name="DialogBatchRelation">Ítem</string>
 
     <!--ActivityItemOperation-->
     <string name="ActivityItemOperationBatchText">Lotes</string>
@@ -19,9 +32,8 @@
     <string name="ActivityItemOperationSectionText">Localizaciones</string>
 
     <!--ActivityItemProduct-->
-    <string name="ActivityItemProductProductoText">Productos</string>
-    <string name="ActivityItemProductCompanyText">Empresas</string>
-    <string name="ActivityItemProductCategoryText">Categorías</string>
+    <string name="ActivityMasterItemText">Ítem</string>
+    <string name="ActivityMasterCompanyText">Empresas</string>
     <string name="ActivityItemProductUnitText">Unidades de medida</string>
     <string name="ActivityItemProductPriceText">Precios por producto</string>
     <string name="ActivityItemProductPictureText">Imágenes por producto</string>
@@ -36,15 +48,17 @@
     <string name="ActionResultForContactAddress">Dirección</string>
 
     <!--ActionResultForCompany-->
-    <string name="ActionResultForCompanyProduct">Producto</string>
-    <string name="ActionResultForCompanyMoney">Divisas</string>
+    <string name="ActionResultForCompanyItem">Ítem</string>
     <string name="ActionResultForCompanyWarehouse">Depósitos</string>
-    <string name="ActionResultForCompanyPerson">Personas</string>
 
     <!--ActionResultForProduct-->
     <string name="ActionResultForProductPrice">Precios</string>
     <string name="ActionResultForProductPicture">Imágenes</string>
     <string name="ActionResultForProductBatch">Lotes</string>
+
+    <!--ActionResultForOperation-->
+    <string name="ActionResultForSection">Localizaciones</string>
+
 
 
 
@@ -60,4 +74,15 @@
     <string name="DialogProductStockMin">Stock [mínimo]</string>
     <string name="DialogProductStockMax">Stock [máximo]</string>
     <string name="DialogProductHasStock">Es Stockeable</string>
+
+    <!--Warehouse:-->
+    <string name="DialogWarehouseName">Depósito</string>
+    <string name="DialogWarehousePrefix">Abreviatura</string>
+    <string name="DialogWarehouseLocation">Dirección</string>
+    <string name="DialogWarehouseRelation">Empresa</string>
+
+    <!--Section:-->
+    <string name="DialogSectionName">Localización</string>
+    <string name="DialogSectionRelation">Depósito</string>
+    <string name="DialogSectionType">Tipo</string>
 </resources>

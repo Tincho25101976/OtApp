@@ -77,11 +77,12 @@ class StdEnsayo : EntityOt<StdEnsayo>(), IStdIdKeyEnsayo {
     override fun aEquals(other: Any?): Boolean {
         if (other !is MasterCompany) return false
         return description == other.description
+                && createDate.time == other.createDate.time
     }
     //endregion
 
     companion object {
-        const val ENTITY_NAME = "std_ensayo"
+        const val ENTITY_NAME = "stdEnsayo"
     }
 
 

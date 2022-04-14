@@ -76,7 +76,7 @@ abstract class CurrentBaseActivityPagingBaseViewRoom<TActivity, TViewModel, TDao
                   TViewModelParent : IViewModelView<TParent>,
                   TParent : IEntity {
         val viewModelParent = makeViewModel(type)
-        val id = intent.getIntExtra(getString(R.string.msg_data), 0)
+        val id = intent.getIntExtra(getString(R.string.MsgData), 0)
         if (id <= 0) return null
         return viewModelParent.viewModelView(id)
     }
@@ -86,7 +86,7 @@ abstract class CurrentBaseActivityPagingBaseViewRoom<TActivity, TViewModel, TDao
                   TViewModelExtraParameter : IViewModelView<TExtraParameter>,
                   TExtraParameter : IEntity {
         val viewModelExtraParameter = makeViewModel(type)
-        val id = intent.getIntExtra(getString(R.string.msg_extra), 0)
+        val id = intent.getIntExtra(getString(R.string.MsgExtra), 0)
         if (id <= 0) return null
         return viewModelExtraParameter.viewModelView(id)
     }
@@ -135,9 +135,7 @@ abstract class CurrentBaseActivityPagingBaseViewRoom<TActivity, TViewModel, TDao
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context())
         }
-        //tSearchSpinner.setCustomAdapterEnum(context(), typeFilter)
         tSearchSpinner.setCustomAdapterEnum(typeFilter)
-//        tAdd.setOnClickListener { applyCRUD(null, DBOperation.INSERT) }
         //endregion
 
         //region action menu:
@@ -223,17 +221,17 @@ abstract class CurrentBaseActivityPagingBaseViewRoom<TActivity, TViewModel, TDao
             clearWidget(this)
             var data = onEventGetListTextSearch?.invoke()
             if (data == null) data = oGetViewModelGetAllTextSearch()
-            data.observe(context(), {
+            data.observe(context()) {
                 this.setCustomAdapter(
                     context = context(),
                     adapter = it,
-                    textSize = 20,
+                    textSize = resources.getInteger(R.integer.CustomAdapterTextSize),
                     ignoreCase = true,
                     callbackOnItemClick = { _, t -> search(t) },
                     callbackOnKeyPressEnter = { _, t -> search(t) },
                     commandImageView = tSearchCommand
                 )
-            })
+            }
             addTextWatcher(after = { _, e ->
                 if (!e) fillAdapter()
             })

@@ -155,6 +155,7 @@ class MasterBatch : EntityOtCompany<MasterBatch>(), IMasterItem {
         if (other !is MasterBatch) return false
         return dueDate?.time == other.dueDate?.time
                 && receiverQty == other.receiverQty
+                && createDate.time == other.createDate.time
                 && idItem == other.idItem
     }
     //endregion

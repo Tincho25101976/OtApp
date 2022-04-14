@@ -22,6 +22,6 @@ interface IRecyclerAdapter {
         const val SIZE_PICTURE_HEIGHT_DEFAULT: Int = 48
         const val SIZE_PICTURE_WIDTH_DEFAULT: Int = 48
         const val SIZE_TEXT_BODY: Int = 14
-        const val SIZE_TEXT_TITLE: Int = 18
+        const val SIZE_TEXT_TITLE: Int = 14
     }
 }

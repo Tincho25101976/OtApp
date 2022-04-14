@@ -4,6 +4,7 @@ import android.widget.RelativeLayout
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.vsg.helper.R
 import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleList
 import com.vsg.helper.common.util.viewModel.IViewModelView
@@ -43,7 +44,8 @@ abstract class ChooseIEntitySpinner<TEntity, TViewModel>(
     //region init
     init {
         tView = RelativeLayout(app).apply {
-            layoutParams = HelperUI.makeCustomLayoutRelativeLayout(TypeMakeLayoutParameter.WIDTH_MATCH_HEIGHT_WRAP)
+            layoutParams =
+                HelperUI.makeCustomLayoutRelativeLayout(TypeMakeLayoutParameter.WIDTH_MATCH_HEIGHT_WRAP)
         }
         tSpinner = CustomSpinner(app, addId = true).apply {
             layoutParams = this.setEditCustomLayoutRelativeLayout().apply {
@@ -60,6 +62,7 @@ abstract class ChooseIEntitySpinner<TEntity, TViewModel>(
                 )
             }
             customTitle = app.getString(text)
+//            customTextSize = resources.getInteger(R.integer.CustomSpinnerTitleTextSize).toFloat()
         }
         tView!!.addView(tSpinner)
     }

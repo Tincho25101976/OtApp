@@ -1,19 +1,23 @@
 package com.vsg.helper.ui.popup.dialog
 
+import androidx.annotation.FloatRange
 import androidx.annotation.LayoutRes
 import com.vsg.helper.common.popup.IPopUpParameter
 
 abstract class UICustomAlertDialogParameter(
     @LayoutRes val layout: Int,
     override var canceledOnTouchOutside: Boolean = false
-): IPopUpParameter {
-    override var factorHeight: Double = 0.8
+) : IPopUpParameter {
+    @FloatRange(from = 0.1, to = 1.0, fromInclusive = true, toInclusive = true)
+    override var factorHeight: Double = FACTOR
         get() {
             if (field <= 0) return 0.1
             if (field >= 1.0) return 1.0
             return field
         }
-    override var factorWidth: Double = 0.8
+
+    @FloatRange(from = 0.1, to = 1.0, fromInclusive = true, toInclusive = true)
+    override var factorWidth: Double = FACTOR
         get() {
             if (field <= 0) return 0.1
             if (field >= 1.0) return 1.0

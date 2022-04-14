@@ -77,7 +77,7 @@ abstract class UIAlertDialogResultEntity<TActivity, TViewModel, TEntity, TFilter
                     this.setCustomAdapter(
                         context = activity,
                         adapter = list,
-                        textSize = 20,
+                        textSize = resources.getInteger(R.integer.CustomAdapterTextSize),
                         ignoreCase = true,
                         callbackOnItemClick = { _, t -> search(t) },
                         callbackOnKeyPressEnter = { _, t -> search(t) },

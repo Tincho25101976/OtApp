@@ -1,38 +1,39 @@
-package com.vsg.agendaandpublication.ui.activities.itemOperation
+package com.vsg.ot.ui.activities.master
 
 import android.widget.RelativeLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
-import com.vsg.agendaandpublication.R
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.Warehouse
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.WarehouseDao
-import com.vsg.agendaandpublication.common.model.itemOperation.wharehouse.warehouse.WarehouseViewModel
-import com.vsg.agendaandpublication.common.model.itemProduct.company.Company
-import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyDao
-import com.vsg.agendaandpublication.common.model.itemProduct.company.CompanyViewModel
-import com.vsg.agendaandpublication.common.model.itemProduct.filter.TypeFilterHasCompanyItems
-import com.vsg.agendaandpublication.ui.activities.itemOperation.util.FilterTypeActivityWarehouse
+import androidx.paging.filter
+import com.vsg.helper.ui.util.CurrentBaseActivityPagingGenericRelationParent
+import com.vsg.ot.R
 import com.vsg.ot.ui.activities.master.util.FilterTypeActivityCompany
-import com.vsg.agendaandpublication.ui.common.itemOperation.warehouse.UICRUDWarehouse
-import com.vsg.utilities.ui.util.CurrentBaseActivityPagingGenericRelationParent
+import com.vsg.ot.ui.activities.master.util.FilterTypeActivityWarehouse
+import com.vsg.ot.ui.common.master.warehouse.UICRUDWarehouse
+import common.model.master.company.MasterCompany
+import common.model.master.company.MasterCompanyDao
+import common.model.master.company.MasterCompanyViewModel
+import common.model.master.filter.TypeFilterHasCompanyItems
+import common.model.master.warehouse.MasterWarehouse
+import common.model.master.warehouse.MasterWarehouseDao
+import common.model.master.warehouse.MasterWarehouseViewModel
 import kotlinx.coroutines.flow.Flow
 
 @ExperimentalStdlibApi
-class WarehouseActivity :
-    CurrentBaseActivityPagingGenericRelationParent<WarehouseActivity, WarehouseViewModel, WarehouseDao, Warehouse, FilterTypeActivityWarehouse, UICRUDWarehouse<WarehouseActivity>,
-            FilterTypeActivityCompany, CompanyViewModel, CompanyDao, Company, TypeFilterHasCompanyItems>(
-        WarehouseViewModel::class.java, CompanyViewModel::class.java,
+class MasterWarehouseActivity :
+    CurrentBaseActivityPagingGenericRelationParent<MasterWarehouseActivity, MasterWarehouseViewModel, MasterWarehouseDao, MasterWarehouse, FilterTypeActivityWarehouse, UICRUDWarehouse<MasterWarehouseActivity>,
+            FilterTypeActivityCompany, MasterCompanyViewModel, MasterCompanyDao, MasterCompany, TypeFilterHasCompanyItems>(
+        MasterWarehouseViewModel::class.java, MasterCompanyViewModel::class.java,
         FilterTypeActivityWarehouse::class.java, FilterTypeActivityCompany::class.java
     ) {
     override fun oSetStringTitleForActionBar(): Int = R.string.ActivityItemOperationWarehouseText
-    override fun aSetActivity(): WarehouseActivity = this
-    override fun oSetSwipeMenuItems(): Int = R.layout.swipe_menu_warehouse_item
+    override fun aSetActivity(): MasterWarehouseActivity = this
+    override fun oSetSwipeMenuItems(): Int = R.layout.swipe_menu_master_warehouse
     override fun aFinishExecutePagingGenericRelationParent() {
         onEventMakeFilter = { item, find, it ->
-            val filter: PagingData<Warehouse> =
+            val filter: PagingData<MasterWarehouse> =
                 when (item) {
                     FilterTypeActivityWarehouse.NAME -> it.filter { s ->
-                        s.name.contains(
+                        s.description.contains(
                             find,
                             true
                         )
@@ -48,9 +49,14 @@ class WarehouseActivity :
             filter
         }
         onEventMakeFilterResult = { item, find, it ->
-            val filter: PagingData<Company> =
+            val filter: PagingData<MasterCompany> =
                 when (item) {
-                    FilterTypeActivityCompany.NAME -> it.filter { s -> s.name.contains(find, true) }
+                    FilterTypeActivityCompany.NAME -> it.filter { s ->
+                        s.description.contains(
+                            find,
+                            true
+                        )
+                    }
                     else -> it
                 }
             filter
@@ -66,7 +72,7 @@ class WarehouseActivity :
             it.findViewById<RelativeLayout>(R.id.SwipeMenuOperationItemSection)
                 .setOnClickListener {
                     if (getItem() != null) loadActivity(
-                        SectionActivity::class.java, getItem()!!, extra = parent
+                        MasterSectionActivity::class.java, getItem()!!, extra = parent
                     )
                 }
         }
@@ -78,7 +84,7 @@ class WarehouseActivity :
             data
         }
         onEventGetViewAllPaging = {
-            val data: Flow<PagingData<Warehouse>>? = when (parent == null) {
+            val data: Flow<PagingData<MasterWarehouse>>? = when (parent == null) {
                 true -> null
                 false -> currentViewModel().viewModelGetViewAllPaging(parent?.id!!)
             }
@@ -86,6 +92,8 @@ class WarehouseActivity :
         }
         onEventSetParentFilterHasItems = { TypeFilterHasCompanyItems.WAREHOUSE }
     }
-    override fun aCurrentListOfParent(): List<Company> = makeViewModel(CompanyViewModel::class.java)
-        .viewModelViewAllSimpleList()
+
+    override fun aCurrentListOfParent(): List<MasterCompany> =
+        makeViewModel(MasterCompanyViewModel::class.java)
+            .viewModelViewAllSimpleList()
 }
