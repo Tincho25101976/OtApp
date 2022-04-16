@@ -37,7 +37,7 @@
     <dimen name="CommandAddMarginImage">32sp</dimen>
 
     <!--ActivityGeneric-->
-    <dimen name="ActivityGenericSearchTextMargin">5sp</dimen>
+    <dimen name="ActivityGenericSearchTextMargin">10sp</dimen>
     <dimen name="ActivityGenericSearchTextPadding">10sp</dimen>
     <dimen name="ActivityGenericSearchSizeImage">48sp</dimen>
     <dimen name="ActivityGenericSearchMarginImage">2sp</dimen>

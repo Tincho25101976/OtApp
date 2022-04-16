@@ -43,6 +43,8 @@ class UICRUDSection<TActivity>(
                 it.findViewById<CustomSpinner>(R.id.DialogSectionType).apply {
                     setCustomAdapterEnum(TypeSection::class.java)
                 }
+
+
         }
         onEventGetNewOrUpdateEntity = {
             val type: TypeSection? = tType.getItemEnumOrDefault()

@@ -386,7 +386,7 @@ class CustomInputText @JvmOverloads constructor(
         gravity = Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
         isClickable = false
         isFocusable = false
-        inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
+        inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_AUTO_CORRECT or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
         boxBackgroundMode = BOX_BACKGROUND_NONE
     }
 

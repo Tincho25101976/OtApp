@@ -8,4 +8,7 @@
     <!--Picture Size for recyclerView-->
     <integer name="CustomSizePictureHeight">64</integer>
     <integer name="CustomSizePictureWidth">64</integer>
+
+    <!--Text for CRUD View-->
+    <integer name="CustomTextSizeCRUD">12</integer>
 </resources>

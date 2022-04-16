@@ -24,18 +24,18 @@
                 android:hint="@string/DialogProductRelation"
                 app:customType="READ_ONLY_TEXT" />
 
-            <include
-                android:id="@+id/DialogProductPictureChoose"
-                layout="@layout/dialog_generic_picture_choose"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/DialogProductRelation" />
+<!--            <include-->
+<!--                android:id="@+id/DialogProductPictureChoose"-->
+<!--                layout="@layout/dialog_generic_picture_choose"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/DialogProductRelation" />-->
 
             <RelativeLayout
                 android:id="@+id/DialogProductFields"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/DialogProductPictureChoose"
+                android:layout_below="@+id/DialogProductRelation"
                 android:layout_marginStart="@dimen/DialogCrudLayoutMargin">
 
                 <com.vsg.helper.ui.widget.text.CustomInputText
@@ -44,27 +44,30 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/DialogProductName" />
 
-                <RelativeLayout
-                    android:id="@+id/DialogProductParameterUnitHasStock"
-                    android:layout_width="match_parent"
+                <com.vsg.helper.ui.widget.spinner.CustomSpinner
+                    android:id="@+id/DialogProductUnit"
+                    android:layout_width="230sp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/DialogProductName"
-                    android:orientation="horizontal">
+                    app:customSpinnerTitle="@string/ActivityItemProductUnitText"
+                    android:layout_below="@+id/DialogProductName"/>
 
-                    <com.vsg.helper.ui.widget.spinner.CustomSpinner
-                        android:id="@+id/DialogProductUnit"
-                        android:layout_width="230sp"
-                        android:layout_height="wrap_content"
-                        app:customSpinnerTitle="@string/ActivityItemProductUnitText" />
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/DialogProductParameterUnitHasStock"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@id/DialogProductName"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <CheckBox
-                        android:id="@+id/DialogProductHasStock"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/DialogCrudLayoutMargin"
-                        android:layout_toEndOf="@id/DialogProductUnit"
-                        android:text="@string/DialogProductHasStock" />
-                </RelativeLayout>
+<!--                    -->
+
+<!--                    <CheckBox-->
+<!--                        android:id="@+id/DialogProductHasStock"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="@dimen/DialogCrudLayoutMargin"-->
+<!--                        android:layout_toEndOf="@id/DialogProductUnit"-->
+<!--                        android:text="@string/DialogProductHasStock" />-->
+<!--                </RelativeLayout>-->
 
                 <include
                     android:id="@+id/DialogProductSelectSection"

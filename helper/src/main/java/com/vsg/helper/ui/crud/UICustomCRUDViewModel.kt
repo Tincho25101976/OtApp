@@ -50,6 +50,7 @@ abstract class UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity>(
     //region properties
     private val defaultTypeface: Typeface
         get() = activity.typeFaceCustom(Typeface.BOLD_ITALIC)
+    protected val viewsFont: MutableList<View> = mutableListOf()
     //endregion
 
     init {
@@ -57,9 +58,25 @@ abstract class UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity>(
             tDescription = it.findViewById(R.id.DialogGenericDescription)
             tEnabled = it.findViewById(R.id.DialogGenericIsEnabled)
             tDefault = it.findViewById(R.id.DialogGenericIsDefault)
+
+            viewsFont.addAll(arrayOf(tDescription, tEnabled, tDefault))
+
             onEventSetInit?.invoke(it)
+
+            val valueSizeFont =
+                activity.resources.getInteger(R.integer.CustomAdapterTextSize).toFloat()
+
+            viewsFont.forEach {
+                when(it){
+                    is TextView -> it.textSize = valueSizeFont
+                    is CustomInputText -> it.textSize = valueSizeFont
+                }
+            }
+
             containerLoad = container != null
             if (containerLoad) oFinishInit(it)
+
+
         }
         this.onEventSetContainer = {
             setItem(item, it)

@@ -13,6 +13,7 @@ import com.vsg.helper.common.popup.IPopUpParameter
 import com.vsg.helper.helper.font.FontManager
 import com.vsg.helper.ui.util.BaseActivity
 
+
 abstract class UICustomAlertDialogBase<TActivity, TParameter>(
     protected val activity: TActivity,
     @LayoutRes private val layout: Int
@@ -22,6 +23,7 @@ abstract class UICustomAlertDialogBase<TActivity, TParameter>(
     protected var dialogView: View? = null
 
     var onSetDialogView: ((View, TParameter, AlertDialog) -> Unit)? = null
+
     fun getContext(): Context? = alertDialog?.context
     private var currentHeight: Int = 0
     private var currentWidth: Int = 0
@@ -74,6 +76,7 @@ abstract class UICustomAlertDialogBase<TActivity, TParameter>(
         layout.width = ViewGroup.LayoutParams.MATCH_PARENT
         return layout
     }
+
 
     companion object Static {
         const val DEFAULT_MARGIN: Int = 10

@@ -4,7 +4,10 @@ import android.widget.ScrollView
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.helper.ui.widget.spinner.CustomSpinner
 import com.vsg.ot.R
-import com.vsg.ot.ui.activities.master.*
+import com.vsg.ot.ui.activities.master.MasterBatchActivity
+import com.vsg.ot.ui.activities.master.MasterCompanyActivity
+import com.vsg.ot.ui.activities.master.MasterItemActivity
+import com.vsg.ot.ui.activities.master.MasterWarehouseActivity
 import com.vsg.ot.ui.activities.master.helper.ChooseCompany
 import common.model.master.company.MasterCompany
 
@@ -39,20 +42,20 @@ class MainMaster : BaseActivity(R.layout.main_master) {
                     getString(R.string.ActivityItemOperationWarehouseText),
                     dataClass = MasterWarehouseActivity::class.java
                 )
-                addWithAction(
-                    R.drawable.pic_section,
-                    getString(R.string.ActivityItemOperationSectionText),
-                    dataClass = MasterSectionActivity::class.java,
-                    extra = {
-                        chooseCompany.item
-                    }
-                )
+//                addWithAction(
+//                    R.drawable.pic_section,
+//                    getString(R.string.ActivityItemOperationSectionText),
+//                    dataClass = MasterSectionActivity::class.java,
+//                    extra = {
+//                        chooseCompany.item
+//                    }
+//                )
             }.makeLayout()
             view
         }
     }
 
-//    override fun onExecuteCreate() {
+    //    override fun onExecuteCreate() {
 //        setActivityAsSelector()
 //    }
     override fun onExecuteCreate() {

@@ -38,13 +38,14 @@ class UICustomAlertDialogResult<TActivity>(activity: TActivity, onlySelect: Bool
                     onAfterOK?.invoke()
                     alertDialog.dismiss()
                 }
+
             } else {
                 dialogView.findViewById<RelativeLayout>(R.id.CustomAlertDialogResultCommand).apply {
                     visibility = View.GONE
                 }
                 dialogView.findViewById<LinearLayout>(R.id.CustomAlertDialogResultContainer).apply {
-                    val layout = getCustomLayout(this)
-                    layout.setMargins(0, 0, 0, 0)
+                    val layout = getCustomLayout(this, margin = true)
+                    //layout.setMargins(0, 0, 0, 0)
                     layoutParams = layout
                 }
             }

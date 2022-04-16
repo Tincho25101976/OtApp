@@ -48,6 +48,4 @@ abstract class UICustomCRUDViewModelRelation<TActivity, TViewModel, TDao, TEntit
             )
         }
     }
-
-
 }

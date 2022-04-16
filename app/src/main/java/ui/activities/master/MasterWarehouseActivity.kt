@@ -22,8 +22,10 @@ import kotlinx.coroutines.flow.Flow
 class MasterWarehouseActivity :
     CurrentBaseActivityPagingGenericRelationParent<MasterWarehouseActivity, MasterWarehouseViewModel, MasterWarehouseDao, MasterWarehouse, FilterTypeActivityWarehouse, UICRUDWarehouse<MasterWarehouseActivity>,
             FilterTypeActivityCompany, MasterCompanyViewModel, MasterCompanyDao, MasterCompany, TypeFilterHasCompanyItems>(
-        MasterWarehouseViewModel::class.java, MasterCompanyViewModel::class.java,
-        FilterTypeActivityWarehouse::class.java, FilterTypeActivityCompany::class.java
+        MasterWarehouseViewModel::class.java,
+        MasterCompanyViewModel::class.java,
+        FilterTypeActivityWarehouse::class.java,
+        FilterTypeActivityCompany::class.java
     ) {
     override fun oSetStringTitleForActionBar(): Int = R.string.ActivityItemOperationWarehouseText
     override fun aSetActivity(): MasterWarehouseActivity = this
@@ -33,13 +35,7 @@ class MasterWarehouseActivity :
             val filter: PagingData<MasterWarehouse> =
                 when (item) {
                     FilterTypeActivityWarehouse.NAME -> it.filter { s ->
-                        s.description.contains(
-                            find,
-                            true
-                        )
-                    }
-                    FilterTypeActivityWarehouse.PREFIX -> it.filter { s ->
-                        s.prefix.contains(
+                        s.valueCode.contains(
                             find,
                             true
                         )
@@ -52,7 +48,7 @@ class MasterWarehouseActivity :
             val filter: PagingData<MasterCompany> =
                 when (item) {
                     FilterTypeActivityCompany.NAME -> it.filter { s ->
-                        s.description.contains(
+                        s.valueCode.contains(
                             find,
                             true
                         )
