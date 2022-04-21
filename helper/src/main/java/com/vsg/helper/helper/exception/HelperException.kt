@@ -26,7 +26,8 @@ class HelperException {
                 false -> throw Exception("$data no puede ser $result...")
             }
         }
-        fun Number.throwExceptionSmallThanZero(data: String){
+
+        fun Number.throwExceptionSmallThanZero(data: String) {
             if (this.toDouble() < 0) {
                 when (data.isEmpty()) {
                     true -> throw Exception("debe ser un numero positivo......")
@@ -34,7 +35,8 @@ class HelperException {
                 }
             }
         }
-        fun Number.throwExceptionSmallOrEqualThanZero(data: String){
+
+        fun Number.throwExceptionSmallOrEqualThanZero(data: String) {
             if (this.toDouble() <= 0) {
                 when (data.isEmpty()) {
                     true -> throw Exception("debe ser un numero positivo......")
@@ -42,7 +44,8 @@ class HelperException {
                 }
             }
         }
-        fun Number.throwExceptionGreaterThanZero(data: String){
+
+        fun Number.throwExceptionGreaterThanZero(data: String) {
             if (this.toDouble() > 0) {
                 when (data.isEmpty()) {
                     true -> throw Exception("debe ser un numero negativo......")
@@ -50,7 +53,8 @@ class HelperException {
                 }
             }
         }
-        fun Number.throwExceptionGreaterOrEqualThanZero(data: String){
+
+        fun Number.throwExceptionGreaterOrEqualThanZero(data: String) {
             if (this.toDouble() >= 0) {
                 when (data.isEmpty()) {
                     true -> throw Exception("debe ser un numero negativo......")
@@ -58,7 +62,8 @@ class HelperException {
                 }
             }
         }
-        fun Number.throwExceptionEqualThanZero(data: String){
+
+        fun Number.throwExceptionEqualThanZero(data: String) {
             if (this.toDouble() == 0.0) {
                 when (data.isEmpty()) {
                     true -> throw Exception("debe ser un numero negativo......")
@@ -66,9 +71,11 @@ class HelperException {
                 }
             }
         }
-        fun Number.throwExceptionId(){
+
+        fun Number.throwExceptionId() {
             this.throwExceptionSmallOrEqualThanZero("El id")
         }
+
         fun String.throwException(data: String, male: Boolean = true) {
             if (this.isNotEmpty()) return
             val result: String = "nul${
@@ -81,6 +88,13 @@ class HelperException {
                 true -> throw Exception("El campo no puede ser $result...")
                 false -> throw Exception("$data no puede ser $result...")
             }
+        }
+
+        fun String.throwException() {
+            if (this.isNotEmpty()) {
+                return
+            }
+            throw Exception("${this}...")
         }
     }
 }

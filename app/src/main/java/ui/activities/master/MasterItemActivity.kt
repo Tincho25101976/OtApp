@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
 import androidx.paging.filter
 import com.vsg.ot.ui.activities.master.util.FilterTypeActivityCompany
-import com.vsg.ot.ui.activities.master.util.FilterTypeActivityProduct
-import com.vsg.ot.ui.common.master.product.UICRUDProduct
+import com.vsg.ot.ui.activities.master.util.FilterTypeActivityItem
+import com.vsg.ot.ui.common.master.product.UICRUDItem
 import com.vsg.helper.ui.util.CurrentBaseActivityPagingGenericRelationParent
 import com.vsg.ot.R
 import common.model.master.company.MasterCompany
@@ -21,12 +21,12 @@ import kotlinx.coroutines.flow.Flow
 @ExperimentalStdlibApi
 class MasterItemActivity :
     CurrentBaseActivityPagingGenericRelationParent
-        <MasterItemActivity, MasterItemViewModel, MasterItemDao, MasterItem, FilterTypeActivityProduct, UICRUDProduct<MasterItemActivity>,
+        <MasterItemActivity, MasterItemViewModel, MasterItemDao, MasterItem, FilterTypeActivityItem, UICRUDItem<MasterItemActivity>,
                 FilterTypeActivityCompany, MasterCompanyViewModel, MasterCompanyDao, MasterCompany, TypeFilterHasCompanyItems>
         (
         MasterItemViewModel::class.java,
         MasterCompanyViewModel::class.java,
-        FilterTypeActivityProduct::class.java,
+        FilterTypeActivityItem::class.java,
         FilterTypeActivityCompany::class.java
     ) {
 
@@ -37,8 +37,8 @@ class MasterItemActivity :
         onEventMakeFilter = { item, find, it ->
             val filter: PagingData<MasterItem> =
                 when (item) {
-                    FilterTypeActivityProduct.NAME -> it.filter { s -> s.description.contains(find, true) }
-                    FilterTypeActivityProduct.CODE -> it.filter { s -> s.code.contains(find, true) }
+                    FilterTypeActivityItem.NAME -> it.filter { s -> s.description.contains(find, true) }
+                    FilterTypeActivityItem.CODE -> it.filter { s -> s.valueCode.contains(find, true) }
                     else -> it
                 }
             filter
@@ -52,7 +52,7 @@ class MasterItemActivity :
             filter
         }
         onEventSetCRUDForApply = { context, operation ->
-            UICRUDProduct(
+            UICRUDItem(
                 context,
                 operation,
                 currentViewModel(),
@@ -86,9 +86,6 @@ class MasterItemActivity :
     override fun aCurrentListOfParent(): List<MasterCompany> = makeViewModel(MasterCompanyViewModel::class.java)
         .viewModelViewAllSimpleList()
 
-
-
-
 //    init {
 //        onEventGetIdRelationFromIntent = {
 //            company = getParent(CompanyViewModel::class.java)
@@ -113,11 +110,6 @@ class MasterItemActivity :
 //            }
 //        }
 //    }
-
-
-
-
-
 
 //    override fun aFinishExecute() {
 //        onEventMakeFilter = { item, find, it ->

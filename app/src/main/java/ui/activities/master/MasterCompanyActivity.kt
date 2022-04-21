@@ -3,10 +3,9 @@ package com.vsg.ot.ui.activities.master
 import android.widget.RelativeLayout
 import androidx.paging.PagingData
 import androidx.paging.filter
-import com.vsg.ot.ui.activities.master.util.FilterTypeActivityCompany
-
 import com.vsg.helper.ui.util.CurrentBaseActivityPagingGeneric
 import com.vsg.ot.R
+import com.vsg.ot.ui.activities.master.util.FilterTypeActivityCompany
 import com.vsg.ot.ui.common.master.company.UICRUDCompany
 import common.model.master.company.MasterCompany
 import common.model.master.company.MasterCompanyDao
@@ -14,7 +13,9 @@ import common.model.master.company.MasterCompanyViewModel
 
 @ExperimentalStdlibApi
 class MasterCompanyActivity :
-    CurrentBaseActivityPagingGeneric<MasterCompanyActivity, MasterCompanyViewModel, MasterCompanyDao, MasterCompany, FilterTypeActivityCompany, UICRUDCompany<MasterCompanyActivity>>(
+    CurrentBaseActivityPagingGeneric<MasterCompanyActivity, MasterCompanyViewModel,
+            MasterCompanyDao, MasterCompany,
+            FilterTypeActivityCompany, UICRUDCompany<MasterCompanyActivity>>(
         MasterCompanyViewModel::class.java,
         FilterTypeActivityCompany::class.java
     ) {

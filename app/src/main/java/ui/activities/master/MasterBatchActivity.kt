@@ -3,10 +3,11 @@ package com.vsg.ot.ui.activities.master
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
 import androidx.paging.filter
+import com.vsg.helper.helper.exception.HelperException.Companion.throwException
 import com.vsg.helper.ui.util.CurrentBaseActivityPagingGenericRelationParentWithRelation
 import com.vsg.ot.R
 import com.vsg.ot.ui.activities.master.util.FilterTypeActivityBatch
-import com.vsg.ot.ui.activities.master.util.FilterTypeActivityProduct
+import com.vsg.ot.ui.activities.master.util.FilterTypeActivityItem
 import com.vsg.ot.ui.common.master.batch.UICRUDBatch
 import common.model.master.batch.MasterBatch
 import common.model.master.batch.MasterBatchDao
@@ -21,15 +22,22 @@ import kotlinx.coroutines.flow.Flow
 
 @ExperimentalStdlibApi
 class MasterBatchActivity :
-    CurrentBaseActivityPagingGenericRelationParentWithRelation<MasterBatchActivity, MasterBatchViewModel, MasterBatchDao, MasterBatch, FilterTypeActivityBatch, UICRUDBatch<MasterBatchActivity>,
-            FilterTypeActivityProduct, MasterItemViewModel, MasterItemDao, MasterItem, TypeFilterHasProductItems,
-            MasterCompany>(
+    CurrentBaseActivityPagingGenericRelationParentWithRelation
+        <MasterBatchActivity, MasterBatchViewModel, MasterBatchDao, MasterBatch, FilterTypeActivityBatch, UICRUDBatch<MasterBatchActivity>,
+            FilterTypeActivityItem, MasterItemViewModel, MasterItemDao, MasterItem, TypeFilterHasProductItems, MasterCompany>(
         MasterBatchViewModel::class.java,
         MasterItemViewModel::class.java,
         FilterTypeActivityBatch::class.java,
-        FilterTypeActivityProduct::class.java
+        FilterTypeActivityItem::class.java
     ) {
+//    //region handler
+//    var onEventGetCompany: ((MasterCompany) -> Unit)? = null
+//    //endregion
+
+    //region properties
     override var factorHeightForCustomViewer: Double = 0.75
+    //endregion
+
     override fun oSetStringTitleForActionBar(): Int = R.string.ActivityItemOperationBatchText
     override fun aSetActivity(): MasterBatchActivity = this
     override fun aFinishExecutePagingGenericRelationParent() {
@@ -61,18 +69,24 @@ class MasterBatchActivity :
         onEventMakeFilterResult = { item, find, it ->
             val filter: PagingData<MasterItem> =
                 when (item) {
-                    FilterTypeActivityProduct.NAME -> it.filter { s ->
+                    FilterTypeActivityItem.NAME -> it.filter { s ->
                         s.description.contains(
                             find,
                             true
                         )
                     }
-                    FilterTypeActivityProduct.CODE -> it.filter { s -> s.code.contains(find, true) }
+                    FilterTypeActivityItem.CODE -> it.filter { s ->
+                        s.valueCode.contains(
+                            find,
+                            true
+                        )
+                    }
                     else -> it
                 }
             filter
         }
         onEventSetCRUDForApply = { context, operation ->
+            if(parent == null) "No hay artículos definidos para esta empresa...".throwException()
             UICRUDBatch(
                 context,
                 operation,
@@ -80,18 +94,7 @@ class MasterBatchActivity :
             ).apply { factorHeight = 0.8 }
         }
         onEventSwipeGetViewForMenu = {
-//            it.findViewById<RelativeLayout>(R.id.SwipeMenuProductItemPrice)
-//                .setOnClickListener {
-//                    if (getItem() != null) loadActivity(
-//                        PriceActivity::class.java, getItem()!!
-//                    )
-//                }
-//            it.findViewById<RelativeLayout>(R.id.SwipeMenuProductItemMail)
-//                .setOnClickListener {
-//                    if (getItem() != null) loadActivity(
-//                        PictureActivity::class.java, getItem()!!
-//                    )
-//                }
+
         }
         onEventGetListTextSearch = {
             val data = when (parent == null) {
@@ -111,8 +114,10 @@ class MasterBatchActivity :
     }
 
     override fun oHintForParent(): String = this.getString(R.string.HintParentForProduct)
+    override fun aRelation(): MasterCompany? {
+        return getExtraParameter(MasterCompanyViewModel::class.java)
+    }
 
-    override fun aRelation(): MasterCompany? = getExtraParameter(MasterCompanyViewModel::class.java)
     override fun aCurrentListOfParent(): List<MasterItem>? {
         relation = aRelation()
         return when (relation == null) {
@@ -121,4 +126,5 @@ class MasterBatchActivity :
                 .viewModelViewAllSimpleList(relation!!.id)
         }
     }
+    //endregion
 }

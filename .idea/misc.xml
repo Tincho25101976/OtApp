@@ -8,7 +8,7 @@
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/dialog_company.xml" value="0.23007246376811594" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/dialog_master_batch.xml" value="0.25416666666666665" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/dialog_master_company.xml" value="0.25416666666666665" />
-        <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/dialog_master_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/dialog_master_item.xml" value="0.4" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/dialog_master_section.xml" value="0.25416666666666665" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/dialog_master_warehouse.xml" value="0.25416666666666665" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/dialog_section.xml" value="0.23007246376811594" />
@@ -17,8 +17,10 @@
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/main_item_producto.xml" value="0.1" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/main_master.xml" value="0.23867753623188406" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/main_security_dialog.xml" value="0.12360688956433637" />
+        <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/select_master_section_by_warehouse.xml" value="0.25416666666666665" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/select_section_by_warehouse.xml" value="0.23007246376811594" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/swipe_menu_company_item.xml" value="0.23007246376811594" />
+        <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/swipe_menu_contact_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/swipe_menu_master_company.xml" value="0.25416666666666665" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/swipe_menu_product_item.xml" value="0.23007246376811594" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/app/src/main/res/layout/swipe_menu_warehouse_item.xml" value="0.23007246376811594" />
@@ -28,17 +30,17 @@
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/drawable/custom_popup_background.xml" value="0.232" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/drawable/shadow_view.xml" value="0.124" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/activity_generic_for_add_item.xml" value="0.4" />
-        <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/activity_paging_generic_and_search.xml" value="0.11302083333333333" />
+        <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/activity_paging_generic_and_search.xml" value="0.264" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/custom_alert_dialog_result.xml" value="0.3149492017416546" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/custom_alert_dialogo.xml" value="0.3200589970501475" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/custom_dialog_result_crud.xml" value="0.11510416666666666" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/custom_dialog_result_export.xml" value="0.11510416666666666" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/custom_dialog_result_export_viewer.xml" value="0.11510416666666666" />
-        <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/custom_viewer.xml" value="0.11510416666666666" />
+        <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/custom_viewer.xml" value="0.6" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/dialog_generic_item_base.xml" value="0.1" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/dialog_generic_picture_choose.xml" value="0.11510416666666666" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/generic_add_command.xml" value="0.11510416666666666" />
-        <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/generic_paging_and_search.xml" value="0.23529411764705882" />
+        <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/generic_paging_and_search.xml" value="0.34281200631911535" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/list_item_idata_adapter.xml" value="0.11302083333333333" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/list_item_recycler_view_idata_adapter.xml" value="0.176" />
         <entry key="..\:/Develop/Android/Proyects/OtApp/helper/src/main/res/layout/list_item_simple_adapter.xml" value="0.11302083333333333" />

@@ -4,9 +4,7 @@ import android.widget.RelativeLayout
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.vsg.helper.R
 import com.vsg.helper.common.model.IEntity
-import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleList
 import com.vsg.helper.common.util.viewModel.IViewModelView
 import com.vsg.helper.helper.HelperUI
 import com.vsg.helper.helper.HelperUI.Static.setEditCustomLayoutRelativeLayout
@@ -23,10 +21,11 @@ abstract class ChooseIEntitySpinner<TEntity, TViewModel>(
         where TEntity : IEntity,
               TEntity : IDataAdapterTitle,
               TViewModel : ViewModel,
-              TViewModel : IViewModelAllSimpleList<TEntity>,
               TViewModel : IViewModelView<TEntity> {
     //region handler
     var onEventItemSelected: ((TEntity?) -> Unit)? = null
+//    var onEventGetDataSource: ((Class<TViewModel>) -> List<TEntity>?)? = null
+//    var onEventAfterInit: (() -> Unit)? = null
     //endregion
 
     //region widget
@@ -51,10 +50,12 @@ abstract class ChooseIEntitySpinner<TEntity, TViewModel>(
             layoutParams = this.setEditCustomLayoutRelativeLayout().apply {
                 addRule(RelativeLayout.ALIGN_PARENT_TOP)
             }
-            val data = makeViewModel(type).viewModelViewAllSimpleList()
-            if (data != null && data.any()) {
+//            val data: List<TEntity>? = makeViewModel(type).viewModelViewAllSimpleList()
+//            val tempData =
+            val result: List<TEntity>? = getDataSource(type)
+            if (result != null && result.any()) {
                 this.setCustomAdapter(
-                    data,
+                    result,
                     callBackItemSelect = {
                         this@ChooseIEntitySpinner.item = it
                         onEventItemSelected?.invoke(it)
@@ -65,6 +66,7 @@ abstract class ChooseIEntitySpinner<TEntity, TViewModel>(
 //            customTextSize = resources.getInteger(R.integer.CustomSpinnerTitleTextSize).toFloat()
         }
         tView!!.addView(tSpinner)
+//        onEventAfterInit?.invoke()
     }
     //endregion
 
@@ -74,9 +76,24 @@ abstract class ChooseIEntitySpinner<TEntity, TViewModel>(
     protected fun <TViewModelParent> makeViewModel(type: Class<TViewModelParent>): TViewModelParent
             where TViewModelParent : ViewModel,
                   TViewModelParent : IViewModelView<TEntity> {
-        return run { ViewModelProvider(app).get(type) }
+        return run {
+            ViewModelProvider(app)[type]
+        }
     }
     //endregion
+
+    protected abstract fun getDataSource(type: Class<TViewModel>) :List<TEntity>?
+//    protected fun setList() {
+//        val data: List<TEntity>? = onEventGetDataSource?.invoke(type)
+//        if (data == null || !data.any()) return
+//        spinner.setCustomAdapter(
+//            data,
+//            callBackItemSelect = {
+//                this@ChooseIEntitySpinner.item = it
+//                onEventItemSelected?.invoke(it)
+//            }
+//        )
+//    }
 
     fun setItem(item: TEntity?) {
         if (item == null) return
@@ -85,8 +102,8 @@ abstract class ChooseIEntitySpinner<TEntity, TViewModel>(
 
     fun setItem(item: Int) {
         if (item <= 0) return
-        val company = makeViewModel(type).viewModelView(item) ?: return
-        setItem(company)
+        val data = makeViewModel(type).viewModelView(item) ?: return
+        setItem(data)
     }
     //endregion
 }

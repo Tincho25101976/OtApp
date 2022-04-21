@@ -14,6 +14,7 @@ import common.model.master.company.MasterCompany
 @ExperimentalStdlibApi
 class MainMaster : BaseActivity(R.layout.main_master) {
     private var onEventGetCompany: (() -> MasterCompany)? = null
+    private var company: MasterCompany? = null
     private lateinit var chooseCompany: ChooseCompany
 
     init {
@@ -33,9 +34,7 @@ class MainMaster : BaseActivity(R.layout.main_master) {
                     R.drawable.pic_batch,
                     getString(R.string.ActivityItemOperationBatchText),
                     dataClass = MasterBatchActivity::class.java,
-                    extra = {
-                        chooseCompany.item
-                    }
+                    extra = { chooseCompany.item }
                 )
                 add(
                     R.drawable.pic_warehouse,
@@ -55,14 +54,14 @@ class MainMaster : BaseActivity(R.layout.main_master) {
         }
     }
 
-    //    override fun onExecuteCreate() {
-//        setActivityAsSelector()
-//    }
     override fun onExecuteCreate() {
         chooseCompany = ChooseCompany(this).apply {
             spinner.customTheme = CustomSpinner.CustomTheme.BLACK
             onEventItemSelected = {
+                this@MainMaster.company = it
                 if (it != null) {
+//                    this@MainMaster.
+                    intent.putExtra(getString(R.string.MsgData), it.id)
                     onEventGetCompany = { it }
                 }
             }

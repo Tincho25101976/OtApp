@@ -13,6 +13,7 @@ import com.vsg.helper.common.util.dao.IGenericDao
 import com.vsg.helper.common.util.viewModel.MakeGenericViewModel
 import com.vsg.helper.helper.font.FontManager.Static.typeFaceCustom
 import com.vsg.helper.ui.util.CurrentBaseActivity
+import com.vsg.helper.ui.widget.spinner.CustomSpinner
 import com.vsg.helper.ui.widget.text.CustomInputText
 import kotlin.reflect.full.createInstance
 
@@ -70,6 +71,7 @@ abstract class UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity>(
                 when(it){
                     is TextView -> it.textSize = valueSizeFont
                     is CustomInputText -> it.textSize = valueSizeFont
+                    is CustomSpinner -> it.customTextSize = valueSizeFont
                 }
             }
 

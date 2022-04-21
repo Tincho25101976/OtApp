@@ -45,7 +45,7 @@ abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResult
 
     @Ignore
     protected fun StringBuilder.getBaseDescriptionView(): StringBuilder {
-        if (description.isNotEmpty()) this.toLineSpanned("Descripción", description)
+//        if (description.isNotEmpty()) this.toLineSpanned("Descripción", description)
         this.toLineSpanned("Activo", isEnabled.toSiNo())
         this.toLineSpanned("Defecto", isDefault.toSiNo())
         return this

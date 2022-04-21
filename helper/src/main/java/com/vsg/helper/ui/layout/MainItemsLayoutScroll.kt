@@ -18,6 +18,9 @@ import com.vsg.helper.ui.util.BaseActivity
 
 
 class MainItemsLayoutScroll(private val activity: BaseActivity) {
+    //region handler
+    var onEventGetOnlyActivity: ((BaseActivity, Class<*>?) -> Unit)? = null
+    //endregion
 
     //region properties
     private val mapItems: MutableList<ActionForCardView> = mutableListOf()
@@ -101,7 +104,10 @@ class MainItemsLayoutScroll(private val activity: BaseActivity) {
                     ActionForCardView.TypeAction.ACTION -> s.action?.invoke()
                     ActionForCardView.TypeAction.DATA_CLASS -> {
                         when (s.typeDataClass) {
-                            ActionForCardView.TypeDataClass.ONLY_ACTIVITY -> activity.loadActivity(s.dataClass!!)
+                            ActionForCardView.TypeDataClass.ONLY_ACTIVITY -> {
+                                onEventGetOnlyActivity?.invoke(activity, s.dataClass!!)
+                                activity.loadActivity(s.dataClass!!)
+                            }
                             ActionForCardView.TypeDataClass.ONLY_WITH_PARENT,
                             ActionForCardView.TypeDataClass.ONLY_WITH_PARENT_ACTION ->
                                 activity.loadActivity(s.dataClass!!, id = s.parentId)
@@ -176,7 +182,6 @@ class MainItemsLayoutScroll(private val activity: BaseActivity) {
                 this.addParent(parent)
                 this.addExtra(extra)
             })
-
     }
 
     fun addWithAction(

@@ -8,18 +8,18 @@
         android:id="@+id/ActivityGenericLayoutSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
         android:background="@drawable/shadow_view"
-        android:layout_alignParentTop="true">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/ActivityGenericSearchParameter"
             android:layout_width="0sp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginStart="@dimen/ActivityGenericSearchTextMargin"
             android:layout_marginEnd="@dimen/ActivityGenericSearchTextMargin"
             android:layout_marginBottom="@dimen/ActivityGenericSearchTextMargin"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <AutoCompleteTextView
@@ -35,9 +35,10 @@
                 android:id="@+id/ActivityGenericSearchSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5sp"
-                app:customSpinnerTitle="@string/ActivityGenericFilter"
-                app:customSpinnerTextSize="17"/>
+                android:paddingStart="10sp"
+                android:paddingEnd="10sp"
+                app:customSpinnerTextSize="17"
+                app:customSpinnerTitle="@string/ActivityGenericFilter" />
 
         </LinearLayout>
 
@@ -45,9 +46,9 @@
             android:id="@+id/ActivityGenericSearchCommand"
             android:layout_width="@dimen/ActivityGenericSearchSizeImage"
             android:layout_height="match_parent"
-            android:contentDescription="@string/CustomDescriptionSearch"
-            android:layout_gravity="fill"
+            android:layout_gravity="fill_vertical"
             android:layout_margin="@dimen/ActivityGenericSearchMarginImage"
+            android:contentDescription="@string/CustomDescriptionSearch"
             android:src="@drawable/pic_search" />
 
     </LinearLayout>

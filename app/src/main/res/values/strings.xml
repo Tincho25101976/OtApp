@@ -31,10 +31,12 @@
     <string name="ActivityItemOperationWarehouseText">Depósitos</string>
     <string name="ActivityItemOperationSectionText">Localizaciones</string>
 
-    <!--ActivityItemProduct-->
+    <!--ActivityItem-->
     <string name="ActivityMasterItemText">Ítem</string>
     <string name="ActivityMasterCompanyText">Empresas</string>
-    <string name="ActivityItemProductUnitText">Unidades de medida</string>
+    <string name="ActivityItemTypeUnitText">Unidades de medida</string>
+    <string name="ActivityItemTypeProductText">Tipo de producto</string>
+    <string name="ActivityItemTypePlantText">Tipo de planta</string>
     <string name="ActivityItemProductPriceText">Precios por producto</string>
     <string name="ActivityItemProductPictureText">Imágenes por producto</string>
 
@@ -67,12 +69,12 @@
 
     <!--Product:-->
     <string name="DialogProductRelation">Empresa</string>
-    <string name="DialogProductName">Producto</string>
+    <string name="DialogItemName">Ítem</string>
     <string name="DialogProductCode">Código</string>
     <string name="DialogProductProviderCode">Código del proveedor</string>
     <string name="DialogProductCodeBar">Código de barras</string>
-    <string name="DialogProductStockMin">Stock [mínimo]</string>
-    <string name="DialogProductStockMax">Stock [máximo]</string>
+    <string name="DialogItemShellLife">Vida útil</string>
+    <string name="DialogItemShellLifeAlert">Vida útil (alerta)</string>
     <string name="DialogProductHasStock">Es Stockeable</string>
 
     <!--Warehouse:-->
