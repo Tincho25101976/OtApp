@@ -3,7 +3,6 @@ package com.vsg.ot.ui.activities.master
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
 import androidx.paging.filter
-import com.vsg.helper.helper.exception.HelperException.Companion.throwException
 import com.vsg.helper.ui.util.CurrentBaseActivityPagingGenericRelationParentWithRelation
 import com.vsg.ot.R
 import com.vsg.ot.ui.activities.master.util.FilterTypeActivityBatch
@@ -23,21 +22,18 @@ import kotlinx.coroutines.flow.Flow
 @ExperimentalStdlibApi
 class MasterBatchActivity :
     CurrentBaseActivityPagingGenericRelationParentWithRelation
-        <MasterBatchActivity, MasterBatchViewModel, MasterBatchDao, MasterBatch, FilterTypeActivityBatch, UICRUDBatch<MasterBatchActivity>,
+    <MasterBatchActivity, MasterBatchViewModel, MasterBatchDao, MasterBatch, FilterTypeActivityBatch, UICRUDBatch<MasterBatchActivity>,
             FilterTypeActivityItem, MasterItemViewModel, MasterItemDao, MasterItem, TypeFilterHasProductItems, MasterCompany>(
         MasterBatchViewModel::class.java,
         MasterItemViewModel::class.java,
         FilterTypeActivityBatch::class.java,
         FilterTypeActivityItem::class.java
     ) {
-//    //region handler
-//    var onEventGetCompany: ((MasterCompany) -> Unit)? = null
-//    //endregion
-
     //region properties
     override var factorHeightForCustomViewer: Double = 0.75
     //endregion
 
+    //region implementation
     override fun oSetStringTitleForActionBar(): Int = R.string.ActivityItemOperationBatchText
     override fun aSetActivity(): MasterBatchActivity = this
     override fun aFinishExecutePagingGenericRelationParent() {
@@ -86,7 +82,10 @@ class MasterBatchActivity :
             filter
         }
         onEventSetCRUDForApply = { context, operation ->
-            if(parent == null) "No hay artículos definidos para esta empresa...".throwException()
+            if (parent == null) {
+                getMessage( "No hay artículos definidos para esta empresa...")
+                parent = MasterItem()
+            }
             UICRUDBatch(
                 context,
                 operation,

@@ -304,7 +304,18 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
     }
     //endregion
 
-    //region viewModel
-
+    //region helper
+    protected fun getMessage(data: Exception?) {
+        if (data == null) return
+        Toast.makeText(this, data.message, Toast.LENGTH_LONG).show()
+    }
+    protected fun getMessage(data: String) {
+        if (data.isEmpty()) return
+        Toast.makeText(this, data, Toast.LENGTH_LONG).show()
+    }
+    protected fun getMessage(data: StringBuilder) {
+        if (data.toString().isEmpty()) return
+        Toast.makeText(this, data.toString(), Toast.LENGTH_LONG).show()
+    }
     //endregion
 }

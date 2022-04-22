@@ -16,6 +16,7 @@ import com.vsg.helper.ui.adapter.IDataAdapterEnum
 import com.vsg.helper.ui.adapter.IDataAdapterTitle
 import com.vsg.helper.ui.crud.UICustomCRUDViewModel
 import com.vsg.helper.ui.widget.text.CustomInputText
+import kotlin.isInitialized as isInitialized
 
 abstract class CurrentBaseActivityPagingGenericRelationParentBase<TActivity, TViewModel, TDao, TEntity, TFilter, TCrud,
         TFilterParent, TParentViewModel, TParentDao, TParent, TParentFilterHasItems>
@@ -69,6 +70,10 @@ abstract class CurrentBaseActivityPagingGenericRelationParentBase<TActivity, TVi
     //region parent
     private lateinit var tTextParent: CustomInputText
     var parent: TParent? = null
+        set(value) {
+            field = value
+            setEnabledAdd(value != null && value.id >= 0)
+        }
     private var typeOriginParent: TypeOriginParent = TypeOriginParent.UNDEFINED
     //endregion
 
@@ -85,6 +90,7 @@ abstract class CurrentBaseActivityPagingGenericRelationParentBase<TActivity, TVi
                     if (tempParent.count() > 1) aMakeCustomViewer()
                     if (tempParent.count() == 1) parent = tempParent.first()
                 }
+                if (tempParent == null || !tempParent.any()) setEnabledAdd(false)
             }
         }
         onEventAfterSetContentView = {

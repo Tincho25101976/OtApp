@@ -64,6 +64,7 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
     private lateinit var tAdd: ImageView
     private lateinit var actionMenu: UICustomAlertDialogAction<TActivity, TEntity>
     private var pagingAdapter: UIRecyclerAdapterPagingData<TEntity>? = null
+    private val istAddInitialized: Boolean get() = ::tAdd.isInitialized
     //endregion
 
     //region menu
@@ -130,7 +131,9 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
         tSearchText = findViewById(R.id.ActivityGenericSearchText)
         tSearchSpinner = findViewById(R.id.ActivityGenericSearchSpinner)
         tRecycler = findViewById(R.id.ActivityGenericRecycler)
-        tAdd = findViewById(R.id.ActivityGenericSearchAdd)
+        tAdd = findViewById<ImageView?>(R.id.ActivityGenericSearchAdd).apply {
+            setStatus(false)
+        }
         tActivityPagingGenericSearchAndRecyclerView =
             findViewById(R.id.ActivityPagingGenericSearchAndRecyclerView)
 
@@ -221,7 +224,6 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
         }
     }
 
-
     private fun search(find: String) {
         if (find.isEmpty()) return
         fillAdapter(true, find)
@@ -258,6 +260,11 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
                 if (!e) fillAdapter()
             })
         }
+    }
+
+    fun setEnabledAdd(result: Boolean) {
+        if (!istAddInitialized) return
+        tAdd.setStatus(result)
     }
     //endregion
 }
