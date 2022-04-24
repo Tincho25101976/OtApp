@@ -1,11 +1,11 @@
 package com.vsg.ot.ui.common.master.batch
 
-import android.view.Gravity
 import com.vsg.helper.common.format.FormatDateString
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.helper.date.HelperDate.Companion.addDay
 import com.vsg.helper.helper.date.HelperDate.Companion.now
 import com.vsg.helper.helper.date.HelperDate.Companion.toDateString
+import com.vsg.helper.helper.exception.HelperException.Companion.throwException
 import com.vsg.helper.ui.crud.UICustomCRUDViewModelRelation
 import com.vsg.helper.ui.util.CurrentBaseActivity
 import com.vsg.helper.ui.widget.text.CustomInputText
@@ -32,6 +32,7 @@ class UICRUDBatch<TActivity>(
         where TActivity : CurrentBaseActivity<MasterBatchViewModel, MasterBatchDao, MasterBatch> {
 
     //region widget
+    private lateinit var tValueCode: CustomInputText
     private lateinit var tDueDate: CustomInputText
     private lateinit var tCreateDate: CustomInputText
     private lateinit var tReceiverQty: CustomInputText
@@ -42,23 +43,24 @@ class UICRUDBatch<TActivity>(
 
     init {
         onEventSetInit = {
+            this.tValueCode = it.findViewById<CustomInputText>(R.id.DialogBatchValueCode)
+                .apply { setOnlyTextUpper() }
             this.tCreateDate = it.findViewById<CustomInputText>(R.id.DialogBatchCreateDate).apply {
                 customFormatDate = this@UICRUDBatch.formatDate
                 setDatePicker(activity) { setDueDate() }
                 date = now()
-                gravity = Gravity.CENTER_HORIZONTAL
             }
             this.tDueDate = it.findViewById<CustomInputText>(R.id.DialogBatchDueDate).apply {
                 customFormatDate = this@UICRUDBatch.formatDate
                 setDatePicker(activity)
                 date = now()
-                gravity = Gravity.CENTER_HORIZONTAL
             }
             this.tReceiverQty = it.findViewById(R.id.DialogBatchReceiverQty)
         }
         onEventGetNewOrUpdateEntity = {
             val data: MasterBatch = it ?: MasterBatch()
             data.apply {
+                this.valueCode = tValueCode.text
                 this.dueDate = tDueDate.date
                 this.createDate = tCreateDate.date ?: now()
                 this.receiverQty = tReceiverQty.toDouble()
@@ -68,12 +70,13 @@ class UICRUDBatch<TActivity>(
             data
         }
         onEventSetItem = {
+            tValueCode.text = it.valueCode
             tCreateDate.date = it.createDate
             tDueDate.date = it.dueDate
             tReceiverQty.double = it.receiverQty
         }
         onEventSetItemsForClean = {
-            mutableListOf(tDueDate, tReceiverQty, tCreateDate)
+            mutableListOf(tValueCode, tDueDate, tReceiverQty, tCreateDate)
         }
         onEventSetParametersForInsert = {
             tCreateDate.date = now()
@@ -82,14 +85,13 @@ class UICRUDBatch<TActivity>(
         onEventValidate = { item, _ ->
             var result = false
             try {
-                if (item.receiverQty < 0.0) throw Exception("La recepción debe ser un numero positivo...")
-                if (item.dueDate == null) throw Exception("La fecha de vencimiento no puede ser nula...")
-                if (item.createDate <= item.dueDate) {
-                    throw Exception(
-                        "La fecha de creación debe ser inferior a ${
-                            item.dueDate.toDateString(formatDate)
-                        }..."
-                    )
+                if (item.valueCode.isEmpty()) "El numero del batch no puede ser una cadena de longitud cero".throwException()
+                if (item.receiverQty < 0.0) "La recepción debe ser un numero positivo".throwException()
+                if (item.dueDate == null) "La fecha de vencimiento no puede ser nula".throwException()
+                if (item.createDate >= item.dueDate) {
+                    "La fecha de creación debe ser inferior a ${
+                        item.dueDate.toDateString(formatDate)
+                    }".throwException()
                 }
                 result = true
             } catch (e: Exception) {

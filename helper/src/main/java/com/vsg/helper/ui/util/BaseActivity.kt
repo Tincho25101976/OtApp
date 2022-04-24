@@ -26,6 +26,7 @@ import com.vsg.helper.helper.HelperUI.Static.REQUEST_FOR_IMAGE_CAPTURE
 import com.vsg.helper.helper.HelperUI.Static.REQUEST_FOR_TAKE_PHOTO
 import com.vsg.helper.helper.HelperUI.Static.makeCustomLayoutLinealLayout
 import com.vsg.helper.helper.HelperUI.Static.toEditable
+import com.vsg.helper.helper.date.HelperDate
 import com.vsg.helper.helper.file.HelperFile.Static.getTempFileForCamera
 import com.vsg.helper.helper.file.HelperFile.Static.getURI
 import com.vsg.helper.helper.font.CustomTypefaceSpan
@@ -36,6 +37,8 @@ import com.vsg.helper.helper.permission.HelperPerminission.Static.checkedPermiss
 import com.vsg.helper.helper.type.TypeMakeLayoutParameter
 import com.vsg.helper.ui.layout.MainItemsLayoutScroll
 import com.vsg.helper.ui.widget.text.CustomInputText
+import com.vsg.helper.ui.widget.text.type.TypeCustomInputText
+import com.vsg.helper.ui.widget.text.type.TypeCustomInputTextType
 import java.io.File
 import kotlin.random.Random
 
@@ -247,7 +250,17 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
             }
             if (it is CustomInputText) {
                 it.apply {
-                    this.text = text
+                    when(it.typeCustomType)
+                    {
+                        TypeCustomInputTextType.TEXT -> this.text = text
+                        TypeCustomInputTextType.NUMERIC -> {
+                            when(customType){
+                                TypeCustomInputText.DOUBLE -> this.double = 0.toDouble()
+                                TypeCustomInputText.INT -> this.int = 0
+                            }
+                        }
+                        TypeCustomInputTextType.DATE -> this.date = HelperDate.now()
+                    }
                     this.setTextColor(Color.BLACK)
                     this.setHintTextColor(Color.LTGRAY)
                 }

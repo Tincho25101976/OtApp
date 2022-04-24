@@ -33,6 +33,7 @@ import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.model.IEntityPagingLayoutPosition
 import com.vsg.helper.common.util.viewModel.IViewModelUpdateSetEnabled
 import com.vsg.helper.helper.HelperEnum.Companion.getDefaultEnum
+import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.grayScale
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toArray
 import com.vsg.helper.helper.date.HelperDate.Companion.formatDate
 import com.vsg.helper.helper.date.HelperDate.Companion.toDate
@@ -444,11 +445,11 @@ class HelperUI {
             return (this as BitmapDrawable).bitmap
         }
 
-        fun ImageView.setStatus(data: Boolean) {
+        fun ImageView.setStatus(data: Boolean, alpha: UByte = 75u) {
             this.isEnabled = data
             this.imageAlpha = when (data) {
                 true -> 255
-                false -> 50
+                false -> alpha.toInt()
             }
         }
 

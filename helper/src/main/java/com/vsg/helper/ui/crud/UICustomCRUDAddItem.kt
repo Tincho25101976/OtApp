@@ -81,8 +81,12 @@ abstract class UICustomCRUDAddItem<TActivity, TViewModel, TDao, TEntity, TEntity
         if (itemsClean != null && itemsClean.any()) items.addAll(itemsClean)
         items.addAll(arrayListOf(tDescription, tEnabled, tDefault))
         val data = activity.clearWidget(*items.toTypedArray())
-        if (isOperationNewOrEdit()) data?.forEach { it.isEnabled = true }
-        if (isOperationDeleteOrView()) data?.forEach { it.isEnabled = false }
+        if (isOperationNewOrEdit()) {
+            data?.forEach { it.isEnabled = true }
+        }
+        if (isOperationDeleteOrView()) {
+            data?.forEach { it.isEnabled = false }
+        }
         if (o == DBOperation.INSERT) {
             tEnabled.isChecked = true
             tEnabled.isEnabled = false

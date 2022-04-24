@@ -1,8 +1,11 @@
 package com.vsg.helper.ui.util
 
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
@@ -20,11 +23,15 @@ import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.common.util.dao.IGenericDao
 import com.vsg.helper.common.util.viewModel.IViewModelView
 import com.vsg.helper.common.util.viewModel.MakeGenericViewModel
+import com.vsg.helper.helper.Helper.Companion.or
+import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.helper.HelperUI.Static.addTextWatcher
+import com.vsg.helper.helper.HelperUI.Static.getBitmap
 import com.vsg.helper.helper.HelperUI.Static.initSwipeToEnabled
 import com.vsg.helper.helper.HelperUI.Static.setCustomAdapter
 import com.vsg.helper.helper.HelperUI.Static.setStatus
 import com.vsg.helper.helper.HelperUI.Static.toText
+import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.grayScale
 import com.vsg.helper.ui.adapter.IDataAdapterEnum
 import com.vsg.helper.ui.adapter.paging.UIRecyclerAdapterPagingData
 import com.vsg.helper.ui.crud.UICustomCRUDViewModel
@@ -57,6 +64,7 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
               TCrud : UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity> {
     //region widget
     private lateinit var tActivityPagingGenericSearchAndRecyclerView: RelativeLayout
+    private lateinit var tLayoutSearch: LinearLayout
     private lateinit var tSearchText: AutoCompleteTextView
     private lateinit var tSearchCommand: ImageView
     private lateinit var tSearchSpinner: CustomSpinner
@@ -64,7 +72,10 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
     private lateinit var tAdd: ImageView
     private lateinit var actionMenu: UICustomAlertDialogAction<TActivity, TEntity>
     private var pagingAdapter: UIRecyclerAdapterPagingData<TEntity>? = null
-    private val istAddInitialized: Boolean get() = ::tAdd.isInitialized
+    private val istAddSearchInitialized: Boolean get() = this::tAdd.isInitialized && this::tLayoutSearch.isInitialized
+    private val imageAdd: Bitmap?
+        @SuppressLint("UseCompatLoadingForDrawables")
+        get() = this.getDrawable(R.drawable.pic_add)?.getBitmap()
     //endregion
 
     //region menu
@@ -127,9 +138,17 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
         onEventGetIdRelationFromIntent?.invoke()
 
         //region widget
-        tSearchCommand = findViewById(R.id.ActivityGenericSearchCommand)
-        tSearchText = findViewById(R.id.ActivityGenericSearchText)
-        tSearchSpinner = findViewById(R.id.ActivityGenericSearchSpinner)
+        tLayoutSearch = findViewById<LinearLayout?>(R.id.ActivityGenericLayoutSearch).apply {
+            isEnabled = false
+        }
+        tSearchCommand =
+            findViewById<ImageView?>(R.id.ActivityGenericSearchCommand).apply { isEnabled = false }
+        tSearchText = findViewById<AutoCompleteTextView>(R.id.ActivityGenericSearchText).apply {
+            isEnabled = false
+        }
+        tSearchSpinner = findViewById<CustomSpinner>(R.id.ActivityGenericSearchSpinner).apply {
+            isEnabled = false
+        }
         tRecycler = findViewById(R.id.ActivityGenericRecycler)
         tAdd = findViewById<ImageView?>(R.id.ActivityGenericSearchAdd).apply {
             setStatus(false)
@@ -147,7 +166,7 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context())
         }
-        tSearchSpinner.setCustomAdapterEnum(typeFilter)
+        tSearchSpinner.setCustomAdapterEnum(typeFilter).apply { }
         tAdd.setOnClickListener { applyCRUD(null, DBOperation.INSERT) }
         //endregion
 
@@ -263,8 +282,12 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
     }
 
     fun setEnabledAdd(result: Boolean) {
-        if (!istAddInitialized) return
-        tAdd.setStatus(result)
+        if (!istAddSearchInitialized) return
+        tAdd.setStatus(result, 75u)
+        arrayOf(tAdd, tSearchSpinner, tSearchText, tLayoutSearch, tSearchCommand)
+            .forEach { it.isEnabled = result }
+        if (this.imageAdd == null) return
+        tAdd.setImageBitmap(result then imageAdd or imageAdd!!.grayScale())
     }
     //endregion
 }

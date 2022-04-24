@@ -68,7 +68,7 @@ abstract class UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity>(
                 activity.resources.getInteger(R.integer.CustomAdapterTextSize).toFloat()
 
             viewsFont.forEach {
-                when(it){
+                when (it) {
                     is TextView -> it.textSize = valueSizeFont
                     is CustomInputText -> it.textSize = valueSizeFont
                     is CustomSpinner -> it.customTextSize = valueSizeFont
@@ -108,8 +108,16 @@ abstract class UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity>(
         if (itemsClean != null && itemsClean.any()) items.addAll(itemsClean)
         items.addAll(arrayListOf(tDescription, tEnabled, tDefault))
         val data = activity.clearWidget(*items.toTypedArray())
-        if (isOperationNewOrEdit()) data?.forEach { it.isEnabled = true }
-        if (isOperationDeleteOrView()) data?.forEach { it.isEnabled = false }
+        if (isOperationNewOrEdit()) {
+            data?.forEach {
+                it.isEnabled = true
+            }
+        }
+        if (isOperationDeleteOrView()) {
+            data?.forEach {
+                it.isEnabled = false
+            }
+        }
         if (o == DBOperation.INSERT) {
             tEnabled.isChecked = true
             tEnabled.isEnabled = false

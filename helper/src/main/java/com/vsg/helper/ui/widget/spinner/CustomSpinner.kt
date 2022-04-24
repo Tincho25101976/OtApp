@@ -25,6 +25,7 @@ import com.vsg.helper.helper.HelperUI.Static.setItemEnum
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
 import com.vsg.helper.helper.type.TypeMakeLayoutParameter
 import com.vsg.helper.ui.adapter.*
+import com.vsg.helper.ui.layout.RelativeLayoutWithDisableSupport
 import com.vsg.helper.ui.util.BaseActivity
 
 class CustomSpinner @JvmOverloads constructor(
@@ -34,7 +35,7 @@ class CustomSpinner @JvmOverloads constructor(
     defStyleRest: Int = 0,
     addId: Boolean = false,
     theme: CustomTheme = CustomTheme.WHITE
-) : RelativeLayout(ctx, attrs, defStyleAttr, defStyleRest) {
+) : RelativeLayoutWithDisableSupport(ctx, attrs, defStyleAttr, defStyleRest) {
 
     //region private properties
     private var tTitle: TextView
@@ -102,7 +103,7 @@ class CustomSpinner @JvmOverloads constructor(
     var customHeight: Int = DEFAULT_HEIGHT
         get() = field.toPixel(ctx)
         set(value) {
-            field = when(value < DEFAULT_MINIMUM_HEIGHT){
+            field = when (value < DEFAULT_MINIMUM_HEIGHT) {
                 true -> DEFAULT_MINIMUM_HEIGHT
                 false -> value
             }
@@ -113,7 +114,7 @@ class CustomSpinner @JvmOverloads constructor(
     var customTheme: CustomTheme = CustomTheme.WHITE
         set(value) {
             field = value
-            when(value){
+            when (value) {
                 CustomTheme.WHITE -> {
                     customTextColor = Color.BLACK
                     customBackColor = Color.WHITE
@@ -158,7 +159,7 @@ class CustomSpinner @JvmOverloads constructor(
     //region init
 
     init {
-        if(addId) this.id = ViewGroup.generateViewId()
+        if (addId) this.id = ViewGroup.generateViewId()
 
         tSpinner = Spinner(context).apply {
             layoutParams =
@@ -171,12 +172,7 @@ class CustomSpinner @JvmOverloads constructor(
                         addRule(RelativeLayout.ALIGN_PARENT_TOP)
                     }
             gravity = Gravity.CENTER_VERTICAL
-//            setPopupBackgroundDrawable(ColorDrawable(customBackColor))
 
-//            this.setBackgroundColor(Color.BLUE)
-
-//            val adapter = ArrayAdapter(ctx, R.layout.list_item_simple_adapter, dataTest)
-//            this.adapter = adapter
         }
         tTitle = TextView(ctx).apply {
             textSize = customTextSize
@@ -452,6 +448,12 @@ class CustomSpinner @JvmOverloads constructor(
     override fun setGravity(value: Int) {
         tSpinner.gravity = value
     }
+
+//    override fun setEnabled(enabled: Boolean) {
+//        super.setEnabled(enabled)
+//        disabledControls(enabled, this)
+//    }
+
     //endregion
 
     //region enum
@@ -460,7 +462,8 @@ class CustomSpinner @JvmOverloads constructor(
         ENUM,
         UNDEFINED
     }
-    enum class CustomTheme{
+
+    enum class CustomTheme {
         WHITE,
         BLACK
     }

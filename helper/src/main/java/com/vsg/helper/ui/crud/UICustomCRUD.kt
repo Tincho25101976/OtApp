@@ -21,6 +21,7 @@ import com.vsg.helper.ui.popup.dialog.UICustomAlertDialog
 import com.vsg.helper.ui.popup.dialog.UICustomAlertDialogParameter
 import com.vsg.helper.ui.popup.dialog.UICustomAlertDialogResult
 import com.vsg.helper.ui.util.CurrentBaseActivity
+import com.vsg.helper.ui.widget.spinner.CustomSpinner
 import com.vsg.helper.ui.widget.text.CustomInputText
 
 abstract class UICustomCRUD<TActivity, TViewModel, TDao, TEntity>(
@@ -107,6 +108,7 @@ abstract class UICustomCRUD<TActivity, TViewModel, TDao, TEntity>(
             if (it is TextView) it.typeface = typeface
             if (it is EditText) it.typeface = typeface
             if (it is CustomInputText) it.typeface = typeface
+            if (it is CustomSpinner) it.setTypeface(typeface)
         }
     }
     //endregion

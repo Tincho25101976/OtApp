@@ -26,7 +26,6 @@
 
         <activity android:name=".ui.activities.master.main.MainMaster"/>
         <activity android:name=".ui.activities.master.MasterBatchActivity"/>
-        <activity android:name=".ui.activities.master.MasterBatchesActivity"/>
         <activity android:name=".ui.activities.master.MasterCompanyActivity"/>
         <activity android:name=".ui.activities.master.MasterItemActivity"/>
         <activity android:name=".ui.activities.master.MasterSectionActivity"/>

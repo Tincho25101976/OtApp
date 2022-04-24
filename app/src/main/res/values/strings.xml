@@ -22,6 +22,7 @@
     <string name="DialogBatchReceiverQty">Recepción</string>
     <string name="DialogBatchCreateDate">Creación</string>
     <string name="DialogBatchRelation">Ítem</string>
+    <string name="DialogBatchValueCode">Batch</string>
 
     <!--ActivityItemOperation-->
     <string name="ActivityItemOperationBatchText">Lotes</string>

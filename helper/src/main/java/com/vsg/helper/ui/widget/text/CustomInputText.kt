@@ -41,6 +41,7 @@ import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
 import com.vsg.helper.ui.widget.ICustomViewSetTypeface
 import com.vsg.helper.ui.widget.datePicker.DatePickerFragment
 import com.vsg.helper.ui.widget.text.type.TypeCustomInputText
+import com.vsg.helper.ui.widget.text.type.TypeCustomInputTextType
 import com.vsg.helper.util.helper.HelperNumeric.Companion.toFormat
 import java.util.*
 import kotlin.math.floor
@@ -75,6 +76,8 @@ class CustomInputText @JvmOverloads constructor(
 
     //region properties
     var customFormatDate: FormatDateString = DEFAULT_VALUE_DATE_FORMAT_STRING
+    val typeCustomType: TypeCustomInputTextType
+        get() = this.customType.type
     var customType: TypeCustomInputText = DEFAULT_VALUE_TYPE
         set(value) {
             if (value != field) {
@@ -386,7 +389,8 @@ class CustomInputText @JvmOverloads constructor(
         gravity = Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
         isClickable = false
         isFocusable = false
-        inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_AUTO_CORRECT or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
+        inputType =
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_AUTO_CORRECT or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
         boxBackgroundMode = BOX_BACKGROUND_NONE
     }
 
@@ -394,6 +398,15 @@ class CustomInputText @JvmOverloads constructor(
     //endregion
 
     //region functional
+    public fun setOnlyTextUpper(){
+        if(this.typeCustomType != TypeCustomInputTextType.TEXT) return
+        this.inputType = InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
+    }
+//    public fun setOnlyTextLower(){
+//        if(this.typeCustomType != TypeCustomInputTextType.TEXT) return
+//        this.inputType = InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
+//    }
+
     private fun makeWatches(): TextWatcher {
         return setTextWatcher(after = { s, e ->
             if (!e) this.error = null
