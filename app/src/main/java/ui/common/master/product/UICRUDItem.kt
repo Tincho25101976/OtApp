@@ -42,6 +42,7 @@ class UICRUDItem<TActivity>(
     //endregion
 
     override fun aGetTextParent(): String = parent.description
+    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<MasterItem>()
 
     init {
         onEventSetInit = { it ->

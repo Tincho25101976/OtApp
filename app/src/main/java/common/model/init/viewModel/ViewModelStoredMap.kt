@@ -15,8 +15,8 @@ import common.model.master.section.MasterSection
 import common.model.master.section.MasterSectionViewModel
 import common.model.master.warehouse.MasterWarehouse
 import common.model.master.warehouse.MasterWarehouseViewModel
-import common.model.securityDialog.xact.Xact
-import common.model.securityDialog.xact.XactViewModel
+import com.vsg.ot.common.model.securityDialog.xact.xact.Xact
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactViewModel
 import kotlin.reflect.KType
 import kotlin.reflect.typeOf
 

@@ -57,6 +57,8 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
     //endregion
 
     //region properties
+    public val typeface: Typeface
+        get() = this.typeFaceCustom(Typeface.BOLD_ITALIC)
     private val root: ViewGroup
         get() = findViewById<View>(android.R.id.content) as ViewGroup
     //endregion
@@ -163,7 +165,6 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        val typeface = this.typeFaceCustom(Typeface.ITALIC)
         for (i in 0 until menu.size()) {
             val menuItem = menu.getItem(i)
             val menuTitle = menuItem.title.toString()
@@ -210,7 +211,7 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
         tv.text = title
         tv.textSize = size
         tv.setTextColor(color)
-        tv.typeface = this.typeFaceCustom(Typeface.BOLD_ITALIC)
+        tv.typeface = this.typeface
         actionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         actionBar!!.setBackgroundDrawable(ColorDrawable(Color.DKGRAY))
         actionBar!!.customView = tv
@@ -250,16 +251,15 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
             }
             if (it is CustomInputText) {
                 it.apply {
-                    when(it.typeCustomType)
-                    {
+                    when (it.typeCustomType) {
                         TypeCustomInputTextType.TEXT -> this.text = text
                         TypeCustomInputTextType.NUMERIC -> {
-                            when(customType){
+                            when (customType) {
                                 TypeCustomInputText.DOUBLE -> this.double = 0.toDouble()
                                 TypeCustomInputText.INT -> this.int = 0
                             }
                         }
-                        TypeCustomInputTextType.DATE -> this.date = HelperDate.now()
+                        TypeCustomInputTextType.DATE -> this.date = HelperDate.nowDate()
                     }
                     this.setTextColor(Color.BLACK)
                     this.setHintTextColor(Color.LTGRAY)
@@ -322,10 +322,12 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
         if (data == null) return
         Toast.makeText(this, data.message, Toast.LENGTH_LONG).show()
     }
+
     protected fun getMessage(data: String) {
         if (data.isEmpty()) return
         Toast.makeText(this, data, Toast.LENGTH_LONG).show()
     }
+
     protected fun getMessage(data: StringBuilder) {
         if (data.toString().isEmpty()) return
         Toast.makeText(this, data.toString(), Toast.LENGTH_LONG).show()

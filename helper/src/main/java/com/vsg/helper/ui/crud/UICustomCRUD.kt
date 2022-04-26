@@ -10,6 +10,7 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.core.view.children
 import com.vsg.helper.common.model.IEntity
+import com.vsg.helper.common.model.IIsDefault
 import com.vsg.helper.common.model.IIsEnabled
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.common.popup.IPopUpData
@@ -23,6 +24,7 @@ import com.vsg.helper.ui.popup.dialog.UICustomAlertDialogResult
 import com.vsg.helper.ui.util.CurrentBaseActivity
 import com.vsg.helper.ui.widget.spinner.CustomSpinner
 import com.vsg.helper.ui.widget.text.CustomInputText
+import kotlin.reflect.full.createInstance
 
 abstract class UICustomCRUD<TActivity, TViewModel, TDao, TEntity>(
     val activity: TActivity,
@@ -114,6 +116,7 @@ abstract class UICustomCRUD<TActivity, TViewModel, TDao, TEntity>(
     //endregion
 
     //region item
+    protected abstract fun aGetEntityAllowDefault(): Boolean
     protected abstract fun aGetItem(): TEntity?
     //endregion
 
@@ -147,4 +150,8 @@ abstract class UICustomCRUD<TActivity, TViewModel, TDao, TEntity>(
         Toast.makeText(activity, data, Toast.LENGTH_LONG).show()
     }
     //endregion
+
+    protected inline fun <reified R : IIsDefault> isEntityAllowDefault(): Boolean {
+        return R::class.createInstance().allowDefaultValue
+    }
 }

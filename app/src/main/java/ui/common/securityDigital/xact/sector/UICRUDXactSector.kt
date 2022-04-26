@@ -1,11 +1,10 @@
-package ui.common.xact
+package com.vsg.ot.ui.common.securityDigital.xact.sector
 
 import android.app.Activity
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.helper.HelperUI
 import com.vsg.helper.helper.HelperUI.Static.getArray
 import com.vsg.helper.helper.HelperUI.Static.setPictureFromFile
-import com.vsg.helper.helper.array.HelperArray.Companion.toBitmap
 import com.vsg.helper.helper.file.HelperFile
 import com.vsg.helper.helper.file.HelperFile.Static.chooserFile
 import com.vsg.helper.helper.file.HelperFile.Static.getTempFileFromUri
@@ -17,30 +16,34 @@ import com.vsg.helper.ui.util.CurrentBaseActivity
 import com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
 import com.vsg.helper.ui.widget.text.CustomInputText
 import com.vsg.ot.R
-import common.model.securityDialog.xact.Xact
-import common.model.securityDialog.xact.XactDao
-import common.model.securityDialog.xact.XactViewModel
+import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
+import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorDao
+import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorViewModel
 import java.io.File
 
 @ExperimentalStdlibApi
-class UICRUDXact<TActivity>(activity: TActivity, operation: DBOperation) :
-    UICustomCRUDViewModel<TActivity, XactViewModel, XactDao, Xact>(
+class UICRUDXactSector<TActivity>(activity: TActivity, operation: DBOperation) :
+    UICustomCRUDViewModel<TActivity, XactSectorViewModel, XactSectorDao, XactSector>(
         activity,
         operation,
-        R.layout.dialog_security_dialog_xact
+        R.layout.dialog_master_company
     )
-        where TActivity : CurrentBaseActivity<XactViewModel, XactDao, Xact> {
+        where TActivity : CurrentBaseActivity<XactSectorViewModel, XactSectorDao, XactSector> {
 
     //region widget
     private lateinit var tName: CustomInputText
-    private lateinit var tPicture: CustomImageViewDobleTap //ImageView
+    private lateinit var tDescription: CustomInputText
+    private lateinit var tPicture: CustomImageViewDobleTap
     //endregion
+
+    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<XactSector>()
 
     init {
         onEventSetInit = {
-            this.tName = it.findViewById(R.id.DialogXactName)
+            this.tName = it.findViewById(R.id.DialogCompanyName)
+            this.tDescription = it.findViewById(R.id.DialogGenericDescription)
             this.tPicture =
-                it.findViewById<CustomImageViewDobleTap>(R.id.DialogXactPicture).apply {
+                it.findViewById<CustomImageViewDobleTap>(R.id.DialogCompanyPicture).apply {
                     setOnLongClickListener {
                         activity.chooserFile(TypeTempFile.IMAGE_CHOOSER_FILE)
                         true
@@ -68,24 +71,26 @@ class UICRUDXact<TActivity>(activity: TActivity, operation: DBOperation) :
             }
         }
         onEventGetNewOrUpdateEntity = {
-            val data = it ?: Xact()
+            val data = it ?: XactSector()
             data.apply {
-                this.description = tName.text
+                this.valueCode = tName.text
+                this.description = tDescription.text
                 this.picture = tPicture.getArray()
             }
             data
         }
         onEventSetItem = {
-            tName.text = it.caption
+            tName.text = it.valueCode
+            tDescription.text = it.description
             tPicture.setImageBitmap(it.picture.toBitmap())
         }
         onEventSetItemsForClean = {
-            mutableListOf(tName, tPicture)
+            mutableListOf(tName, tDescription, tPicture)
         }
         onEventValidate = { item, _ ->
             var result = false
             try {
-                if (item.caption.isEmpty()) throw Exception("El nombre de la Empresa no puede ser nulo...")
+                if (item.valueCode.isEmpty()) throw Exception("El nombre de la Empresa no puede ser nulo...")
                 if (item.picture == null || item.picture!!.isEmpty()) throw Exception("El logo no fue asignado...")
                 result = true
             } catch (e: Exception) {
@@ -94,7 +99,7 @@ class UICRUDXact<TActivity>(activity: TActivity, operation: DBOperation) :
             result
         }
         onEventGetPopUpDataParameter = { p, item ->
-            p?.factorHeight = 0.25
+            p?.factorHeight = 0.30
             if (item != null) {
                 p?.icon = item.getDrawableShow().drawable
                 p?.bitmap = item.getPictureShow()

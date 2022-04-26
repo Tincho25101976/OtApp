@@ -16,16 +16,16 @@
             android:id="@+id/DialogBatchRelation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/DialogBatchRelation"
             android:layout_alignParentTop="true"
-            app:customType="READ_ONLY_TEXT"/>
+            android:hint="@string/DialogBatchRelation"
+            app:customType="READ_ONLY_TEXT" />
 
         <com.vsg.helper.ui.widget.text.CustomInputText
             android:id="@+id/DialogBatchValueCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/DialogBatchValueCode"
-            android:layout_below="@id/DialogBatchRelation"/>
+            android:layout_below="@id/DialogBatchRelation"
+            android:hint="@string/DialogBatchValueCode" />
 
         <com.vsg.helper.ui.widget.text.CustomInputText
             android:id="@+id/DialogBatchCreateDate"

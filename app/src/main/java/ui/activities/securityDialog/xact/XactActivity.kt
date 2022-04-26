@@ -4,20 +4,22 @@ import androidx.paging.PagingData
 import androidx.paging.filter
 import com.vsg.helper.ui.util.CurrentBaseActivityPagingGeneric
 import com.vsg.ot.R
-import common.model.securityDialog.xact.Xact
-import common.model.securityDialog.xact.XactDao
-import common.model.securityDialog.xact.XactViewModel
+import com.vsg.ot.common.model.securityDialog.xact.xact.Xact
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactDao
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactViewModel
+import com.vsg.ot.ui.common.securityDigital.xact.xact.UICRUDXact
 import ui.activities.securityDialog.xact.util.FilterTypeActivityXact
-import ui.common.xact.UICRUDXact
 
 @ExperimentalStdlibApi
-class XactActivity:
-    CurrentBaseActivityPagingGeneric<XactActivity, XactViewModel, XactDao, Xact, FilterTypeActivityXact, UICRUDXact<XactActivity>>(
+class XactActivity :
+    CurrentBaseActivityPagingGeneric<XactActivity, XactViewModel,
+            XactDao, Xact,
+            FilterTypeActivityXact, UICRUDXact<XactActivity>>(
         XactViewModel::class.java,
         FilterTypeActivityXact::class.java
     ) {
 
-    override fun oSetStringTitleForActionBar(): Int = R.string.ActivityMainCommandSecurityDialog
+    override fun oSetStringTitleForActionBar(): Int = R.string.ActivityMainCommandRecord
     override fun aFinishExecute() {
         onEventMakeFilter = { item, find, it ->
             val filter: PagingData<Xact> =

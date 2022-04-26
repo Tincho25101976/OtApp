@@ -102,6 +102,7 @@ abstract class CurrentBaseActivityPagingGenericRelationParentBase<TActivity, TVi
                     rules = arrayOf(RelativeLayout.ALIGN_PARENT_TOP)
                 )
                 setBackgroundResource(R.drawable.shadow_view)
+                this.setHintTextAppearance()
             }
             val tActivityPagingGenericSearchAndRecyclerView =
                 it.findViewById<RelativeLayout>(R.id.ActivityPagingGenericSearchAndRecyclerView)
@@ -136,6 +137,7 @@ abstract class CurrentBaseActivityPagingGenericRelationParentBase<TActivity, TVi
         tTextParent.text = parent?.title ?: "├╧╤╧╤╧┤"
         tTextParent.hint = hint
         tTextParent.customHintTextColor = Color.BLACK
+        tTextParent.typeface = this.typeface
         fillTextSearch()
         fillAdapter()
     }

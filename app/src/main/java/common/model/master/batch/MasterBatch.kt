@@ -54,6 +54,8 @@ class MasterBatch : EntityOtCompany<MasterBatch>(), IMasterItem {
     @Ignore
     var quantity: Double = 0.0
 
+    override val allowDefaultValue: Boolean
+        get() = false
     val absolute: Double get() = abs(quantity)
     val percentUsefulLife: Double
         get() {
@@ -80,7 +82,7 @@ class MasterBatch : EntityOtCompany<MasterBatch>(), IMasterItem {
         get() {
             if (dueDate == null || item == null) return TypeBatchStatus.UNDEFINED
             return try {
-                val fecha: Date = HelperDate.now()
+                val fecha: Date = HelperDate.nowDate()
                 if (fecha >= dueDate) TypeBatchStatus.EXPIRED
                 if (item!!.shellLifeAlert <= 0) TypeBatchStatus.RIGHT
                 val rango: Long = dueDate.toPeriod(fecha)

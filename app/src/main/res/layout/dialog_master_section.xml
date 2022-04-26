@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             app:customSpinnerTitle="@string/DialogSectionType"
             android:layout_below="@+id/DialogSectionName" />
+
     </RelativeLayout>
 
     <include

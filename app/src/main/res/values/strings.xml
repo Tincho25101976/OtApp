@@ -4,9 +4,15 @@
 
     <!--ActivitySecurityDialog-->
     <string name="ActivityMainCommandSecurityDialog">Diálogos de seguridad</string>
+    <string name="ActivityMainCommandRecord">Registros</string>
 
     <!--Xact:-->
-    <string name="DialogXactName">Categoría</string>
+    <string name="DialogXactEvento">Evento</string>
+    <string name="DialogXactTitle">Título</string>
+    <string name="DialogXactProcess">Proceso</string>
+    <string name="DialogXactSector">Sector</string>
+    <string name="DialogXactPlant">Planta</string>
+    <string name="DialogXactDate">Fecha</string>
 
     <!--ActivityMain:-->
     <string name="ActivityMainCommandMaster">Master</string>
@@ -40,6 +46,10 @@
     <string name="ActivityItemTypePlantText">Tipo de planta</string>
     <string name="ActivityItemProductPriceText">Precios por producto</string>
     <string name="ActivityItemProductPictureText">Imágenes por producto</string>
+
+    <string name="ActivityXactText">Xact</string>
+    <string name="ActivityXactSectorText">Sector</string>
+    <string name="ActivityXactProcessText">Proceso</string>
 
     <!--    HintForParent-->
     <string name="HintParentForCompany">Empresa</string>

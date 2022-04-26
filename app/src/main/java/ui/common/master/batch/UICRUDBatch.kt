@@ -4,6 +4,7 @@ import com.vsg.helper.common.format.FormatDateString
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.helper.date.HelperDate.Companion.addDay
 import com.vsg.helper.helper.date.HelperDate.Companion.now
+import com.vsg.helper.helper.date.HelperDate.Companion.nowDate
 import com.vsg.helper.helper.date.HelperDate.Companion.toDateString
 import com.vsg.helper.helper.exception.HelperException.Companion.throwException
 import com.vsg.helper.ui.crud.UICustomCRUDViewModelRelation
@@ -40,6 +41,7 @@ class UICRUDBatch<TActivity>(
     //endregion
 
     override fun aGetTextParent(): String = parent.description
+    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<MasterBatch>()
 
     init {
         onEventSetInit = {
@@ -48,12 +50,12 @@ class UICRUDBatch<TActivity>(
             this.tCreateDate = it.findViewById<CustomInputText>(R.id.DialogBatchCreateDate).apply {
                 customFormatDate = this@UICRUDBatch.formatDate
                 setDatePicker(activity) { setDueDate() }
-                date = now()
+                date = nowDate()
             }
             this.tDueDate = it.findViewById<CustomInputText>(R.id.DialogBatchDueDate).apply {
                 customFormatDate = this@UICRUDBatch.formatDate
                 setDatePicker(activity)
-                date = now()
+                date = nowDate()
             }
             this.tReceiverQty = it.findViewById(R.id.DialogBatchReceiverQty)
         }
@@ -62,7 +64,7 @@ class UICRUDBatch<TActivity>(
             data.apply {
                 this.valueCode = tValueCode.text
                 this.dueDate = tDueDate.date
-                this.createDate = tCreateDate.date ?: now()
+                this.createDate = tCreateDate.date ?: nowDate()
                 this.receiverQty = tReceiverQty.toDouble()
                 this.idItem = parent.id
                 this.idCompany = parent.idCompany
@@ -79,8 +81,8 @@ class UICRUDBatch<TActivity>(
             mutableListOf(tValueCode, tDueDate, tReceiverQty, tCreateDate)
         }
         onEventSetParametersForInsert = {
-            tCreateDate.date = now()
-            tDueDate.date = now().addDay(parent.shellLife)
+            tCreateDate.date = nowDate()
+            tDueDate.date = nowDate().addDay(parent.shellLife)
         }
         onEventValidate = { item, _ ->
             var result = false
@@ -100,10 +102,11 @@ class UICRUDBatch<TActivity>(
             result
         }
         onEventGetPopUpDataParameter = { p, item ->
-            p?.factorHeight = 0.25
-            if (item != null) {
-                p?.icon = item.getDrawableShow().drawable
-                p?.bitmap = item.getPictureShow()
+            p?.factorHeight = 0.45
+            if (item != null && p != null) {
+                p.icon = item.getDrawableShow().drawable
+                p.bitmap = item.getPictureShow()
+                p.toHtml = item.reference()
             }
             p
         }

@@ -28,6 +28,9 @@ abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResult
     @ColumnInfo(name = "description")
     override var description: String = ""
 
+    override val allowDefaultValue: Boolean
+        get() = true
+
     override val isEntityOnlyDefault: Boolean
         get() = false
 

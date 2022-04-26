@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="@dimen/DialogCrudTextMargin"
@@ -21,19 +22,81 @@
             android:src="@drawable/pic_camera_alpha" />
 
         <com.vsg.helper.ui.widget.text.CustomInputText
-            android:id="@+id/DialogXactName"
+            android:id="@+id/DialogXactEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/DialogCrudPictureMargin"
             android:layout_toEndOf="@+id/DialogXactPicture"
-            android:hint="@string/DialogXactName"
+            android:hint="@string/DialogXactEvento"
             android:padding="@dimen/DialogCrudTextPadding" />
+
     </RelativeLayout>
 
-    <include layout="@layout/dialog_generic_item_base"
+    <RelativeLayout
+        android:id="@+id/DialogXactData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/DialogXactMain"/>
+        android:layout_below="@id/DialogXactMain">
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogXactTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/DialogCrudPictureMargin"
+            android:hint="@string/DialogXactTitle"
+            android:padding="@dimen/DialogCrudTextPadding" />
+
+        <com.vsg.helper.ui.widget.spinner.CustomSpinner
+            android:id="@+id/DialogXactPlant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/DialogXactTitle"
+            app:customSpinnerTitle="@string/DialogXactPlant" />
+
+        <LinearLayout
+            android:id="@+id/DialogXactSectorProcess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/DialogXactPlant"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.vsg.helper.ui.widget.spinner.CustomSpinner
+                android:id="@+id/DialogXactSector"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:customSpinnerTitle="@string/DialogXactSector" />
+
+            <com.vsg.helper.ui.widget.spinner.CustomSpinner
+                android:id="@+id/DialogXactProcess"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:customSpinnerTitle="@string/DialogXactProcess" />
+
+        </LinearLayout>
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogXactDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/DialogXactSectorProcess"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/DialogCrudPictureMargin"
+            android:hint="@string/DialogXactDate"
+            android:padding="@dimen/DialogCrudTextPadding"
+            app:customType="DATE" />
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/dialog_generic_item_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DialogXactData" />
 
 </RelativeLayout>

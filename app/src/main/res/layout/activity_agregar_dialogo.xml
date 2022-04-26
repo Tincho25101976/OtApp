@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AgregarDialogoActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="2">
+
+                <TableRow>
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_span="3"
+                        android:layout_weight="1"
+                        android:background="#AAA3A3"
+                        android:gravity="top"
+                        android:padding="10dp"
+                        android:text="DIALOGO DE SEGURIDAD"
+                        android:textAlignment="center"
+                        android:textColor="#131313"
+                        android:textSize="18sp"
+                        tools:ignore="RtlCompat" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_span="3"
+                        android:layout_weight="1"
+                        android:background="#E42828"
+                        android:gravity="top"
+                        android:padding="10dp"
+                        android:text="Reaccion de las personas"
+                        android:textAlignment="center"
+                        android:textColor="#FAF3F3"
+                        android:textSize="18sp"
+                        tools:ignore="RtlCompat" />
+                </TableRow>
+
+                <TableRow>
+
+                    <Spinner
+                        android:id="@+id/repe1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                    <Spinner
+                        android:id="@+id/repe2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <Spinner
+                        android:id="@+id/repe3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                    <Spinner
+                        android:id="@+id/repe4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                </TableRow>
+
+
+
+                <TableRow>
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_span="3"
+                        android:layout_weight="1"
+                        android:background="#E42828"
+                        android:gravity="top"
+                        android:padding="10dp"
+                        android:textColor="#FAF3F3"
+                        android:textSize="18sp"
+                        android:text="EPP"
+                        android:textAlignment="center"
+                        tools:ignore="RtlCompat" />
+                </TableRow>
+
+                <TableRow>
+
+                    <Spinner
+                        android:id="@+id/epp1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                    <Spinner
+                        android:id="@+id/epp2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <Spinner
+                        android:id="@+id/epp3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                    <Spinner
+                        android:id="@+id/epp4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_span="3"
+                        android:layout_weight="1"
+                        android:background="#E42828"
+                        android:gravity="top"
+                        android:textColor="#FAF3F3"
+                        android:textSize="18sp"
+                        android:padding="10dp"
+                        android:text="Posicion de las  personas"
+                        android:textAlignment="center"
+                        tools:ignore="RtlCompat" />
+                </TableRow>
+
+                <TableRow>
+
+                    <Spinner
+                        android:id="@+id/pope1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                    <Spinner
+                        android:id="@+id/pope2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <Spinner
+                        android:id="@+id/pope3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                    <Spinner
+                        android:id="@+id/pope4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                </TableRow>
+
+
+                <TableRow>
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_span="3"
+                        android:layout_weight="1"
+                        android:background="#E42828"
+                        android:gravity="top"
+                        android:padding="10dp"
+                        android:textColor="#FAF3F3"
+                        android:textSize="18sp"
+                        android:text="Herramientas y equipos"
+                        android:textAlignment="center"
+                        tools:ignore="RtlCompat" />
+                </TableRow>
+
+                <TableRow>
+
+                    <Spinner
+                        android:id="@+id/heeq1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                    <Spinner
+                        android:id="@+id/heeq2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <Spinner
+                        android:id="@+id/heeq3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                    <Spinner
+                        android:id="@+id/heeq4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" />
+
+                </TableRow>
+
+
+
+            </TableLayout>
+
+            <!-- FAB: Agregar Registro-->
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/saveBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/descripcionEt"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                app:backgroundTint="@color/colorBlack"
+                android:layout_marginBottom="10dp" />
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+    </RelativeLayout>

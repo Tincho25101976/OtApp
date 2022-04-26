@@ -1,14 +1,15 @@
-package common.model.securityDialog.xact
+package com.vsg.ot.common.model.securityDialog.xact.xact
 
 import android.app.Application
 import androidx.lifecycle.LiveData
 import com.vsg.agendaandpublication.common.data.AppDatabase
 import com.vsg.helper.common.model.viewModel.ViewModelGeneric
-import com.vsg.helper.common.util.viewModel.*
+import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleList
+import com.vsg.helper.common.util.viewModel.IViewModelAllTextSearch
+import com.vsg.helper.common.util.viewModel.IViewModelHasItemsRelation
+import com.vsg.helper.common.util.viewModel.IViewModelView
 import common.model.init.viewModel.ViewModelStoredMap
-import common.model.master.filter.TypeFilterHasCompanyItems
 import common.model.master.item.MasterItemViewModel
-import common.model.master.warehouse.MasterWarehouseViewModel
 import kotlinx.coroutines.runBlocking
 
 @ExperimentalStdlibApi
@@ -21,16 +22,7 @@ class XactViewModel(application: Application) :
     IViewModelAllTextSearch,
     IViewModelView<Xact>,
     IViewModelAllSimpleList<Xact>,
-    IViewModelHasItemsRelationType<TypeFilterHasCompanyItems>,
     IViewModelHasItemsRelation {
-
-//    fun viewModelGetViewProductWithPicture(id: Int) = runBlocking {
-//        return@runBlocking Pager(
-//            pagingConfig,
-//            0,
-//            dao.viewCompanyWithProduct(id).asPagingSourceFactory()
-//        ).flow
-//    }
 
     override fun viewModelGetAllTextSearch(): LiveData<List<String>> = runBlocking {
         return@runBlocking dao.viewAllTextSearch()
@@ -38,20 +30,6 @@ class XactViewModel(application: Application) :
 
     override fun viewModelViewAllSimpleList(): List<Xact> =
         dao.viewAllSimpleList() ?: listOf()
-
-    override fun viewModelViewHasItems(
-        idRelation: Int,
-        filter: TypeFilterHasCompanyItems
-    ): Boolean {
-        return when (filter) {
-            TypeFilterHasCompanyItems.PRODUCT -> MasterItemViewModel(context).viewModelViewHasItems(
-                idRelation
-            )
-            TypeFilterHasCompanyItems.WAREHOUSE -> MasterWarehouseViewModel(context).viewModelViewHasItems(
-                idRelation
-            )
-        }
-    }
 
     override fun viewModelViewHasItems(idRelation: Int): Boolean =
         MasterItemViewModel(context).viewModelViewHasItems(idRelation)

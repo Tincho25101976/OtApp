@@ -30,6 +30,7 @@ class UICRUDWarehouse<TActivity>(
     //endregion
 
     override fun aGetTextParent(): String = parent.description
+    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<MasterWarehouse>()
     override fun oIsEntityOnlyOneDefault() = isEntityOnlyOneDefaultTrue<MasterWarehouse>()
 
     init {

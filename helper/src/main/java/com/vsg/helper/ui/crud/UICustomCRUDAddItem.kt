@@ -9,6 +9,8 @@ import com.vsg.helper.common.model.ItemBase
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.common.util.dao.IGenericDao
 import com.vsg.helper.common.util.viewModel.MakeGenericViewModel
+import com.vsg.helper.helper.Helper.Companion.or
+import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.ui.util.CurrentBaseActivity
 import com.vsg.helper.ui.widget.text.CustomInputText
 
@@ -74,8 +76,9 @@ abstract class UICustomCRUDAddItem<TActivity, TViewModel, TDao, TEntity, TEntity
         }
     }
 
+
     override fun aActionForSetOperation() {}
-    private fun clean(o: DBOperation) {
+    private fun clean(o: DBOperation, item: TEntity?) {
         val itemsClean = onEventSetItemsForClean?.invoke()
         val items: MutableList<View> = mutableListOf()
         if (itemsClean != null && itemsClean.any()) items.addAll(itemsClean)
@@ -83,6 +86,11 @@ abstract class UICustomCRUDAddItem<TActivity, TViewModel, TDao, TEntity, TEntity
         val data = activity.clearWidget(*items.toTypedArray())
         if (isOperationNewOrEdit()) {
             data?.forEach { it.isEnabled = true }
+            val allowDefault = when (item == null) {
+                true -> aGetEntityAllowDefault()
+                else -> item.allowDefaultValue
+            }
+            tDefault.isEnabled = allowDefault
         }
         if (isOperationDeleteOrView()) {
             data?.forEach { it.isEnabled = false }
@@ -95,23 +103,25 @@ abstract class UICustomCRUDAddItem<TActivity, TViewModel, TDao, TEntity, TEntity
             isEnabled = false
             isChecked = false
         }
+
     }
 
     private fun setItem(item: TEntity?, o: DBOperation) {
-        clean(o)
+        clean(o, item)
         if (o == DBOperation.INSERT) onEventSetParametersForInsert?.invoke()
         if (!isOperationView()) return
         item ?: return
         onEventSetItem?.invoke(item)
         tDescription.text = item.description
         tEnabled.isChecked = item.isEnabled
-        //tDefault.isChecked = item.isDefault
+        tDefault.isChecked = item.allowDefaultValue then item.isDefault or false
+        tDefault.isEnabled = item.allowDefaultValue
     }
 
     private fun makeItem(): TEntity? {
         val t: TEntity = onEventGetNewEntity?.invoke() ?: return null
         t.description = tDescription.text
-        t.isDefault = tDefault.isChecked
+        t.isDefault = t.allowDefaultValue then tDefault.isChecked or false
         t.isEnabled = tEnabled.isChecked
         return t
     }

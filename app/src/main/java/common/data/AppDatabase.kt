@@ -6,6 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.vsg.helper.common.cast.Convert
+import com.vsg.ot.common.model.securityDialog.xact.process.XactProcessDao
+import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorDao
 import common.data.convert.ConvertCurrentModel
 import common.model.master.batch.MasterBatch
 import common.model.master.batch.MasterBatchDao
@@ -19,8 +21,8 @@ import common.model.master.stock.MasterStock
 import common.model.master.stock.MasterStockDao
 import common.model.master.warehouse.MasterWarehouse
 import common.model.master.warehouse.MasterWarehouseDao
-import common.model.securityDialog.xact.Xact
-import common.model.securityDialog.xact.XactDao
+import com.vsg.ot.common.model.securityDialog.xact.xact.Xact
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactDao
 
 @Database(
     entities =
@@ -52,6 +54,8 @@ abstract class AppDatabase : RoomDatabase() {
 
     // securityDialog:
     abstract fun xactDao(): XactDao
+    abstract fun xactSectorDao(): XactSectorDao
+    abstract fun xactProcessDao(): XactProcessDao
     //endregion
 
     companion object {

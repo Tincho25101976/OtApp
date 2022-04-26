@@ -11,6 +11,8 @@ import com.vsg.helper.common.model.ItemBase
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.common.util.dao.IGenericDao
 import com.vsg.helper.common.util.viewModel.MakeGenericViewModel
+import com.vsg.helper.helper.Helper.Companion.or
+import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.helper.font.FontManager.Static.typeFaceCustom
 import com.vsg.helper.ui.util.CurrentBaseActivity
 import com.vsg.helper.ui.widget.spinner.CustomSpinner
@@ -102,21 +104,22 @@ abstract class UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity>(
     protected open fun oFinishInit(view: View) {}
     override fun aActionForSetOperation() {}
     protected open fun oIsEntityOnlyOneDefault() = false
-    private fun clean(o: DBOperation) {
+    private fun clean(o: DBOperation, item: TEntity?) {
         val itemsClean = onEventSetItemsForClean?.invoke()
         val items: MutableList<View> = mutableListOf()
         if (itemsClean != null && itemsClean.any()) items.addAll(itemsClean)
         items.addAll(arrayListOf(tDescription, tEnabled, tDefault))
         val data = activity.clearWidget(*items.toTypedArray())
         if (isOperationNewOrEdit()) {
-            data?.forEach {
-                it.isEnabled = true
+            data?.forEach { it.isEnabled = true }
+            val allowDefault = when (item == null) {
+                true -> aGetEntityAllowDefault()
+                else -> item.allowDefaultValue
             }
+            tDefault.isEnabled = allowDefault
         }
         if (isOperationDeleteOrView()) {
-            data?.forEach {
-                it.isEnabled = false
-            }
+            data?.forEach { it.isEnabled = false }
         }
         if (o == DBOperation.INSERT) {
             tEnabled.isChecked = true
@@ -131,20 +134,20 @@ abstract class UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity>(
     }
 
     private fun setItem(item: TEntity?, o: DBOperation) {
-        clean(o)
+        clean(o, item)
         if (o == DBOperation.INSERT) onEventSetParametersForInsert?.invoke()
         if (!isOperationView()) return
         item ?: return
         onEventSetItem?.invoke(item)
         tDescription.text = item.description
         tEnabled.isChecked = item.isEnabled
-        tDefault.isChecked = item.isDefault
+        tDefault.isChecked = item.allowDefaultValue then item.isDefault or false
     }
 
     private fun makeItem(item: TEntity? = null): TEntity? {
         val temp: TEntity = onEventGetNewOrUpdateEntity?.invoke(item) ?: return null
         temp.isEnabled = tEnabled.isChecked
-        temp.isDefault = tDefault.isChecked
+        temp.isDefault = temp.allowDefaultValue then tDefault.isChecked or false
         temp.description = tDescription.text
         return temp
     }

@@ -99,6 +99,7 @@ class CustomInputText @JvmOverloads constructor(
 
     @IntRange(from = 0, to = 10)
     var customDecimalPlace: Int = DEFAULT_VALUE_DECIMAL_PLACE
+
     var textSize: Float
         get() = tEdit.textSize
         set(value) {
@@ -299,8 +300,8 @@ class CustomInputText @JvmOverloads constructor(
 
     //region override
     override fun setTypeface(typeface: Typeface?) {
-        tEdit.typeface = typeface
         super.setTypeface(typeface)
+        tEdit.typeface = typeface
     }
 
     override fun customSetTypeface(typeface: Typeface?, color: Int) {
@@ -327,6 +328,9 @@ class CustomInputText @JvmOverloads constructor(
 
     fun setHintTextColor(color: Int = Color.LTGRAY) {
         tEdit.setHintTextColor(color)
+    }
+    fun setHintTextAppearance(){
+        super.setHintTextAppearance(R.style.HintTextAppearance)
     }
 
     fun setLinesForMultilineText(
@@ -398,8 +402,8 @@ class CustomInputText @JvmOverloads constructor(
     //endregion
 
     //region functional
-    public fun setOnlyTextUpper(){
-        if(this.typeCustomType != TypeCustomInputTextType.TEXT) return
+    public fun setOnlyTextUpper() {
+        if (this.typeCustomType != TypeCustomInputTextType.TEXT) return
         this.inputType = InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
     }
 //    public fun setOnlyTextLower(){

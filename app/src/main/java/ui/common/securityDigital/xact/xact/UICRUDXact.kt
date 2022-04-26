@@ -1,4 +1,4 @@
-package com.vsg.ot.ui.common.master.company
+package com.vsg.ot.ui.common.securityDigital.xact.xact
 
 import android.app.Activity
 import com.vsg.helper.common.operation.DBOperation
@@ -15,36 +15,42 @@ import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewer
 import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewerParameter
 import com.vsg.helper.ui.util.CurrentBaseActivity
 import com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
+import com.vsg.helper.ui.widget.spinner.CustomSpinner
 import com.vsg.helper.ui.widget.text.CustomInputText
 import com.vsg.ot.R
-import common.model.master.company.MasterCompany
-import common.model.master.company.MasterCompanyDao
-import common.model.master.company.MasterCompanyViewModel
+import common.model.master.item.type.TypePlant
+import com.vsg.ot.common.model.securityDialog.xact.xact.Xact
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactDao
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactViewModel
 import java.io.File
 
 @ExperimentalStdlibApi
-class UICRUDCompany<TActivity>(activity: TActivity, operation: DBOperation) :
-    UICustomCRUDViewModel<TActivity, MasterCompanyViewModel, MasterCompanyDao, MasterCompany>(
+class UICRUDXact<TActivity>(activity: TActivity, operation: DBOperation) :
+    UICustomCRUDViewModel<TActivity, XactViewModel, XactDao, Xact>(
         activity,
         operation,
-        R.layout.dialog_master_company
+        R.layout.dialog_security_dialog_xact
     )
-        where TActivity : CurrentBaseActivity<MasterCompanyViewModel, MasterCompanyDao, MasterCompany> {
+        where TActivity : CurrentBaseActivity<XactViewModel, XactDao, Xact> {
 
     //region widget
-    private lateinit var tName: CustomInputText
-    private lateinit var tDescription: CustomInputText
+    private lateinit var tEvent: CustomInputText
     private lateinit var tPicture: CustomImageViewDobleTap
+    private lateinit var tTitle: CustomInputText
+    private lateinit var tPlant: CustomSpinner
+    private lateinit var tSector: CustomSpinner
+    private lateinit var tProcess: CustomSpinner
+    private lateinit var tDate: CustomInputText
     //endregion
 
-    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<MasterCompany>()
+    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<Xact>()
 
     init {
         onEventSetInit = {
-            this.tName = it.findViewById(R.id.DialogCompanyName)
-            this.tDescription = it.findViewById(R.id.DialogGenericDescription)
+            this.tEvent = it.findViewById(R.id.DialogXactEvent)
+            this.tTitle = it.findViewById(R.id.DialogXactTitle)
             this.tPicture =
-                it.findViewById<CustomImageViewDobleTap>(R.id.DialogCompanyPicture).apply {
+                it.findViewById<CustomImageViewDobleTap>(R.id.DialogXactPicture).apply {
                     setOnLongClickListener {
                         activity.chooserFile(TypeTempFile.IMAGE_CHOOSER_FILE)
                         true
@@ -57,6 +63,10 @@ class UICRUDCompany<TActivity>(activity: TActivity, operation: DBOperation) :
                         }
                     }
                 }
+            this.tPlant = it.findViewById<CustomSpinner?>(R.id.DialogXactPlant).apply {
+                setCustomAdapterEnum(TypePlant::class.java)
+            }
+
             activity.onEventExecuteActivityResult = { requestCode, resultCode, data ->
                 if (requestCode == HelperUI.REQUEST_FOR_CHOOSER_FILE_FROM_MANAGER && resultCode == Activity.RESULT_OK) {
                     val file: File? = activity.getTempFileFromUri(
@@ -72,26 +82,24 @@ class UICRUDCompany<TActivity>(activity: TActivity, operation: DBOperation) :
             }
         }
         onEventGetNewOrUpdateEntity = {
-            val data = it ?: MasterCompany()
+            val data = it ?: Xact()
             data.apply {
-                this.valueCode = tName.text
-                this.description = tDescription.text
+                this.description = tTitle.text
                 this.picture = tPicture.getArray()
             }
             data
         }
         onEventSetItem = {
-            tName.text = it.valueCode
-            tDescription.text = it.description
+            tTitle.text = it.caption
             tPicture.setImageBitmap(it.picture.toBitmap())
         }
         onEventSetItemsForClean = {
-            mutableListOf(tName, tDescription, tPicture)
+            mutableListOf(tTitle, tPicture)
         }
         onEventValidate = { item, _ ->
             var result = false
             try {
-                if (item.valueCode.isEmpty()) throw Exception("El nombre de la Empresa no puede ser nulo...")
+                if (item.caption.isEmpty()) throw Exception("El nombre de la Empresa no puede ser nulo...")
                 if (item.picture == null || item.picture!!.isEmpty()) throw Exception("El logo no fue asignado...")
                 result = true
             } catch (e: Exception) {
@@ -100,7 +108,7 @@ class UICRUDCompany<TActivity>(activity: TActivity, operation: DBOperation) :
             result
         }
         onEventGetPopUpDataParameter = { p, item ->
-            p?.factorHeight = 0.30
+            p?.factorHeight = 0.25
             if (item != null) {
                 p?.icon = item.getDrawableShow().drawable
                 p?.bitmap = item.getPictureShow()

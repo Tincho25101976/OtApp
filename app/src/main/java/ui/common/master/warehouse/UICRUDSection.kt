@@ -34,6 +34,7 @@ class UICRUDSection<TActivity>(
     //endregion
 
     override fun aGetTextParent(): String = parent.description
+    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<MasterSection>()
     override fun oIsEntityOnlyOneDefault() = isEntityOnlyOneDefaultTrue<MasterSection>()
 
     init {

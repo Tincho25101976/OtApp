@@ -1,4 +1,4 @@
-package common.model.securityDialog.xact
+package com.vsg.ot.common.model.securityDialog.xact.xact
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource

@@ -49,6 +49,9 @@ class MasterItem : EntityOtCompany<MasterItem>() {
     var typeProduct: TypeProduct = TypeProduct.UNDEFINED
     var typePlant: TypePlant = TypePlant.UNDEFINED
 
+    override val allowDefaultValue: Boolean
+        get() = false
+
     @Ignore
     val masterBatch: MutableList<MasterBatch> = mutableListOf()
     //endregion
