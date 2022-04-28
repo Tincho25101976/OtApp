@@ -24,8 +24,8 @@
         </activity>
 
         <activity android:name=".ui.activities.securityDialog.main.MainSecurityDialog" />
-        <activity android:name=".ui.activities.securityDialog.xact.main.MainXact" />
-        <activity android:name="ui.activities.securityDialog.xact.XactActivity"/>
+        <activity android:name=".ui.activities.securityDialog.xact.main.MainXactRecord" />
+        <activity android:name="ui.activities.securityDialog.xact.XactRecordActivity"/>
 
         <activity android:name=".ui.activities.master.main.MainMaster" />
         <activity android:name=".ui.activities.master.MasterBatchActivity" />

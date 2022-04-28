@@ -13,22 +13,22 @@ import common.model.master.item.MasterItemViewModel
 import kotlinx.coroutines.runBlocking
 
 @ExperimentalStdlibApi
-class XactViewModel(application: Application) :
-    ViewModelGeneric<XactDao, Xact>(
+class XactRecordViewModel(application: Application) :
+    ViewModelGeneric<XactRecordDao, XactRecord>(
         AppDatabase.getInstance(application)?.xactDao()!!,
         application,
         ViewModelStoredMap()
     ),
     IViewModelAllTextSearch,
-    IViewModelView<Xact>,
-    IViewModelAllSimpleList<Xact>,
+    IViewModelView<XactRecord>,
+    IViewModelAllSimpleList<XactRecord>,
     IViewModelHasItemsRelation {
 
     override fun viewModelGetAllTextSearch(): LiveData<List<String>> = runBlocking {
         return@runBlocking dao.viewAllTextSearch()
     }
 
-    override fun viewModelViewAllSimpleList(): List<Xact> =
+    override fun viewModelViewAllSimpleList(): List<XactRecord> =
         dao.viewAllSimpleList() ?: listOf()
 
     override fun viewModelViewHasItems(idRelation: Int): Boolean =

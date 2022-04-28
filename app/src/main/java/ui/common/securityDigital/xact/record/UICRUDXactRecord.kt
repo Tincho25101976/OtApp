@@ -19,19 +19,19 @@ import com.vsg.helper.ui.widget.spinner.CustomSpinner
 import com.vsg.helper.ui.widget.text.CustomInputText
 import com.vsg.ot.R
 import common.model.master.item.type.TypePlant
-import com.vsg.ot.common.model.securityDialog.xact.xact.Xact
-import com.vsg.ot.common.model.securityDialog.xact.xact.XactDao
-import com.vsg.ot.common.model.securityDialog.xact.xact.XactViewModel
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecord
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecordDao
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecordViewModel
 import java.io.File
 
 @ExperimentalStdlibApi
-class UICRUDXact<TActivity>(activity: TActivity, operation: DBOperation) :
-    UICustomCRUDViewModel<TActivity, XactViewModel, XactDao, Xact>(
+class UICRUDXactRecord<TActivity>(activity: TActivity, operation: DBOperation) :
+    UICustomCRUDViewModel<TActivity, XactRecordViewModel, XactRecordDao, XactRecord>(
         activity,
         operation,
         R.layout.dialog_security_dialog_xact
     )
-        where TActivity : CurrentBaseActivity<XactViewModel, XactDao, Xact> {
+        where TActivity : CurrentBaseActivity<XactRecordViewModel, XactRecordDao, XactRecord> {
 
     //region widget
     private lateinit var tEvent: CustomInputText
@@ -43,7 +43,7 @@ class UICRUDXact<TActivity>(activity: TActivity, operation: DBOperation) :
     private lateinit var tDate: CustomInputText
     //endregion
 
-    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<Xact>()
+    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<XactRecord>()
 
     init {
         onEventSetInit = {
@@ -82,7 +82,7 @@ class UICRUDXact<TActivity>(activity: TActivity, operation: DBOperation) :
             }
         }
         onEventGetNewOrUpdateEntity = {
-            val data = it ?: Xact()
+            val data = it ?: XactRecord()
             data.apply {
                 this.description = tTitle.text
                 this.picture = tPicture.getArray()

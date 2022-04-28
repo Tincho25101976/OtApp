@@ -3,12 +3,12 @@ package com.vsg.ot.ui.activities.securityDialog.xact.main
 import android.widget.ScrollView
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.ot.R
-import com.vsg.ot.ui.activities.master.MasterBatchActivity
-import com.vsg.ot.ui.activities.master.MasterItemActivity
-import ui.activities.securityDialog.xact.XactActivity
+import com.vsg.ot.ui.activities.securityDialog.xact.XactProcessActivity
+import com.vsg.ot.ui.activities.securityDialog.xact.XactSectorActivity
+import ui.activities.securityDialog.xact.XactRecordActivity
 
 @ExperimentalStdlibApi
-class MainXact : BaseActivity(R.layout.sub_main_xact) {
+class MainXactRecord : BaseActivity(R.layout.sub_main_xact) {
 
     init {
         onEventMakeActivityForSelector = {
@@ -16,17 +16,17 @@ class MainXact : BaseActivity(R.layout.sub_main_xact) {
                 add(
                     R.drawable.pic_xact,
                     getString(R.string.ActivityXactText),
-                    dataClass = XactActivity::class.java
+                    dataClass = XactRecordActivity::class.java
                 )
                 add(
                     R.drawable.pic_sector,
                     getString(R.string.ActivityXactSectorText),
-                    dataClass = MasterItemActivity::class.java
+                    dataClass = XactSectorActivity::class.java
                 )
                 addWithAction(
                     R.drawable.pic_process,
                     getString(R.string.ActivityXactProcessText),
-                    dataClass = MasterBatchActivity::class.java
+                    dataClass = XactProcessActivity::class.java
                 )
             }.makeLayout()
             view

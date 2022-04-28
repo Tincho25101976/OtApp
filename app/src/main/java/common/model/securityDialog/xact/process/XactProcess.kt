@@ -6,6 +6,7 @@ import androidx.room.Ignore
 import androidx.room.Index
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecord
 import common.model.init.entity.EntityOt
 
 @Entity(
@@ -18,6 +19,10 @@ import common.model.init.entity.EntityOt
     tableName = XactProcess.ENTITY_NAME
 )
 class XactProcess : EntityOt<XactProcess>() {
+    //region properties
+    public var records: List<XactRecord>? = null
+    //endregion
+
     //region methods
 
     @Ignore

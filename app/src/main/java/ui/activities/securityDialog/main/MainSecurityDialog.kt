@@ -3,7 +3,7 @@ package com.vsg.ot.ui.activities.securityDialog.main
 import android.widget.ScrollView
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.ot.R
-import com.vsg.ot.ui.activities.securityDialog.xact.main.MainXact
+import com.vsg.ot.ui.activities.securityDialog.xact.main.MainXactRecord
 
 @ExperimentalStdlibApi
 class MainSecurityDialog : BaseActivity(R.layout.main_security_dialog) {
@@ -13,12 +13,12 @@ class MainSecurityDialog : BaseActivity(R.layout.main_security_dialog) {
                 add(
                     R.drawable.pic_xact,
                     getString(R.string.ActivityMainCommandRecord),
-                    dataClass = MainXact::class.java
+                    dataClass = MainXactRecord::class.java
                 )
                 add(
                     R.drawable.pic_security_dialog,
                     getString(R.string.ActivityMainCommandSecurityDialog),
-                    dataClass = MainXact::class.java
+                    dataClass = MainXactRecord::class.java
                 )
             }.makeLayout()
             view

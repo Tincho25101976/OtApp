@@ -7,12 +7,12 @@
     android:layout_marginEnd="@dimen/DialogCrudTextMargin">
 
     <RelativeLayout
-        android:id="@+id/DialogXactSectorMain"
+        android:id="@+id/DialogXactProcessMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.vsg.helper.ui.widget.text.CustomInputText
-            android:id="@+id/DialogXactSectorValueCode"
+            android:id="@+id/DialogXactProcessValueCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -26,7 +26,7 @@
         layout="@layout/dialog_generic_item_base"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/DialogXactSectorMain" />
+        android:layout_below="@+id/DialogXactProcessMain" />
 
 
 </RelativeLayout>

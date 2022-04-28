@@ -2,7 +2,7 @@ package ui.activities.securityDialog.xact.util
 
 import com.vsg.helper.ui.adapter.IDataAdapterEnum
 
-enum class FilterTypeActivityXact (
+enum class FilterTypeActivityXactRecord (
     override val value: Int,
     override val title: String,
     override val order: Int = 1000,

@@ -21,8 +21,8 @@ import common.model.master.stock.MasterStock
 import common.model.master.stock.MasterStockDao
 import common.model.master.warehouse.MasterWarehouse
 import common.model.master.warehouse.MasterWarehouseDao
-import com.vsg.ot.common.model.securityDialog.xact.xact.Xact
-import com.vsg.ot.common.model.securityDialog.xact.xact.XactDao
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecord
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecordDao
 
 @Database(
     entities =
@@ -31,7 +31,7 @@ import com.vsg.ot.common.model.securityDialog.xact.xact.XactDao
         MasterBatch::class, MasterWarehouse::class,
         MasterSection::class, MasterStock::class,
 
-        Xact::class
+        XactRecord::class
     ],
     //views = [
     //    ProvisioningViewRoom::class, TrackingViewRoom::class,
@@ -53,7 +53,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun stockDao(): MasterStockDao
 
     // securityDialog:
-    abstract fun xactDao(): XactDao
+    abstract fun xactDao(): XactRecordDao
     abstract fun xactSectorDao(): XactSectorDao
     abstract fun xactProcessDao(): XactProcessDao
     //endregion

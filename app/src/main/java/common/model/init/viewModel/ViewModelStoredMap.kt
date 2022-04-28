@@ -15,8 +15,8 @@ import common.model.master.section.MasterSection
 import common.model.master.section.MasterSectionViewModel
 import common.model.master.warehouse.MasterWarehouse
 import common.model.master.warehouse.MasterWarehouseViewModel
-import com.vsg.ot.common.model.securityDialog.xact.xact.Xact
-import com.vsg.ot.common.model.securityDialog.xact.xact.XactViewModel
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecord
+import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecordViewModel
 import kotlin.reflect.KType
 import kotlin.reflect.typeOf
 
@@ -30,7 +30,7 @@ class ViewModelStoredMap : IViewModelStoredMap {
         data.add(DataMakeViewModelView(typeOf<MasterBatch>(), MasterBatchViewModel(context)))
         data.add(DataMakeViewModelView(typeOf<MasterWarehouse>(), MasterWarehouseViewModel(context)))
         data.add(DataMakeViewModelView(typeOf<MasterSection>(), MasterSectionViewModel(context)))
-        data.add(DataMakeViewModelView(typeOf<Xact>(), XactViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<XactRecord>(), XactRecordViewModel(context)))
         return data
     }
 

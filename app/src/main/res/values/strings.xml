@@ -5,6 +5,8 @@
     <!--ActivitySecurityDialog-->
     <string name="ActivityMainCommandSecurityDialog">Diálogos de seguridad</string>
     <string name="ActivityMainCommandRecord">Registros</string>
+    <string name="ActivityMainCommandSector">Sector</string>
+    <string name="ActivityMainCommandProcess">Proceso</string>
 
     <!--Xact:-->
     <string name="DialogXactEvento">Evento</string>

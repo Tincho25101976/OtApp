@@ -1,35 +1,35 @@
-package com.vsg.ot.ui.common.securityDigital.xact.sector
+package com.vsg.ot.ui.common.securityDigital.xact.process
 
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.ui.crud.UICustomCRUDViewModel
 import com.vsg.helper.ui.util.CurrentBaseActivity
 import com.vsg.helper.ui.widget.text.CustomInputText
 import com.vsg.ot.R
-import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
-import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorDao
-import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorViewModel
+import com.vsg.ot.common.model.securityDialog.xact.process.XactProcess
+import com.vsg.ot.common.model.securityDialog.xact.process.XactProcessDao
+import com.vsg.ot.common.model.securityDialog.xact.process.XactProcessViewModel
 
 @ExperimentalStdlibApi
-class UICRUDXactSector<TActivity>(activity: TActivity, operation: DBOperation) :
-    UICustomCRUDViewModel<TActivity, XactSectorViewModel, XactSectorDao, XactSector>(
+class UICRUDXactProcess<TActivity>(activity: TActivity, operation: DBOperation) :
+    UICustomCRUDViewModel<TActivity, XactProcessViewModel, XactProcessDao, XactProcess>(
         activity,
         operation,
-        R.layout.dialog_xact_sector
+        R.layout.dialog_xact_process
     )
-        where TActivity : CurrentBaseActivity<XactSectorViewModel, XactSectorDao, XactSector> {
+        where TActivity : CurrentBaseActivity<XactProcessViewModel, XactProcessDao, XactProcess> {
 
     //region widget
     private lateinit var tValueCode: CustomInputText
     //endregion
 
-    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<XactSector>()
+    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<XactProcess>()
 
     init {
         onEventSetInit = {
-            this.tValueCode = it.findViewById(R.id.DialogXactSectorValueCode)
+            this.tValueCode = it.findViewById(R.id.DialogXactProcessValueCode)
         }
         onEventGetNewOrUpdateEntity = {
-            val data = it ?: XactSector()
+            val data = it ?: XactProcess()
             data.apply {
                 this.valueCode = tValueCode.text
             }
@@ -44,7 +44,7 @@ class UICRUDXactSector<TActivity>(activity: TActivity, operation: DBOperation) :
         onEventValidate = { item, _ ->
             var result = false
             try {
-                if (item.valueCode.isEmpty()) throw Exception("El nombre del sector no puede ser nulo...")
+                if (item.valueCode.isEmpty()) throw Exception("El nombre del proceso no puede ser nulo...")
                 result = true
             } catch (e: Exception) {
                 message(e.message ?: "Error desconocido...")
