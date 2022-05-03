@@ -32,6 +32,7 @@ class UIRecyclerAdapter<T>(private val list: List<T>) :
             else if (data.picture > 0)  pic.setImageResource(data.picture)
             data.sizePictureHeight = resources.getInteger(R.integer.CustomSizePictureHeight)
             data.sizePictureWidth = resources.getInteger(R.integer.CustomSizePictureWidth)
+            data.textSizeTitle = resources.getInteger(R.integer.CustomSizeTextSize)
             val layoutParams: LinearLayout.LayoutParams =
                 LinearLayout.LayoutParams(data.sizePictureWidth.toPixel(),
                                           data.sizePictureHeight.toPixel())

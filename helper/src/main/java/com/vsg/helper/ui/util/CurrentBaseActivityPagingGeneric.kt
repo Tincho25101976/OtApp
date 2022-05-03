@@ -43,4 +43,9 @@ abstract class CurrentBaseActivityPagingGeneric<TActivity, TViewModel, TDao, TEn
 
     override fun oGetViewModelGetViewAllPaging(): Flow<PagingData<TEntity>> =
         currentViewModel().viewModelGetViewAllPaging()
+
+    override fun onExecuteCreate() {
+        super.onExecuteCreate()
+        this.setEnabledAdd(true)
+    }
 }

@@ -1,35 +1,35 @@
-package com.vsg.ot.ui.common.securityDigital.xact.process
+package com.vsg.ot.ui.common.securityDigital.xact.event
 
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.ui.crud.UICustomCRUDViewModel
 import com.vsg.helper.ui.util.CurrentBaseActivity
 import com.vsg.helper.ui.widget.text.CustomInputText
 import com.vsg.ot.R
-import com.vsg.ot.common.model.securityDialog.xact.process.XactProcess
-import com.vsg.ot.common.model.securityDialog.xact.process.XactProcessDao
-import com.vsg.ot.common.model.securityDialog.xact.process.XactProcessViewModel
+import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
+import com.vsg.ot.common.model.securityDialog.xact.event.XactEventDao
+import com.vsg.ot.common.model.securityDialog.xact.event.XactEventViewModel
 
 @ExperimentalStdlibApi
-class UICRUDXactProcess<TActivity>(activity: TActivity, operation: DBOperation) :
-    UICustomCRUDViewModel<TActivity, XactProcessViewModel, XactProcessDao, XactProcess>(
+class UICRUDXactEvent<TActivity>(activity: TActivity, operation: DBOperation) :
+    UICustomCRUDViewModel<TActivity, XactEventViewModel, XactEventDao, XactEvent>(
         activity,
         operation,
         R.layout.dialog_xact_process
     )
-        where TActivity : CurrentBaseActivity<XactProcessViewModel, XactProcessDao, XactProcess> {
+        where TActivity : CurrentBaseActivity<XactEventViewModel, XactEventDao, XactEvent> {
 
     //region widget
     private lateinit var tValueCode: CustomInputText
     //endregion
 
-    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<XactProcess>()
+    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<XactEvent>()
 
     init {
         onEventSetInit = {
             this.tValueCode = it.findViewById(R.id.DialogXactProcessValueCode)
         }
         onEventGetNewOrUpdateEntity = {
-            val data = it ?: XactProcess()
+            val data = it ?: XactEvent()
             data.apply {
                 this.valueCode = tValueCode.text
             }

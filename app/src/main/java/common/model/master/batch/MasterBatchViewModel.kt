@@ -1,7 +1,7 @@
 package common.model.master.batch
 
 import android.app.Application
-import com.vsg.agendaandpublication.common.data.AppDatabase
+import com.vsg.ot.common.data.AppDatabase
 import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.util.viewModel.IViewModelCRUD
 import com.vsg.helper.common.util.viewModel.util.FilterMemberInclude

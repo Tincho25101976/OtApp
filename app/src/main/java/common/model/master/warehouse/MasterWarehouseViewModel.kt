@@ -1,7 +1,7 @@
 package common.model.master.warehouse
 
 import android.app.Application
-import com.vsg.agendaandpublication.common.data.AppDatabase
+import com.vsg.ot.common.data.AppDatabase
 import com.vsg.helper.common.util.viewModel.IViewModelHasItemsRelationType
 import com.vsg.helper.common.util.viewModel.IViewModelUpdateIsDefault
 import common.model.init.viewModel.ViewModelGenericOt

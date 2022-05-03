@@ -23,7 +23,7 @@ class XactSector : EntityOt<XactSector>() {
 
     @Ignore
     @DrawableRes
-    override fun oGetDrawablePicture(): Int = R.drawable.pic_sector
+    override fun oGetDrawablePicture(): Int = R.drawable.pic_xact_sector
 
     override fun oGetSpannedGeneric(): StringBuilder =
         StringBuilder().toTitleSpanned(valueCode)

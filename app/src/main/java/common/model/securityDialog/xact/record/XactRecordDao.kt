@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
+import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
 import common.model.init.dao.DaoGenericOt
 
 @Dao

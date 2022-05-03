@@ -2,12 +2,13 @@ package com.vsg.ot.common.model.securityDialog.xact.xact
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.vsg.agendaandpublication.common.data.AppDatabase
+import com.vsg.ot.common.data.AppDatabase
 import com.vsg.helper.common.model.viewModel.ViewModelGeneric
 import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleList
 import com.vsg.helper.common.util.viewModel.IViewModelAllTextSearch
 import com.vsg.helper.common.util.viewModel.IViewModelHasItemsRelation
 import com.vsg.helper.common.util.viewModel.IViewModelView
+import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
 import common.model.init.viewModel.ViewModelStoredMap
 import common.model.master.item.MasterItemViewModel
 import kotlinx.coroutines.runBlocking
@@ -15,7 +16,7 @@ import kotlinx.coroutines.runBlocking
 @ExperimentalStdlibApi
 class XactRecordViewModel(application: Application) :
     ViewModelGeneric<XactRecordDao, XactRecord>(
-        AppDatabase.getInstance(application)?.xactDao()!!,
+        AppDatabase.getInstance(application)?.xactRecordDao()!!,
         application,
         ViewModelStoredMap()
     ),

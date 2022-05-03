@@ -1,7 +1,7 @@
 package common.model.master.stock
 
 import android.app.Application
-import com.vsg.agendaandpublication.common.data.AppDatabase
+import com.vsg.ot.common.data.AppDatabase
 import common.model.init.viewModel.ViewModelGenericOt
 import common.model.master.filter.TypeFilterNearExpired
 

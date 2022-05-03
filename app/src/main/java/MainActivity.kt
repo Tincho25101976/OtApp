@@ -14,7 +14,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         onEventMakeActivityForSelector = {
             val view: ScrollView = it.apply {
                 add(
-                    R.drawable.pic_xact,
+                    R.drawable.pic_xact_record,
                     getString(R.string.ActivityMainCommandSecurityDialog),
                     dataClass = MainSecurityDialog::class.java
                 )

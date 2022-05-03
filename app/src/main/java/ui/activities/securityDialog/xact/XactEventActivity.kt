@@ -4,25 +4,25 @@ import androidx.paging.PagingData
 import androidx.paging.filter
 import com.vsg.helper.ui.util.CurrentBaseActivityPagingGeneric
 import com.vsg.ot.R
-import com.vsg.ot.common.model.securityDialog.xact.process.XactProcess
-import com.vsg.ot.common.model.securityDialog.xact.process.XactProcessDao
-import com.vsg.ot.common.model.securityDialog.xact.process.XactProcessViewModel
+import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
+import com.vsg.ot.common.model.securityDialog.xact.event.XactEventDao
+import com.vsg.ot.common.model.securityDialog.xact.event.XactEventViewModel
 import com.vsg.ot.ui.activities.securityDialog.xact.util.FilterTypeActivityXactProcess
-import com.vsg.ot.ui.common.securityDigital.xact.process.UICRUDXactProcess
+import com.vsg.ot.ui.common.securityDigital.xact.event.UICRUDXactEvent
 
 @ExperimentalStdlibApi
-class XactProcessActivity :
-    CurrentBaseActivityPagingGeneric<XactProcessActivity, XactProcessViewModel,
-            XactProcessDao, XactProcess,
-            FilterTypeActivityXactProcess, UICRUDXactProcess<XactProcessActivity>>(
-        XactProcessViewModel::class.java,
+class XactEventActivity :
+    CurrentBaseActivityPagingGeneric<XactEventActivity, XactEventViewModel,
+            XactEventDao, XactEvent,
+            FilterTypeActivityXactProcess, UICRUDXactEvent<XactEventActivity>>(
+        XactEventViewModel::class.java,
         FilterTypeActivityXactProcess::class.java
     ) {
 
     override fun oSetStringTitleForActionBar(): Int = R.string.ActivityMainCommandProcess
     override fun aFinishExecute() {
         onEventMakeFilter = { item, find, it ->
-            val filter: PagingData<XactProcess> =
+            val filter: PagingData<XactEvent> =
                 when (item) {
                     FilterTypeActivityXactProcess.NAME -> it.filter { s ->
                         s.valueCode.contains(
@@ -34,6 +34,6 @@ class XactProcessActivity :
                 }
             filter
         }
-        onEventSetCRUDForApply = { context, operation -> UICRUDXactProcess(context, operation) }
+        onEventSetCRUDForApply = { context, operation -> UICRUDXactEvent(context, operation) }
     }
 }

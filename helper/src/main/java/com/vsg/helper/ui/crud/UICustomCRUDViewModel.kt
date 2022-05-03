@@ -5,11 +5,14 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.vsg.helper.R
 import com.vsg.helper.common.model.IIsDefault
 import com.vsg.helper.common.model.ItemBase
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.common.util.dao.IGenericDao
+import com.vsg.helper.common.util.viewModel.IViewModelView
 import com.vsg.helper.common.util.viewModel.MakeGenericViewModel
 import com.vsg.helper.helper.Helper.Companion.or
 import com.vsg.helper.helper.Helper.Companion.then
@@ -100,6 +103,17 @@ abstract class UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity>(
             result
         }
     }
+
+    //region viewModel
+    protected fun <TViewModelMake, TEntityMake> makeViewModel(type: Class<TViewModelMake>): TViewModelMake
+            where TViewModelMake : ViewModel,
+                  TViewModelMake : IViewModelView<TEntityMake>,
+                  TEntityMake : ItemBase {
+        return run {
+            ViewModelProvider(activity)[type]
+        }
+    }
+    //endregion
 
     protected open fun oFinishInit(view: View) {}
     override fun aActionForSetOperation() {}

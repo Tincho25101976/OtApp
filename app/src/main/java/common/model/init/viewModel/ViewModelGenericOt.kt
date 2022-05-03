@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.Pager
-import com.vsg.agendaandpublication.common.data.AppDatabase
+import com.vsg.ot.common.data.AppDatabase
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
 import com.vsg.helper.common.model.*
 import com.vsg.helper.common.util.dao.*

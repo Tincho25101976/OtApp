@@ -83,17 +83,6 @@ abstract class ChooseIEntitySpinner<TEntity, TViewModel>(
     //endregion
 
     protected abstract fun getDataSource(type: Class<TViewModel>) :List<TEntity>?
-//    protected fun setList() {
-//        val data: List<TEntity>? = onEventGetDataSource?.invoke(type)
-//        if (data == null || !data.any()) return
-//        spinner.setCustomAdapter(
-//            data,
-//            callBackItemSelect = {
-//                this@ChooseIEntitySpinner.item = it
-//                onEventItemSelected?.invoke(it)
-//            }
-//        )
-//    }
 
     fun setItem(item: TEntity?) {
         if (item == null) return

@@ -2,7 +2,7 @@ package com.vsg.ot.common.model.securityDialog.xact.sector
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.vsg.agendaandpublication.common.data.AppDatabase
+import com.vsg.ot.common.data.AppDatabase
 import com.vsg.helper.common.model.viewModel.ViewModelGeneric
 import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleList
 import com.vsg.helper.common.util.viewModel.IViewModelAllTextSearch

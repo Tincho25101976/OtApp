@@ -1,4 +1,4 @@
-package com.vsg.agendaandpublication.common.data
+package com.vsg.ot.common.data
 
 import android.content.Context
 import androidx.room.Database
@@ -6,7 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.vsg.helper.common.cast.Convert
-import com.vsg.ot.common.model.securityDialog.xact.process.XactProcessDao
+import com.vsg.ot.common.data.migration.file.Migration202204262051
+import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
+import com.vsg.ot.common.model.securityDialog.xact.event.XactEventDao
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorDao
 import common.data.convert.ConvertCurrentModel
 import common.model.master.batch.MasterBatch
@@ -21,7 +23,8 @@ import common.model.master.stock.MasterStock
 import common.model.master.stock.MasterStockDao
 import common.model.master.warehouse.MasterWarehouse
 import common.model.master.warehouse.MasterWarehouseDao
-import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecord
+import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
+import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
 import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecordDao
 
 @Database(
@@ -31,7 +34,7 @@ import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecordDao
         MasterBatch::class, MasterWarehouse::class,
         MasterSection::class, MasterStock::class,
 
-        XactRecord::class
+        XactRecord::class, XactSector::class, XactEvent::class
     ],
     //views = [
     //    ProvisioningViewRoom::class, TrackingViewRoom::class,
@@ -53,9 +56,9 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun stockDao(): MasterStockDao
 
     // securityDialog:
-    abstract fun xactDao(): XactRecordDao
+    abstract fun xactRecordDao(): XactRecordDao
     abstract fun xactSectorDao(): XactSectorDao
-    abstract fun xactProcessDao(): XactProcessDao
+    abstract fun xactEventDao(): XactEventDao
     //endregion
 
     companion object {
@@ -73,7 +76,7 @@ abstract class AppDatabase : RoomDatabase() {
                     DATABASE_NAME
                 )
                     .allowMainThreadQueries()
-//                    .addMigrations(Migration_20200222_1218())
+//                    .addMigrations(Migration202204262051())
                     .build()
             }
             return INSTANCE
