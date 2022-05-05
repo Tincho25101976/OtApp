@@ -6,12 +6,10 @@
     <integer name="CustomAdapterTextSize">16</integer>
 
     <!--Picture Size for recyclerView-->
-    <integer name="CustomSizePictureHeight">64</integer>
-    <integer name="CustomSizePictureWidth">64</integer>
-    <integer name="CustomSizeTextSize">24</integer>
+    <integer name="CustomSizePictureHeightForRecyclerView">64</integer>
+    <integer name="CustomSizePictureWidthForRecyclerView">64</integer>
+    <integer name="CustomSizeTitleTextSizeForRecyclerView">18</integer>
 
     <!--Text for CRUD View-->
     <integer name="CustomTextSizeCRUD">12</integer>
-
-
 </resources>

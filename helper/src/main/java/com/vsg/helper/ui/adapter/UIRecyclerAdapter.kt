@@ -1,6 +1,7 @@
 package com.vsg.helper.ui.adapter
 
 import android.graphics.Color
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,9 +31,9 @@ class UIRecyclerAdapter<T>(private val list: List<T>) :
             pic.setImageBitmap(null)
             if(data.isBitmap) pic.setImageBitmap(data.bitmap)
             else if (data.picture > 0)  pic.setImageResource(data.picture)
-            data.sizePictureHeight = resources.getInteger(R.integer.CustomSizePictureHeight)
-            data.sizePictureWidth = resources.getInteger(R.integer.CustomSizePictureWidth)
-            data.textSizeTitle = resources.getInteger(R.integer.CustomSizeTextSize)
+            data.sizePictureHeight = resources.getInteger(R.integer.CustomSizePictureHeightForRecyclerView)
+            data.sizePictureWidth = resources.getInteger(R.integer.CustomSizePictureWidthForRecyclerView)
+            data.textSizeTitle = resources.getInteger(R.integer.CustomSizeTitleTextSizeForRecyclerView)
             val layoutParams: LinearLayout.LayoutParams =
                 LinearLayout.LayoutParams(data.sizePictureWidth.toPixel(),
                                           data.sizePictureHeight.toPixel())
@@ -42,7 +43,7 @@ class UIRecyclerAdapter<T>(private val list: List<T>) :
 
             findViewById<TextView>(R.id.listItemRecyclerViewDataTitle).apply {
                 text = data.title
-                textSize = data.textSizeTitle.toFloat()
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, data.textSizeTitle.toFloat())
                 setTextColor(Color.BLACK)
                 onEventSetTextViewTitle?.invoke(this)
             }

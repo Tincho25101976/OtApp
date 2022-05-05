@@ -2,6 +2,8 @@ package com.vsg.ot.ui.common.securityDigital.xact.record
 
 import com.vsg.helper.common.format.FormatDateString
 import com.vsg.helper.common.operation.DBOperation
+import com.vsg.helper.helper.Helper.Companion.or
+import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.helper.date.HelperDate.Companion.date
 import com.vsg.helper.helper.date.HelperDate.Companion.nowDate
 import com.vsg.helper.helper.exception.HelperException.Companion.throwException
@@ -58,7 +60,7 @@ class UICRUDXactRecord<TActivity>(activity: TActivity, operation: DBOperation) :
                     callBackItemSelect = { sec ->
                         if (sec != null) this@UICRUDXactRecord.sector = sec
                     },
-                    selectItem = sector
+//                    selectItem = this@UICRUDXactRecord::sector.isInitialized then sector or XactSector()
                 )
             }
             this.tEvent = it.findViewById<CustomSpinner>(R.id.DialogXactRecordEvent).apply {
@@ -67,7 +69,7 @@ class UICRUDXactRecord<TActivity>(activity: TActivity, operation: DBOperation) :
                     callBackItemSelect = { sec ->
                         if (sec != null) this@UICRUDXactRecord.event = sec
                     },
-                    selectItem = event
+//                   selectItem = this@UICRUDXactRecord::event.isInitialized then event or XactEvent()
                 )
             }
 
@@ -118,7 +120,7 @@ class UICRUDXactRecord<TActivity>(activity: TActivity, operation: DBOperation) :
             result
         }
         onEventGetPopUpDataParameter = { p, item ->
-            p?.factorHeight = 0.25
+            p?.factorHeight = 0.75
             if (item != null) {
                 p?.icon = item.getDrawableShow().drawable
                 p?.bitmap = item.getPictureShow()

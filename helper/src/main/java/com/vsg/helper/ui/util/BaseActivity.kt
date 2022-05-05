@@ -1,6 +1,7 @@
 package com.vsg.helper.ui.util
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Typeface
@@ -129,7 +130,9 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
         var result: File? = null
         if (this.checkedPermissionCamera()) {
             val s = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            if (s.resolveActivity(this.packageManager) != null) {
+            if (applicationContext.packageManager.hasSystemFeature(
+                    PackageManager.FEATURE_CAMERA_ANY)) {
+
                 if (formatCamera) {
                     val fileCapture = this.getTempFileForCamera()
                     if (fileCapture != null) {
@@ -143,6 +146,20 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
                 }
                 if (!formatCamera) this.startActivityForResult(s, REQUEST_FOR_IMAGE_CAPTURE)
             }
+//            if (s.resolveActivity(this.packageManager) != null) {
+//                if (formatCamera) {
+//                    val fileCapture = this.getTempFileForCamera()
+//                    if (fileCapture != null) {
+//                        s.putExtra(MediaStore.EXTRA_OUTPUT, this.getURI(fileCapture))
+//                        val bundle = Bundle()
+//                        bundle.putString(getString(R.string.MsgData), fileCapture.absolutePath)
+//                        result = fileCapture
+//                        onEventPathForTakePhoto?.invoke(fileCapture)
+//                        this.startActivityForResult(s, REQUEST_FOR_TAKE_PHOTO, bundle)
+//                    }
+//                }
+//                if (!formatCamera) this.startActivityForResult(s, REQUEST_FOR_IMAGE_CAPTURE)
+//            }
         }
         return result
     }

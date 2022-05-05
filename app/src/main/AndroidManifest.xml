@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.vsg.ot">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
@@ -26,9 +29,9 @@
         <activity android:name=".ui.activities.securityDialog.main.MainSecurityDialog" />
 
         <activity android:name=".ui.activities.securityDialog.xact.main.MainXactRecord" />
-        <activity android:name=".ui.activities.securityDialog.xact.XactRecordActivity"/>
-        <activity android:name=".ui.activities.securityDialog.xact.XactEventActivity"/>
-        <activity android:name=".ui.activities.securityDialog.xact.XactSectorActivity"/>
+        <activity android:name=".ui.activities.securityDialog.xact.XactRecordActivity" />
+        <activity android:name=".ui.activities.securityDialog.xact.XactEventActivity" />
+        <activity android:name=".ui.activities.securityDialog.xact.XactSectorActivity" />
 
         <activity android:name=".ui.activities.master.main.MainMaster" />
         <activity android:name=".ui.activities.master.MasterBatchActivity" />

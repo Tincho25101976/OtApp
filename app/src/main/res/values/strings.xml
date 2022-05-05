@@ -3,13 +3,14 @@
 
 
     <!--ActivitySecurityDialog-->
+    <string name="ActivityMainCommandXact">My Xact</string>
     <string name="ActivityMainCommandSecurityDialog">Diálogos de seguridad</string>
-    <string name="ActivityMainCommandRecord">Registros</string>
+    <string name="ActivityMainCommandRecord">Condiciones inseguras</string>
     <string name="ActivityMainCommandSector">Sector</string>
     <string name="ActivityMainCommandProcess">Proceso</string>
 
     <!--Xact:-->
-    <string name="DialogXactEvento">Evento</string>
+    <string name="DialogXactEvent">Evento</string>
     <string name="DialogXactTitle">Título</string>
     <string name="DialogXactProcess">Proceso</string>
     <string name="DialogXactSector">Sector</string>

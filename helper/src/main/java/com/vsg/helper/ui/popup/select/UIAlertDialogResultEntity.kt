@@ -1,5 +1,6 @@
 package com.vsg.helper.ui.popup.select
 
+import android.util.TypedValue
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
 import androidx.lifecycle.lifecycleScope
@@ -102,6 +103,11 @@ abstract class UIAlertDialogResultEntity<TActivity, TViewModel, TEntity, TFilter
                 }
                 onEventGetItemAfterBind =
                     { t -> this@UIAlertDialogResultEntity.onEventGetItemAfterBind?.invoke(t) ?: t }
+//                onEventSetTextViewTitle = { _tv ->
+//                    val size = this@UIAlertDialogResultEntity.activity.resources.getInteger(R.integer.CustomAdapterTextSize).toFloat()
+//                    _tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, size)
+//                    val ttt = 4
+//                }
             }
             tRecycler.adapter = pagingAdapter
 

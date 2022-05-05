@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/DialogCrudPictureMargin"
-            android:hint="@string/DialogXactSector"
+            android:hint="@string/DialogXactEvent"
             android:padding="@dimen/DialogCrudTextPadding" />
 
     </RelativeLayout>

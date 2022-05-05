@@ -57,9 +57,9 @@
                 android:id="@+id/DialogXactRecordEvent"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 app:customSpinnerTextSize="@integer/CustomSpinnerTextSize"
-                app:customSpinnerTitle="@string/DialogXactEvento" />
+                app:customSpinnerTitle="@string/DialogXactEvent" />
 
             <com.vsg.helper.ui.widget.text.CustomInputText
                 android:id="@+id/DialogXactRecordDate"
@@ -86,7 +86,7 @@
                 android:id="@+id/DialogXactRecordSector"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 app:customSpinnerTextSize="@integer/CustomSpinnerTextSize"
                 app:customSpinnerTitle="@string/DialogXactSector" />
 
@@ -105,6 +105,7 @@
 
     <include
         layout="@layout/dialog_generic_item_base"
+        android:layout_marginTop="@dimen/DialogCrudPictureMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/DialogXactRecordData" />
