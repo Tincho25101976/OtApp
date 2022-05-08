@@ -158,7 +158,7 @@ class ChoosePicture(
                         layoutParams = makeCustomLayoutRelativeLayout().apply {
                             height = RelativeLayout.LayoutParams.WRAP_CONTENT
                             width = RelativeLayout.LayoutParams.MATCH_PARENT
-                            addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
+                            addRule(RelativeLayout.ALIGN_PARENT_TOP)
                         }
                         addView(commandsContainer)
                     })
@@ -202,11 +202,12 @@ class ChoosePicture(
     }
 
     private fun setViewPicture(format: TypeFormatChoosePicture): CustomImageViewDobleTap {
+        val dimensionCommand = 256.toPixel(activity)
         return CustomImageViewDobleTap(activity).apply {
             id = View.generateViewId()
             layoutParams = when (format) {
                 TypeFormatChoosePicture.DEFAULT -> {
-                    val dimensionCommand = 256.toPixel(activity)
+
                     makeCustomLayoutRelativeLayout().apply {
                         height = dimensionCommand
                         width = dimensionCommand
@@ -215,9 +216,11 @@ class ChoosePicture(
                 }
                 TypeFormatChoosePicture.COMMAND_BOTTOM -> {
                     makeCustomLayoutRelativeLayout().apply {
-                        height = RelativeLayout.LayoutParams.MATCH_PARENT
-                        width = RelativeLayout.LayoutParams.MATCH_PARENT
-                        addRule(RelativeLayout.ALIGN_PARENT_TOP)
+//                        height = RelativeLayout.LayoutParams.MATCH_PARENT
+//                        width = RelativeLayout.LayoutParams.MATCH_PARENT
+                        height = dimensionCommand
+                        width = dimensionCommand
+                        addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
                         topMargin = 65.toPixel(activity)
                     }
                 }

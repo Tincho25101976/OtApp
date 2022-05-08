@@ -3,12 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <LinearLayout
-        android:id="@+id/CustomAlertDialogResultContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/CustomDialogActionResultCommandMarginBottomContainer"
-        android:orientation="vertical">
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="@dimen/CustomDialogActionResultCommandMarginBottomContainer">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/CustomAlertDialogResultContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/CustomDialogActionResultCommandMarginBottomContainer"
+                android:orientation="vertical" />
+        </ScrollView>
     </LinearLayout>
 
     <RelativeLayout
@@ -22,18 +34,18 @@
             android:id="@+id/CustomAlertDialogResultOK"
             android:layout_width="@dimen/CustomDialogActionResultCommandSize"
             android:layout_height="@dimen/CustomDialogActionResultCommandSize"
+            android:layout_alignParentStart="true"
             android:layout_marginStart="@dimen/CustomDialogActionResultCommandMarginStartEnd"
             android:layout_marginBottom="@dimen/CustomDialogActionResultCommandMarginTopBottom"
-            android:layout_alignParentStart="true"
             android:src="@drawable/pic_ok" />
 
         <ImageView
             android:id="@+id/CustomAlertDialogResultCancel"
             android:layout_width="@dimen/CustomDialogActionResultCommandSize"
             android:layout_height="@dimen/CustomDialogActionResultCommandSize"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/CustomDialogActionResultCommandMarginStartEnd"
             android:layout_marginBottom="@dimen/CustomDialogActionResultCommandMarginTopBottom"
-            android:layout_alignParentEnd="true"
             android:src="@drawable/pic_temporal_vencida" />
 
     </RelativeLayout>

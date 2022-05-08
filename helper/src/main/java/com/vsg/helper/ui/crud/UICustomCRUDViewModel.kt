@@ -8,10 +8,12 @@ import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.vsg.helper.R
+import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.model.IIsDefault
 import com.vsg.helper.common.model.ItemBase
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.common.util.dao.IGenericDao
+import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleListWithRelation
 import com.vsg.helper.common.util.viewModel.IViewModelView
 import com.vsg.helper.common.util.viewModel.MakeGenericViewModel
 import com.vsg.helper.helper.Helper.Companion.or
@@ -21,6 +23,7 @@ import com.vsg.helper.ui.util.CurrentBaseActivity
 import com.vsg.helper.ui.widget.spinner.CustomSpinner
 import com.vsg.helper.ui.widget.text.CustomInputText
 import kotlin.reflect.full.createInstance
+import kotlin.reflect.typeOf
 
 abstract class UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity>(
     activity: TActivity,
@@ -184,5 +187,14 @@ abstract class UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity>(
 
     protected inline fun <reified R : IIsDefault> isEntityOnlyOneDefaultTrue(): Boolean {
         return R::class.createInstance().isEntityOnlyDefault
+    }
+
+    protected fun <TViewModelMake, TEntityMake> getEntityWithRelation(type: Class<TViewModelMake>, id: Int): TEntityMake?
+            where TEntityMake : IEntity,
+                  TEntityMake : ItemBase,
+                  TViewModelMake : ViewModel,
+                  TViewModelMake : IViewModelView<TEntityMake>,
+                  TViewModelMake: IViewModelAllSimpleListWithRelation<TEntityMake> {
+        return makeViewModel(type).viewModelViewWithRelations(id)
     }
 }

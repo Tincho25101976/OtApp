@@ -10,7 +10,7 @@ import common.model.master.relationship.CompanyBatch
 import common.model.master.relationship.CompanyItem
 
 @Dao
-abstract class MasterCompanyDao: DaoGenericOt<MasterCompany>() {
+abstract class MasterCompanyDao : DaoGenericOt<MasterCompany>() {
     //region relationShip
     @Transaction
     @Query("SELECT * FROM ${MasterCompany.ENTITY_NAME} WHERE id = :id ORDER BY description")

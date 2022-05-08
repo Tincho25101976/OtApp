@@ -15,7 +15,7 @@ class MainXactRecord : BaseActivity(R.layout.sub_main_xact) {
             val view: ScrollView = it.apply {
                 add(
                     R.drawable.pic_xact_record,
-                    getString(R.string.ActivityXactText),
+                    getString(R.string.ActivityXactRecordText),
                     dataClass = XactRecordActivity::class.java
                 )
                 add(

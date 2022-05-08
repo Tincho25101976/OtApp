@@ -5,8 +5,8 @@ import androidx.paging.filter
 import com.vsg.helper.ui.util.CurrentBaseActivityPagingGeneric
 import com.vsg.ot.R
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
-import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecordDao
-import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecordViewModel
+import com.vsg.ot.common.model.securityDialog.xact.record.XactRecordDao
+import com.vsg.ot.common.model.securityDialog.xact.record.XactRecordViewModel
 import com.vsg.ot.ui.common.securityDigital.xact.record.UICRUDXactRecord
 import ui.activities.securityDialog.xact.util.FilterTypeActivityXactRecord
 

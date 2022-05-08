@@ -62,7 +62,7 @@ class MasterBatch : EntityOtCompany<MasterBatch>(), IMasterItem {
             return try {
                 if (item == null) return 0.0
                 if (item!!.shellLife <= 0) return 0.0
-                if (dueDate == null || createDate == null) return 0.0
+                if (dueDate == null) return 0.0
                 val rango: Long = dueDate.toPeriod(createDate)
                 if (rango <= 0) return 0.0
                 ((rango * 100) / item!!.shellLife).toDouble()

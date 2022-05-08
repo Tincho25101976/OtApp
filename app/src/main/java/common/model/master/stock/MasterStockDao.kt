@@ -56,9 +56,10 @@ abstract class MasterStockDao : DaoGenericOtCompany<MasterStock>() {
                 "WHERE st.idCompany = :idRelation " +
                 "       AND DATE('now', 'localtime') <= bt.dueDate " +
                 "       AND p.shellLife >= JulianDay(bt.dueDate) - JulianDay(DATE('now', 'localtime')) " +
-        "ORDER BY description"
+                "ORDER BY description"
     )
     abstract fun getNearExpiredByCompany(idRelation: Int): List<MasterStock>?
+
     @Query(
         "SELECT " +
                 "st.* " +
@@ -73,6 +74,7 @@ abstract class MasterStockDao : DaoGenericOtCompany<MasterStock>() {
                 "ORDER BY description"
     )
     abstract fun getNearExpiredByItem(idRelation: Int): List<MasterStock>?
+
     @Query(
         "SELECT " +
                 "st.* " +
@@ -87,6 +89,7 @@ abstract class MasterStockDao : DaoGenericOtCompany<MasterStock>() {
                 "ORDER BY description"
     )
     abstract fun getNearExpiredBySection(idRelation: Int): List<MasterStock>?
+
     @Query(
         "SELECT " +
                 "st.* " +

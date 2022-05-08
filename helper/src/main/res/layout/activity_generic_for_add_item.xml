@@ -47,8 +47,11 @@
         android:id="@+id/ActivityGenericForAddItemRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/ActivityGenericForAddItemCardViewMargin"
-        android:layout_below="@id/ActivityGenericForAddItemCardView"/>
+        android:layout_below="@id/ActivityGenericForAddItemCardView"
+        android:layout_marginStart="@dimen/ActivityGenericForAddItemCardViewMargin"
+        android:layout_marginTop="@dimen/ActivityGenericForAddItemCardViewMargin"
+        android:layout_marginEnd="@dimen/ActivityGenericForAddItemCardViewMargin"
+        android:layout_marginBottom="@dimen/ActivityGenericForAddItemCardViewMargin" />
 
     <ImageView
         android:id="@+id/ActivityGenericForAddItemAdd"

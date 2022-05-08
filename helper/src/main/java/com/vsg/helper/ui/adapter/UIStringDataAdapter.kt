@@ -22,7 +22,6 @@ class UIStringDataAdapter(context: Activity, list: List<String>, val ignoreCase:
 
     override fun getCount(): Int = temp.size
     override fun setView(view: View, item: String, position: Int) {
-        //view.findViewById<TextView>(R.id.listItemString)
         view.findViewById<TextView>(R.id.listItemString).apply {
             text = getItem(position)
             onEventSetTextView?.invoke(this)

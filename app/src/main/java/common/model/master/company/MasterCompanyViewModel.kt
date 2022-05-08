@@ -3,9 +3,9 @@ package common.model.master.company
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.paging.Pager
-import com.vsg.ot.common.data.AppDatabase
 import com.vsg.helper.common.model.viewModel.ViewModelGeneric
 import com.vsg.helper.common.util.viewModel.*
+import com.vsg.ot.common.data.AppDatabase
 import common.model.init.viewModel.ViewModelStoredMap
 import common.model.master.filter.TypeFilterHasCompanyItems
 import common.model.master.item.MasterItemViewModel
@@ -39,7 +39,7 @@ class MasterCompanyViewModel(application: Application) :
 
     override fun viewModelViewAllSimpleList(): List<MasterCompany> =
         dao.viewAllSimpleList() ?: listOf()
-
+    
     override fun viewModelViewHasItems(
         idRelation: Int,
         filter: TypeFilterHasCompanyItems

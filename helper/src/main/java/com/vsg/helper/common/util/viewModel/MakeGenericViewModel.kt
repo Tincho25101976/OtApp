@@ -81,6 +81,10 @@ abstract class MakeGenericViewModel<TDao, TEntity>(
             return@runBlocking dao.viewAll() ?: MutableLiveData()
         }
 
+//    //region storeEntity
+//    private val storedMap: List<TEntityStored> where TEntityStored: IEntity
+//    //endregion
+
     //region withInclude
     fun viewModelView(
         id: Int,

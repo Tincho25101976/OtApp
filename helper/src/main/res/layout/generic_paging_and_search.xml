@@ -58,6 +58,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/ActivityGenericLayoutSearch"
-        android:layout_margin="@dimen/ActivityGenericRecyclerMargin" />
+        android:layout_marginStart="@dimen/ActivityGenericRecyclerMargin"
+        android:layout_marginTop="@dimen/ActivityGenericRecyclerMargin"
+        android:layout_marginEnd="@dimen/ActivityGenericRecyclerMargin"
+        android:layout_marginBottom="@dimen/ActivityGenericRecyclerMargin" />
 
 </RelativeLayout>

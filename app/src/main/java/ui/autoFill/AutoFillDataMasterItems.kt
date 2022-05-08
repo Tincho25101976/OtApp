@@ -45,7 +45,7 @@ class AutoFillDataMasterItems(app: BaseActivity) : AutoFillDataBase(app) {
             temp.forEach {
                 this.viewModelInsert(it)
             }
-            getMessage(temp.count(), "MasterItemo", "MasterItemos")
+            getMessage(temp.count(), "MasterItem", "MasterItems")
         }
     }
 

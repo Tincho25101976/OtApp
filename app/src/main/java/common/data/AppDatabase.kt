@@ -6,7 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.vsg.helper.common.cast.Convert
-import com.vsg.ot.common.data.migration.file.Migration202204262051
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEventDao
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorDao
@@ -25,7 +24,7 @@ import common.model.master.warehouse.MasterWarehouse
 import common.model.master.warehouse.MasterWarehouseDao
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
-import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecordDao
+import com.vsg.ot.common.model.securityDialog.xact.record.XactRecordDao
 
 @Database(
     entities =

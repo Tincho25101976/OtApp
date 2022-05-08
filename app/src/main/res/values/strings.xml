@@ -50,7 +50,7 @@
     <string name="ActivityItemProductPriceText">Precios por producto</string>
     <string name="ActivityItemProductPictureText">Imágenes por producto</string>
 
-    <string name="ActivityXactText">Xact</string>
+    <string name="ActivityXactRecordText">Registros</string>
     <string name="ActivityXactSectorText">Sector</string>
     <string name="ActivityXactProcessText">Proceso</string>
 

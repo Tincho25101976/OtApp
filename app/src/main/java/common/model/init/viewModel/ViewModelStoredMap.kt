@@ -5,18 +5,22 @@ import com.vsg.helper.common.model.viewModel.IViewModelStoredMap
 import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleListIdRelation
 import com.vsg.helper.common.util.viewModel.IViewModelView
 import com.vsg.helper.common.util.viewModel.util.DataMakeViewModelView
+import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
+import com.vsg.ot.common.model.securityDialog.xact.event.XactEventViewModel
+import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
+import com.vsg.ot.common.model.securityDialog.xact.record.XactRecordViewModel
+import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
+import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorViewModel
 import common.model.master.batch.MasterBatch
 import common.model.master.batch.MasterBatchViewModel
-import common.model.master.company.MasterCompanyViewModel
 import common.model.master.company.MasterCompany
+import common.model.master.company.MasterCompanyViewModel
 import common.model.master.item.MasterItem
 import common.model.master.item.MasterItemViewModel
 import common.model.master.section.MasterSection
 import common.model.master.section.MasterSectionViewModel
 import common.model.master.warehouse.MasterWarehouse
 import common.model.master.warehouse.MasterWarehouseViewModel
-import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
-import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecordViewModel
 import kotlin.reflect.KType
 import kotlin.reflect.typeOf
 
@@ -25,12 +29,23 @@ class ViewModelStoredMap : IViewModelStoredMap {
 
     private fun storedInstanceOfViewModelView(context: Application): MutableList<DataMakeViewModelView<*, *>> {
         val data: MutableList<DataMakeViewModelView<*, *>> = mutableListOf()
+
+        // Master:
         data.add(DataMakeViewModelView(typeOf<MasterItem>(), MasterItemViewModel(context)))
         data.add(DataMakeViewModelView(typeOf<MasterCompany>(), MasterCompanyViewModel(context)))
         data.add(DataMakeViewModelView(typeOf<MasterBatch>(), MasterBatchViewModel(context)))
-        data.add(DataMakeViewModelView(typeOf<MasterWarehouse>(), MasterWarehouseViewModel(context)))
+        data.add(
+            DataMakeViewModelView(
+                typeOf<MasterWarehouse>(),
+                MasterWarehouseViewModel(context)
+            )
+        )
         data.add(DataMakeViewModelView(typeOf<MasterSection>(), MasterSectionViewModel(context)))
+
+        // Xact (Records)
         data.add(DataMakeViewModelView(typeOf<XactRecord>(), XactRecordViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<XactEvent>(), XactEventViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<XactSector>(), XactSectorViewModel(context)))
         return data
     }
 

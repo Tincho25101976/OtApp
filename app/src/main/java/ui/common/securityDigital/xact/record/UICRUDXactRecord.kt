@@ -2,8 +2,6 @@ package com.vsg.ot.ui.common.securityDigital.xact.record
 
 import com.vsg.helper.common.format.FormatDateString
 import com.vsg.helper.common.operation.DBOperation
-import com.vsg.helper.helper.Helper.Companion.or
-import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.helper.date.HelperDate.Companion.date
 import com.vsg.helper.helper.date.HelperDate.Companion.nowDate
 import com.vsg.helper.helper.exception.HelperException.Companion.throwException
@@ -16,10 +14,10 @@ import com.vsg.ot.R
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEventViewModel
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
+import com.vsg.ot.common.model.securityDialog.xact.record.XactRecordDao
+import com.vsg.ot.common.model.securityDialog.xact.record.XactRecordViewModel
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorViewModel
-import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecordDao
-import com.vsg.ot.common.model.securityDialog.xact.xact.XactRecordViewModel
 import common.model.master.item.type.TypePlant
 
 @ExperimentalStdlibApi
@@ -48,7 +46,13 @@ class UICRUDXactRecord<TActivity>(activity: TActivity, operation: DBOperation) :
 
     init {
         onEventSetInit = {
-            choosePicture = ChoosePicture(it, activity)
+            choosePicture = ChoosePicture(
+                it,
+                activity,
+                ChoosePicture.TypeFormatChoosePicture.COMMAND_BOTTOM
+            ).apply {
+
+            }
             this.tCaption = it.findViewById(R.id.DialogXactRecordTitle)
 
             this.tPlant = it.findViewById<CustomSpinner>(R.id.DialogXactRecordPlant).apply {
@@ -60,7 +64,6 @@ class UICRUDXactRecord<TActivity>(activity: TActivity, operation: DBOperation) :
                     callBackItemSelect = { sec ->
                         if (sec != null) this@UICRUDXactRecord.sector = sec
                     },
-//                    selectItem = this@UICRUDXactRecord::sector.isInitialized then sector or XactSector()
                 )
             }
             this.tEvent = it.findViewById<CustomSpinner>(R.id.DialogXactRecordEvent).apply {
@@ -69,7 +72,6 @@ class UICRUDXactRecord<TActivity>(activity: TActivity, operation: DBOperation) :
                     callBackItemSelect = { sec ->
                         if (sec != null) this@UICRUDXactRecord.event = sec
                     },
-//                   selectItem = this@UICRUDXactRecord::event.isInitialized then event or XactEvent()
                 )
             }
 
@@ -83,9 +85,9 @@ class UICRUDXactRecord<TActivity>(activity: TActivity, operation: DBOperation) :
             val data = it ?: XactRecord()
             data.apply {
                 this.caption = tCaption.text
-                this.idEvent = event?.id ?: 0
+                this.idEvent = this@UICRUDXactRecord.event.id ?: 0
                 this.event = this@UICRUDXactRecord.event
-                this.idSector = sector?.id ?: 0
+                this.idSector = this@UICRUDXactRecord.sector.id ?: 0
                 this.sector = this@UICRUDXactRecord.sector
                 this.planta = tPlant.getItemEnumOrDefault() ?: TypePlant.UNDEFINED
                 this.createDate = tDate.date ?: nowDate()
@@ -120,10 +122,12 @@ class UICRUDXactRecord<TActivity>(activity: TActivity, operation: DBOperation) :
             result
         }
         onEventGetPopUpDataParameter = { p, item ->
-            p?.factorHeight = 0.75
+            p?.factorHeight = 0.45
             if (item != null) {
-                p?.icon = item.getDrawableShow().drawable
-                p?.bitmap = item.getPictureShow()
+                val temp = getEntityWithRelation(XactRecordViewModel::class.java, item.id) ?: item
+                p?.icon = temp.getDrawableShow().drawable
+                p?.bitmap = temp.getPictureShow()
+                p?.toHtml = temp.reference()
             }
             p
         }

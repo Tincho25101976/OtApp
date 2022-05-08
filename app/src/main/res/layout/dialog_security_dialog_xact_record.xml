@@ -19,15 +19,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/DialogXactRecordPicture" />
 
-        <!--        <com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap-->
-        <!--            android:id="@+id/DialogXactRecordPicture"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="@dimen/DialogXactRecordPictureSize"-->
-        <!--            android:layout_margin="@dimen/DialogCrudPictureMargin"-->
-        <!--            android:background="@drawable/shadow_view"-->
-        <!--            android:scaleType="fitCenter"-->
-        <!--            android:src="@drawable/pic_camera_alpha" />-->
-
     </RelativeLayout>
 
     <com.vsg.helper.ui.widget.text.CustomInputText
@@ -39,75 +30,48 @@
         android:hint="@string/DialogXactTitle"
         android:padding="@dimen/DialogCrudTextPadding" />
 
-    <RelativeLayout
-        android:id="@+id/DialogXactRecordData"
+    <com.vsg.helper.ui.widget.spinner.CustomSpinner
+        android:id="@+id/DialogXactRecordEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/DialogXactRecordTitle">
+        android:layout_below="@+id/DialogXactRecordTitle"
+        android:layout_marginTop="@dimen/DialogCrudPictureMargin"
+        app:customSpinnerTextSize="@integer/CustomSpinnerTextSize"
+        app:customSpinnerTitle="@string/DialogXactEvent" />
 
-        <LinearLayout
-            android:id="@+id/DialogXactRecordEventDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:gravity="center"
-            android:orientation="horizontal">
+    <com.vsg.helper.ui.widget.text.CustomInputText
+        android:id="@+id/DialogXactRecordDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DialogXactRecordEvent"
+        android:layout_marginTop="@dimen/DialogCrudPictureMargin"
+        android:hint="@string/DialogXactDate"
+        android:padding="@dimen/DialogCrudTextPadding"
+        app:customType="DATE" />
 
-            <com.vsg.helper.ui.widget.spinner.CustomSpinner
-                android:id="@+id/DialogXactRecordEvent"
-                android:layout_width="0sp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:customSpinnerTextSize="@integer/CustomSpinnerTextSize"
-                app:customSpinnerTitle="@string/DialogXactEvent" />
+    <com.vsg.helper.ui.widget.spinner.CustomSpinner
+        android:id="@+id/DialogXactRecordSector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DialogXactRecordDate"
+        android:layout_marginTop="@dimen/DialogCrudPictureMargin"
+        app:customSpinnerTextSize="@integer/CustomSpinnerTextSize"
+        app:customSpinnerTitle="@string/DialogXactSector" />
 
-            <com.vsg.helper.ui.widget.text.CustomInputText
-                android:id="@+id/DialogXactRecordDate"
-                android:layout_width="0sp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/DialogCrudPictureMargin"
-                android:layout_marginTop="@dimen/DialogCrudPictureMargin"
-                android:layout_weight="1"
-                android:hint="@string/DialogXactDate"
-                android:padding="@dimen/DialogCrudTextPadding"
-                app:customType="DATE" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/DialogXactRecordSectorPlant"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/DialogXactRecordEventDate"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <com.vsg.helper.ui.widget.spinner.CustomSpinner
-                android:id="@+id/DialogXactRecordSector"
-                android:layout_width="0sp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:customSpinnerTextSize="@integer/CustomSpinnerTextSize"
-                app:customSpinnerTitle="@string/DialogXactSector" />
-
-            <com.vsg.helper.ui.widget.spinner.CustomSpinner
-                android:id="@+id/DialogXactRecordPlant"
-                android:layout_width="0sp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/DialogCrudPictureMargin"
-                android:layout_weight="1"
-                app:customSpinnerTextSize="@integer/CustomSpinnerTextSize"
-                app:customSpinnerTitle="@string/DialogXactPlant" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    <com.vsg.helper.ui.widget.spinner.CustomSpinner
+        android:id="@+id/DialogXactRecordPlant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DialogXactRecordSector"
+        android:layout_marginTop="@dimen/DialogCrudPictureMargin"
+        app:customSpinnerTextSize="@integer/CustomSpinnerTextSize"
+        app:customSpinnerTitle="@string/DialogXactPlant" />
 
     <include
         layout="@layout/dialog_generic_item_base"
-        android:layout_marginTop="@dimen/DialogCrudPictureMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/DialogXactRecordData" />
+        android:layout_below="@+id/DialogXactRecordPlant"
+        android:layout_marginTop="@dimen/DialogCrudPictureMargin" />
 
 </RelativeLayout>

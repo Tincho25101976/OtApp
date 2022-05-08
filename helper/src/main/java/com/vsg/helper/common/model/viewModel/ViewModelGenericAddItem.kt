@@ -11,7 +11,11 @@ import com.vsg.helper.common.util.viewModel.IViewModelView
 import kotlin.reflect.KType
 
 @ExperimentalStdlibApi
-abstract class ViewModelGenericAddItem<TDao, TEntity>(dao: TDao, context: Application, stored: IViewModelStoredMap) :
+abstract class ViewModelGenericAddItem<TDao, TEntity>(
+    dao: TDao,
+    context: Application,
+    stored: IViewModelStoredMap
+) :
     MakeGenericAddItemViewModel<TDao, TEntity>(dao, context, stored),
     IViewModelUpdateIsDefault<TEntity>
         where TDao : IAddItemDao<TEntity>,

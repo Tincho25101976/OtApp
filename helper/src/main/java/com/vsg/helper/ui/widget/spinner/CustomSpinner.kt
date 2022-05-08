@@ -177,8 +177,6 @@ class CustomSpinner @JvmOverloads constructor(
         tTitle = TextView(ctx).apply {
             textSize = customTextSize
             setTypeface(Typeface.DEFAULT_BOLD, Typeface.BOLD_ITALIC)
-//            setBackgroundColor(customBackColor)
-//            setTextColor(this@CustomSpinner.customTextColor)
             layoutParams =
                 HelperUI.makeCustomLayoutRelativeLayout(TypeMakeLayoutParameter.WIDTH_WRAP_HEIGHT_WRAP)
                     .apply {
@@ -300,7 +298,8 @@ class CustomSpinner @JvmOverloads constructor(
         type: Class<T>,
         callBackItemSelect: ((T?) -> Unit)? = null,
         callBackSetTextView: ((TextView) -> Unit)? = { t -> t.setTextColor(customTextColor) },
-        selectItem: T? = null
+        selectItem: T? = null,
+        customTextSize: Int = resources.getInteger(R.integer.CustomSpinnerTitleTextSize)
     ): UIDataAdapterGenericEnum<T>?
             where T : IDataAdapterEnum,
                   T : Enum<T> {
@@ -315,6 +314,7 @@ class CustomSpinner @JvmOverloads constructor(
                 callBackSetTextView,
                 selectItem
             )
+            this.customTextSize = customTextSize.toFloat()
             this.adapterType = AdapterType.ENUM
         } catch (ex: Exception) {
             this.adapterType = AdapterType.UNDEFINED

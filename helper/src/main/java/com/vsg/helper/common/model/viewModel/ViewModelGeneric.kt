@@ -14,6 +14,7 @@ import com.vsg.helper.common.util.viewModel.IViewModelView
 import com.vsg.helper.common.util.viewModel.MakeGenericViewModelPaging
 import kotlinx.coroutines.runBlocking
 import kotlin.reflect.KType
+import kotlin.reflect.typeOf
 
 @ExperimentalStdlibApi
 abstract class ViewModelGeneric<TDao, TEntity>(
@@ -50,6 +51,16 @@ abstract class ViewModelGeneric<TDao, TEntity>(
         dao.updateSetEnabled(item.id)
     }
     //endregion
+
+    //region entityRelation
+    protected inline fun <reified TEntityStored> getEntityWithRelation(id: Int): TEntityStored?
+            where TEntityStored : IEntity {
+        if (id <= 0) return null
+        return stored.getInstanceOfIViewModelView(typeOf<TEntityStored>(), context)
+            ?.viewModelView(id) as TEntityStored?
+    }
+    //endrelation
+
 
 //    //region paging
 //    val viewModelGetViewAllPaging = runBlocking {
