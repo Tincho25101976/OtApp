@@ -1,6 +1,5 @@
 package com.vsg.ot.common.model.securityDialog.xact.record
 
-import android.graphics.Bitmap
 import android.text.Spanned
 import androidx.annotation.DrawableRes
 import androidx.room.ColumnInfo
@@ -10,12 +9,11 @@ import androidx.room.Index
 import com.vsg.helper.common.model.EntityForeignKeyID
 import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
-import com.vsg.helper.helper.string.HelperString.Static.toOneLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
+import com.vsg.ot.common.model.init.entity.EntityOtWithPicture
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
-import common.model.init.entity.EntityOt
 import common.model.master.item.type.TypePlant
 import java.util.*
 
@@ -28,10 +26,10 @@ import java.util.*
     inheritSuperIndices = true,
     tableName = XactRecord.ENTITY_NAME
 )
-class XactRecord : EntityOt<XactRecord>() {
+class XactRecord : EntityOtWithPicture<XactRecord>() {
     //region properties
-    @ColumnInfo(name = "picture", typeAffinity = ColumnInfo.BLOB)
-    var picture: ByteArray? = null
+//    @ColumnInfo(name = "picture", typeAffinity = ColumnInfo.BLOB)
+//    override var picture: ByteArray? = null
     var planta: TypePlant = TypePlant.UNDEFINED
     var updateDate: Date? = null
     var caption: String = ""
@@ -54,14 +52,14 @@ class XactRecord : EntityOt<XactRecord>() {
     //endregion
 
     // recycler adapter
-    override val isBitmap: Boolean
-        get() = true
+//    override val isBitmap: Boolean
+//        get() = true
     override val title: String
         get() = this.caption
 
-    override fun oGetPictureShow(): ByteArray? {
-        return this.picture
-    }
+//    override fun oGetPictureShow(): ByteArray? {
+//        return this.picture
+//    }
 
     override fun descriptionSpanned(): Spanned {
         val sb = StringBuilder()

@@ -3,6 +3,7 @@ package com.vsg.ot.ui.common.securityDigital.xact.record
 import com.vsg.helper.common.format.FormatDateString
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.helper.date.HelperDate.Companion.date
+import com.vsg.helper.helper.date.HelperDate.Companion.now
 import com.vsg.helper.helper.date.HelperDate.Companion.nowDate
 import com.vsg.helper.helper.exception.HelperException.Companion.throwException
 import com.vsg.helper.ui.crud.UICustomCRUDViewModel
@@ -93,6 +94,7 @@ class UICRUDXactRecord<TActivity>(activity: TActivity, operation: DBOperation) :
                 this.createDate = tDate.date ?: nowDate()
                 this.picture = choosePicture.getArray()
             }
+            if (operation == DBOperation.UPDATE) data.updateDate = now()
             data
         }
         onEventSetItem = {

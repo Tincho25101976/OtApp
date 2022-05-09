@@ -8,7 +8,15 @@ import androidx.room.TypeConverters
 import com.vsg.helper.common.cast.Convert
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEventDao
+import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
+import com.vsg.ot.common.model.securityDialog.xact.record.XactRecordDao
+import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorDao
+import com.vsg.ot.common.model.setting.menu.SettingMenuDao
+import com.vsg.ot.common.model.setting.profile.SettingProfileDao
+import com.vsg.ot.common.model.setting.profile.menu.SettingProfileMenuDao
+import com.vsg.ot.common.model.setting.profile.user.SettingProfileUserDao
+import com.vsg.ot.common.model.setting.user.SettingUserDao
 import common.data.convert.ConvertCurrentModel
 import common.model.master.batch.MasterBatch
 import common.model.master.batch.MasterBatchDao
@@ -22,9 +30,6 @@ import common.model.master.stock.MasterStock
 import common.model.master.stock.MasterStockDao
 import common.model.master.warehouse.MasterWarehouse
 import common.model.master.warehouse.MasterWarehouseDao
-import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
-import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
-import com.vsg.ot.common.model.securityDialog.xact.record.XactRecordDao
 
 @Database(
     entities =
@@ -58,6 +63,14 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun xactRecordDao(): XactRecordDao
     abstract fun xactSectorDao(): XactSectorDao
     abstract fun xactEventDao(): XactEventDao
+    //endregion
+
+    //region setting
+    abstract fun settingUserDao(): SettingUserDao
+    abstract fun settingMenuDao(): SettingMenuDao
+    abstract fun settingProfileDao(): SettingProfileDao
+    abstract fun settingProfileMenuDao(): SettingProfileMenuDao
+    abstract fun settingProfileUserDao(): SettingProfileUserDao
     //endregion
 
     companion object {

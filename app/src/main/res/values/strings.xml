@@ -2,14 +2,14 @@
     <string name="app_name">Ot</string>
 
 
-    <!--ActivitySecurityDialog-->
+    <!--ActivitySecurityDialog (Main)-->
     <string name="ActivityMainCommandXact">My Xact</string>
     <string name="ActivityMainCommandSecurityDialog">Diálogos de seguridad</string>
     <string name="ActivityMainCommandRecord">Condiciones inseguras</string>
     <string name="ActivityMainCommandSector">Sector</string>
     <string name="ActivityMainCommandProcess">Proceso</string>
 
-    <!--Xact:-->
+    <!--Xact (Registro):-->
     <string name="DialogXactEvent">Evento</string>
     <string name="DialogXactTitle">Título</string>
     <string name="DialogXactProcess">Proceso</string>
@@ -49,6 +49,7 @@
     <string name="ActivityItemTypePlantText">Tipo de planta</string>
     <string name="ActivityItemProductPriceText">Precios por producto</string>
     <string name="ActivityItemProductPictureText">Imágenes por producto</string>
+
 
     <string name="ActivityXactRecordText">Registros</string>
     <string name="ActivityXactSectorText">Sector</string>
