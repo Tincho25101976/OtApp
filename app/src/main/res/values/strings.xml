@@ -9,6 +9,14 @@
     <string name="ActivityMainCommandSector">Sector</string>
     <string name="ActivityMainCommandProcess">Proceso</string>
 
+    <!--    ActivitySetting (Main):-->
+    <string name="ActivityMainCommandSetting">Setting</string>
+    <string name="ActivityMainCommandSettingUser">Usuarios</string>
+    <string name="ActivityMainCommandSettingMenu">Menus</string>
+    <string name="ActivityMainCommandSettingProfile">Perfiles</string>
+    <string name="ActivityMainCommandSettingProfileUser">Perfiles por Usuario</string>
+    <string name="ActivityMainCommandSettingProfileMenu">Menus por perfiles</string>
+
     <!--Xact (Registro):-->
     <string name="DialogXactEvent">Evento</string>
     <string name="DialogXactTitle">Título</string>
@@ -16,6 +24,11 @@
     <string name="DialogXactSector">Sector</string>
     <string name="DialogXactPlant">Planta</string>
     <string name="DialogXactDate">Fecha</string>
+
+<!--    Setting (User):-->
+    <string name="DialogSettingUserName">Nombre</string>
+    <string name="DialogSettingUserId">Id(LX)</string>
+    <string name="DialogSettingUserPlant">Planta</string>
 
     <!--ActivityMain:-->
     <string name="ActivityMainCommandMaster">Master</string>
@@ -75,8 +88,6 @@
 
     <!--ActionResultForOperation-->
     <string name="ActionResultForSection">Localizaciones</string>
-
-
 
 
     <!--Company:-->

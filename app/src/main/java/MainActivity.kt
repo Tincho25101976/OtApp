@@ -4,6 +4,7 @@ import android.widget.ScrollView
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.ot.ui.activities.master.main.MainMaster
 import com.vsg.ot.ui.activities.securityDialog.main.MainSecurityDialog
+import com.vsg.ot.ui.activities.setting.main.MainSetting
 
 //TODO Path app:  /data/data/com.vsg.ot
 
@@ -23,11 +24,11 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                     getString(R.string.ActivityMainCommandMaster),
                     dataClass = MainMaster::class.java
                 )
-//                add(
-//                    R.drawable.pic_person,
-//                    getString(R.string.ActivityMainCommandPerson),
-//                    dataClass = PersonActivity::class.java
-//                )
+                add(
+                    R.drawable.pic_setting,
+                    getString(R.string.ActivityMainCommandSetting),
+                    dataClass = MainSetting::class.java
+                )
 //                add(
 //                    R.drawable.pic_operation,
 //                    getString(R.string.ActivityMainCommandOperation),

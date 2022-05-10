@@ -26,7 +26,7 @@ class UICRUDXactRecord<TActivity>(activity: TActivity, operation: DBOperation) :
     UICustomCRUDViewModel<TActivity, XactRecordViewModel, XactRecordDao, XactRecord>(
         activity,
         operation,
-        R.layout.dialog_security_dialog_xact_record
+        R.layout.dialog_xact_record
     )
         where TActivity : CurrentBaseActivity<XactRecordViewModel, XactRecordDao, XactRecord> {
 
@@ -86,9 +86,9 @@ class UICRUDXactRecord<TActivity>(activity: TActivity, operation: DBOperation) :
             val data = it ?: XactRecord()
             data.apply {
                 this.caption = tCaption.text
-                this.idEvent = this@UICRUDXactRecord.event.id ?: 0
+                this.idEvent = this@UICRUDXactRecord.event.id
                 this.event = this@UICRUDXactRecord.event
-                this.idSector = this@UICRUDXactRecord.sector.id ?: 0
+                this.idSector = this@UICRUDXactRecord.sector.id
                 this.sector = this@UICRUDXactRecord.sector
                 this.planta = tPlant.getItemEnumOrDefault() ?: TypePlant.UNDEFINED
                 this.createDate = tDate.date ?: nowDate()
