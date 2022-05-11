@@ -43,6 +43,9 @@
 
         <!--        Setting:-->
         <activity android:name=".ui.activities.setting.main.MainSetting" />
+        <activity android:name=".ui.activities.setting.SettingUserActivity" />
+        <activity android:name=".ui.activities.setting.SettingMenuActivity" />
+        <activity android:name=".ui.activities.setting.SettingProfileActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

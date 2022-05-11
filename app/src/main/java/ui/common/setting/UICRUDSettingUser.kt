@@ -2,6 +2,7 @@ package com.vsg.ot.ui.common.setting
 
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.helper.exception.HelperException.Companion.throwException
+import com.vsg.helper.helper.string.HelperString.Static.isMailAddress
 import com.vsg.helper.ui.crud.UICustomCRUDViewModel
 import com.vsg.helper.ui.util.CurrentBaseActivity
 import com.vsg.helper.ui.widget.spinner.CustomSpinner
@@ -23,6 +24,7 @@ class UICRUDSettingUser<TActivity>(activity: TActivity, operation: DBOperation) 
 
     //region widget
     private lateinit var tName: CustomInputText
+    private lateinit var tMail: CustomInputText
     private lateinit var tUserId: CustomInputText
     private lateinit var tPlant: CustomSpinner
     //endregion
@@ -33,7 +35,7 @@ class UICRUDSettingUser<TActivity>(activity: TActivity, operation: DBOperation) 
         onEventSetInit = {
             this.tName = it.findViewById(R.id.DialogSettingUserName)
             this.tUserId = it.findViewById(R.id.DialogSettingUserId)
-
+            this.tMail = it.findViewById(R.id.DialogSettingUserMail)
             this.tPlant = it.findViewById<CustomSpinner>(R.id.DialogSettingUserPlant).apply {
                 setCustomAdapterEnum(TypePlant::class.java)
             }
@@ -43,6 +45,7 @@ class UICRUDSettingUser<TActivity>(activity: TActivity, operation: DBOperation) 
             data.apply {
                 this.name = tName.text
                 this.valueCode = tUserId.text
+                this.mail = tMail.text
                 this.planta = tPlant.getItemEnumOrDefault() ?: TypePlant.UNDEFINED
             }
             data
@@ -50,15 +53,18 @@ class UICRUDSettingUser<TActivity>(activity: TActivity, operation: DBOperation) 
         onEventSetItem = {
             tName.text = it.name
             tUserId.text = it.valueCode
+            tMail.text = it.mail
             tPlant.setItemEnum(it.planta)
         }
         onEventSetItemsForClean = {
-            mutableListOf(tName, tUserId)
+            mutableListOf(tName, tUserId, tMail)
         }
         onEventValidate = { item, _ ->
             var result = false
             try {
                 if (item.name.isEmpty()) "El nombre del usuario no puede ser nulo".throwException()
+                if (item.mail.isEmpty()) "El correo del usuario no puede ser nulo".throwException()
+                if (!item.mail.isMailAddress()) "El formato del correo es incorrecto".throwException()
                 if (item.valueCode.isEmpty()) "El ID del usuario no puede ser nulo".throwException()
                 if (item.planta == TypePlant.UNDEFINED) "No se ha seleccionado una Planta".throwException()
                 result = true

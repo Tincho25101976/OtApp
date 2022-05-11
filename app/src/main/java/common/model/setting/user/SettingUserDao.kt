@@ -32,14 +32,4 @@ abstract class SettingUserDao : DaoGenericOt<SettingUser>() {
     @Query("SELECT EXISTS(SELECT * FROM ${SettingUser.ENTITY_NAME} WHERE id = :id)")
     abstract override fun checkExitsEntity(id: Int): Boolean
     //endregion
-
-    //region relationShip
-//    @Transaction
-//    @Query("SELECT * FROM ${SettingUser.ENTITY_NAME} WHERE id = :id ORDER BY name")
-//    abstract fun viewRecordWithSector(id: Int): XactSectorRecord
-//
-//    @Transaction
-//    @Query("SELECT * FROM ${SettingUser.ENTITY_NAME} WHERE id = :id ORDER BY name")
-//    abstract fun viewRecordWithEvent(id: Int): XactEventRecord
-    //endregion
 }

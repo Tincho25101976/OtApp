@@ -5,38 +5,38 @@ import com.vsg.helper.helper.exception.HelperException.Companion.throwException
 import com.vsg.helper.ui.crud.UICustomCRUDViewModel
 import com.vsg.helper.ui.util.CurrentBaseActivity
 import com.vsg.ot.R
-import com.vsg.ot.common.model.setting.menu.SettingMenu
-import com.vsg.ot.common.model.setting.menu.SettingMenuDao
-import com.vsg.ot.common.model.setting.menu.SettingMenuViewModel
+import com.vsg.ot.common.model.setting.profile.SettingProfile
+import com.vsg.ot.common.model.setting.profile.SettingProfileDao
+import com.vsg.ot.common.model.setting.profile.SettingProfileViewModel
 
 @ExperimentalStdlibApi
-class UICRUDSettingMenu<TActivity>(activity: TActivity, operation: DBOperation) :
-    UICustomCRUDViewModel<TActivity, SettingMenuViewModel, SettingMenuDao, SettingMenu>(
+class UICRUDSettingProfile<TActivity>(activity: TActivity, operation: DBOperation) :
+    UICustomCRUDViewModel<TActivity, SettingProfileViewModel, SettingProfileDao, SettingProfile>(
         activity,
         operation,
-        R.layout.dialog_setting_menu
+        R.layout.dialog_setting_profile
     )
-        where TActivity : CurrentBaseActivity<SettingMenuViewModel, SettingMenuDao, SettingMenu> {
+        where TActivity : CurrentBaseActivity<SettingProfileViewModel, SettingProfileDao, SettingProfile> {
 
-    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<SettingMenu>()
+    override fun aGetEntityAllowDefault(): Boolean = isEntityAllowDefault<SettingProfile>()
 
     init {
-        onEventSetInit = {
-
-        }
+//        onEventSetInit = {
+//
+//        }
 //        onEventGetNewOrUpdateEntity = {
 //
 //        }
-        onEventSetItem = {
-
-        }
+//        onEventSetItem = {
+//
+//        }
 //        onEventSetItemsForClean = {
 //
 //        }
         onEventValidate = { item, _ ->
             var result = true
             try {
-                if (item.description.isEmpty()) "El nombre del menú no puede ser nulo".throwException()
+                if (item.description.isEmpty()) "El nombre del perfil no puede ser nulo".throwException()
                 result = true
             } catch (e: Exception) {
                 message(e.message ?: "Error desconocido...")

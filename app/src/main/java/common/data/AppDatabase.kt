@@ -6,16 +6,22 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.vsg.helper.common.cast.Convert
+import com.vsg.ot.common.data.migration.file.Migration202205102119
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEventDao
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecordDao
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorDao
+import com.vsg.ot.common.model.setting.menu.SettingMenu
 import com.vsg.ot.common.model.setting.menu.SettingMenuDao
+import com.vsg.ot.common.model.setting.profile.SettingProfile
 import com.vsg.ot.common.model.setting.profile.SettingProfileDao
+import com.vsg.ot.common.model.setting.profile.menu.SettingProfileMenu
 import com.vsg.ot.common.model.setting.profile.menu.SettingProfileMenuDao
+import com.vsg.ot.common.model.setting.profile.user.SettingProfileUser
 import com.vsg.ot.common.model.setting.profile.user.SettingProfileUserDao
+import com.vsg.ot.common.model.setting.user.SettingUser
 import com.vsg.ot.common.model.setting.user.SettingUserDao
 import common.data.convert.ConvertCurrentModel
 import common.model.master.batch.MasterBatch
@@ -38,13 +44,16 @@ import common.model.master.warehouse.MasterWarehouseDao
         MasterBatch::class, MasterWarehouse::class,
         MasterSection::class, MasterStock::class,
 
-        XactRecord::class, XactSector::class, XactEvent::class
+        XactRecord::class, XactSector::class, XactEvent::class,
+
+        SettingUser::class, SettingMenu::class, SettingProfile::class,
+        SettingProfileMenu::class, SettingProfileUser::class
     ],
     //views = [
     //    ProvisioningViewRoom::class, TrackingViewRoom::class,
     //    AccountingSummaryViewRoom::class, StockViewRoom::class
     //],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Convert::class, ConvertCurrentModel::class)
@@ -88,7 +97,7 @@ abstract class AppDatabase : RoomDatabase() {
                     DATABASE_NAME
                 )
                     .allowMainThreadQueries()
-//                    .addMigrations(Migration202204262051())
+                    .addMigrations(Migration202205102119())
                     .build()
             }
             return INSTANCE

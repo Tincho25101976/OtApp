@@ -27,6 +27,7 @@
 
 <!--    Setting (User):-->
     <string name="DialogSettingUserName">Nombre</string>
+    <string name="DialogSettingUserMail">Correo</string>
     <string name="DialogSettingUserId">Id(LX)</string>
     <string name="DialogSettingUserPlant">Planta</string>
 

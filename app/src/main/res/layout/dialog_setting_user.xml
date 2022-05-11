@@ -26,11 +26,21 @@
         android:hint="@string/DialogSettingUserId"
         android:padding="@dimen/DialogCrudTextPadding" />
 
+    <com.vsg.helper.ui.widget.text.CustomInputText
+        android:id="@+id/DialogSettingUserMail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DialogSettingUserId"
+        android:layout_marginTop="@dimen/DialogCrudPictureMargin"
+        android:hint="@string/DialogSettingUserMail"
+        app:customType="TEXT"
+        android:padding="@dimen/DialogCrudTextPadding" />
+
     <com.vsg.helper.ui.widget.spinner.CustomSpinner
         android:id="@+id/DialogSettingUserPlant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/DialogSettingUserId"
+        android:layout_below="@+id/DialogSettingUserMail"
         android:layout_marginTop="@dimen/DialogCrudPictureMargin"
         app:customSpinnerTextSize="@integer/CustomSpinnerTextSize"
         app:customSpinnerTitle="@string/DialogSettingUserPlant" />

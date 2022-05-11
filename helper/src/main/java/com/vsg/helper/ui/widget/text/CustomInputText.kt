@@ -86,6 +86,7 @@ class CustomInputText @JvmOverloads constructor(
                 if (value == TypeCustomInputText.DOUBLE) setMask(MaskType.NUMBER_DECIMAL)
                 if (value == TypeCustomInputText.INT) setMask(MaskType.NUMBER_INTEGER)
                 if (value == TypeCustomInputText.PHONE) setMask(MaskType.PHONE)
+                if (value == TypeCustomInputText.MAIL_ADDRESS) setMask(MaskType.MAIL_ADDRESS)
                 if (value == TypeCustomInputText.READ_ONLY_TEXT) {
                     isMultiline = false
                     isEnabled = false
@@ -329,7 +330,8 @@ class CustomInputText @JvmOverloads constructor(
     fun setHintTextColor(color: Int = Color.LTGRAY) {
         tEdit.setHintTextColor(color)
     }
-    fun setHintTextAppearance(){
+
+    fun setHintTextAppearance() {
         super.setHintTextAppearance(R.style.HintTextAppearance)
     }
 

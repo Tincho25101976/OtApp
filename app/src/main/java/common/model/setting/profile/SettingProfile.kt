@@ -14,7 +14,9 @@ import common.model.init.entity.EntityOt
 class SettingProfile : EntityOt<SettingProfile>() {
 
     //region properties
+    @Ignore
     var users: List<SettingProfileUser> = mutableListOf()
+    @Ignore
     var menus: List<SettingProfileMenu> = mutableListOf()
     //endregion
 
