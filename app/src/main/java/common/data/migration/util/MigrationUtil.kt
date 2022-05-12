@@ -25,6 +25,10 @@ class MigrationUtil(private val db: SupportSQLiteDatabase, val tableName: String
         }
     }
 
+    fun createIndex(indexName: String, tableName: String = this.tableName, fields: String) {
+        db.execSQL("CREATE INDEX $indexName ON $tableName ($fields)")
+    }
+
     fun create(sqlCreate: String): Boolean {
         val exist = exist()
         val sqlCreateFull = "CREATE TABLE IF NOT EXISTS ${

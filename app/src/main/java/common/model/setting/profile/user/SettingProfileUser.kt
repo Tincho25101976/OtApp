@@ -1,17 +1,37 @@
 package com.vsg.ot.common.model.setting.profile.user
 
 import androidx.annotation.DrawableRes
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Ignore
+import androidx.room.*
 import com.vsg.helper.common.model.EntityForeignKeyID
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
+import com.vsg.ot.common.model.setting.menu.SettingMenu
 import com.vsg.ot.common.model.setting.profile.SettingProfile
+import com.vsg.ot.common.model.setting.profile.menu.SettingProfileMenu
 import com.vsg.ot.common.model.setting.user.SettingUser
 import common.model.init.entity.EntityOt
 
-@Entity(tableName = SettingProfileUser.ENTITY_NAME)
+@Entity(
+    foreignKeys =
+    [
+        ForeignKey(
+            entity = SettingProfile::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("idProfile"),
+            onDelete = ForeignKey.RESTRICT
+        ),
+        ForeignKey(
+            entity = SettingUser::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("idUser"),
+            onDelete = ForeignKey.RESTRICT
+        )
+    ],
+    indices = [
+        Index(value = arrayOf("idUser", "idProfile"), name = "IX_SETTING_PROFILE_USER_FK")],
+    inheritSuperIndices = true,
+    tableName = SettingProfileUser.ENTITY_NAME
+)
 class SettingProfileUser : EntityOt<SettingProfileUser>() {
 
     //region properties

@@ -53,22 +53,22 @@ import common.model.master.warehouse.MasterWarehouseDao
     //    ProvisioningViewRoom::class, TrackingViewRoom::class,
     //    AccountingSummaryViewRoom::class, StockViewRoom::class
     //],
-    version = 2,
+    version = 1,
     exportSchema = false
 )
 @TypeConverters(Convert::class, ConvertCurrentModel::class)
 abstract class AppDatabase : RoomDatabase() {
-
     //region dataSource
-    // master:
+    //region master:
     abstract fun companyDao(): MasterCompanyDao
     abstract fun itemDao(): MasterItemDao
     abstract fun batchDao(): MasterBatchDao
     abstract fun warehouseDao(): MasterWarehouseDao
     abstract fun sectionDao(): MasterSectionDao
     abstract fun stockDao(): MasterStockDao
+    //endregion
 
-    // securityDialog:
+    //region securityDialog:
     abstract fun xactRecordDao(): XactRecordDao
     abstract fun xactSectorDao(): XactSectorDao
     abstract fun xactEventDao(): XactEventDao
@@ -97,6 +97,7 @@ abstract class AppDatabase : RoomDatabase() {
                     DATABASE_NAME
                 )
                     .allowMainThreadQueries()
+//                    .fallbackToDestructiveMigration()
                     .addMigrations(Migration202205102119())
                     .build()
             }

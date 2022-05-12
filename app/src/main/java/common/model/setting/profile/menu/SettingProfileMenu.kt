@@ -1,9 +1,7 @@
 package com.vsg.ot.common.model.setting.profile.menu
 
 import androidx.annotation.DrawableRes
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Ignore
+import androidx.room.*
 import com.vsg.helper.common.model.EntityForeignKeyID
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
@@ -11,7 +9,27 @@ import com.vsg.ot.common.model.setting.menu.SettingMenu
 import com.vsg.ot.common.model.setting.profile.SettingProfile
 import common.model.init.entity.EntityOt
 
-@Entity(tableName = SettingProfileMenu.ENTITY_NAME)
+@Entity(
+    foreignKeys =
+    [
+        ForeignKey(
+            entity = SettingProfile::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("idProfile"),
+            onDelete = ForeignKey.RESTRICT
+        ),
+        ForeignKey(
+            entity = SettingMenu::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("idMenu"),
+            onDelete = ForeignKey.RESTRICT
+        )
+    ],
+    indices = [
+        Index(value = arrayOf("idMenu", "idProfile"), name = "IX_SETTING_PROFILE_MENU_FK")],
+    inheritSuperIndices = true,
+    tableName = SettingProfileMenu.ENTITY_NAME
+)
 class SettingProfileMenu : EntityOt<SettingProfileMenu>() {
 
     //region properties
