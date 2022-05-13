@@ -23,7 +23,6 @@ import com.vsg.helper.ui.util.CurrentBaseActivity
 import com.vsg.helper.ui.widget.spinner.CustomSpinner
 import com.vsg.helper.ui.widget.text.CustomInputText
 import kotlin.reflect.full.createInstance
-import kotlin.reflect.typeOf
 
 abstract class UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity>(
     activity: TActivity,

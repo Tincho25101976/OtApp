@@ -65,7 +65,7 @@ class StdEspecificacion : EntityOt<StdEspecificacion>(), IStdEspecificacion {
 
     override var idKeyEnsayo: String
         get() = ensayo?.idKeyEnsayo ?: ""
-        set(value) {}
+        set(value) { }
 
     val typeUnit: TypeUnit = ensayo?.typeUnit ?: TypeUnit.UNDEFINED
     val typeEnsayo: TypeEnsayo = ensayo?.typeEnsayo ?: TypeEnsayo.UNDEFINED

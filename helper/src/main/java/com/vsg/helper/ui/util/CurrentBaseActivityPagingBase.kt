@@ -86,6 +86,7 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
     //region handler
     var onEventMakeFilter: ((TFilter, String, PagingData<TEntity>) -> PagingData<TEntity>)? = null
     var onEventSetCRUDForApply: ((TActivity, DBOperation) -> TCrud)? = null
+    var onEventSetDataUpload: ((TActivity) -> DataBase)
     var onEventSwipeGetViewForMenu: ((View) -> Unit)? = null
     var onEventGetIdRelationFromIntent: (() -> Unit)? = null
     var onEventGetListTextSearch: (() -> LiveData<List<String>>)? = null
@@ -249,6 +250,16 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
     }
 
     private fun applyCRUD(e: TEntity?, operation: DBOperation) {
+        val crud = onEventSetCRUDForApply?.invoke(context(), operation) ?: return
+        crud.apply {
+            item = e
+            onEventCRUD = {
+                if (it && e != null && e.layoutPosition > 0) pagingAdapter?.notifyItemChanged(e.layoutPosition)
+            }
+            make()
+        }
+    }
+    private fun applyUploadData(e: TEntity?, operation: DBOperation) {
         val crud = onEventSetCRUDForApply?.invoke(context(), operation) ?: return
         crud.apply {
             item = e

@@ -20,7 +20,7 @@ class Migration202204262051: Migration(1, 2) {
                 ")"
         MigrationUtil(database, XactEvent.ENTITY_NAME).run {
             drop()
-            if(!exist()) create(sqlCreate)
+            if(!existTable()) create(sqlCreate)
         }
 
         sqlCreate = "(" +
@@ -33,7 +33,7 @@ class Migration202204262051: Migration(1, 2) {
                 ")"
         MigrationUtil(database, XactSector.ENTITY_NAME).run {
             drop()
-            if(!exist()) create(sqlCreate)
+            if(!existTable()) create(sqlCreate)
         }
 
         sqlCreate = "(" +
@@ -56,7 +56,7 @@ class Migration202204262051: Migration(1, 2) {
 
         MigrationUtil(database, XactRecord.ENTITY_NAME).run {
             drop()
-            if(!exist()) create(sqlCreate)
+            if(!existTable()) create(sqlCreate)
         }
     }
 }

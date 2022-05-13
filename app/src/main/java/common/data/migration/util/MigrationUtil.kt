@@ -26,11 +26,11 @@ class MigrationUtil(private val db: SupportSQLiteDatabase, val tableName: String
     }
 
     fun createIndex(indexName: String, tableName: String = this.tableName, fields: String) {
-        db.execSQL("CREATE INDEX $indexName ON $tableName ($fields)")
+        if(!existIndex(indexName)) db.execSQL("CREATE INDEX $indexName ON $tableName ($fields)")
     }
 
     fun create(sqlCreate: String): Boolean {
-        val exist = exist()
+        val exist = existTable()
         val sqlCreateFull = "CREATE TABLE IF NOT EXISTS ${
             when (exist) {
                 true -> "'$tableNameTemp'"
@@ -51,13 +51,31 @@ class MigrationUtil(private val db: SupportSQLiteDatabase, val tableName: String
         db.execSQL("DROP TABLE IF EXISTS $tableName")
     }
 
-    fun exist(tableName: String = this.tableName): Boolean {
+    fun existTable(tableName: String = this.tableName): Boolean {
         val result: Boolean
         try {
             var count = 0
-            var nameIndex = "COUNT"
+            val nameIndex = "COUNT"
             val query =
-                "SELECT COUNT(name) as $nameIndex FROM sqlite_master WHERE type='table' AND name='$tableName' GROUP BY name"
+                "SELECT COUNT(name) AS $nameIndex FROM sqlite_master WHERE type='table' AND name='$tableName' GROUP BY name"
+            val cursor = db.query(query)
+            while (cursor.moveToNext()) {
+                val columnIndex: Int = cursor.getColumnIndex(nameIndex)
+                count = cursor.getInt(columnIndex)
+            }
+            result = count > 0
+        } catch (ex: Exception) {
+            return false
+        }
+        return result
+    }
+    fun existIndex(indexName: String): Boolean {
+        val result: Boolean
+        try {
+            var count = 0
+            val nameIndex = "COUNT"
+            val query =
+                "SELECT COUNT(name) AS $nameIndex FROM sqlite_master WHERE type='index' AND name='$indexName' GROUP BY name"
             val cursor = db.query(query)
             while (cursor.moveToNext()) {
                 val columnIndex: Int = cursor.getColumnIndex(nameIndex)

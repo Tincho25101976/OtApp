@@ -26,14 +26,14 @@
             </intent-filter>
         </activity>
 
-        <!--        SecurityDialog-->
+        <!--SecurityDialog-->
         <activity android:name=".ui.activities.securityDialog.main.MainSecurityDialog" />
         <activity android:name=".ui.activities.securityDialog.xact.main.MainXactRecord" />
         <activity android:name=".ui.activities.securityDialog.xact.XactRecordActivity" />
         <activity android:name=".ui.activities.securityDialog.xact.XactEventActivity" />
         <activity android:name=".ui.activities.securityDialog.xact.XactSectorActivity" />
 
-        <!--        Master:-->
+        <!--Master:-->
         <activity android:name=".ui.activities.master.main.MainMaster" />
         <activity android:name=".ui.activities.master.MasterBatchActivity" />
         <activity android:name=".ui.activities.master.MasterCompanyActivity" />
@@ -41,11 +41,14 @@
         <activity android:name=".ui.activities.master.MasterSectionActivity" />
         <activity android:name=".ui.activities.master.MasterWarehouseActivity" />
 
-        <!--        Setting:-->
+        <!--Setting:-->
         <activity android:name=".ui.activities.setting.main.MainSetting" />
         <activity android:name=".ui.activities.setting.SettingUserActivity" />
         <activity android:name=".ui.activities.setting.SettingMenuActivity" />
         <activity android:name=".ui.activities.setting.SettingProfileActivity" />
+
+        <!--UploadData-->
+        <activity android:name="com.vsg.helper.ui.data.ui.DataBaseActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

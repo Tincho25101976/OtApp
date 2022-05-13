@@ -6,7 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.vsg.helper.common.cast.Convert
-import com.vsg.ot.common.data.migration.file.Migration202205102119
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEventDao
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
@@ -83,7 +82,7 @@ abstract class AppDatabase : RoomDatabase() {
     //endregion
 
     companion object {
-        private const val DATABASE_NAME = "dbApp.db"
+        private const val DATABASE_NAME = "ot.db"
 
         @Volatile
         private var INSTANCE: AppDatabase? = null
@@ -98,7 +97,7 @@ abstract class AppDatabase : RoomDatabase() {
                 )
                     .allowMainThreadQueries()
 //                    .fallbackToDestructiveMigration()
-                    .addMigrations(Migration202205102119())
+//                    .addMigrations(Migration202205102119())
                     .build()
             }
             return INSTANCE

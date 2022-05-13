@@ -7,6 +7,8 @@ import com.vsg.helper.common.model.IEntityCreateDate
 import com.vsg.helper.common.model.IEntityPagingLayoutPosition
 import com.vsg.helper.common.model.IIsEnabled
 import com.vsg.helper.common.util.dao.IDaoAllSimpleList
+import com.vsg.helper.common.util.dao.IGenericDaoPaging
+import com.vsg.helper.common.util.dao.IGenericDaoPagingParse
 import com.vsg.helper.helper.Helper.Companion.or
 import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.helper.progress.ICallbackProcessWithProgress
@@ -16,9 +18,7 @@ import com.vsg.helper.ui.data.log.CustomLog
 import common.model.init.dao.DaoGenericOt
 import kotlinx.coroutines.runBlocking
 
-abstract class DaoGenericOtParse<T> : DaoGenericOt<T>(), ILog, ICallbackProcessWithProgress<T>,
-    IReadToList<T>,
-    IDaoAllSimpleList<T>
+abstract class DaoGenericOtParse<T> : IGenericDaoPagingParse<T>
         where T : IResultRecyclerAdapter,
               T : IEntityPagingLayoutPosition,
               T : IEntity,
@@ -37,7 +37,7 @@ abstract class DaoGenericOtParse<T> : DaoGenericOt<T>(), ILog, ICallbackProcessW
     //region methods
     override fun processWithProgress(data: List<T>): Boolean = insert(data)
 
-    fun insert(item: List<T>): Boolean {
+    override fun insert(item: List<T>): Boolean {
         if (item.any()) return false
         var i = 0
         var c = 0
@@ -55,7 +55,7 @@ abstract class DaoGenericOtParse<T> : DaoGenericOt<T>(), ILog, ICallbackProcessW
         return c == count
     }
 
-    abstract fun deleteAll()
+    abstract override fun deleteAll()
     override fun readToList(): MutableList<T> {
         val result = viewAllSimpleList()
         return (result == null) then mutableListOf<T>() or result!!.toMutableList()

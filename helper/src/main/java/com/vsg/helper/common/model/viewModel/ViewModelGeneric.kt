@@ -59,16 +59,5 @@ abstract class ViewModelGeneric<TDao, TEntity>(
         return stored.getInstanceOfIViewModelView(typeOf<TEntityStored>(), context)
             ?.viewModelView(id) as TEntityStored?
     }
-    //endrelation
-
-
-//    //region paging
-//    val viewModelGetViewAllPaging = runBlocking {
-//        return@runBlocking Pager<Int, TEntity>(
-//            pagingConfig,
-//            0,
-//            dao.viewAllPaging().asPagingSourceFactory()
-//        ).flow
-//    }
-//    //endregion
+    //endregion
 }

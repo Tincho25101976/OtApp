@@ -215,7 +215,7 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
 
     protected fun setIcon(r: Int) = actionBar!!.setIcon(r)
     protected fun setLogo(r: Int) = actionBar!!.setLogo(r)
-    protected fun makeCustomActionbar(
+    public fun makeCustomActionbar(
         title: String?,
         size: Float = 24F,
         color: Int = Color.WHITE

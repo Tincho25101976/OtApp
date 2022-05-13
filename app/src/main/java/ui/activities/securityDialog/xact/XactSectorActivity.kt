@@ -8,10 +8,9 @@ import com.vsg.ot.R
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorDao
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorViewModel
-import com.vsg.ot.ui.activities.master.MasterBatchActivity
 import com.vsg.ot.ui.activities.securityDialog.xact.util.FilterTypeActivityXactSector
 import com.vsg.ot.ui.common.securityDigital.xact.sector.UICRUDXactSector
-import com.vsg.ot.ui.data.DataBaseActivity
+import com.vsg.helper.ui.data.ui.DataBaseActivity
 
 @ExperimentalStdlibApi
 class XactSectorActivity :

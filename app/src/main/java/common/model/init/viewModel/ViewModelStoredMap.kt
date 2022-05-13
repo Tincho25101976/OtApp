@@ -11,6 +11,17 @@ import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecordViewModel
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorViewModel
+import com.vsg.ot.common.model.setting.menu.SettingMenu
+import com.vsg.ot.common.model.setting.menu.SettingMenuViewModel
+import com.vsg.ot.common.model.setting.profile.SettingProfile
+import com.vsg.ot.common.model.setting.profile.SettingProfileViewModel
+import com.vsg.ot.common.model.setting.profile.menu.SettingProfileMenu
+import com.vsg.ot.common.model.setting.profile.menu.SettingProfileMenuViewModel
+import com.vsg.ot.common.model.setting.profile.user.SettingProfileUser
+import com.vsg.ot.common.model.setting.profile.user.SettingProfileUserViewModel
+import com.vsg.ot.common.model.setting.user.SettingUser
+import com.vsg.ot.common.model.setting.user.SettingUserDao
+import com.vsg.ot.common.model.setting.user.SettingUserViewModel
 import common.model.master.batch.MasterBatch
 import common.model.master.batch.MasterBatchViewModel
 import common.model.master.company.MasterCompany
@@ -46,6 +57,13 @@ class ViewModelStoredMap : IViewModelStoredMap {
         data.add(DataMakeViewModelView(typeOf<XactRecord>(), XactRecordViewModel(context)))
         data.add(DataMakeViewModelView(typeOf<XactEvent>(), XactEventViewModel(context)))
         data.add(DataMakeViewModelView(typeOf<XactSector>(), XactSectorViewModel(context)))
+
+        // Setting
+        data.add(DataMakeViewModelView(typeOf<SettingUser>(), SettingUserViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<SettingMenu>(), SettingMenuViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<SettingProfile>(), SettingProfileViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<SettingProfileUser>(), SettingProfileUserViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<SettingProfileMenu>(), SettingProfileMenuViewModel(context)))
         return data
     }
 
