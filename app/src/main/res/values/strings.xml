@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Ot</string>
 
+    <!--ActivityMain:-->
+    <string name="ActivityMainCommandMaster">Master</string>
 
     <!--ActivitySecurityDialog (Main)-->
     <string name="ActivityMainCommandXact">My Xact</string>
@@ -9,7 +11,7 @@
     <string name="ActivityMainCommandSector">Sector</string>
     <string name="ActivityMainCommandProcess">Proceso</string>
 
-    <!--    ActivitySetting (Main):-->
+    <!--ActivitySetting (Main):-->
     <string name="ActivityMainCommandSetting">Setting</string>
     <string name="ActivityMainCommandSettingUser">Usuarios</string>
     <string name="ActivityMainCommandSettingMenu">Menus</string>
@@ -17,7 +19,12 @@
     <string name="ActivityMainCommandSettingProfileUser">Perfiles por Usuario</string>
     <string name="ActivityMainCommandSettingProfileMenu">Menus por perfiles</string>
 
-    <!--Xact (Registro):-->
+    <!--ActivityXact (Main)-->
+    <string name="ActivityXactRecordText">Registros</string>
+    <string name="ActivityXactSectorText">Sector</string>
+    <string name="ActivityXactProcessText">Proceso</string>
+
+    <!--Condiciones inseguras (Registro):-->
     <string name="DialogXactEvent">Evento</string>
     <string name="DialogXactTitle">Título</string>
     <string name="DialogXactProcess">Proceso</string>
@@ -25,20 +32,15 @@
     <string name="DialogXactPlant">Planta</string>
     <string name="DialogXactDate">Fecha</string>
 
-<!--    Setting (User):-->
+    <!--Condiciones inseguras (Menu):-->
+    <string name="MenuItemSectorUpdate">Update</string>
+
+    <!--Setting (User):-->
     <string name="DialogSettingUserName">Nombre</string>
     <string name="DialogSettingUserMail">Correo</string>
     <string name="DialogSettingUserId">Id(LX)</string>
     <string name="DialogSettingUserPlant">Planta</string>
 
-    <!--ActivityMain:-->
-    <string name="ActivityMainCommandMaster">Master</string>
-    <string name="ActivityMainCommandContact">Contactos</string>
-
-    <string name="ActivityMainCommandPerson">Personas</string>
-    <string name="ActivityMainCommandOperation">Operaciones</string>
-    <string name="ActivityMainCommandAutoFillData">Auto data</string>
-    <string name="ActivityMainCommandAutoFillDataBatch">Auto data (add batch)</string>
 
     <!--Batch:-->
     <string name="DialogBatchDueDate">Vencimiento</string>
@@ -49,9 +51,6 @@
 
     <!--ActivityItemOperation-->
     <string name="ActivityItemOperationBatchText">Lotes</string>
-    <string name="ActivityItemOperationMoneyText">Divisas</string>
-    <string name="ActivityItemOperationOperationText">Operaciones</string>
-    <string name="ActivityItemOperationOperationDetailText">Operaciones (detalle)</string>
     <string name="ActivityItemOperationWarehouseText">Depósitos</string>
     <string name="ActivityItemOperationSectionText">Localizaciones</string>
 
@@ -61,13 +60,7 @@
     <string name="ActivityItemTypeUnitText">Unidades de medida</string>
     <string name="ActivityItemTypeProductText">Tipo de producto</string>
     <string name="ActivityItemTypePlantText">Tipo de planta</string>
-    <string name="ActivityItemProductPriceText">Precios por producto</string>
-    <string name="ActivityItemProductPictureText">Imágenes por producto</string>
 
-
-    <string name="ActivityXactRecordText">Registros</string>
-    <string name="ActivityXactSectorText">Sector</string>
-    <string name="ActivityXactProcessText">Proceso</string>
 
     <!--    HintForParent-->
     <string name="HintParentForCompany">Empresa</string>
@@ -114,4 +107,11 @@
     <string name="DialogSectionName">Localización</string>
     <string name="DialogSectionRelation">Depósito</string>
     <string name="DialogSectionType">Tipo</string>
+
+    <!--UpdateDataBase:-->
+    <string name="DialogTextViewSource">Data</string>
+    <string name="DialogTextViewDeleteSource">Delete</string>
+    <string name="DialogTextViewUpdateSource">Update</string>
+    <string name="DialogTextViewReadSource">Read</string>
+    <string name="DialogTextViewCaptionUpdateSource">Update source</string>
 </resources>

@@ -88,14 +88,17 @@ class HelperProgressBarGetAdapter<TActivity, TData>(private val activity: TActiv
         setVisibility(true)
     }
 
-    override fun doInBackground(vararg params: Unit?): Int {
+    override  fun doInBackground(vararg params: Unit?): Int {
         process.apply {
             onProgress = { v, m, p ->
                 activity.tProgressBar.max = m
                 publishProgress(v)
                 activity.tDescriptionProgress.text = StringBuilder().append(p.format()).append(" %")
             }
-            data = this.processGetAdapter()
+            run {
+                data = this.processGetAdapter()
+            }
+
         }
         return 0
     }

@@ -12,6 +12,7 @@ import com.vsg.helper.helper.Helper.Companion.toSiNo
 import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.util.helper.HelperNumeric.Companion.toPadStart
+import kotlin.reflect.full.memberProperties
 
 abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResultPopUpData,
     IDescriptionView, IEntityKeySearch {
@@ -33,7 +34,6 @@ abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResult
 
     override val isEntityOnlyDefault: Boolean
         get() = false
-
 
     override val keySearch: String get() = id.toPadStart(10)
 
@@ -70,6 +70,15 @@ abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResult
 
     @Ignore
     protected fun formatId(): String = id.toString().padStart(5, '0')
+
+    //region reflection
+    fun getFields(): List<String> {
+        val lst = listOf("Id", "description", "tag")
+        val result = this::class.memberProperties.filter { lst.contains(it.name) }.map { it.name }
+        val data = this::class.memberProperties.map { it }.toList()
+        return result
+    }
+    //endregion
 
     companion object {
 

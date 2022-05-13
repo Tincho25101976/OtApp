@@ -6,39 +6,9 @@
     <dimen name="ActivityMainCardViewElevation">8sp</dimen>
     <dimen name="ActivityMainCardViewTextSize">20sp</dimen>
 
-    <!--Contact:-->
-    <dimen name="ActivityContactSearchSizeImage">24sp</dimen>
-    <dimen name="ActivityContactSearchMarginImage">5sp</dimen>
-    <dimen name="ActivityContactSearchTextMargin">16sp</dimen>
-    <dimen name="ActivityContactSearchTextPadding">10sp</dimen>
-    <dimen name="ActivityContactRecyclerMargin">10sp</dimen>
-
-    <!--Contact (Dialog):-->
-    <dimen name="DialogContactSizeImage">24sp</dimen>
-    <dimen name="DialogContactMarginImage">5sp</dimen>
-    <dimen name="DialogContactTextMargin">16sp</dimen>
-    <dimen name="DialogContactLayoutMargin">5sp</dimen>
-    <dimen name="DialogContactTextPadding">10sp</dimen>
-    <dimen name="DialogContactPictureSize">96sp</dimen>
-    <dimen name="DialogContactPictureMargin">8sp</dimen>
-
-    <!--Phone:-->
-    <dimen name="PhoneDialogTextMargin">16sp</dimen>
-    <dimen name="PhoneDialogTextPadding">10sp</dimen>
-    <dimen name="PhoneDialogTextHeight">60sp</dimen>
-    <dimen name="PhoneDialogSpinnerHeight">30sp</dimen>
-
     <!--Commands:-->
     <dimen name="CommandAddSizeImage">64sp</dimen>
     <dimen name="CommandAddMarginImage">24sp</dimen>
-
-    <!--Mail:-->
-    <dimen name="MailDialogTextMargin">16sp</dimen>
-    <dimen name="MailDialogTextPadding">10sp</dimen>
-
-    <!--Address:-->
-    <dimen name="AddressDialogTextMargin">16sp</dimen>
-    <dimen name="AddressDialogTextPadding">10sp</dimen>
 
     <!--CustomDialogActionResult:-->
     <dimen name="CustomDialogActionResultCommandExitSize">48sp</dimen>
@@ -61,15 +31,10 @@
     <dimen name="DialogCrudHeightSpinner">60sp</dimen>
     <dimen name="DialogCrudTextSizeRelation">32sp</dimen>
     <dimen name="DialogCrudPadding">5sp</dimen>
-
-
-    <!--Category:-->
-    <dimen name="DialogXactRecordPictureSize">256sp</dimen>
-
-    <!--Product:-->
-    <dimen name="DialogProductPictureSize">256sp</dimen>
-    <dimen name="DialogProductTextSizeCompany">32sp</dimen>
-    <dimen name="DialogProductHeightSpinner">60sp</dimen>
+    <dimen name="DialogCrudMargin">10sp</dimen>
+    <dimen name="DialogCrudTextSize">8sp</dimen>
+    <dimen name="DialogCrudPictureSize">32sp</dimen>
+    <dimen name="DialogCrudLogTextSize">11sp</dimen>
 
     <!--ActivityItemGenericGrid-->
     <dimen name="MainActivityItemCardViewMargin">16sp</dimen>
@@ -80,7 +45,6 @@
     <dimen name="MainActivityItemCardViewSizeWidth">128sp</dimen>
     <dimen name="MainActivityItemCardViewSizeHeight">175sp</dimen>
 
-
     <!--DialogGenericChoosePicture-->
     <dimen name="DialogGenericChoosePictureSize">256sp</dimen>
 
@@ -88,6 +52,4 @@
     <dimen name="SwipeMenuItemsLayoutMarginStartEnd">10sp</dimen>
     <dimen name="SwipeMenuItemsLayoutTopBottom">5sp</dimen>
     <dimen name="SwipeMenuItemsPictureSize">48sp</dimen>
-
-
 </resources>

@@ -1,6 +1,5 @@
 package com.vsg.helper.common.model
 
-import android.R
 import android.graphics.Bitmap
 import android.text.Spanned
 import androidx.room.Ignore
@@ -20,7 +19,7 @@ abstract class ItemBasePaging<T> : ItemBase(), IResultRecyclerAdapter, IAddItemE
               T : IReference,
               T : IEntityPagingLayoutPosition {
 
-    override val title: String  get() = ""
+    override val title: String get() = ""
 
     @Ignore
     override var layoutPosition: Int = 0
