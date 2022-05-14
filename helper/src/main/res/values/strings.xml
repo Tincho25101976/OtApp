@@ -41,4 +41,11 @@
 
     <!--GenericSearch:-->
     <string name="CustomDescriptionSearch">Search</string>
+
+    <!--UpdateDataBase:-->
+    <string name="DialogTextViewSource">Data</string>
+    <string name="DialogTextViewDeleteSource">Delete</string>
+    <string name="DialogTextViewUpdateSource">Update</string>
+    <string name="DialogTextViewReadSource">Read</string>
+    <string name="DialogTextViewCaptionUpdateSource">Update source</string>
 </resources>

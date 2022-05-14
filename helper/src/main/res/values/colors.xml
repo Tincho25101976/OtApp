@@ -3,4 +3,6 @@
     <color name="CropButtonText">#666666</color>
     <color name="CropSelectorPressed">#1a000000</color>
     <color name="CropSelectorFocused">#77000000</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>

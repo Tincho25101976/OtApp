@@ -49,6 +49,13 @@
     <dimen name="DialogCrudPictureMargin">8sp</dimen>
     <dimen name="DialogCrudLayoutMargin">5sp</dimen>
     <dimen name="DialogCrudPictureChooseSize">48sp</dimen>
+    <dimen name="DialogCrudHeightSpinner">60sp</dimen>
+    <dimen name="DialogCrudTextSizeRelation">32sp</dimen>
+    <dimen name="DialogCrudPadding">5sp</dimen>
+    <dimen name="DialogCrudMargin">10sp</dimen>
+    <dimen name="DialogCrudTextSize">8sp</dimen>
+    <dimen name="DialogCrudPictureSize">32sp</dimen>
+    <dimen name="DialogCrudLogTextSize">11sp</dimen>
 
     <!--DialogGenericChoosePicture-->
     <dimen name="DialogGenericChoosePictureSize">256sp</dimen>
@@ -65,5 +72,7 @@
 
     <!--RecyclerView:-->
     <dimen name="RecyclerViewPictureSize">64sp</dimen>
+
+
 
 </resources>

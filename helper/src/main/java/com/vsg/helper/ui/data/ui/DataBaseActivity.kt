@@ -1,6 +1,6 @@
 package com.vsg.helper.ui.data.ui
 
-import android.provider.Settings.Global.getString
+import android.app.Activity
 import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.ScrollingMovementMethod
@@ -42,6 +42,7 @@ abstract class DataBaseActivity<TActivity, TViewModel, TDao, TEntity>(
         layout
     ), IActivityForProgress
         where TActivity : CurrentBaseActivity<TViewModel, TDao, TEntity>,
+              TActivity : IActivityForProgress,
               TViewModel : ViewModelGenericParse<TDao, TEntity>,
               TEntity : IEntityParse<TEntity>,
               TEntity : IDataAdapter,
@@ -54,15 +55,15 @@ abstract class DataBaseActivity<TActivity, TViewModel, TDao, TEntity>(
               TDao : IGenericDaoPagingParse<TEntity> {
 //    private var crud: ManagerCRUD<TEntity>? = null
 
-    private lateinit var tListView: ListView
+    private var tListView: ListView
     private lateinit var tLog: TextView
-    private lateinit var tSend: ImageView
-    override lateinit var tProgressBar: ProgressBar
-    override lateinit var tDescriptionProgress: TextView
-    override lateinit var tLayoutProgress: RelativeLayout
+    private var tSend: ImageView
+    final override var tProgressBar: ProgressBar
+    final override var tDescriptionProgress: TextView
+    final override var tLayoutProgress: RelativeLayout
 
-    override fun onExecuteCreate() {
-        activity. makeCustomActionbar(getString(R.string.DialogTextViewCaptionUpdateSource))
+    init {
+        activity.makeCustomActionbar(activity.getString(R.string.DialogTextViewCaptionUpdateSource))
         activity.chooserFile(TypeTempFile.DATABASE)
 
         //region progress
@@ -125,7 +126,7 @@ abstract class DataBaseActivity<TActivity, TViewModel, TDao, TEntity>(
         // update dataBase
         activity.findViewById<ImageView>(R.id.iv_activity_update_database_update)
             .setOnClickListener {
-                HelperProgressBarGetAdapter(this, crud!!).apply {
+                HelperProgressBarGetAdapter(this.activity, this).apply {
                     var adapter: UIIDataAdapter<TEntity>?
                     onGetResult = {
                         adapter = it
@@ -136,15 +137,15 @@ abstract class DataBaseActivity<TActivity, TViewModel, TDao, TEntity>(
             }
         this.activity.onEventExecuteActivityResult = { request, result, data ->
             if (data != null) {
-                if (request == REQUEST_FOR_CHOOSER_FILE_FROM_MANAGER && result == RESULT_OK) {
-                    val file: String = this.getTempFileFromUri(
+                if (request == REQUEST_FOR_CHOOSER_FILE_FROM_MANAGER && result == Activity.RESULT_OK) {
+                    val file: String = this.activity.getTempFileFromUri(
                         data.data,
                         SUB_PATH_TEMP_FILE_DATABASE,
                         TypeTempFile.DATABASE
                     )?.absolutePath
                         ?: ""
                     if (file.isNotEmpty()) {
-                        crud = ManagerCRUD(this, this.getDatabaseName(), item, file, db)
+//                        crud = ManagerCRUD(this, this.getDatabaseName(), item, file, db)
                     }
                 }
             }

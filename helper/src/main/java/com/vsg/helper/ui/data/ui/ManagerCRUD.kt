@@ -1,6 +1,5 @@
 package com.vsg.helper.ui.data.ui
 
-import android.content.Context
 import android.graphics.Typeface
 import android.view.View
 import android.view.ViewGroup
@@ -92,7 +91,10 @@ abstract class ManagerCRUD<TActivity, TViewModel, TEntity, TDao>(
 //                    }
 //                    else -> Unit
 //                }
-                if(it is ViewGroup) findAndSetTypeface(it, activity.typeFaceCustom(Typeface.BOLD_ITALIC))
+                if (it is ViewGroup) findAndSetTypeface(
+                    it,
+                    activity.typeFaceCustom(Typeface.BOLD_ITALIC)
+                )
             }
             dialog.onEventClickOK = { if (crud()) dialog }
 //            dialog.onEventSetOKEnabled = { onSetOKEnabled?.invoke(operation) ?: true }

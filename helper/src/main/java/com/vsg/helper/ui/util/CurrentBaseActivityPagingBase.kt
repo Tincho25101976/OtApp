@@ -86,7 +86,7 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
     //region handler
     var onEventMakeFilter: ((TFilter, String, PagingData<TEntity>) -> PagingData<TEntity>)? = null
     var onEventSetCRUDForApply: ((TActivity, DBOperation) -> TCrud)? = null
-    var onEventSetDataUpload: ((TActivity) -> DataBase)
+//    var onEventSetDataUpload: ((TActivity) -> DataBase)
     var onEventSwipeGetViewForMenu: ((View) -> Unit)? = null
     var onEventGetIdRelationFromIntent: (() -> Unit)? = null
     var onEventGetListTextSearch: (() -> LiveData<List<String>>)? = null
