@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.Index
+import com.vsg.helper.common.adapter.IDataAdapter
 import com.vsg.helper.common.model.IEntityParse
 import com.vsg.helper.helper.date.HelperDate.Companion.toDate
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
@@ -23,7 +24,7 @@ import kotlin.reflect.full.starProjectedType
     inheritSuperIndices = true,
     tableName = XactSector.ENTITY_NAME
 )
-class XactSector : EntityOt<XactSector>(), IEntityParse<XactSector> {
+class XactSector : EntityOt<XactSector>(), IEntityParse<XactSector>, IDataAdapter {
 
     //region methods
 
@@ -41,6 +42,9 @@ class XactSector : EntityOt<XactSector>(), IEntityParse<XactSector> {
 
     override val tag: String
         get() = javaClass.simpleName
+
+    override fun titleAdapter(): String? = title
+    override fun bodyAdapter(): String = description
     //endregion
 
     companion object {

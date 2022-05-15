@@ -167,10 +167,10 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
 
     //region menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.items_menu, menu)
-//        val items: MenuItem = menu?.findItem(R.id.action_bar_item_update_db) ?: return true
-//        val command: Button = items.actionView as Button
-        //FontManager(this).replaceFonts(menu as ViewGroup)
+//        menuInflater.inflate(R.menu.items_menu, menu)
+////        val items: MenuItem = menu?.findItem(R.id.action_bar_item_update_db) ?: return true
+////        val command: Button = items.actionView as Button
+//        //FontManager(this).replaceFonts(menu as ViewGroup)
         return true
     }
 

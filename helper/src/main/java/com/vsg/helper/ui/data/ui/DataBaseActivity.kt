@@ -5,8 +5,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.ScrollingMovementMethod
 import android.view.View
-import android.widget.*
-import androidx.annotation.LayoutRes
+import android.widget.ImageView
+import android.widget.ListView
+import android.widget.ProgressBar
+import android.widget.TextView
 import com.vsg.helper.R
 import com.vsg.helper.common.adapter.IDataAdapter
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
@@ -28,19 +30,12 @@ import com.vsg.helper.ui.util.CurrentBaseActivity
 
 @ExperimentalStdlibApi
 abstract class DataBaseActivity<TActivity, TViewModel, TDao, TEntity>(
-    item: TEntity,
-    val db: IGenericDaoPagingParse<TEntity>,
-    activity: TActivity,
-    fileSource: String,
-    @LayoutRes layout: Int,
-    val viewModel: TViewModel? = null
+    activity: TActivity
 ) :
     ManagerCRUD<TActivity, TViewModel, TEntity, TDao>(
         activity,
-        item,
-        fileSource,
-        layout
-    ), IActivityForProgress
+        R.layout.activity_update_database
+    )
         where TActivity : CurrentBaseActivity<TViewModel, TDao, TEntity>,
               TActivity : IActivityForProgress,
               TViewModel : ViewModelGenericParse<TDao, TEntity>,
@@ -53,26 +48,26 @@ abstract class DataBaseActivity<TActivity, TViewModel, TDao, TEntity>(
               TEntity : IEntityCreateDate,
               TEntity : Comparable<TEntity>,
               TDao : IGenericDaoPagingParse<TEntity> {
-//    private var crud: ManagerCRUD<TEntity>? = null
 
     private var tListView: ListView
     private lateinit var tLog: TextView
     private var tSend: ImageView
-    final override var tProgressBar: ProgressBar
-    final override var tDescriptionProgress: TextView
-    final override var tLayoutProgress: RelativeLayout
+
+//    final override var tProgressBar: ProgressBar
+//    final override var tDescriptionProgress: TextView
+//    final override var tLayoutProgress: RelativeLayout
 
     init {
-        activity.makeCustomActionbar(activity.getString(R.string.DialogTextViewCaptionUpdateSource))
+//        activity.makeCustomActionbar(activity.getString(R.string.DialogTextViewCaptionUpdateSource))
         activity.chooserFile(TypeTempFile.DATABASE)
 
         //region progress
-        tProgressBar =
+        activity.tProgressBar =
             activity.findViewById<ProgressBar>(R.id.activity_update_db_progress_bar).apply {
                 visibility = View.GONE
             }
-        tDescriptionProgress = activity.findViewById(R.id.activity_update_db_progress_text)
-        tLayoutProgress = activity.findViewById(R.id.activity_update_db_progress)
+        activity.tDescriptionProgress = activity.findViewById(R.id.activity_update_db_progress_text)
+        activity.tLayoutProgress = activity.findViewById(R.id.activity_update_db_progress)
         //endregion
 
         tListView = activity.findViewById(R.id.lv_activity_update_database)
@@ -145,6 +140,7 @@ abstract class DataBaseActivity<TActivity, TViewModel, TDao, TEntity>(
                     )?.absolutePath
                         ?: ""
                     if (file.isNotEmpty()) {
+                        this.fileXML = file
 //                        crud = ManagerCRUD(this, this.getDatabaseName(), item, file, db)
                     }
                 }

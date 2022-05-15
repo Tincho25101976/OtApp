@@ -4,6 +4,6 @@
     <item
         android:id="@+id/MenuActionXactUpdateSector"
         android:title="@string/MenuItemSectorUpdate"
-        android:icon="@drawable/pic_xact_sector"
+        android:icon="@drawable/pic_xact_sector_update"
         app:actionViewClass="android.widget.Button"/>
 </menu>

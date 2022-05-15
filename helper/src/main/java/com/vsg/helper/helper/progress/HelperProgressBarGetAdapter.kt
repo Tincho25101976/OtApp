@@ -12,17 +12,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.Toast
+import com.vsg.helper.R
 import com.vsg.helper.common.adapter.IDataAdapter
 import com.vsg.helper.helper.font.FontManager.Static.typeFaceCustom
 import com.vsg.helper.ui.adapter.UIIDataAdapter
-import com.vsg.helper.R
 import java.text.DecimalFormat
 import kotlin.random.Random
 
-class HelperProgressBarGetAdapter<TActivity, TData>(private val activity: TActivity,
-                                                    private val process: ICallbackProcessGetAdapter<TData>
+class HelperProgressBarGetAdapter<TActivity, TData>(
+    private val activity: TActivity,
+    private val process: ICallbackProcessGetAdapter<TData>
 ) :
-    AsyncTask<Unit, Int, Int>() where TData : IDataAdapter, TActivity : Activity, TActivity : IActivityForProgress {
+    AsyncTask<Unit, Int, Int>()
+        where TData : IDataAdapter,
+              TActivity : Activity,
+              TActivity : IActivityForProgress {
 
     var onGetResult: ((UIIDataAdapter<TData>?) -> Unit)? = null
     var data: UIIDataAdapter<TData>? = null
@@ -88,7 +92,7 @@ class HelperProgressBarGetAdapter<TActivity, TData>(private val activity: TActiv
         setVisibility(true)
     }
 
-    override  fun doInBackground(vararg params: Unit?): Int {
+    override fun doInBackground(vararg params: Unit?): Int {
         process.apply {
             onProgress = { v, m, p ->
                 activity.tProgressBar.max = m

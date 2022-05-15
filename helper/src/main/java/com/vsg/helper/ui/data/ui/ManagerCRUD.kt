@@ -35,8 +35,6 @@ import java.io.FileInputStream
 @ExperimentalStdlibApi
 abstract class ManagerCRUD<TActivity, TViewModel, TEntity, TDao>(
     val activity: TActivity,
-    val item: TEntity,
-    private var fileXML: String,
     @LayoutRes customLayout: Int
 ) :
     UICustomAlertDialogParameter(customLayout),
@@ -63,6 +61,7 @@ abstract class ManagerCRUD<TActivity, TViewModel, TEntity, TDao>(
     //endregion
 
     //region properties
+    protected var fileXML: String = ""
     private var db: TViewModel = activity.currentViewModel()
     private val xml: XmlParseHelper<TEntity>
     private lateinit var read: MutableList<TEntity>
@@ -70,12 +69,12 @@ abstract class ManagerCRUD<TActivity, TViewModel, TEntity, TDao>(
     var type: TypeManagerCRUD = TypeManagerCRUD.DEFAULT
     private var dialog: UICustomAlertDialogResult<TActivity> = UICustomAlertDialogResult(activity)
     protected var container: View? = null
-    protected var containerLoad: Boolean = false
+//    protected var containerLoad: Boolean = false
     //endregion
 
     init {
         try {
-            xml = XmlParseHelper(item)
+            xml = XmlParseHelper(aGetItem())
             db.onProgress = { actual, total, porcentaje ->
                 Thread { onResultProgreso(actual, total, porcentaje) }.start()
             }
@@ -83,14 +82,6 @@ abstract class ManagerCRUD<TActivity, TViewModel, TEntity, TDao>(
                 this.container = it
                 if (container != null) onEventGetView?.invoke(it, db)
 
-//                when (operation) {
-//                    DBOperation.INSERT -> onEventSetContainer?.invoke(operation)
-//                    DBOperation.UPDATE -> {
-//                        setOperation()
-//                        onEventSetContainer?.invoke(operation)
-//                    }
-//                    else -> Unit
-//                }
                 if (it is ViewGroup) findAndSetTypeface(
                     it,
                     activity.typeFaceCustom(Typeface.BOLD_ITALIC)
@@ -105,7 +96,7 @@ abstract class ManagerCRUD<TActivity, TViewModel, TEntity, TDao>(
     }
 
     //region methods
-    protected abstract fun aGetItem(): TEntity?
+    protected abstract fun aGetItem(): TEntity
 
     //region typeface
     protected fun findAndSetTypeface(view: ViewGroup, typeface: Typeface) {
