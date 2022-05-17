@@ -12,7 +12,9 @@ import com.vsg.helper.helper.Helper.Companion.toSiNo
 import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.util.helper.HelperNumeric.Companion.toPadStart
+import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.memberProperties
+import kotlin.reflect.jvm.isAccessible
 
 abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResultPopUpData,
     IDescriptionView, IEntityKeySearch {
@@ -73,9 +75,15 @@ abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResult
 
     //region reflection
     fun getFields(): List<String> {
-        val lst = listOf("Id", "description", "tag")
-        val result = this::class.memberProperties.filter { lst.contains(it.name) }.map { it.name }
-        val data = this::class.memberProperties.map { it }.toList()
+        val lst = listOf("id", "valueCode", "tag")
+        val ttt = this::class.memberProperties.filter { lst.contains(it.name) }.toList()
+        val result = this::class.memberProperties.filter { it.findAnnotation<Ignore>() != null }
+            .map { it.name }
+        val resultNotIgnore = this::class.memberProperties.filter {
+            it.findAnnotation<Ignore>() == null
+                    && it.isAccessible
+        }.map { it.name }
+        val data = this::class.memberProperties.map { it.name }.toList()
         return result
     }
     //endregion

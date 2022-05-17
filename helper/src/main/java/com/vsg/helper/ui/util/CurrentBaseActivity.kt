@@ -27,7 +27,7 @@ abstract class CurrentBaseActivity<TViewModel, TDao, TEntity>(
         setContext()
         this.onEventExecuteSetViewModel = {
             viewModel = run {
-                ViewModelProvider(it).get(type)
+                ViewModelProvider(it)[type]
             }
         }
         this.onEventLoadBackground = { v, background ->

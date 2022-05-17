@@ -48,7 +48,7 @@
         <activity android:name=".ui.activities.setting.SettingProfileActivity" />
 
         <!--UploadData-->
-        <activity android:name="com.vsg.helper.ui.data.ui.DataBaseActivity"/>
+        <activity android:name=".ui.common.securityDigital.xact.sector.UIUpdateDataXactSector" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

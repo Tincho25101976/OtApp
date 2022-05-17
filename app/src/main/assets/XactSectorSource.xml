@@ -1,0 +1,20 @@
+<root>
+	<XactSector>
+		<valueCode>Playón Almacenes</valueCode>
+		<description>Playón de Almacenes Materia prima</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+    <XactSector>
+		<valueCode>Almacenes MP</valueCode>
+		<description>Almacenes Materia prima</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+    <XactSector>
+		<valueCode>Almacenes PT</valueCode>
+		<description>Almacenes Producto terminado</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+</root>

@@ -18,8 +18,7 @@ class XactSectorActivity :
     CurrentBaseActivityPagingGenericParse<XactSectorActivity, XactSectorViewModel,
             XactSectorDao, XactSector,
             FilterTypeActivityXactSector,
-            UICRUDXactSector<XactSectorActivity>,
-            UIUpdateDataXactSector<XactSectorActivity>>(
+            UICRUDXactSector<XactSectorActivity>>(
         XactSectorViewModel::class.java,
         FilterTypeActivityXactSector::class.java
     ) {
@@ -40,9 +39,7 @@ class XactSectorActivity :
             filter
         }
         onEventSetCRUDForApply = { context, operation -> UICRUDXactSector(context, operation) }
-        onEventSetDataUpload = { context -> UIUpdateDataXactSector(context) }
-
-
+//        onEventSetDataUpload = { context -> UIUpdateDataXactSector(context) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -56,7 +53,8 @@ class XactSectorActivity :
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.MenuActionXactUpdateSector -> {
-                applyUploadData()
+//                applyUploadData()
+                loadActivity(UIUpdateDataXactSector::class.java)
             }
         }
         return super.onOptionsItemSelected(item)

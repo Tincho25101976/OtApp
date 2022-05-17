@@ -44,6 +44,7 @@
 
     <!--UpdateDataBase:-->
     <string name="DialogTextViewSource">Data</string>
+    <string name="DialogTextViewSourceFind">Select File</string>
     <string name="DialogTextViewDeleteSource">Delete</string>
     <string name="DialogTextViewUpdateSource">Update</string>
     <string name="DialogTextViewReadSource">Read</string>

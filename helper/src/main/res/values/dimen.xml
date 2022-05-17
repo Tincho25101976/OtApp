@@ -56,6 +56,7 @@
     <dimen name="DialogCrudTextSize">8sp</dimen>
     <dimen name="DialogCrudPictureSize">32sp</dimen>
     <dimen name="DialogCrudLogTextSize">11sp</dimen>
+    <dimen name="DialogCrudPictureActionSize">64sp</dimen>
 
     <!--DialogGenericChoosePicture-->
     <dimen name="DialogGenericChoosePictureSize">256sp</dimen>
