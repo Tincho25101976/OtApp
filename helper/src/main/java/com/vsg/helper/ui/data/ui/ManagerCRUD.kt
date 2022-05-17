@@ -33,6 +33,8 @@ class ManagerCRUD<TActivity, TViewModel, TDao, TEntity>(
               TEntity : IEntityPagingLayoutPosition,
               TEntity : IEntity,
               TEntity : IIsEnabled,
+              TEntity : IEntityCode,
+              TEntity : ItemBase,
               TEntity : IEntityCreateDate,
               TEntity : Comparable<TEntity>,
               TDao : IGenericDaoPagingParse<TEntity> {

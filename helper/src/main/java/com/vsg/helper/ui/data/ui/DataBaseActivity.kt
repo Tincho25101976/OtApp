@@ -36,6 +36,8 @@ abstract class DataBaseActivity<TViewModel, TDao, TEntity>(type: Class<TViewMode
               TEntity : IEntityPagingLayoutPosition,
               TEntity : IEntity,
               TEntity : IIsEnabled,
+              TEntity : ItemBase,
+              TEntity : IEntityCode,
               TEntity : IEntityCreateDate,
               TEntity : Comparable<TEntity>,
               TDao : IGenericDaoPagingParse<TEntity> {

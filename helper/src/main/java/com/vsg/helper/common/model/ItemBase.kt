@@ -74,16 +74,16 @@ abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResult
     protected fun formatId(): String = id.toString().padStart(5, '0')
 
     //region reflection
-    fun getFields(): List<String> {
-        val lst = listOf("id", "valueCode", "tag")
-        val ttt = this::class.memberProperties.filter { lst.contains(it.name) }.toList()
-        val result = this::class.memberProperties.filter { it.findAnnotation<Ignore>() != null }
-            .map { it.name }
-        val resultNotIgnore = this::class.memberProperties.filter {
-            it.findAnnotation<Ignore>() == null
-                    && it.isAccessible
-        }.map { it.name }
-        val data = this::class.memberProperties.map { it.name }.toList()
+    open fun getFields(): List<String> {
+//        val lst = listOf("id", "valueCode", "tag")
+//        val ttt = this::class.memberProperties.filter { lst.contains(it.name) }.toList()
+//        val result = this::class.memberProperties.filter { it.findAnnotation<Ignore>() != null }
+//            .map { it.name }
+//        val resultNotIgnore = this::class.memberProperties.filter {
+//            it.findAnnotation<Ignore>() == null
+//                    && it.isAccessible
+//        }.map { it.name }
+        val result = this::class.memberProperties.map { it.name }.toList()
         return result
     }
     //endregion

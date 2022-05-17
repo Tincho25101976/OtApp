@@ -13,6 +13,7 @@ import common.model.init.entity.EntityOt
 import java.util.*
 import kotlin.reflect.KMutableProperty
 import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.full.memberProperties
 import kotlin.reflect.full.starProjectedType
 
 @Entity(
@@ -51,8 +52,12 @@ class XactSector : EntityOt<XactSector>(), IEntityParse<XactSector>, IDataAdapte
         const val ENTITY_NAME = "masterXactSector"
     }
 
+    override fun getFields(): List<String> {
+        return listOf("id", "valueCode", "description", "isDefault", "isEnabled")
+    }
+
     override fun cast(s: HashMap<String?, String?>): XactSector {
-        val data = XactSector::class.declaredMemberProperties
+        val data = XactSector::class.memberProperties
             .filter { s.keys.contains(it.name) }
             .map { it }
         val result = XactSector()

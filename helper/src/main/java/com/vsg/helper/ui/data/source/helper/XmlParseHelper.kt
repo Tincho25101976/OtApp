@@ -1,7 +1,9 @@
 package com.vsg.helper.ui.data.source.helper
 
 import android.text.Spanned
+import com.vsg.helper.common.model.IEntityCode
 import com.vsg.helper.common.model.IEntityParse
+import com.vsg.helper.common.model.ItemBase
 import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.helper.ui.data.ILog
@@ -13,11 +15,13 @@ import org.xmlpull.v1.XmlPullParserFactory
 import java.io.IOException
 import java.io.InputStream
 
-class XmlParseHelper<T>(var item: T) : ILog, IReadToList<T>
-        where T : IEntityParse<T> {
+class XmlParseHelper<TEntity>(var item: TEntity) : ILog, IReadToList<TEntity>
+        where TEntity : ItemBase,
+              TEntity : IEntityCode,
+              TEntity : IEntityParse<TEntity> {
 
     var list = ArrayList<HashMap<String?, String?>>()
-    var cast: MutableList<T> = mutableListOf()
+    var cast: MutableList<TEntity> = mutableListOf()
     private val log: CustomLog = CustomLog()
 
     fun getParse(file: InputStream) = try {
@@ -66,5 +70,5 @@ class XmlParseHelper<T>(var item: T) : ILog, IReadToList<T>
     }
 
     override fun getLog(): Spanned = log.getAndNew()
-    override fun readToList(): MutableList<T> = cast
+    override fun readToList(): MutableList<TEntity> = cast
 }
