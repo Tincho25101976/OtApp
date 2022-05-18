@@ -35,7 +35,9 @@ abstract class ViewModelGenericParse<TDao, TEntity>(
               TEntity : IEntityPagingLayoutPosition,
               TEntity : Comparable<TEntity> {
 
-    override fun processWithProgress(data: List<TEntity>): Boolean = insert(data)
+    override fun processWithProgress(data: List<TEntity>): Boolean {
+        return insert(data)
+    }
 
     override var onProgress: ((Int, Int, Double) -> Unit)? = null
 
@@ -43,7 +45,12 @@ abstract class ViewModelGenericParse<TDao, TEntity>(
         dao.viewAllSimpleList() ?: listOf()
 
     override fun deleteAll() = dao.deleteAll()
-    override fun insert(item: List<TEntity>): Boolean = dao.insert(item)
+    override fun insert(item: List<TEntity>): Boolean {
+        dao.onProgress = { current, total, percentage ->
+            onProgress?.invoke(current, total, percentage)
+        }
+        return dao.insert(item)
+    }
 
     override fun getLog(): Spanned = dao.getLog()
     override fun readToList(): MutableList<TEntity> = dao.readToList()

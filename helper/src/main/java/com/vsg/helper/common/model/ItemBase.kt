@@ -9,11 +9,16 @@ import com.vsg.helper.common.popup.IPopUpData
 import com.vsg.helper.common.popup.IResultPopUpData
 import com.vsg.helper.common.popup.PopUpData
 import com.vsg.helper.helper.Helper.Companion.toSiNo
+import com.vsg.helper.helper.date.HelperDate.Companion.toDate
 import com.vsg.helper.helper.string.HelperString.Static.castToHtml
+import com.vsg.helper.helper.string.HelperString.Static.toBool
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.util.helper.HelperNumeric.Companion.toPadStart
+import java.util.*
+import kotlin.reflect.KMutableProperty
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.memberProperties
+import kotlin.reflect.full.starProjectedType
 import kotlin.reflect.jvm.isAccessible
 
 abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResultPopUpData,
@@ -72,21 +77,6 @@ abstract class ItemBase : IIsEnabled, IIsDefault, IDescription, IEntity, IResult
 
     @Ignore
     protected fun formatId(): String = id.toString().padStart(5, '0')
-
-    //region reflection
-    open fun getFields(): List<String> {
-//        val lst = listOf("id", "valueCode", "tag")
-//        val ttt = this::class.memberProperties.filter { lst.contains(it.name) }.toList()
-//        val result = this::class.memberProperties.filter { it.findAnnotation<Ignore>() != null }
-//            .map { it.name }
-//        val resultNotIgnore = this::class.memberProperties.filter {
-//            it.findAnnotation<Ignore>() == null
-//                    && it.isAccessible
-//        }.map { it.name }
-        val result = this::class.memberProperties.map { it.name }.toList()
-        return result
-    }
-    //endregion
 
     companion object {
 

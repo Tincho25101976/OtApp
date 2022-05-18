@@ -106,23 +106,34 @@ class HelperString {
             StringBuilder().append(this).append(": ").toString()
 
         private fun String.toTagBold() = this.toTag(TypeTagHTML.B)
-        fun StringBuilder.toTagBold(text: String): StringBuilder = this.append(text.toTag(TypeTagHTML.B))
+        fun StringBuilder.toTagBold(text: String): StringBuilder =
+            this.append(text.toTag(TypeTagHTML.B))
+
         private fun String.toTagCaption(underline: Boolean = true) = when (underline) {
             true -> this.toTag(TypeTagHTML.B, TypeTagHTML.U)
             false -> this.toTag(TypeTagHTML.B)
         }
 
         private fun String.toTagTitle() = this.toTag(TypeTagHTML.H2)
-        fun StringBuilder.toLineSpanned(caption: String, item: String?, underline: Boolean = true): StringBuilder =
+        fun StringBuilder.toLineSpanned(
+            caption: String,
+            item: String?,
+            underline: Boolean = true
+        ): StringBuilder =
             this.append(caption.formatCaption().toTagCaption(underline)).append(item).appendLine()
-        fun StringBuilder.toLineSpanned(caption: String, item: Int?, underline: Boolean = true): StringBuilder =
+
+        fun StringBuilder.toLineSpanned(
+            caption: String,
+            item: Int?,
+            underline: Boolean = true
+        ): StringBuilder =
             this.append(caption.formatCaption().toTagCaption(underline)).append(item).appendLine()
 
         fun StringBuilder.toOneLineSpanned(
             caption: String,
             item: String?,
             underline: Boolean = true
-        ):StringBuilder =
+        ): StringBuilder =
             this.append(caption.formatCaption().toTagCaption(underline)).append(item)
 
         fun StringBuilder.toTitleSpanned(caption: String): StringBuilder =
@@ -168,6 +179,12 @@ class HelperString {
             return this.isCompareRegEx(p)
         }
 
+        fun String.isNumeric(): Boolean {
+            val regex = "-?[0-9]+(\\.[0-9]+)?".toRegex()
+            return this.matches(regex)
+        }
+
+
         fun String.isPhoneNumber(): Boolean {
             val p = "(0/91)?[7-9][0-9]{9}"
             return this.isCompareRegEx(p)
@@ -201,13 +218,22 @@ class HelperString {
                 null
             }
         }
+
+        fun String.toBool(): Boolean {
+            if (this.isEmpty()) return false
+            if (this == "true") return true
+            if (this.isNumeric()) return this.toDouble() != 0.0
+            return false
+        }
+
         //endregion
 
         //region util
         fun String.capitalizeWords(): String =
             split(" ").joinToString(" ") { s ->
                 s.lowercase()
-                .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() } }
+                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+            }
 
         //        fun String.capitalizeWords(): String = split(" ").map { it.toLowerCase().capitalize() }.joinToString(" ")
         fun String.removeAllSpace(): String = when (this.isEmpty()) {

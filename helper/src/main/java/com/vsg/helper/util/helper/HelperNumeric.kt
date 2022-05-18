@@ -23,6 +23,8 @@ class HelperNumeric {
             return df.format(this)
         }
 
+        fun Number.toBoolean(): Boolean = (this != 0)
+
         fun Number.toPadStart(@IntRange(from = 2, to = 10) length: Int = 4): String =
             this.toString().padStart(length, '0')
 

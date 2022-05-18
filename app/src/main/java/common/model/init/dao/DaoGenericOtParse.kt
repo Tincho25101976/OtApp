@@ -38,7 +38,7 @@ abstract class DaoGenericOtParse<T> : IGenericDaoPagingParse<T>
     override fun processWithProgress(data: List<T>): Boolean = insert(data)
 
     override fun insert(item: List<T>): Boolean {
-        if (item.any()) return false
+        if (!item.any()) return false
         var i = 0
         var c = 0
         val count = item.count()
@@ -47,7 +47,7 @@ abstract class DaoGenericOtParse<T> : IGenericDaoPagingParse<T>
                 runBlocking {
                     c += (insert(it) > 0L) then 1 or 0
                 }
-                onResultProgreso(i++, count)
+                onResultProgreso(++i, count)
             } catch (ex: Exception) {
 
             }

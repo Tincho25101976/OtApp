@@ -6,6 +6,7 @@ import androidx.room.Ignore
 import androidx.room.Index
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
+import com.vsg.ot.common.model.init.entity.EntityOtParse
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
 import common.model.init.entity.EntityOt
 
@@ -18,7 +19,7 @@ import common.model.init.entity.EntityOt
     inheritSuperIndices = true,
     tableName = XactEvent.ENTITY_NAME
 )
-class XactEvent : EntityOt<XactEvent>() {
+class XactEvent : EntityOtParse<XactEvent>() {
     //region properties
     @Ignore
     public var records: List<XactRecord>? = null
@@ -37,6 +38,8 @@ class XactEvent : EntityOt<XactEvent>() {
         if (other !is XactEvent) return false
         return valueCode == other.valueCode
     }
+
+    override fun aGetItemCast(): XactEvent = XactEvent()
     //endregion
 
     companion object {

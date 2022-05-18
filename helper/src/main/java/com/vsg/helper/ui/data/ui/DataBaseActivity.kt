@@ -42,7 +42,6 @@ abstract class DataBaseActivity<TViewModel, TDao, TEntity>(type: Class<TViewMode
               TEntity : Comparable<TEntity>,
               TDao : IGenericDaoPagingParse<TEntity> {
 
-
     //region event
     var onEventSetItem: ((Unit) -> TEntity)? = null
     //endregion
