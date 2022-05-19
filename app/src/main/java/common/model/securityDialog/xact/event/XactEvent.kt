@@ -40,6 +40,9 @@ class XactEvent : EntityOtParse<XactEvent>() {
     }
 
     override fun aGetItemCast(): XactEvent = XactEvent()
+    override fun getFields(): List<String> {
+       return listOf("description", "valueCode", "isEnabled", "isDefault", "id")
+    }
     //endregion
 
     companion object {

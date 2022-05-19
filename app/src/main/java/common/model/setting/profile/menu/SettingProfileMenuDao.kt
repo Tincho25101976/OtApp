@@ -36,7 +36,7 @@ abstract class SettingProfileMenuDao : DaoGenericOt<SettingProfileMenu>() {
                 "   ON sm.id = e.idMenu " +
                 "GROUP BY e.idProfile ORDER BY sp.description"
     )
-    abstract fun viewAllTextSearch(): LiveData<List<String>>
+    abstract override fun viewGetAllTextSearch(): LiveData<List<String>>
 
     //region check
     @Query("SELECT EXISTS(SELECT * FROM ${SettingProfileMenu.ENTITY_NAME} WHERE id = :id)")

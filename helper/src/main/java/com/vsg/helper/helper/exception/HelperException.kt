@@ -1,6 +1,8 @@
 package com.vsg.helper.helper.exception
 
 import com.vsg.helper.common.model.IEntity
+import com.vsg.helper.helper.Helper.Companion.or
+import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.ui.adapter.IDataAdapterEnum
 
 class HelperException {
@@ -91,10 +93,8 @@ class HelperException {
         }
 
         fun String.throwException() {
-            if (this.isNotEmpty()) {
-                return
-            }
-            throw Exception("${this}...")
+            val data = this.isEmpty() then "Exception unknown" or this
+            throw Exception("${data}...")
         }
     }
 }

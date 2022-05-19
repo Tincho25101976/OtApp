@@ -49,6 +49,7 @@
 
         <!--UploadData-->
         <activity android:name=".ui.common.securityDigital.xact.sector.UIUpdateDataXactSector" />
+        <activity android:name=".ui.common.securityDigital.xact.event.UIUpdateDataXactEvent" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

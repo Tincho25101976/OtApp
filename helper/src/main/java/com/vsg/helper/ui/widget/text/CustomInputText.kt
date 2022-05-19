@@ -87,6 +87,7 @@ class CustomInputText @JvmOverloads constructor(
                 if (value == TypeCustomInputText.INT) setMask(MaskType.NUMBER_INTEGER)
                 if (value == TypeCustomInputText.PHONE) setMask(MaskType.PHONE)
                 if (value == TypeCustomInputText.MAIL_ADDRESS) setMask(MaskType.MAIL_ADDRESS)
+                if (value == TypeCustomInputText.DATE) setMask(MaskType.DATE)
                 if (value == TypeCustomInputText.READ_ONLY_TEXT) {
                     isMultiline = false
                     isEnabled = false

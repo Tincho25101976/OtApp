@@ -112,11 +112,11 @@ class UICRUDXactRecord<TActivity>(activity: TActivity, operation: DBOperation) :
             var result = false
             try {
                 if (item.caption.isEmpty()) "El nombre del Evento no puede ser nulo".throwException()
-                if (item.createDate <= nowDate().date()) "La fecha no puede ser inferior a la fecha actual".throwException()
+                if (item.createDate > nowDate().date()) "La fecha no puede ser superior a la fecha actual".throwException()
                 if (item.idEvent <= 0) "No se ha seleccionado un Evento".throwException()
                 if (item.idSector <= 0) "No se ha seleccionado un Sector".throwException()
                 if (item.planta == TypePlant.UNDEFINED) "No se ha seleccionado una Planta".throwException()
-                if (item.picture == null || item.picture!!.isEmpty()) "La imagen no fue asignado".throwException()
+                //if (item.picture == null || item.picture!!.isEmpty()) "La imagen no fue asignada".throwException()
                 result = true
             } catch (e: Exception) {
                 message(e.message ?: "Error desconocido...")

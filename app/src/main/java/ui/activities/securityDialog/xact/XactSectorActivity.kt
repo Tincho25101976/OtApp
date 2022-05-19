@@ -39,23 +39,16 @@ class XactSectorActivity :
             filter
         }
         onEventSetCRUDForApply = { context, operation -> UICRUDXactSector(context, operation) }
-//        onEventSetDataUpload = { context -> UIUpdateDataXactSector(context) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_xact_sector, menu)
-////        val items: MenuItem = menu?.findItem(R.id.action_bar_item_update_db) ?: return true
-////        val command: Button = items.actionView as Button
-//        //FontManager(this).replaceFonts(menu as ViewGroup)
+        menuInflater.inflate(R.menu.menu_update_source, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.MenuActionXactUpdateSector -> {
-//                applyUploadData()
-                loadActivity(UIUpdateDataXactSector::class.java)
-            }
+            R.id.MenuActionUpdateSource -> loadActivity(UIUpdateDataXactSector::class.java)
         }
         return super.onOptionsItemSelected(item)
     }

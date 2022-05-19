@@ -26,7 +26,7 @@ abstract class SettingProfileUserDao : DaoGenericOt<SettingProfileUser>() {
     abstract override fun updateSetEnabled(data: Int)
 
     @Query("SELECT description FROM ${SettingProfileUser.ENTITY_NAME} GROUP BY description ORDER BY description")
-    abstract fun viewAllTextSearch(): LiveData<List<String>>
+    abstract override fun viewGetAllTextSearch(): LiveData<List<String>>
 
     //region check
     @Query("SELECT EXISTS(SELECT * FROM ${SettingProfileUser.ENTITY_NAME} WHERE id = :id)")

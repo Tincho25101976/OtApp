@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/MenuActionXactUpdateSector"
+        android:id="@+id/MenuActionUpdateSource"
         android:title="@string/MenuItemSectorUpdate"
-        android:icon="@drawable/pic_xact_sector_update"
+        android:icon="@drawable/pic_update"
         app:actionViewClass="android.widget.Button"/>
 </menu>

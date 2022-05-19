@@ -4,6 +4,7 @@ import com.vsg.helper.common.adapter.IDataAdapter
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
 import com.vsg.helper.common.model.*
 import com.vsg.helper.common.model.viewModel.ViewModelGenericParse
+import com.vsg.helper.common.util.dao.IDaoAllTextSearch
 import com.vsg.helper.common.util.dao.IGenericDaoPagingParse
 import com.vsg.helper.helper.Helper.Companion.or
 import com.vsg.helper.helper.Helper.Companion.then
@@ -37,6 +38,7 @@ class ManagerCRUD<TActivity, TViewModel, TDao, TEntity>(
               TEntity : ItemBase,
               TEntity : IEntityCreateDate,
               TEntity : Comparable<TEntity>,
+              TDao : IDaoAllTextSearch,
               TDao : IGenericDaoPagingParse<TEntity> {
 
     //region events

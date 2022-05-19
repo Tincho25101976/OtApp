@@ -11,9 +11,117 @@
 		<isEnabled>1</isEnabled>
 		<isDefault>0</isDefault>
 	</XactSector>
+	<XactSector>
+		<valueCode>Almacenes MP (Adm)</valueCode>
+		<description>Administración Almacenes Materia prima</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
     <XactSector>
 		<valueCode>Almacenes PT</valueCode>
 		<description>Almacenes Producto terminado</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Almacenes PT (Adm)</valueCode>
+		<description>Administración Almacenes Producto terminado</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Administración PB</valueCode>
+		<description>Administración Planta baja</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Administración PA</valueCode>
+		<description>Administración Planta alta</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Bladder (PRO)</valueCode>
+		<description>Producción Bladder</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Bladder (Mte)</valueCode>
+		<description>Mantenimiento de Bladder</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Bladder (Adm)</valueCode>
+		<description>Administración de Bladder</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Bladder (Lab)</valueCode>
+		<description>Laboratorio de Bladder</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Químicos (PRO)</valueCode>
+		<description>Producción Químico</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Químicos (Mte)</valueCode>
+		<description>Mantenimiento de Químico</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Químicos (Adm)</valueCode>
+		<description>Administración de Químico</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Químicos (Lab)</valueCode>
+		<description>Laboratorio de Químico</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Químicos (Des)</valueCode>
+		<description>Laboratorio de Desarrollo Químico</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Consultorio Medico</valueCode>
+		<description>Consultorio Medico</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Recepción Químico</valueCode>
+		<description>Recepción Químico</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Recepción Bladder</valueCode>
+		<description>Recepción Bladder</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Comedor Químico</valueCode>
+		<description>Comedor Químico</description>
+		<isEnabled>1</isEnabled>
+		<isDefault>0</isDefault>
+	</XactSector>
+	<XactSector>
+		<valueCode>Comedor Bladder</valueCode>
+		<description>Comedor Bladder</description>
 		<isEnabled>1</isEnabled>
 		<isDefault>0</isDefault>
 	</XactSector>

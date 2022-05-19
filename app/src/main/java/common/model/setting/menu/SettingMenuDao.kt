@@ -26,7 +26,7 @@ abstract class SettingMenuDao : DaoGenericOt<SettingMenu>() {
     abstract override fun updateSetEnabled(data: Int)
 
     @Query("SELECT description FROM ${SettingMenu.ENTITY_NAME} GROUP BY description ORDER BY description")
-    abstract fun viewAllTextSearch(): LiveData<List<String>>
+    abstract override fun viewGetAllTextSearch(): LiveData<List<String>>
 
     //region check
     @Query("SELECT EXISTS(SELECT * FROM ${SettingMenu.ENTITY_NAME} WHERE id = :id)")

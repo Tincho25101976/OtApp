@@ -26,7 +26,7 @@ abstract class XactSectorDao : DaoGenericOtParse<XactSector>() {
     abstract override fun updateSetEnabled(data: Int)
 
     @Query("SELECT valueCode FROM ${XactSector.ENTITY_NAME} GROUP BY valueCode ORDER BY valueCode")
-    abstract fun viewAllTextSearch(): LiveData<List<String>>
+    abstract override fun viewGetAllTextSearch(): LiveData<List<String>>
 
     @Query("DELETE FROM ${XactSector.ENTITY_NAME}")
     abstract override fun deleteAll()

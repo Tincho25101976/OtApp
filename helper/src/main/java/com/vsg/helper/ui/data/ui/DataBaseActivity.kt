@@ -11,6 +11,7 @@ import com.vsg.helper.common.adapter.IDataAdapter
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
 import com.vsg.helper.common.model.*
 import com.vsg.helper.common.model.viewModel.ViewModelGenericParse
+import com.vsg.helper.common.util.dao.IDaoAllTextSearch
 import com.vsg.helper.common.util.dao.IGenericDaoPagingParse
 import com.vsg.helper.helper.HelperUI.Static.REQUEST_FOR_CHOOSER_FILE_FROM_MANAGER
 import com.vsg.helper.helper.HelperUI.Static.setStatus
@@ -40,6 +41,7 @@ abstract class DataBaseActivity<TViewModel, TDao, TEntity>(type: Class<TViewMode
               TEntity : IEntityCode,
               TEntity : IEntityCreateDate,
               TEntity : Comparable<TEntity>,
+              TDao : IDaoAllTextSearch,
               TDao : IGenericDaoPagingParse<TEntity> {
 
     //region event

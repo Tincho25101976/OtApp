@@ -4,6 +4,7 @@ import com.vsg.helper.common.adapter.IDataAdapter
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
 import com.vsg.helper.common.model.*
 import com.vsg.helper.common.model.viewModel.ViewModelGenericParse
+import com.vsg.helper.common.util.dao.IDaoAllTextSearch
 import com.vsg.helper.common.util.dao.IGenericDaoPagingParse
 import com.vsg.helper.common.util.viewModel.IViewModelAllPaging
 import com.vsg.helper.common.util.viewModel.IViewModelAllTextSearch
@@ -24,6 +25,7 @@ abstract class CurrentBaseActivityPagingGenericParse<TActivity, TViewModel, TDao
               TViewModel : IViewModelAllTextSearch,
               TViewModel : ViewModelGenericParse<TDao, TEntity>,
               TDao : IGenericDaoPagingParse<TEntity>,
+              TDao : IDaoAllTextSearch,
               TEntity : IEntity,
               TEntity : IEntityParse<TEntity>,
               TEntity : IDataAdapter,
@@ -35,28 +37,4 @@ abstract class CurrentBaseActivityPagingGenericParse<TActivity, TViewModel, TDao
               TFilter : IDataAdapterEnum,
               TFilter : Enum<TFilter>,
               TEntity : ItemBase,
-              TCrud : UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity> {
-
-    //region events
-//    var onEventSetDataUpload: ((TActivity) -> TParse)? = null
-    //endregion
-
-//    //region progress
-//    override lateinit var tProgressBar: ProgressBar
-//    override lateinit var tDescriptionProgress: TextView
-//    override lateinit var tLayoutProgress: RelativeLayout
-//    //endregion
-
-    //region method
-//    fun applyUploadData() {
-//        val crud = onEventSetDataUpload?.invoke(context()) ?: return
-//        crud.apply {
-////            item = e
-////            onEventCRUD = {
-////                if (it && e != null && e.layoutPosition > 0) pagingAdapter?.notifyItemChanged(e.layoutPosition)
-////            }
-//            make()
-//        }
-//    }
-    //endregion
-}
+              TCrud : UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity>

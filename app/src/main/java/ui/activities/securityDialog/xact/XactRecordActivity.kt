@@ -2,6 +2,7 @@ package com.vsg.ot.ui.activities.securityDialog.xact
 
 import androidx.paging.PagingData
 import androidx.paging.filter
+import com.vsg.helper.ui.popup.action.UICustomAlertDialogActionParameter
 import com.vsg.helper.ui.util.CurrentBaseActivityPagingGeneric
 import com.vsg.ot.R
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
@@ -35,5 +36,6 @@ class XactRecordActivity :
             filter
         }
         onEventSetCRUDForApply = { context, operation -> UICRUDXactRecord(context, operation) }
+        onEventSetUICustomAlertDialogActionType = { UICustomAlertDialogActionParameter() }
     }
 }

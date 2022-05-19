@@ -1,5 +1,7 @@
 package com.vsg.ot.ui.activities.securityDialog.xact
 
+import android.view.Menu
+import android.view.MenuItem
 import androidx.paging.PagingData
 import androidx.paging.filter
 import com.vsg.helper.ui.util.CurrentBaseActivityPagingGeneric
@@ -9,6 +11,7 @@ import com.vsg.ot.common.model.securityDialog.xact.event.XactEventDao
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEventViewModel
 import com.vsg.ot.ui.activities.securityDialog.xact.util.FilterTypeActivityXactProcess
 import com.vsg.ot.ui.common.securityDigital.xact.event.UICRUDXactEvent
+import com.vsg.ot.ui.common.securityDigital.xact.event.UIUpdateDataXactEvent
 
 @ExperimentalStdlibApi
 class XactEventActivity :
@@ -35,5 +38,19 @@ class XactEventActivity :
             filter
         }
         onEventSetCRUDForApply = { context, operation -> UICRUDXactEvent(context, operation) }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_update_source, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.MenuActionUpdateSource -> {
+                loadActivity(UIUpdateDataXactEvent::class.java)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

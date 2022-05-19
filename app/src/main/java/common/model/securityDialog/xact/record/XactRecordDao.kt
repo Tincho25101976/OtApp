@@ -29,7 +29,7 @@ abstract class XactRecordDao : DaoGenericOt<XactRecord>() {
     abstract override fun updateSetEnabled(data: Int)
 
     @Query("SELECT caption FROM ${XactRecord.ENTITY_NAME} GROUP BY description ORDER BY description")
-    abstract fun viewAllTextSearch(): LiveData<List<String>>
+    abstract override fun viewGetAllTextSearch(): LiveData<List<String>>
 
     //region check
     @Query("SELECT EXISTS(SELECT * FROM ${XactRecord.ENTITY_NAME} WHERE id = :id)")

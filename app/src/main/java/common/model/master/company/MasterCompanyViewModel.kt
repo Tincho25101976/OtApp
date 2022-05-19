@@ -34,7 +34,7 @@ class MasterCompanyViewModel(application: Application) :
     }
 
     override fun viewModelGetAllTextSearch(): LiveData<List<String>> = runBlocking {
-        return@runBlocking dao.viewAllTextSearch()
+        return@runBlocking dao.viewGetAllTextSearch()
     }
 
     override fun viewModelViewAllSimpleList(): List<MasterCompany> =

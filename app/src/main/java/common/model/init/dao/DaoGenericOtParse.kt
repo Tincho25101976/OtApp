@@ -6,19 +6,14 @@ import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.model.IEntityCreateDate
 import com.vsg.helper.common.model.IEntityPagingLayoutPosition
 import com.vsg.helper.common.model.IIsEnabled
-import com.vsg.helper.common.util.dao.IDaoAllSimpleList
-import com.vsg.helper.common.util.dao.IGenericDaoPaging
+import com.vsg.helper.common.util.dao.IDaoAllTextSearch
 import com.vsg.helper.common.util.dao.IGenericDaoPagingParse
 import com.vsg.helper.helper.Helper.Companion.or
 import com.vsg.helper.helper.Helper.Companion.then
-import com.vsg.helper.helper.progress.ICallbackProcessWithProgress
-import com.vsg.helper.ui.data.ILog
-import com.vsg.helper.ui.data.IReadToList
 import com.vsg.helper.ui.data.log.CustomLog
-import common.model.init.dao.DaoGenericOt
 import kotlinx.coroutines.runBlocking
 
-abstract class DaoGenericOtParse<T> : IGenericDaoPagingParse<T>
+abstract class DaoGenericOtParse<T> : IGenericDaoPagingParse<T>, IDaoAllTextSearch
         where T : IResultRecyclerAdapter,
               T : IEntityPagingLayoutPosition,
               T : IEntity,
