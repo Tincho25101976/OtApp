@@ -5,6 +5,7 @@ import android.view.MenuItem
 import androidx.paging.PagingData
 import androidx.paging.filter
 import com.vsg.helper.ui.util.CurrentBaseActivityPagingGenericParse
+import com.vsg.helper.ui.util.CurrentBaseActivityPagingGenericParseExport
 import com.vsg.ot.R
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSectorDao
@@ -15,7 +16,7 @@ import com.vsg.ot.ui.common.securityDigital.xact.sector.UIUpdateDataXactSector
 
 @ExperimentalStdlibApi
 class XactSectorActivity :
-    CurrentBaseActivityPagingGenericParse<XactSectorActivity, XactSectorViewModel,
+    CurrentBaseActivityPagingGenericParseExport<XactSectorActivity, XactSectorViewModel,
             XactSectorDao, XactSector,
             FilterTypeActivityXactSector,
             UICRUDXactSector<XactSectorActivity>>(

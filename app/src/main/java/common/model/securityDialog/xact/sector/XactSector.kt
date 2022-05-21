@@ -4,9 +4,10 @@ import androidx.annotation.DrawableRes
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.Index
+import com.vsg.helper.common.export.ExportGenericEntityItem
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
-import com.vsg.ot.common.model.init.entity.EntityOtParse
+import com.vsg.ot.common.model.init.entity.EntityOtParseWithExport
 
 @Entity(
     indices = [
@@ -17,7 +18,7 @@ import com.vsg.ot.common.model.init.entity.EntityOtParse
     inheritSuperIndices = true,
     tableName = XactSector.ENTITY_NAME
 )
-class XactSector : EntityOtParse<XactSector>() {
+class XactSector : EntityOtParseWithExport<XactSector>() {
 
     //region methods
     @Ignore
@@ -36,6 +37,16 @@ class XactSector : EntityOtParse<XactSector>() {
         return listOf("id", "valueCode", "description", "isDefault", "isEnabled")
     }
 
+    override fun aGetExportItem(): List<ExportGenericEntityItem<*>> {
+        return listOf<ExportGenericEntityItem<out Any>>(
+            ExportGenericEntityItem("id", value = id),
+            ExportGenericEntityItem("valueCode", value = valueCode),
+            ExportGenericEntityItem("description", value = description),
+            ExportGenericEntityItem("isDefault", value = isDefault),
+            ExportGenericEntityItem("isEnabled", value = isEnabled)
+        )
+    }
+
     override fun aGetItemCast(): XactSector = XactSector()
     //endregion
 
@@ -43,27 +54,5 @@ class XactSector : EntityOtParse<XactSector>() {
         const val ENTITY_NAME = "masterXactSector"
     }
 
-//    override fun getFields(): List<String> {
-//        return listOf("id", "valueCode", "description", "isDefault", "isEnabled")
-//    }
-//
-//    override fun cast(s: HashMap<String?, String?>): XactSector {
-//        val data = XactSector::class.memberProperties
-//            .filter { s.keys.contains(it.name) }
-//            .map { it }
-//        val result = XactSector()
-//        if (!data.any()) return result
-//        data.filterIsInstance<KMutableProperty<*>>().forEach {
-//            val value = s[it.name] ?: ""
-//            when (it.returnType) {
-//                Int::class.starProjectedType -> it.setter.call(result, value.toInt())
-//                Double::class.starProjectedType -> it.setter.call(result, value.toDouble())
-//                String::class.starProjectedType -> it.setter.call(result, value)
-//                Long::class.starProjectedType -> it.setter.call(result, value.toLong())
-//                Date::class.starProjectedType -> it.setter.call(result, value.toDate())
-//                Boolean::class.starProjectedType -> it.setter.call(result, value.toBool())
-//            }
-//        }
-//        return result
-//    }
+
 }

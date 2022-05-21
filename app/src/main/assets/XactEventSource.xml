@@ -1,0 +1,18 @@
+<XactEvent>
+    <valueCode>Seguridad</valueCode>
+    <description>Seguridad</description>
+    <isEnabled>1</isEnabled>
+    <isDefault>0</isDefault>
+</XactEvent>
+<XactEvent>
+    <valueCode>Medio ambiente</valueCode>
+    <description>Medio ambiente</description>
+    <isEnabled>1</isEnabled>
+    <isDefault>0</isDefault>
+</XactEvent>
+<XactEvent>
+    <valueCode>Salud ocupacional</valueCode>
+    <description>Salud ocupacional</description>
+    <isEnabled>1</isEnabled>
+    <isDefault>0</isDefault>
+</XactEvent>

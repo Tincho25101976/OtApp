@@ -36,6 +36,6 @@ class XactRecordActivity :
             filter
         }
         onEventSetCRUDForApply = { context, operation -> UICRUDXactRecord(context, operation) }
-        onEventSetUICustomAlertDialogActionType = { UICustomAlertDialogActionParameter() }
+
     }
 }

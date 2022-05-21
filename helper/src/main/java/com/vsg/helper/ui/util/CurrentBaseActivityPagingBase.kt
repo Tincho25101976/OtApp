@@ -38,8 +38,6 @@ import com.vsg.helper.ui.crud.UICustomCRUDViewModel
 import com.vsg.helper.ui.popup.action.UICustomAlertDialogAction
 import com.vsg.helper.ui.popup.action.UICustomAlertDialogActionParameter
 import com.vsg.helper.ui.popup.action.UICustomAlertDialogActionType
-import com.vsg.helper.ui.popup.export.UICustomAlertDialogExport
-import com.vsg.helper.ui.popup.export.UICustomAlertDialogExportParameter
 import com.vsg.helper.ui.widget.spinner.CustomSpinner
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -64,6 +62,7 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
               TFilter : Enum<TFilter>,
               TEntity : ItemBase,
               TCrud : UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity> {
+
     //region widget
     private lateinit var tActivityPagingGenericSearchAndRecyclerView: RelativeLayout
     private lateinit var tLayoutSearch: LinearLayout
@@ -73,7 +72,7 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
     private lateinit var tRecycler: RecyclerView
     private lateinit var tAdd: ImageView
     private lateinit var actionMenu: UICustomAlertDialogAction<TActivity, TEntity>
-    private lateinit var actionExport: UICustomAlertDialogExport<TActivity, TEntity>
+
     private var pagingAdapter: UIRecyclerAdapterPagingData<TEntity>? = null
     private val istAddSearchInitialized: Boolean get() = this::tAdd.isInitialized && this::tLayoutSearch.isInitialized
     private val imageAdd: Bitmap?
@@ -94,6 +93,7 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
     var onEventGetListTextSearch: (() -> LiveData<List<String>>)? = null
     var onEventGetViewAllPaging: (() -> Flow<PagingData<TEntity>>?)? = null
     var onEventSetUICustomAlertDialogActionType: (() -> UICustomAlertDialogActionParameter)? = null
+    protected var onEventGetExport: ((TEntity?) -> Unit)? = null
     //endregion
     //endregion
 
@@ -199,15 +199,8 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
                         e, DBOperation.DELETE
                     )
                     UICustomAlertDialogActionType.VIEW -> applyCRUD(e, DBOperation.VIEW)
-                    UICustomAlertDialogActionType.EXPORT ->{
-                            actionExport = UICustomAlertDialogExport<TActivity, TEntity>(context(), UICustomAlertDialogExportParameter()
-                                .apply { sizeImage = 42 }
-                            )
-                            actionExport.onClickItem = {exportType, temp ->
-                                export(temp, exportType)
-                            }
-                            actionExport.make(e)
-                    }
+                    UICustomAlertDialogActionType.EXPORT -> onEventGetExport?.invoke(e)
+
                     else -> Unit
                 }
             }
@@ -276,7 +269,6 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
             make()
         }
     }
-
 
     protected fun fillTextSearch() {
         tSearchText.apply {
