@@ -31,6 +31,7 @@ class XactSector : EntityOtParseWithExport<XactSector>() {
     override fun aEquals(other: Any?): Boolean {
         if (other !is XactSector) return false
         return valueCode == other.valueCode
+                && description == other.description
     }
 
     override fun getFields(): List<String> {

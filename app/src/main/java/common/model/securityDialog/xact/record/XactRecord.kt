@@ -6,12 +6,13 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.Index
+import com.vsg.helper.common.export.ExportGenericEntityItem
 import com.vsg.helper.common.model.EntityForeignKeyID
 import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
-import com.vsg.ot.common.model.init.entity.EntityOtWithPicture
+import com.vsg.ot.common.model.init.entity.EntityOtWithPictureParseWithExport
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
 import common.model.master.item.type.TypePlant
@@ -26,10 +27,8 @@ import java.util.*
     inheritSuperIndices = true,
     tableName = XactRecord.ENTITY_NAME
 )
-class XactRecord : EntityOtWithPicture<XactRecord>() {
+class XactRecord : EntityOtWithPictureParseWithExport<XactRecord>() {
     //region properties
-//    @ColumnInfo(name = "picture", typeAffinity = ColumnInfo.BLOB)
-//    override var picture: ByteArray? = null
     var planta: TypePlant = TypePlant.UNDEFINED
     var updateDate: Date? = null
     var caption: String = ""
@@ -97,6 +96,43 @@ class XactRecord : EntityOtWithPicture<XactRecord>() {
                 && idSector == other.idSector
                 && idEvent == other.idEvent
     }
+
+    override fun getFields(): List<String> {
+        return listOf(
+            "planta",
+            "updateDate",
+            "caption",
+            "idEvent",
+            "idSector",
+            "picture",
+            "createDate",
+            "id",
+            "valueCode",
+            "description",
+            "isDefault",
+            "isEnabled"
+        )
+    }
+
+    override fun aGetExportItem(): List<ExportGenericEntityItem<*>> {
+        return listOf<ExportGenericEntityItem<out Any>>(
+            ExportGenericEntityItem("planta", value = planta.value),
+            ExportGenericEntityItem("updateDate", value = updateDate),
+            ExportGenericEntityItem("caption", value = caption),
+            ExportGenericEntityItem("idEvent", value = idEvent),
+            ExportGenericEntityItem("idSector", value = idSector),
+            ExportGenericEntityItem("picture", value = picture),
+            ExportGenericEntityItem("createDate", value = createDate),
+
+            ExportGenericEntityItem("id", value = id),
+            ExportGenericEntityItem("valueCode", value = valueCode),
+            ExportGenericEntityItem("description", value = description),
+            ExportGenericEntityItem("isDefault", value = isDefault),
+            ExportGenericEntityItem("isEnabled", value = isEnabled)
+        )
+    }
+
+    override fun aGetItemCast(): XactRecord = XactRecord()
     //endregion
 
     companion object {

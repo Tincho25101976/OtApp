@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/shadow_view">
 
     <LinearLayout
-        android:id="@+id/SwipeMenuProductItemLayoutMain"
+        android:id="@+id/SwipeMenuReportLayoutMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/SwipeMenuItemsLayoutMarginStartEnd"
@@ -17,19 +17,27 @@
         android:orientation="horizontal">
 
         <com.vsg.helper.ui.widget.imageWithText.CustomImagenWithText
-            android:id="@+id/SwipeMenuProductItemMail"
+            android:id="@+id/SwipeMenuReportPDF"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:customResourceImage="@drawable/pic_picture"
+            app:customResourceImage="@drawable/pic_report"
             app:customResourceString="@string/ActionResultForReportPDF" />
 
         <com.vsg.helper.ui.widget.imageWithText.CustomImagenWithText
-            android:id="@+id/SwipeMenuProductItemBatch"
+            android:id="@+id/SwipeMenuReportXML"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:customResourceImage="@drawable/pic_batch"
+            app:customResourceImage="@drawable/pic_export_xml"
+            app:customResourceString="@string/ActionResultForReportXML" />
+
+        <com.vsg.helper.ui.widget.imageWithText.CustomImagenWithText
+            android:id="@+id/SwipeMenuReportJson"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:customResourceImage="@drawable/pic_export_json"
             app:customResourceString="@string/ActionResultForReportJson" />
 
     </LinearLayout>

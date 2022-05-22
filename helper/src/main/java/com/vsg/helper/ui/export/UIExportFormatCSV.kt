@@ -9,14 +9,14 @@ import com.fasterxml.jackson.dataformat.csv.CsvGenerator
 import com.fasterxml.jackson.dataformat.csv.CsvMapper
 import com.fasterxml.jackson.dataformat.csv.CsvParser
 import com.fasterxml.jackson.dataformat.csv.CsvSchema
+import com.fasterxml.jackson.module.kotlin.KotlinFeature
+import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.fasterxml.jackson.module.kotlin.SingletonSupport
 import com.vsg.helper.common.export.ExportGenericEntityValue
 import com.vsg.helper.common.export.ExportType
 import com.vsg.helper.common.export.IEntityExport
 import com.vsg.helper.helper.permission.HelperPerminission.Static.checkedPermissionStorage
-import java.io.BufferedOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStreamWriter
+import java.io.*
 
 class UIExportFormatCSV<TEntity> :
     IUIExportFormat<TEntity>
@@ -31,28 +31,13 @@ class UIExportFormatCSV<TEntity> :
             val ruta: File? = activity.getExternalFilesDir(path)
             ruta?.mkdirs()
             val file = File(ruta, fileName)
-            try {
-                FileOutputStream(file).use {
-                    BufferedOutputStream(it, 1024).use { buffer ->
-                        OutputStreamWriter(buffer, "UTF-8").use { write ->
-                            val forSchema = data.export().values.first()
-                            data.export().values.forEach {
-                                getMapper(forSchema).writeValue(
-                                    write,
-                                    it
-                                )
-                            }
-//                            getMapper(forSchema).writeValue(write, data.export().values)
-                            write.flush()
-                        }
-                        buffer.flush()
-                    }
-                    it.flush()
-                }
-                file
-            } catch (e: Exception) {
-                throw e
+            val mapper = getMapper(data.export().values.first())
+            FileWriter(file).use { writer ->
+                mapper.writeValues(writer)
+                    .writeAll(data.export().values)
+                    .close()
             }
+            file
         } catch (e: Exception) {
             null
         }

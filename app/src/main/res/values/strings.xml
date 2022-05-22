@@ -75,10 +75,10 @@
     <string name="ActionResultForCompanyItem">Ítem</string>
     <string name="ActionResultForCompanyWarehouse">Depósitos</string>
 
-    <!--ActionResultForProduct-->
-    <string name="ActionResultForProductPrice">Precios</string>
-    <string name="ActionResultForProductPicture">Imágenes</string>
-    <string name="ActionResultForProductBatch">Lotes</string>
+    <!--ActionResultForReport-->
+    <string name="ActionResultForReportXML">XML</string>
+    <string name="ActionResultForReportPDF">Reporte</string>
+    <string name="ActionResultForReportJson">Json</string>
 
     <!--ActionResultForOperation-->
     <string name="ActionResultForSection">Localizaciones</string>
