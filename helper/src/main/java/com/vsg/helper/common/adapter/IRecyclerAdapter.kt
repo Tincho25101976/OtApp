@@ -2,8 +2,9 @@ package com.vsg.helper.common.adapter
 
 import android.graphics.Bitmap
 import android.text.Spanned
+import com.vsg.helper.common.model.IIsEnabled
 
-interface IRecyclerAdapter {
+interface IRecyclerAdapter : IIsEnabled {
     var title: String
     var body: Spanned
     var picture: Int

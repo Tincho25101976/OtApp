@@ -5,6 +5,7 @@ import android.view.MenuItem
 import android.widget.RelativeLayout
 import androidx.paging.PagingData
 import androidx.paging.filter
+import com.vsg.helper.common.export.ExportType
 import com.vsg.helper.ui.util.CurrentBaseActivityPagingGenericParseExport
 import com.vsg.ot.R
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
@@ -24,6 +25,7 @@ class XactRecordActivity :
     ) {
 
     override fun oSetStringTitleForActionBar(): Int = R.string.ActivityMainCommandRecord
+    override fun oSetSwipeMenuItems(): Int = R.layout.swipe_menu_report_export
     override fun aFinishExecute() {
         onEventMakeFilter = { item, find, it ->
             val filter: PagingData<XactRecord> =
@@ -42,21 +44,17 @@ class XactRecordActivity :
         onEventSwipeGetViewForMenu = {
             it.findViewById<RelativeLayout>(R.id.SwipeMenuReportPDF)
                 .setOnClickListener {
-                    if (getItem() != null) loadActivity(
-                        PriceActivity::class.java, getItem()!!
-                    )
+//                    if (getItem() != null) sendExport(getItem(), ) loadActivity(
+//                        PriceActivity::class.java, getItem()!!
+//                    )
                 }
             it.findViewById<RelativeLayout>(R.id.SwipeMenuReportXML)
                 .setOnClickListener {
-                    if (getItem() != null) loadActivity(
-                        PictureActivity::class.java, getItem()!!
-                    )
+                    if (getItem() != null) sendExport(getItem()!!, ExportType.XML)
                 }
             it.findViewById<RelativeLayout>(R.id.SwipeMenuReportJson)
                 .setOnClickListener {
-                    if (getItem() != null) loadActivity(
-                        PictureActivity::class.java, getItem()!!
-                    )
+                    if (getItem() != null) sendExport(getItem()!!, ExportType.JSON)
                 }
         }
     }

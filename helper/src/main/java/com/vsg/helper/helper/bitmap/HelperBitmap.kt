@@ -2,6 +2,8 @@ package com.vsg.helper.helper.bitmap
 
 import android.app.Activity
 import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -10,17 +12,28 @@ import java.util.*
 class HelperBitmap {
     companion object {
         fun Bitmap.grayScale(): Bitmap {
-            val mutable = this.copy(Bitmap.Config.ARGB_8888, true)
-            val result = Bitmap.createBitmap(mutable.width, mutable.height, Bitmap.Config.ARGB_8888)
+//            val mutable = this.copy(Bitmap.Config.ARGB_8888, true)
+            val result = Bitmap.createBitmap(this.width, this.height, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(result)
-            val paint = Paint()
-            val colorMatrix = ColorMatrix()
-            colorMatrix.setSaturation(0f)
+            val colorMatrix = ColorMatrix().apply { setSaturation(0f) }
             val colorMatrixFilter = ColorMatrixColorFilter(colorMatrix)
-            paint.colorFilter = colorMatrixFilter
-            canvas.drawBitmap(mutable, 0F, 0F, paint)
+            val paint = Paint().apply { colorFilter = colorMatrixFilter }
+            canvas.drawBitmap(this, 0f, 0f, paint)
             return result
         }
+
+//        fun Bitmap.grayScale(): Bitmap {
+//            val mutable = this.copy(Bitmap.Config.ARGB_8888, true)
+//            val result = Bitmap.createBitmap(mutable.width, mutable.height, Bitmap.Config.ARGB_8888)
+//            val canvas = Canvas(result)
+//            val paint = Paint()
+//            val colorMatrix = ColorMatrix()
+//            colorMatrix.setSaturation(0f)
+//            val colorMatrixFilter = ColorMatrixColorFilter(colorMatrix)
+//            paint.colorFilter = colorMatrixFilter
+//            canvas.drawBitmap(mutable, 0F, 0F, paint)
+//            return result
+//        }
 
         fun Bitmap?.encodeToString(): String? {
             if (this == null) return null
@@ -65,6 +78,30 @@ class HelperBitmap {
         fun Activity.toBitmap(@DrawableRes pic: Int): Bitmap {
             val decoder = BitmapFactory.decodeResource(this.resources, pic)
             return decoder.copy(Bitmap.Config.ARGB_8888, true)
+        }
+
+        fun Drawable.drawableToBitmap(): Bitmap? {
+            if (this is BitmapDrawable) {
+                if (this.bitmap != null) return this.bitmap
+            }
+            val bitmap: Bitmap =
+                if (this.intrinsicWidth <= 0 || this.intrinsicHeight <= 0) {
+                    Bitmap.createBitmap(
+                        1,
+                        1,
+                        Bitmap.Config.ARGB_8888
+                    ) // Single color bitmap will be created of 1x1 pixel
+                } else {
+                    Bitmap.createBitmap(
+                        this.intrinsicWidth,
+                        this.intrinsicHeight,
+                        Bitmap.Config.ARGB_8888
+                    )
+                }
+            val canvas = Canvas(bitmap)
+            this.setBounds(0, 0, canvas.width, canvas.height)
+            this.draw(canvas)
+            return bitmap
         }
 
         fun String.toBitmap(textSize: Float, textColor: Int): Bitmap? {

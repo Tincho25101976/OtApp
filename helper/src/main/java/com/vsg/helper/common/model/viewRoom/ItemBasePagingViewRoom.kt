@@ -43,6 +43,7 @@ abstract class ItemBasePagingViewRoom<T> : ItemBase(),
             rating = -1.0F
             picture = aDrawableRecyclerAdapter().drawable
             bitmap = null
+            isEnabled = this@ItemBasePagingViewRoom.isEnabled
             sizePictureHeight = 32
             sizePictureWidth = 32
             textSizeTitle = 32

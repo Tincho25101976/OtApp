@@ -1,7 +1,9 @@
 package com.vsg.helper.ui.util
 
+import android.os.Environment
 import com.vsg.helper.common.adapter.IDataAdapter
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
+import com.vsg.helper.common.export.ExportType
 import com.vsg.helper.common.export.IEntityExport
 import com.vsg.helper.common.model.*
 import com.vsg.helper.common.model.viewModel.ViewModelGenericParse
@@ -9,11 +11,17 @@ import com.vsg.helper.common.util.dao.IDaoAllTextSearch
 import com.vsg.helper.common.util.dao.IGenericDaoPagingParse
 import com.vsg.helper.common.util.viewModel.IViewModelAllPaging
 import com.vsg.helper.common.util.viewModel.IViewModelAllTextSearch
+import com.vsg.helper.helper.file.HelperFile.Static.sendFile
 import com.vsg.helper.ui.adapter.IDataAdapterEnum
 import com.vsg.helper.ui.crud.UICustomCRUDViewModel
+import com.vsg.helper.ui.export.IUIExportToFile
+import com.vsg.helper.ui.export.UIExportFormatCSV
+import com.vsg.helper.ui.export.UIExportFormatJson
+import com.vsg.helper.ui.export.UIExportFormatXML
 import com.vsg.helper.ui.popup.action.UICustomAlertDialogActionParameter
 import com.vsg.helper.ui.popup.export.UICustomAlertDialogExport
 import com.vsg.helper.ui.popup.export.UICustomAlertDialogExportParameter
+import com.vsg.helper.ui.report.pdf.UIReportFormatPDF
 
 @ExperimentalStdlibApi
 abstract class CurrentBaseActivityPagingGenericParseExport<TActivity, TViewModel, TDao, TEntity, TFilter, TCrud>(
@@ -64,6 +72,17 @@ abstract class CurrentBaseActivityPagingGenericParseExport<TActivity, TViewModel
                 }
             }
         }
+    }
+
+    protected fun sendExport(e: TEntity, type: ExportType) {
+        val directory: String = Environment.DIRECTORY_DOCUMENTS
+        val iExport: IUIExportToFile<TEntity> = when (type) {
+            ExportType.XML -> UIExportFormatXML()
+            ExportType.JSON -> UIExportFormatJson()
+            ExportType.CSV -> UIExportFormatCSV()
+            ExportType.PDF -> UIReportFormatPDF()
+        }
+        this.sendFile(iExport.toFile(e, this, directory))
     }
     //endregion
 }

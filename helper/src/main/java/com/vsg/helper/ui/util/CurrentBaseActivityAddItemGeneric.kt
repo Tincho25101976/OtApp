@@ -1,6 +1,5 @@
 package com.vsg.helper.ui.util
 
-import android.graphics.BitmapFactory
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,12 +8,14 @@ import com.vsg.helper.R
 import com.vsg.helper.common.adapter.IRecyclerAdapter
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
 import com.vsg.helper.common.model.IEntity
+import com.vsg.helper.common.model.IIsEnabled
 import com.vsg.helper.common.model.IReference
 import com.vsg.helper.common.model.ItemBase
 import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.common.util.dao.IGenericDao
 import com.vsg.helper.common.util.viewModel.IViewModelAllById
 import com.vsg.helper.common.util.viewModel.MakeGenericViewModel
+import com.vsg.helper.helper.HelperUI.Static.setGrayScale
 import com.vsg.helper.ui.adapter.UIRecyclerAdapter
 import com.vsg.helper.ui.crud.UICustomCRUDAddItem
 import com.vsg.helper.ui.popup.action.UICustomAlertDialogAction
@@ -35,6 +36,7 @@ abstract class CurrentBaseActivityAddItemGeneric<TActivity, TViewModel, TDao, TE
               TEntity : ItemBase,
               TEntity : IResultRecyclerAdapter,
               TEntityParent : IReference,
+              TEntityParent : IIsEnabled,
               TEntityParent : IEntity,
               TCustomCrud : UICustomCRUDAddItem<TActivity, TViewModel, TDao, TEntity, TEntityParent> {
     //region widget
@@ -67,8 +69,18 @@ abstract class CurrentBaseActivityAddItemGeneric<TActivity, TViewModel, TDao, TE
         tCardViewPicture.apply {
             val p = this@CurrentBaseActivityAddItemGeneric.parent
             if (p != null) {
+                setGrayScale(p.isEnabled)
                 if (p.isBitmap) setImageBitmap(p.getPictureShow())
-                else setImageBitmap(BitmapFactory.decodeResource(resources, p.getDrawableShow().drawable))
+                else {
+                    setImageResource(p.getDrawableShow().drawable)
+//                    val picture = BitmapFactory.decodeResource(
+//                        resources,
+//                        p.getDrawableShow().drawable
+//                    )
+//                    setImageBitmap(
+//                        p.getDrawableShow().enabled then picture or picture.grayScale()
+//                    )
+                }
             }
         }
         tCardViewText.apply {

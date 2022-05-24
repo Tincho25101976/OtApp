@@ -28,6 +28,7 @@ abstract class ItemBaseAddItem : ItemBase(), IAddItemEntity {
         RecyclerAdapter(id, aTitleRecyclerAdapter(), descriptionSpanned()).apply {
             rating = -1.0F
             picture = aPictureRecyclerAdapter()
+            isEnabled = this@ItemBaseAddItem.isEnabled
             sizePictureHeight = 32
             sizePictureWidth = 32
             textSizeTitle = 32

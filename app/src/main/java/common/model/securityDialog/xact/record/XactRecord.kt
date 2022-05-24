@@ -12,7 +12,7 @@ import com.vsg.helper.helper.string.HelperString.Static.castToHtml
 import com.vsg.helper.helper.string.HelperString.Static.toLineSpanned
 import com.vsg.helper.helper.string.HelperString.Static.toTitleSpanned
 import com.vsg.ot.R
-import com.vsg.ot.common.model.init.entity.EntityOtWithPictureParseWithExport
+import com.vsg.ot.common.model.init.entity.EntityOtWithPictureParseWithExportReport
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
 import common.model.master.item.type.TypePlant
@@ -27,7 +27,7 @@ import java.util.*
     inheritSuperIndices = true,
     tableName = XactRecord.ENTITY_NAME
 )
-class XactRecord : EntityOtWithPictureParseWithExport<XactRecord>() {
+class XactRecord : EntityOtWithPictureParseWithExportReport<XactRecord>() {
     //region properties
     var planta: TypePlant = TypePlant.UNDEFINED
     var updateDate: Date? = null
@@ -51,14 +51,9 @@ class XactRecord : EntityOtWithPictureParseWithExport<XactRecord>() {
     //endregion
 
     // recycler adapter
-//    override val isBitmap: Boolean
-//        get() = true
     override val title: String
         get() = this.caption
 
-//    override fun oGetPictureShow(): ByteArray? {
-//        return this.picture
-//    }
 
     override fun descriptionSpanned(): Spanned {
         val sb = StringBuilder()
@@ -129,6 +124,18 @@ class XactRecord : EntityOtWithPictureParseWithExport<XactRecord>() {
             ExportGenericEntityItem("description", value = description),
             ExportGenericEntityItem("isDefault", value = isDefault),
             ExportGenericEntityItem("isEnabled", value = isEnabled)
+        )
+    }
+
+    override fun aGetReportItem(): List<ExportGenericEntityItem<*>> {
+        return listOf<ExportGenericEntityItem<out Any>>(
+            ExportGenericEntityItem("picture", value = picture),
+            ExportGenericEntityItem("caption", value = caption, nameReport = "Título"),
+            ExportGenericEntityItem("planta", value = planta.value, nameReport = "Planta"),
+            ExportGenericEntityItem("idEvent", value = idEvent, nameReport = "Evento"),
+            ExportGenericEntityItem("idSector", value = idSector, nameReport = "Sector"),
+            ExportGenericEntityItem("createDate", value = createDate, nameReport = "Fecha"),
+            ExportGenericEntityItem("description", value = description, nameReport = "Observación"),
         )
     }
 

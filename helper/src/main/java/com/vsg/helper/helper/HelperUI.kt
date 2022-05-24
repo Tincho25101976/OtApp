@@ -1,10 +1,7 @@
 package com.vsg.helper.helper
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.graphics.Point
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -33,7 +30,6 @@ import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.model.IEntityPagingLayoutPosition
 import com.vsg.helper.common.util.viewModel.IViewModelUpdateSetEnabled
 import com.vsg.helper.helper.HelperEnum.Companion.getDefaultEnum
-import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.grayScale
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toArray
 import com.vsg.helper.helper.date.HelperDate.Companion.formatDate
 import com.vsg.helper.helper.date.HelperDate.Companion.toDate
@@ -507,6 +503,14 @@ class HelperUI {
         fun ImageView.setPictureFromFile(file: File) {
             val currentBitmap: Bitmap? = BitmapFactory.decodeFile(file.absolutePath)
             if (currentBitmap != null) this.setPictureFromBitmap(currentBitmap)
+        }
+
+        fun ImageView.setGrayScale(status: Boolean) {
+            if (status) this.colorFilter = null
+            else {
+                val colorMatrix = ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0F) })
+                this.colorFilter = colorMatrix
+            }
         }
         //endregion
 

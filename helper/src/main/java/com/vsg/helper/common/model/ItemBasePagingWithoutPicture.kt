@@ -29,7 +29,10 @@ abstract class ItemBasePagingWithoutPicture<T> : ItemBasePaging<T>() where T : I
     override fun getPictureShow(): Bitmap? {
         val picture = oGetPictureShow()
         val data = when (picture == null || picture.isEmpty()) {
-            true -> null
+            true -> {
+                null
+//                val temp = getDrawableShow().drawable
+            }
             false -> {
                 val bitmap = picture.toBitmap()
                 when (isEnabled) {

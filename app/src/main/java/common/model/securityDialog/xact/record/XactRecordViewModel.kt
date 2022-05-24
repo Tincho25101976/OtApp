@@ -2,11 +2,20 @@ package com.vsg.ot.common.model.securityDialog.xact.record
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import com.itextpdf.text.*
+import com.itextpdf.text.pdf.PdfPTable
+import com.itextpdf.text.pdf.PdfWriter
+import com.vsg.helper.common.export.ExportType
 import com.vsg.helper.common.model.viewModel.ViewModelGenericParse
-import com.vsg.helper.common.util.viewModel.*
+import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleList
+import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleListWithRelation
+import com.vsg.helper.common.util.viewModel.IViewModelHasItemsRelation
+import com.vsg.helper.helper.permission.HelperPerminission.Static.checkedPermissionStorage
 import com.vsg.ot.common.data.AppDatabase
 import common.model.init.viewModel.ViewModelStoredMap
 import common.model.master.item.MasterItemViewModel
+import java.io.File
+import java.io.FileOutputStream
 
 @ExperimentalStdlibApi
 class XactRecordViewModel(application: Application) :
@@ -15,19 +24,11 @@ class XactRecordViewModel(application: Application) :
         application,
         ViewModelStoredMap()
     ),
-    IViewModelAllTextSearch,
-    IViewModelView<XactRecord>,
     IViewModelAllSimpleList<XactRecord>,
     IViewModelAllSimpleListWithRelation<XactRecord>,
-    IViewModelHasItemsRelation {
-
-//    override fun viewModelGetAllTextSearch(): LiveData<List<String>> = runBlocking {
-//        return@runBlocking dao.viewGetAllTextSearch()
-//    }
-
-//    override fun viewModelViewAllSimpleList(): List<XactRecord> =
-//        dao.viewAllSimpleList() ?: listOf()
-
+    IViewModelHasItemsRelation
+//    IViewModelGetPDFFile
+{
     override fun viewModelViewListWithRelations(): LiveData<List<XactRecord>>? {
         val data: LiveData<List<XactRecord>> = dao.viewAll() ?: return null
         if (data.value == null || !data.value!!.any()) return null

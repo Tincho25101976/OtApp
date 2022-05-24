@@ -10,6 +10,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlFactory
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import com.vsg.helper.common.export.ExportType
 import com.vsg.helper.common.export.IEntityExport
+import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.helper.permission.HelperPerminission.Static.checkedPermissionStorage
 import java.io.File
 import java.io.FileWriter
@@ -19,7 +20,8 @@ import javax.xml.stream.XMLStreamWriter
 
 class UIExportFormatXML<TEntity> :
     IUIExportFormat<TEntity>
-        where TEntity : IEntityExport {
+        where TEntity : IEntityExport,
+              TEntity : IEntity {
 
     override fun toFile(data: TEntity, activity: Activity, path: String): File? {
         if (!data.export().hasItems) return null

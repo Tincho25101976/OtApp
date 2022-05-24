@@ -65,19 +65,12 @@ class UICustomAlertDialogExport<TActivity, TEntity>(
     fun export(e: TEntity, type: ExportType) {
         try {
             val directory: String = Environment.DIRECTORY_DOCUMENTS
-//            val iExport = onEventSetIUIExportToFile?.invoke(type) ?: return
             val iExport: IUIExportToFile<TEntity> = when (type) {
                 ExportType.XML -> UIExportFormatXML()
                 ExportType.JSON -> UIExportFormatJson()
                 ExportType.CSV -> UIExportFormatCSV()
             }
-//                else -> null
-//            } ?: return
-//            val iExport: IUIExportToFile<TEntity> = UIExportFormatXML()
-
-//            val temp = UIExportFormatXML<TEntity>().toDataString(e)
             this.activity.sendFile(iExport.toFile(e, this.activity, directory))
-
         } catch (e: Exception) {
         }
     }

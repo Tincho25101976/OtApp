@@ -26,6 +26,7 @@ class PopUpData(override var title: String, override var body: String) : IPopUpD
             return field
         }
     override var commandOK: Boolean = false
+    override var isEnabled: Boolean = true
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.let {

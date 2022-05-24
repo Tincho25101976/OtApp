@@ -20,6 +20,7 @@ import com.vsg.helper.common.adapter.IRecyclerAdapter
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
 import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.model.IEntityPagingLayoutPosition
+import com.vsg.helper.helper.HelperUI.Static.setGrayScale
 import com.vsg.helper.helper.font.FontManager
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
 
@@ -110,12 +111,17 @@ class UIRecyclerAdapterPagingData<TEntity> :
         private fun custom(data: IRecyclerAdapter) = with(itemView)
         {
             val pic = findViewById<ImageView>(R.id.listItemRecyclerViewDataPicture)
+            pic.setGrayScale(data.isEnabled)
             pic.setImageBitmap(null)
             if (data.isBitmap) pic.setImageBitmap(data.bitmap)
             else if (data.picture > 0) pic.setImageResource(data.picture)
-            data.sizePictureHeight = resources.getInteger(R.integer.CustomSizePictureHeightForRecyclerView)
-            data.sizePictureWidth = resources.getInteger(R.integer.CustomSizePictureWidthForRecyclerView)
-            data.textSizeTitle = resources.getInteger(R.integer.CustomSizeTitleTextSizeForRecyclerView)
+
+            data.sizePictureHeight =
+                resources.getInteger(R.integer.CustomSizePictureHeightForRecyclerView)
+            data.sizePictureWidth =
+                resources.getInteger(R.integer.CustomSizePictureWidthForRecyclerView)
+            data.textSizeTitle =
+                resources.getInteger(R.integer.CustomSizeTitleTextSizeForRecyclerView)
             val layoutParams: LinearLayout.LayoutParams =
                 LinearLayout.LayoutParams(
                     data.sizePictureWidth.toPixel(),

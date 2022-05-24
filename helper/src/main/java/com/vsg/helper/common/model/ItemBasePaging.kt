@@ -50,6 +50,7 @@ abstract class ItemBasePaging<T> : ItemBase(), IResultRecyclerAdapter, IAddItemE
             rating = -1.0F
             picture = aDrawableRecyclerAdapter().drawable
             bitmap = aBitmapRecyclerAdapter()
+            isEnabled = this@ItemBasePaging.isEnabled
             sizePictureHeight = 32
             sizePictureWidth = 32
             textSizeTitle = 32

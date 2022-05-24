@@ -1,10 +1,10 @@
 package com.vsg.helper.ui.export
 
-import android.app.Activity
 import com.vsg.helper.common.export.IEntityExport
-import java.io.File
+import com.vsg.helper.common.model.IEntity
 
-interface IUIExportToFile<TEntity>
-        where TEntity : IEntityExport {
-    fun toFile(data: TEntity, activity: Activity, path: String): File?
+interface IUIExportToFile<TEntity> : IUIEntityToFile<TEntity>
+        where TEntity : IEntityExport,
+              TEntity : IEntity {
+//    override fun toFile(data: TEntity, activity: Activity, path: String): File?
 }

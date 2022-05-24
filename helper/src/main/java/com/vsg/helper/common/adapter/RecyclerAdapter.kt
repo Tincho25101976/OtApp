@@ -43,6 +43,7 @@ class RecyclerAdapter(
     @DrawableRes
     override var picture: Int = 0
     override var bitmap: Bitmap? = null
+    override var isEnabled: Boolean = true
     override var isBitmap: Boolean = false
         get() = bitmap != null && bitmap!!.byteCount > 0
     override var rating: Float = 0.0F

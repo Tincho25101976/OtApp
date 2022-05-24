@@ -23,15 +23,13 @@ import com.vsg.helper.common.operation.DBOperation
 import com.vsg.helper.common.util.dao.IGenericDao
 import com.vsg.helper.common.util.viewModel.IViewModelView
 import com.vsg.helper.common.util.viewModel.MakeGenericViewModel
-import com.vsg.helper.helper.Helper.Companion.or
-import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.helper.HelperUI.Static.addTextWatcher
 import com.vsg.helper.helper.HelperUI.Static.getBitmap
 import com.vsg.helper.helper.HelperUI.Static.initSwipeToEnabled
 import com.vsg.helper.helper.HelperUI.Static.setCustomAdapter
+import com.vsg.helper.helper.HelperUI.Static.setGrayScale
 import com.vsg.helper.helper.HelperUI.Static.setStatus
 import com.vsg.helper.helper.HelperUI.Static.toText
-import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.grayScale
 import com.vsg.helper.ui.adapter.IDataAdapterEnum
 import com.vsg.helper.ui.adapter.paging.UIRecyclerAdapterPagingData
 import com.vsg.helper.ui.crud.UICustomCRUDViewModel
@@ -298,7 +296,8 @@ abstract class CurrentBaseActivityPagingBase<TActivity, TViewModel, TDao, TEntit
         arrayOf(tAdd, tSearchSpinner, tSearchText, tLayoutSearch, tSearchCommand)
             .forEach { it.isEnabled = result }
         if (this.imageAdd == null) return
-        tAdd.setImageBitmap(result then imageAdd or imageAdd!!.grayScale())
+        tAdd.setGrayScale(result)
+        tAdd.setImageBitmap(imageAdd)
     }
     //endregion
 }

@@ -11,13 +11,15 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.vsg.helper.R
 import com.vsg.helper.common.adapter.IRecyclerAdapter
+import com.vsg.helper.helper.HelperUI.Static.setGrayScale
 import com.vsg.helper.helper.font.FontManager
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
-import com.vsg.helper.R
 
 class UIRecyclerAdapter<T>(private val list: List<T>) :
-    RecyclerView.Adapter<UIRecyclerAdapter<T>.ViewHolder>() where T : IRecyclerAdapter {
+    RecyclerView.Adapter<UIRecyclerAdapter<T>.ViewHolder>()
+        where T : IRecyclerAdapter {
 
     //region handler
     var onEventClickItem: ((View, Int) -> Unit)? = null
@@ -29,14 +31,21 @@ class UIRecyclerAdapter<T>(private val list: List<T>) :
         fun custom(data: T) = with(itemView) {
             val pic = findViewById<ImageView>(R.id.listItemRecyclerViewDataPicture)
             pic.setImageBitmap(null)
-            if(data.isBitmap) pic.setImageBitmap(data.bitmap)
-            else if (data.picture > 0)  pic.setImageResource(data.picture)
-            data.sizePictureHeight = resources.getInteger(R.integer.CustomSizePictureHeightForRecyclerView)
-            data.sizePictureWidth = resources.getInteger(R.integer.CustomSizePictureWidthForRecyclerView)
-            data.textSizeTitle = resources.getInteger(R.integer.CustomSizeTitleTextSizeForRecyclerView)
+            pic.setGrayScale(data.isEnabled)
+            if (data.isBitmap) pic.setImageBitmap(data.bitmap)
+            else if (data.picture > 0) pic.setImageResource(data.picture)
+
+            data.sizePictureHeight =
+                resources.getInteger(R.integer.CustomSizePictureHeightForRecyclerView)
+            data.sizePictureWidth =
+                resources.getInteger(R.integer.CustomSizePictureWidthForRecyclerView)
+            data.textSizeTitle =
+                resources.getInteger(R.integer.CustomSizeTitleTextSizeForRecyclerView)
             val layoutParams: LinearLayout.LayoutParams =
-                LinearLayout.LayoutParams(data.sizePictureWidth.toPixel(),
-                                          data.sizePictureHeight.toPixel())
+                LinearLayout.LayoutParams(
+                    data.sizePictureWidth.toPixel(),
+                    data.sizePictureHeight.toPixel()
+                )
             pic.layoutParams = layoutParams
             pic.scaleType = ImageView.ScaleType.FIT_END
 
@@ -72,8 +81,10 @@ class UIRecyclerAdapter<T>(private val list: List<T>) :
         FontManager(parent.context).replaceFonts(v as ViewGroup)
         return ViewHolder(v)
     }
+
     override fun onBindViewHolder(holder: ViewHolder, posicion: Int) {
         holder.custom(list[posicion])
     }
+
     override fun getItemCount() = list.count()
 }
