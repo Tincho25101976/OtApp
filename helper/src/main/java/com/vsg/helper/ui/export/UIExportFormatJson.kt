@@ -5,13 +5,15 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.vsg.helper.common.export.ExportType
 import com.vsg.helper.common.export.IEntityExport
+import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.helper.permission.HelperPerminission.Static.checkedPermissionStorage
 import java.io.File
 import java.io.FileOutputStream
 
 class UIExportFormatJson<TEntity> :
     IUIExportFormat<TEntity>
-        where TEntity : IEntityExport {
+        where TEntity : IEntityExport,
+              TEntity : IEntity {
     override fun toFile(data: TEntity, activity: Activity, path: String): File? {
         if (!data.export().hasItems) return null
         if (path.isEmpty()) return null

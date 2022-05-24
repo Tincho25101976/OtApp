@@ -9,18 +9,18 @@ import com.fasterxml.jackson.dataformat.csv.CsvGenerator
 import com.fasterxml.jackson.dataformat.csv.CsvMapper
 import com.fasterxml.jackson.dataformat.csv.CsvParser
 import com.fasterxml.jackson.dataformat.csv.CsvSchema
-import com.fasterxml.jackson.module.kotlin.KotlinFeature
-import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.fasterxml.jackson.module.kotlin.SingletonSupport
 import com.vsg.helper.common.export.ExportGenericEntityValue
 import com.vsg.helper.common.export.ExportType
 import com.vsg.helper.common.export.IEntityExport
+import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.helper.permission.HelperPerminission.Static.checkedPermissionStorage
-import java.io.*
+import java.io.File
+import java.io.FileWriter
 
 class UIExportFormatCSV<TEntity> :
     IUIExportFormat<TEntity>
-        where TEntity : IEntityExport {
+        where TEntity : IEntityExport,
+              TEntity : IEntity {
 
     override fun toFile(data: TEntity, activity: Activity, path: String): File? {
         if (!data.export().hasItems) return null

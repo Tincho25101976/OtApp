@@ -6,7 +6,7 @@ import android.widget.RelativeLayout
 import androidx.paging.PagingData
 import androidx.paging.filter
 import com.vsg.helper.common.export.ExportType
-import com.vsg.helper.ui.util.CurrentBaseActivityPagingGenericParseExport
+import com.vsg.helper.ui.util.CurrentBaseActivityPagingGenericParseExportReport
 import com.vsg.ot.R
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecordDao
@@ -17,7 +17,7 @@ import ui.activities.securityDialog.xact.util.FilterTypeActivityXactRecord
 
 @ExperimentalStdlibApi
 class XactRecordActivity :
-    CurrentBaseActivityPagingGenericParseExport<XactRecordActivity, XactRecordViewModel,
+    CurrentBaseActivityPagingGenericParseExportReport<XactRecordActivity, XactRecordViewModel,
             XactRecordDao, XactRecord,
             FilterTypeActivityXactRecord, UICRUDXactRecord<XactRecordActivity>>(
         XactRecordViewModel::class.java,
@@ -44,9 +44,7 @@ class XactRecordActivity :
         onEventSwipeGetViewForMenu = {
             it.findViewById<RelativeLayout>(R.id.SwipeMenuReportPDF)
                 .setOnClickListener {
-//                    if (getItem() != null) sendExport(getItem(), ) loadActivity(
-//                        PriceActivity::class.java, getItem()!!
-//                    )
+                    if (getItem() != null) sendReport(getItem()!!, ExportType.PDF)
                 }
             it.findViewById<RelativeLayout>(R.id.SwipeMenuReportXML)
                 .setOnClickListener {

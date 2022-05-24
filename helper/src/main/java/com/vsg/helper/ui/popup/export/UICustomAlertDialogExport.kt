@@ -6,6 +6,7 @@ import android.widget.ImageView
 import com.vsg.helper.R
 import com.vsg.helper.common.export.ExportType
 import com.vsg.helper.common.export.IEntityExport
+import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.helper.file.HelperFile.Static.sendFile
 import com.vsg.helper.ui.export.IUIExportToFile
 import com.vsg.helper.ui.export.UIExportFormatCSV
@@ -23,7 +24,8 @@ class UICustomAlertDialogExport<TActivity, TEntity>(
         R.layout.custom_dialog_result_export
     )
         where TActivity : Activity,
-              TEntity : IEntityExport {
+              TEntity : IEntityExport,
+              TEntity : IEntity {
 
     //region event
     var onEventSetIUIExportToFile: ((ExportType) -> IUIExportToFile<TEntity>)? = null
@@ -69,7 +71,8 @@ class UICustomAlertDialogExport<TActivity, TEntity>(
                 ExportType.XML -> UIExportFormatXML()
                 ExportType.JSON -> UIExportFormatJson()
                 ExportType.CSV -> UIExportFormatCSV()
-            }
+                ExportType.PDF -> null
+            } ?: return
             this.activity.sendFile(iExport.toFile(e, this.activity, directory))
         } catch (e: Exception) {
         }
