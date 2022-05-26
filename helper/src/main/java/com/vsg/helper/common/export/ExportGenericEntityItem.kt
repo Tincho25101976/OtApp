@@ -1,8 +1,10 @@
 package com.vsg.helper.common.export
 
+import com.vsg.helper.common.format.FormatDateString
 import com.vsg.helper.helper.Helper.Companion.or
 import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.helper.date.HelperDate.Companion.toDate
+import com.vsg.helper.helper.date.HelperDate.Companion.toDateString
 import com.vsg.helper.helper.string.HelperString.Static.toBool
 import java.util.*
 import kotlin.reflect.KType
@@ -28,7 +30,7 @@ class ExportGenericEntityItem<T>(
                 Double::class.starProjectedType -> data.toDouble().toString()
                 String::class.starProjectedType -> data
                 Long::class.starProjectedType -> data.toLong().toString()
-                Date::class.starProjectedType -> data.toDate().toString()
+                Date::class.starProjectedType -> (value as Date?).toDateString(FormatDateString.SIMPLE)
                 Boolean::class.starProjectedType -> data.toBool().toString()
                 else -> data
             }

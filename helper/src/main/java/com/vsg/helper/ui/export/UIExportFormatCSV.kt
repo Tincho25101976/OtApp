@@ -13,7 +13,7 @@ import com.vsg.helper.common.export.ExportGenericEntityValue
 import com.vsg.helper.common.export.ExportType
 import com.vsg.helper.common.export.IEntityExport
 import com.vsg.helper.common.model.IEntity
-import com.vsg.helper.helper.permission.HelperPerminission.Static.checkedPermissionStorage
+import com.vsg.helper.helper.permission.HelperPermission.Static.checkedPermissionStorage
 import java.io.File
 import java.io.FileWriter
 
@@ -27,7 +27,7 @@ class UIExportFormatCSV<TEntity> :
         if (path.isEmpty()) return null
         return try {
             if (!activity.checkedPermissionStorage()) return null
-            val fileName = data.nameFile(ExportType.CSV)
+            val fileName = data.nameFile(ExportType.CSV, false)
             val ruta: File? = activity.getExternalFilesDir(path)
             ruta?.mkdirs()
             val file = File(ruta, fileName)

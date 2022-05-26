@@ -1,5 +1,11 @@
 package com.vsg.helper.common.export
 
+import com.vsg.helper.helper.Helper.Companion.or
+import com.vsg.helper.helper.Helper.Companion.then
+import com.vsg.helper.helper.file.HelperFile.Static.getNameFile
+import java.text.SimpleDateFormat
+import java.util.*
+
 class ExportGenericEntity(override val type: Class<*>) : IExportSimpleFormat, IExport {
     //region properties
     val items: MutableList<ExportGenericEntityItem<*>> = mutableListOf()
@@ -14,7 +20,7 @@ class ExportGenericEntity(override val type: Class<*>) : IExportSimpleFormat, IE
 //endregion
 
     //region methods
-    override fun nameFile(exportType: ExportType): String =
-        "${type.simpleName}Source.${exportType.extension}"
+    override fun nameFile(exportType: ExportType, addTime: Boolean): String =
+        type.getNameFile(exportType.extension, addTime)
 //endregion
 }

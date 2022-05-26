@@ -6,11 +6,15 @@ import android.net.Uri
 import android.os.Environment
 import android.webkit.MimeTypeMap
 import androidx.core.content.FileProvider
+import com.vsg.helper.helper.Helper.Companion.or
+import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.helper.HelperUI.Static.REQUEST_FOR_CHOOSER_FILE_FROM_MANAGER
-import com.vsg.helper.helper.permission.HelperPerminission.Static.checkedPermissionStorage
+import com.vsg.helper.helper.permission.HelperPermission.Static.checkedPermissionStorage
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.SUB_PATH_TEMP_FILE_CAMERA
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.jvm.internal.Intrinsics
 
 
@@ -20,6 +24,18 @@ class HelperFile {
         const val SUB_PATH_TEMP_CHOOSER_FILE = "tempChooserFile"
 
         private fun appProvider(app: String): String = "$app.provider"
+
+        private fun getCurrentTime(): String {
+            val simpleDateFormat = SimpleDateFormat("yyyyMMdd_HHmmss");
+            val time = Calendar.getInstance().time
+            return simpleDateFormat.format(time);
+        }
+
+        fun getNameFile(name: String, extension: String, addTime: Boolean): String =
+            "${name}Source${addTime then "_${getCurrentTime()}" or ""}.${extension}"
+
+        fun Class<*>.getNameFile(extension: String, addTime: Boolean): String =
+            "${this.simpleName}Source${addTime then "_${getCurrentTime()}" or ""}.${extension}"
 
         fun Activity.getURI(file: File): Uri =
             FileProvider.getUriForFile(this, appProvider(this.packageName), file)
@@ -35,8 +51,24 @@ class HelperFile {
                     s.type = this.contentResolver.getType(uri)
                     s.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     s.putExtra(Intent.EXTRA_STREAM, uri)
-                    this.startActivity(Intent.createChooser(s, "Compartir"))
+
+//                    val resInfoList: List<ResolveInfo> = this.packageManager
+//                        .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+//                    for (resolveInfo in resInfoList) {
+//                        val packageName = resolveInfo.activityInfo.packageName
+//                        this.grantUriPermission(
+//                            packageName,
+//                            uri,
+//                            Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                        )
+//                    }
+                    this.startActivity(Intent.createChooser(s, "Compartir").apply {
+                        addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    })
+//                    this.startActivity(s)
                 } catch (e: Exception) {
+                    throw e
                 }
             }
         }
@@ -90,7 +122,7 @@ class HelperFile {
             return file
         }
 
-        private fun Activity.getTempFileStore(
+        fun Activity.getTempFileStore(
             subPath: String,
             type: TypeTempFile,
             clear: Boolean = true
@@ -115,7 +147,11 @@ class HelperFile {
         }
 
         fun Activity.getTempFileForCamera(clear: Boolean = true): File? {
-            return this.getTempFileStore(SUB_PATH_TEMP_FILE_CAMERA, TypeTempFile.IMAGE_CAMERA, clear)
+            return this.getTempFileStore(
+                SUB_PATH_TEMP_FILE_CAMERA,
+                TypeTempFile.IMAGE_CAMERA,
+                clear
+            )
                 ?: return null
         }
 

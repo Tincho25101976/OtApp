@@ -33,8 +33,8 @@ import com.vsg.helper.helper.file.HelperFile.Static.getURI
 import com.vsg.helper.helper.font.CustomTypefaceSpan
 import com.vsg.helper.helper.font.FontManager
 import com.vsg.helper.helper.font.FontManager.Static.typeFaceCustom
-import com.vsg.helper.helper.permission.HelperPerminission.Static.checkedPermissionCamera
-import com.vsg.helper.helper.permission.HelperPerminission.Static.checkedPermissionStorage
+import com.vsg.helper.helper.permission.HelperPermission.Static.checkedPermissionCamera
+import com.vsg.helper.helper.permission.HelperPermission.Static.checkedPermissionStorage
 import com.vsg.helper.helper.type.TypeMakeLayoutParameter
 import com.vsg.helper.ui.layout.MainItemsLayoutScroll
 import com.vsg.helper.ui.widget.text.CustomInputText

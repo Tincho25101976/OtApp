@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
     <files-path name="files_download" path="." />
-    <external-path name="files_root" path="/storage/emulated/0/Android/data/com.ot" />
+<!--    <external-path name="files_root" path="/storage/emulated/0/Android/data/com.ot" />-->
     <external-path name="external-path_root" path="." />
     <external-files-path name="external-files-path_root" path="." />
     <external-media-path name="external-media-path_root" path="." />

@@ -9,6 +9,7 @@ import com.vsg.helper.common.model.IEntityPagingLayoutPosition
 import com.vsg.helper.common.model.IReference
 import com.vsg.helper.common.model.ItemBase
 import com.vsg.helper.common.util.addItem.IAddItemEntity
+import com.vsg.helper.helper.file.HelperFile
 
 abstract class EntityOtWithPictureParseWithExport<T> :
     EntityOtWithPictureParse<T>(), IEntityExport
@@ -19,7 +20,8 @@ abstract class EntityOtWithPictureParseWithExport<T> :
               T : IEntityExport,
               T : IEntityPagingLayoutPosition {
 
-    override fun nameFile(exportType: ExportType): String = "${tag}Source.${exportType.extension}"
+    override fun nameFile(exportType: ExportType, addTime: Boolean): String =
+        HelperFile.getNameFile(tag, exportType.extension, addTime)
 
     abstract fun aGetExportItem(): List<ExportGenericEntityItem<*>>
     override fun export(): ExportGenericEntity {

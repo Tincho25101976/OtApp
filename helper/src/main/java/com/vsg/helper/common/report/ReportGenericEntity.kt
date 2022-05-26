@@ -1,6 +1,7 @@
 package com.vsg.helper.common.report
 
 import com.vsg.helper.common.export.*
+import com.vsg.helper.helper.file.HelperFile.Static.getNameFile
 
 class ReportGenericEntity(override val type: Class<*>) : IExportSimpleFormat, IExport {
     //region properties
@@ -16,7 +17,7 @@ class ReportGenericEntity(override val type: Class<*>) : IExportSimpleFormat, IE
 //endregion
 
     //region methods
-    override fun nameFile(exportType: ExportType): String =
-        "${type.simpleName}Source.${exportType.extension}"
+    override fun nameFile(exportType: ExportType, addTime: Boolean): String =
+        type.getNameFile(exportType.extension, addTime)
 //endregion
 }

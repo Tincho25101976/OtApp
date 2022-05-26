@@ -12,7 +12,7 @@ import android.widget.LinearLayout
 import com.vsg.helper.R
 import com.vsg.helper.helper.HelperUI.Static.setStatus
 import com.vsg.helper.helper.font.FontManager
-import com.vsg.helper.helper.permission.HelperPerminission.Static.checkedPermissionStorage
+import com.vsg.helper.helper.permission.HelperPermission.Static.checkedPermissionStorage
 
 class UICustomAlertDialogViewerExport<TActivity>(
     val activity: TActivity,

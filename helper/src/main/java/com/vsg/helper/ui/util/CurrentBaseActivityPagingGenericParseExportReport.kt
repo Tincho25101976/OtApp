@@ -11,14 +11,12 @@ import com.vsg.helper.common.report.IEntityReport
 import com.vsg.helper.common.util.dao.IDaoAllTextSearch
 import com.vsg.helper.common.util.dao.IGenericDaoPagingParse
 import com.vsg.helper.common.util.viewModel.IViewModelAllPaging
+import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleListWithRelation
 import com.vsg.helper.common.util.viewModel.IViewModelAllTextSearch
 import com.vsg.helper.helper.file.HelperFile.Static.sendFile
 import com.vsg.helper.ui.adapter.IDataAdapterEnum
 import com.vsg.helper.ui.crud.UICustomCRUDViewModel
-import com.vsg.helper.ui.export.*
-import com.vsg.helper.ui.popup.action.UICustomAlertDialogActionParameter
-import com.vsg.helper.ui.popup.export.UICustomAlertDialogExport
-import com.vsg.helper.ui.popup.export.UICustomAlertDialogExportParameter
+import com.vsg.helper.ui.export.IUIEntityToFile
 import com.vsg.helper.ui.report.pdf.UIReportFormatPDF
 
 @ExperimentalStdlibApi
@@ -34,6 +32,7 @@ abstract class CurrentBaseActivityPagingGenericParseExportReport<TActivity, TVie
               TViewModel : IViewModelAllPaging<TEntity>,
               TViewModel : IViewModelAllTextSearch,
               TViewModel : ViewModelGenericParse<TDao, TEntity>,
+              TViewModel : IViewModelAllSimpleListWithRelation<TEntity>,
               TDao : IGenericDaoPagingParse<TEntity>,
               TDao : IDaoAllTextSearch,
               TEntity : IEntity,
@@ -51,22 +50,25 @@ abstract class CurrentBaseActivityPagingGenericParseExportReport<TActivity, TVie
               TEntity : ItemBase,
               TCrud : UICustomCRUDViewModel<TActivity, TViewModel, TDao, TEntity> {
 
-    //region properties
-//    private lateinit var actionExport: UICustomAlertDialogExport<TActivity, TEntity>
+    //region event
+    protected var onSetTitleReport: ((Unit) -> String)? = null
     //endregion
 
     //region method
-//    init {
-//        onEventSetUICustomAlertDialogActionType = { UICustomAlertDialogActionParameter() }
-//    }
-
     protected fun sendReport(e: TEntity, type: ExportType) {
+        val data = this.currentViewModel().viewModelViewWithRelations(e.id) ?: return
         val directory: String = Environment.DIRECTORY_DOCUMENTS
         val iExport: IUIEntityToFile<TEntity> = when (type) {
-            ExportType.PDF -> UIReportFormatPDF()
+            ExportType.PDF -> UIReportFormatPDF<TEntity>().apply {
+                this.onEventSetTitle = {
+                    this@CurrentBaseActivityPagingGenericParseExportReport.onSetTitleReport?.invoke(
+                        Unit
+                    ) ?: ""
+                }
+            }
             else -> null
         } ?: return
-        this.sendFile(iExport.toFile(e, this, directory))
+        this.sendFile(iExport.toFile(data, this, directory))
     }
     //endregion
 }
