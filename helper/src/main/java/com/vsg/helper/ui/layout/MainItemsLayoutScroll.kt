@@ -73,7 +73,7 @@ class MainItemsLayoutScroll(private val activity: BaseActivity) {
             layoutParams = makeCustomLayoutLinealLayout()
             text = textCard
             textAlignment = View.TEXT_ALIGNMENT_CENTER
-            setTextColor(Color.BLACK)
+            setTextColor(Color.rgb(255, 255, 255))
             textSize = DEFAULT_TEXT_SIZE.toFloat()
             typeface = activity.typeFaceCustom(Typeface.BOLD)
         }

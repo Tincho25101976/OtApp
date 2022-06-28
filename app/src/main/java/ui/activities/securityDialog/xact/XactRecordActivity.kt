@@ -45,7 +45,8 @@ class XactRecordActivity :
         onEventSwipeGetViewForMenu = {
             it.findViewById<RelativeLayout>(R.id.SwipeMenuReportPDF)
                 .setOnClickListener {
-                    if (getItem() != null) sendReport(getItem()!!, ExportType.PDF)
+//                    if (getItem() != null) sendReport(getItem()!!, ExportType.PDF)
+                    if (getItem() != null) openReport(getItem()!!, ExportType.PDF)
                 }
             it.findViewById<RelativeLayout>(R.id.SwipeMenuReportXML)
                 .setOnClickListener {

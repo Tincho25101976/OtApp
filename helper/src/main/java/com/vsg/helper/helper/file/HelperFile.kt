@@ -1,6 +1,7 @@
 package com.vsg.helper.helper.file
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Environment
@@ -9,6 +10,7 @@ import androidx.core.content.FileProvider
 import com.vsg.helper.helper.Helper.Companion.or
 import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.helper.HelperUI.Static.REQUEST_FOR_CHOOSER_FILE_FROM_MANAGER
+import com.vsg.helper.helper.file.HelperFile.Static.getURI
 import com.vsg.helper.helper.permission.HelperPermission.Static.checkedPermissionStorage
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.SUB_PATH_TEMP_FILE_CAMERA
 import java.io.File
@@ -42,6 +44,23 @@ class HelperFile {
 
         fun Activity.getURI(file: String): Uri =
             FileProvider.getUriForFile(this, appProvider(this.packageName), File(file))
+
+        fun Activity.openFile(file: File?) {
+            if (file == null || !file.exists()) return
+            val uri: Uri = getURI(file)
+            val type: String = this.contentResolver.getType(uri) ?: return
+            val target = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(uri, type)
+                addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+            val intent = Intent.createChooser(target, "Open File")
+            try {
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                // Instruct the user to install a PDF reader here, or something
+            }
+        }
 
         fun Activity.sendFile(file: File?) {
             if (file != null && file.exists()) {

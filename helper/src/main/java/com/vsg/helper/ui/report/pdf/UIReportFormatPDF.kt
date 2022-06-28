@@ -2,9 +2,7 @@ package com.vsg.helper.ui.report.pdf
 
 import android.app.Activity
 import com.itextpdf.text.*
-import com.itextpdf.text.pdf.BaseFont
-import com.itextpdf.text.pdf.PdfPCell
-import com.itextpdf.text.pdf.PdfWriter
+import com.itextpdf.text.pdf.*
 import com.itextpdf.text.pdf.draw.LineSeparator
 import com.vsg.helper.common.export.ExportType
 import com.vsg.helper.common.model.IEntity
@@ -37,11 +35,13 @@ class UIReportFormatPDF<TEntity> :
             val file = File(ruta, fileName)
             FileOutputStream(file).use {
                 val document = Document()
-                PdfWriter.getInstance(document, it)
+                val writer = PdfWriter.getInstance(document, it)
                 document.open()
 
                 // Document Settings
                 document.pageSize = PageSize.A4
+                val margin = 5F;
+                document.setMargins(margin, margin, margin, margin)
                 document.addCreationDate()
                 document.addAuthor(activity.packageName)
                 document.addCreator(activity.packageName)
@@ -56,7 +56,6 @@ class UIReportFormatPDF<TEntity> :
                     BaseFont.EMBEDDED
                 )
 
-
                 // Line Separator
                 val lineSeparator = LineSeparator().apply {
                     lineColor = BaseColor(87, 68, 64, 68)
@@ -66,20 +65,78 @@ class UIReportFormatPDF<TEntity> :
                 // Document Title:
                 val title = onEventSetTitle?.invoke(Unit)
                 if (!title.isNullOrEmpty()) {
+                    val fontTitle =
+                        Font(fontBase, 36F, Font.BOLD or Font.UNDERLINE, BaseColor.WHITE)
                     val titlePDF =
-                        Paragraph(
-                            title,
-                            Font(fontBase, 36F, Font.BOLD or Font.UNDERLINE, BaseColor.GRAY)
-                        ).apply {
-                            alignment = Element.ALIGN_CENTER
+                        Paragraph(title, fontTitle).apply {
+                            alignment = Element.ALIGN_LEFT
+//                            spacingAfter = 100F
+//                            leading = 25F
+//                            multipliedLeading = 25F
+                            setLeading(25F, 100F)
                         }
-                    document.add(titlePDF)
-                    document.addSeparator()
+
+                    val table = PdfPTable(2).apply {
+                        widthPercentage = 100F
+                        addCell(PdfPCell(titlePDF).apply {
+                            paddingLeft = 25F
+                            backgroundColor = BaseColor.GRAY
+//                            fixedHeight = 100F
+                            verticalAlignment = Element.ALIGN_MIDDLE
+                            horizontalAlignment = Element.ALIGN_LEFT
+                            border = Rectangle.NO_BORDER
+                        })
+                        data.report().items.filter { s -> s.isByteArray }.forEach { s ->
+                            val img: Image = Image.getInstance(s.valueByteArray)
+                            val w: Float = 300F
+                            val h: Float = 300F
+                            val t: PdfTemplate = writer.directContent.createTemplate(w, h)
+                            t.ellipse(0F, 0F, w, h)
+                            t.clip()
+                            t.newPath()
+                            val f = (((document.pageSize.width / 2) - (w / 2)))
+                            t.addImage(
+                                img,
+                                w.toDouble(),
+                                0.0,
+                                0.0,
+                                h.toDouble(),
+                                0.0,
+                                0.0
+                            )
+                            val jpg: Image = Image.getInstance(t).apply {
+//                                setAbsolutePosition(f, 0F)
+                                scaleToFit(230f, 230f)
+                                alignment = Image.ALIGN_CENTER or Image.ALIGN_MIDDLE
+                                indentationLeft = 3F
+                                spacingAfter = 3F
+
+////                                borderWidthTop = 36f
+//                                borderColorTop = BaseColor.WHITE
+                            }
+                            val cellImage = PdfPCell(jpg).apply {
+                                backgroundColor = BaseColor.GRAY
+//                                fixedHeight = 85F
+                                verticalAlignment = Element.ALIGN_MIDDLE
+                                horizontalAlignment = Element.ALIGN_CENTER
+                                border = Rectangle.NO_BORDER
+                            }
+                            addCell(cellImage)
+                        }
+                    }
+                    document.add(table)
                 }
+
+                //val marginData = 30F
+                //document.setMargins(marginData, marginData, margin, margin)
+                document.add(Chunk("\n\n"))
+
+
 
                 data.report().items.filter { s -> s.isItemReport }.forEach { s ->
                     document.addTitleAndDataLine(s.nameReport, s.valueCast, fontBase)
                 }
+
 
                 // pdf table:
 //                val fontCellTitle =
@@ -119,34 +176,41 @@ class UIReportFormatPDF<TEntity> :
             verticalAlignment = Element.ALIGN_MIDDLE
             paddingRight = 5F
             paddingLeft = 5F
-
         }
         return cell
     }
-
 
     private fun Document.addSeparator(beforeLines: Int = 1, afterLines: Int = 1) {
         val lineSeparator = LineSeparator().apply {
             lineColor = BaseColor(87, 68, 64, 68)
             lineWidth = 3F
         }
-        (1..beforeLines).forEach { _ -> this.add(Chunk.NEWLINE) }
-        this.add(Chunk(lineSeparator))
-        (1..afterLines).forEach { _ -> this.add(Chunk.NEWLINE) }
+//        (1..beforeLines).forEach { _ -> this.add(Chunk()) }
+        this.add(Chunk("\n"))
+        this.add(lineSeparator)
+//        (1..afterLines).forEach { _ -> this.add(Chunk()) }
     }
 
-    private fun Document.addTitleAndDataLine(title: String, data: String, font: BaseFont) {
+    private fun Document.addTitleAndDataLine(
+        title: String,
+        data: String,
+        font: BaseFont,
+        space: Float = 2F
+    ) {
         val fontCellTitle =
             Font(font, 16F, Font.UNDERLINE or Font.BOLDITALIC, BaseColor.BLUE)
+
         this.add(Paragraph("${title}:", fontCellTitle).apply {
-            alignment = Element.ALIGN_JUSTIFIED
-            spacingBefore = 35F
+            alignment = Element.ALIGN_LEFT
+            spacingBefore = space
+//            leading = fontCellTitle.size * 2F
         })
         val fontCellValue =
             Font(font, 14F, Font.NORMAL, BaseColor.BLACK)
         this.add(Paragraph(data, fontCellValue).apply {
             alignment = Element.ALIGN_RIGHT
-            spacingAfter = 35F
+            spacingAfter = space
+//            leading = fontCellValue.size * 2F
         })
         this.addSeparator()
     }

@@ -135,7 +135,7 @@ class XactRecord : EntityOtWithPictureParseWithExportReport<XactRecord>() {
             ExportGenericEntityItem("idEvent", value = event?.description, nameReport = "Evento"),
             ExportGenericEntityItem("idSector", value = sector?.description, nameReport = "Sector"),
             ExportGenericEntityItem("createDate", value = createDate, nameReport = "Fecha"),
-            ExportGenericEntityItem("description", value = description, nameReport = "Observación"),
+            ExportGenericEntityItem("description", value = description, nameReport = "Observación")
         )
     }
 

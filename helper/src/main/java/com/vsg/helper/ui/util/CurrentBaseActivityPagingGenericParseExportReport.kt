@@ -1,5 +1,8 @@
 package com.vsg.helper.ui.util
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Environment
 import com.vsg.helper.common.adapter.IDataAdapter
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
@@ -13,11 +16,14 @@ import com.vsg.helper.common.util.dao.IGenericDaoPagingParse
 import com.vsg.helper.common.util.viewModel.IViewModelAllPaging
 import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleListWithRelation
 import com.vsg.helper.common.util.viewModel.IViewModelAllTextSearch
+import com.vsg.helper.helper.file.HelperFile.Static.openFile
 import com.vsg.helper.helper.file.HelperFile.Static.sendFile
 import com.vsg.helper.ui.adapter.IDataAdapterEnum
 import com.vsg.helper.ui.crud.UICustomCRUDViewModel
 import com.vsg.helper.ui.export.IUIEntityToFile
 import com.vsg.helper.ui.report.pdf.UIReportFormatPDF
+import java.io.File
+
 
 @ExperimentalStdlibApi
 abstract class CurrentBaseActivityPagingGenericParseExportReport<TActivity, TViewModel, TDao, TEntity, TFilter, TCrud>(
@@ -55,8 +61,8 @@ abstract class CurrentBaseActivityPagingGenericParseExportReport<TActivity, TVie
     //endregion
 
     //region method
-    protected fun sendReport(e: TEntity, type: ExportType) {
-        val data = this.currentViewModel().viewModelViewWithRelations(e.id) ?: return
+    private fun getReportFile(e: TEntity, type: ExportType): File? {
+        val data = this.currentViewModel().viewModelViewWithRelations(e.id) ?: return null
         val directory: String = Environment.DIRECTORY_DOCUMENTS
         val iExport: IUIEntityToFile<TEntity> = when (type) {
             ExportType.PDF -> UIReportFormatPDF<TEntity>().apply {
@@ -67,8 +73,16 @@ abstract class CurrentBaseActivityPagingGenericParseExportReport<TActivity, TVie
                 }
             }
             else -> null
-        } ?: return
-        this.sendFile(iExport.toFile(data, this, directory))
+        } ?: return null
+        return iExport.toFile(data, this, directory)
+    }
+    protected fun sendReport(e: TEntity, type: ExportType) {
+        val result = getReportFile(e, type) ?: return
+        this.sendFile(result)
+    }
+    protected fun openReport(e: TEntity, type: ExportType){
+        val result = getReportFile(e, type) ?: return
+        this.openFile(result)
     }
     //endregion
 }
