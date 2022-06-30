@@ -65,61 +65,56 @@ class UIReportFormatPDF<TEntity> :
                 // Document Title:
                 val title = onEventSetTitle?.invoke(Unit)
                 if (!title.isNullOrEmpty()) {
+                    val backColor = BaseColor.LIGHT_GRAY
+                    // AddTitle:
                     val fontTitle =
                         Font(fontBase, 36F, Font.BOLD or Font.UNDERLINE, BaseColor.WHITE)
                     val titlePDF =
-                        Paragraph(title, fontTitle).apply {
+                        Paragraph(title.uppercase(), fontTitle).apply {
                             alignment = Element.ALIGN_LEFT
-//                            spacingAfter = 100F
-//                            leading = 25F
-//                            multipliedLeading = 25F
-                            setLeading(25F, 100F)
+                            setLeading(50F, 0F)
                         }
 
                     val table = PdfPTable(2).apply {
                         widthPercentage = 100F
-                        addCell(PdfPCell(titlePDF).apply {
+                        this.addCell(PdfPCell().apply {
                             paddingLeft = 25F
-                            backgroundColor = BaseColor.GRAY
-//                            fixedHeight = 100F
+                            backgroundColor = backColor
                             verticalAlignment = Element.ALIGN_MIDDLE
                             horizontalAlignment = Element.ALIGN_LEFT
                             border = Rectangle.NO_BORDER
+                            addElement(titlePDF)
                         })
+
+                        // AddImage:
                         data.report().items.filter { s -> s.isByteArray }.forEach { s ->
                             val img: Image = Image.getInstance(s.valueByteArray)
-                            val w: Float = 300F
-                            val h: Float = 300F
-                            val t: PdfTemplate = writer.directContent.createTemplate(w, h)
-                            t.ellipse(0F, 0F, w, h)
-                            t.clip()
-                            t.newPath()
-                            val f = (((document.pageSize.width / 2) - (w / 2)))
-                            t.addImage(
-                                img,
-                                w.toDouble(),
-                                0.0,
-                                0.0,
-                                h.toDouble(),
-                                0.0,
-                                0.0
-                            )
-                            val jpg: Image = Image.getInstance(t).apply {
-//                                setAbsolutePosition(f, 0F)
-                                scaleToFit(230f, 230f)
+                            val w = 200F
+                            val h = 200F
+                            val template: PdfTemplate = writer.directContent.createTemplate(w, h).apply {
+                                ellipse(0F, 0F, w, h)
+                                clip()
+                                newPath()
+                                addImage(
+                                    img,
+                                    w.toDouble(),
+                                    0.0,
+                                    0.0,
+                                    h.toDouble(),
+                                    0.0,
+                                    0.0
+                                )
+                            }
+                            val jpg: Image = Image.getInstance(template).apply {
+                                scaleToFit(w, h)
                                 alignment = Image.ALIGN_CENTER or Image.ALIGN_MIDDLE
-                                indentationLeft = 3F
-                                spacingAfter = 3F
-
-////                                borderWidthTop = 36f
-//                                borderColorTop = BaseColor.WHITE
                             }
                             val cellImage = PdfPCell(jpg).apply {
-                                backgroundColor = BaseColor.GRAY
-//                                fixedHeight = 85F
+                                backgroundColor = backColor
                                 verticalAlignment = Element.ALIGN_MIDDLE
                                 horizontalAlignment = Element.ALIGN_CENTER
                                 border = Rectangle.NO_BORDER
+                                setPadding(25F)
                             }
                             addCell(cellImage)
                         }
@@ -128,11 +123,7 @@ class UIReportFormatPDF<TEntity> :
                 }
 
                 //val marginData = 30F
-                //document.setMargins(marginData, marginData, margin, margin)
                 document.add(Chunk("\n\n"))
-
-
-
                 data.report().items.filter { s -> s.isItemReport }.forEach { s ->
                     document.addTitleAndDataLine(s.nameReport, s.valueCast, fontBase)
                 }
@@ -198,19 +189,17 @@ class UIReportFormatPDF<TEntity> :
         space: Float = 2F
     ) {
         val fontCellTitle =
-            Font(font, 16F, Font.UNDERLINE or Font.BOLDITALIC, BaseColor.BLUE)
+            Font(font, 18F, Font.UNDERLINE or Font.BOLDITALIC, BaseColor.BLUE)
 
         this.add(Paragraph("${title}:", fontCellTitle).apply {
             alignment = Element.ALIGN_LEFT
             spacingBefore = space
-//            leading = fontCellTitle.size * 2F
         })
         val fontCellValue =
             Font(font, 14F, Font.NORMAL, BaseColor.BLACK)
         this.add(Paragraph(data, fontCellValue).apply {
             alignment = Element.ALIGN_RIGHT
             spacingAfter = space
-//            leading = fontCellValue.size * 2F
         })
         this.addSeparator()
     }
