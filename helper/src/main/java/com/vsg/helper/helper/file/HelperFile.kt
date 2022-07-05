@@ -70,22 +70,10 @@ class HelperFile {
                     s.type = this.contentResolver.getType(uri)
                     s.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     s.putExtra(Intent.EXTRA_STREAM, uri)
-
-//                    val resInfoList: List<ResolveInfo> = this.packageManager
-//                        .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
-//                    for (resolveInfo in resInfoList) {
-//                        val packageName = resolveInfo.activityInfo.packageName
-//                        this.grantUriPermission(
-//                            packageName,
-//                            uri,
-//                            Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
-//                        )
-//                    }
                     this.startActivity(Intent.createChooser(s, "Compartir").apply {
                         addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
                         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     })
-//                    this.startActivity(s)
                 } catch (e: Exception) {
                     throw e
                 }

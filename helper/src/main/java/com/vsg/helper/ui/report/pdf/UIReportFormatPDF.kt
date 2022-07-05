@@ -47,20 +47,11 @@ class UIReportFormatPDF<TEntity> :
                 document.addCreator(activity.packageName)
 
                 // Document Font
-                val mColorAccent = BaseColor(0, 153, 204, 255)
-                val mHeadingFontSize = 20.0f
-                val mValueFontSize = 26.0f
                 val fontBase = BaseFont.createFont(
-                    BaseFont.HELVETICA,
+                    BaseFont.HELVETICA_BOLDOBLIQUE,
                     BaseFont.CP1252,
                     BaseFont.EMBEDDED
                 )
-
-                // Line Separator
-                val lineSeparator = LineSeparator().apply {
-                    lineColor = BaseColor(87, 68, 64, 68)
-                    lineWidth = 3F
-                }
 
                 // Document Title:
                 val title = onEventSetTitle?.invoke(Unit)
@@ -120,32 +111,13 @@ class UIReportFormatPDF<TEntity> :
                         }
                     }
                     document.add(table)
+                    document.add(Paragraph("\n"))
                 }
 
-                //val marginData = 30F
-                document.add(Chunk("\n\n"))
                 data.report().items.filter { s -> s.isItemReport }.forEach { s ->
                     document.addTitleAndDataLine(s.nameReport, s.valueCast, fontBase)
                 }
 
-
-                // pdf table:
-//                val fontCellTitle =
-//                    Font(fontBase, 16F, Font.UNDERLINE or Font.BOLDITALIC, BaseColor.BLACK)
-//                val fontCellValue =
-//                    Font(fontBase, 14F, Font.NORMAL, BaseColor.BLACK)
-//                val table = PdfPTable(2).apply {
-//                    data.report().items.filter { s -> s.isItemReport }.forEach { s ->
-//                        addCell(getCell("${s.nameReport}:", BaseColor.LIGHT_GRAY, fontCellTitle))
-//                        addCell(getCell(s.valueCast, font = fontCellValue))
-//                    }
-//                }
-//
-//                document.addSeparator()
-//                document.add(table)
-//                document.addSeparator()
-
-                // close:
                 document.close()
             }
             file
@@ -175,11 +147,10 @@ class UIReportFormatPDF<TEntity> :
         val lineSeparator = LineSeparator().apply {
             lineColor = BaseColor(87, 68, 64, 68)
             lineWidth = 3F
+            percentage = 98F
         }
-//        (1..beforeLines).forEach { _ -> this.add(Chunk()) }
         this.add(Chunk("\n"))
         this.add(lineSeparator)
-//        (1..afterLines).forEach { _ -> this.add(Chunk()) }
     }
 
     private fun Document.addTitleAndDataLine(
@@ -189,7 +160,7 @@ class UIReportFormatPDF<TEntity> :
         space: Float = 2F
     ) {
         val fontCellTitle =
-            Font(font, 18F, Font.UNDERLINE or Font.BOLDITALIC, BaseColor.BLUE)
+            Font(font, 20F, Font.UNDERLINE or Font.BOLDITALIC, BaseColor.BLUE)
 
         this.add(Paragraph("${title}:", fontCellTitle).apply {
             alignment = Element.ALIGN_LEFT

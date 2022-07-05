@@ -28,7 +28,7 @@ class UIExportFormatXML<TEntity> :
         if (path.isEmpty()) return null
         return try {
             if (!activity.checkedPermissionStorage()) return null
-            val fileName = data.nameFile(ExportType.XML, false)
+            val fileName = data.nameFile(ExportType.XML, true)
             val writer = getMapper()
             val ruta: File? = activity.getExternalFilesDir(path)
             ruta?.mkdirs()

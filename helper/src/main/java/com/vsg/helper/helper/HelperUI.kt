@@ -53,6 +53,8 @@ class HelperUI {
         const val REQUEST_FOR_IMAGE_CAPTURE = 101
         const val REQUEST_FOR_TAKE_SCREENSHOT = 102
         const val REQUEST_FOR_TAKE_PHOTO = 103
+        const val REQUEST_FOR_PERMISSION_READ_STATE_PHONE = 104
+        const val REQUEST_FOR_PERMISSION_READ_PHONE_NUMBER = 105
 
         const val DEFAULT_TEXT_SIZE_FOR_SPINNER = 20
 

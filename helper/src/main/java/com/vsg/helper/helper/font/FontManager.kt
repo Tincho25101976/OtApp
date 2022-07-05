@@ -1,5 +1,6 @@
 package com.vsg.helper.helper.font
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.res.AssetManager
@@ -18,7 +19,6 @@ class FontManager(val context: Context) {
     private var data: List<Components>
 
     init {
-//        val am: AssetManager = context.assets
         data = listOf(
             Components(Typeface.NORMAL, "KOMTXTK_.ttf"),
             Components(Typeface.BOLD_ITALIC, "KOMTXTBI.ttf"),
@@ -27,23 +27,7 @@ class FontManager(val context: Context) {
         )
     }
 
-//    fun replaceFonts(viewTree: ViewGroup) {
-//        val childCount = viewTree.childCount
-//        for (i in 0 until childCount) {
-//            val child: View = viewTree.getChildAt(i)
-//            when (child) {
-//                is ICustomViewSetTypeface -> {
-//                    child.customSetTypeface(getTypeface(Typeface.BOLD_ITALIC))
-//                }
-//                is TextView -> {
-//                    child.typeface = getTypeface(child.typeface)
-//                    child.setTextColor(Color.BLACK)
-//                }
-//                is ViewGroup -> replaceFonts(child)
-//            }
-//        }
-//    }
-
+    @SuppressLint("Range")
     fun replaceFonts(
         viewTree: ViewGroup,
         @IntRange(from = -1, to = Typeface.BOLD_ITALIC.toLong()) style: Int = -1

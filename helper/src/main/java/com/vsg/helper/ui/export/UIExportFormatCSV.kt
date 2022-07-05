@@ -27,7 +27,7 @@ class UIExportFormatCSV<TEntity> :
         if (path.isEmpty()) return null
         return try {
             if (!activity.checkedPermissionStorage()) return null
-            val fileName = data.nameFile(ExportType.CSV, false)
+            val fileName = data.nameFile(ExportType.CSV, true)
             val ruta: File? = activity.getExternalFilesDir(path)
             ruta?.mkdirs()
             val file = File(ruta, fileName)
@@ -44,7 +44,6 @@ class UIExportFormatCSV<TEntity> :
     }
 
     override fun toDataString(data: TEntity): String? {
-//        if (data == null) return ""
         try {
             val export = UIExportXML<TEntity>()
             val jNode: MutableList<JsonNode> = mutableListOf()

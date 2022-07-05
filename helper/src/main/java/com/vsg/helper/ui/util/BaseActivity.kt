@@ -34,6 +34,7 @@ import com.vsg.helper.helper.font.CustomTypefaceSpan
 import com.vsg.helper.helper.font.FontManager
 import com.vsg.helper.helper.font.FontManager.Static.typeFaceCustom
 import com.vsg.helper.helper.permission.HelperPermission.Static.checkedPermissionCamera
+import com.vsg.helper.helper.permission.HelperPermission.Static.checkedPermissionPhoneStateAndNumbers
 import com.vsg.helper.helper.permission.HelperPermission.Static.checkedPermissionStorage
 import com.vsg.helper.helper.type.TypeMakeLayoutParameter
 import com.vsg.helper.ui.layout.MainItemsLayoutScroll
@@ -131,7 +132,9 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
         if (this.checkedPermissionCamera()) {
             val s = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             if (applicationContext.packageManager.hasSystemFeature(
-                    PackageManager.FEATURE_CAMERA_ANY)) {
+                    PackageManager.FEATURE_CAMERA_ANY
+                )
+            ) {
 
                 if (formatCamera) {
                     val fileCapture = this.getTempFileForCamera()
@@ -239,6 +242,7 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
     private fun checkPermission() {
         this.checkedPermissionStorage()
         this.checkedPermissionCamera()
+        this.checkedPermissionPhoneStateAndNumbers()
     }
     //endregion
 

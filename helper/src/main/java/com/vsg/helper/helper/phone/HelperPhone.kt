@@ -1,9 +1,15 @@
 package com.vsg.helper.helper.phone
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.telephony.PhoneNumberUtils
+import android.telephony.TelephonyManager
 import com.google.i18n.phonenumbers.NumberParseException
 import com.google.i18n.phonenumbers.PhoneNumberUtil
 import com.google.i18n.phonenumbers.Phonenumber
+import com.vsg.helper.helper.Helper.Companion.or
+import com.vsg.helper.helper.Helper.Companion.then
 import java.util.*
 
 
@@ -113,6 +119,13 @@ class HelperPhone {
         fun String.formatPhoneNumber(code: String): String {
             if (this.isEmpty() || code.isEmpty()) return this
             return PhoneNumberUtils.formatNumber(this, code)
+        }
+
+        @SuppressLint("MissingPermission")
+        fun Activity.getNumberPhone(): String {
+            val mPhoneNumber = this.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            val data = (mPhoneNumber == null) then "" or mPhoneNumber.line1Number
+            return data
         }
     }
 }

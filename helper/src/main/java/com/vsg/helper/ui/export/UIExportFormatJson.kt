@@ -19,7 +19,7 @@ class UIExportFormatJson<TEntity> :
         if (path.isEmpty()) return null
         return try {
             if (!activity.checkedPermissionStorage()) return null
-            val fileName = data.nameFile(ExportType.JSON, false)
+            val fileName = data.nameFile(ExportType.JSON, true)
             val ruta: File? = activity.getExternalFilesDir(path)
             ruta?.mkdirs()
             val file = File(ruta, fileName)
