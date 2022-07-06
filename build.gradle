@@ -7,6 +7,9 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        flatDir {
+            dirs 'scr/main/libs'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.2.1'

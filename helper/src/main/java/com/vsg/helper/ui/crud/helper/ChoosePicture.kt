@@ -232,6 +232,7 @@ class ChoosePicture(
     private fun setPictureFromFile(file: File?) {
         if (file != null) {
             tPicture.setPictureFromFile(file)
+            rotate()
             file.delete()
             onEventGetPicture?.invoke(getBitmap(), getArray())
         }
