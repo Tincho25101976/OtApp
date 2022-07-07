@@ -1,6 +1,7 @@
 package com.vsg.helper.ui.crud.helper
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.View
@@ -8,6 +9,9 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.annotation.DrawableRes
+import androidx.core.app.ActivityCompat.startActivityForResult
+import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity
+import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants
 import com.vsg.helper.R
 import com.vsg.helper.helper.HelperUI
 import com.vsg.helper.helper.HelperUI.Static.getBitmap
@@ -24,8 +28,6 @@ import com.vsg.helper.helper.file.HelperFile.Static.chooserFile
 import com.vsg.helper.helper.file.HelperFile.Static.getTempFileFromUri
 import com.vsg.helper.helper.file.TypeTempFile
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
-import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewer
-import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewerParameter
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
 import java.io.File
@@ -63,9 +65,38 @@ class ChoosePicture(
         this.tPicture.apply {
             onEventDoubleTap = { _, b ->
                 if (b != null) {
-                    UICustomDialogViewer(activity).apply {
-                        make(UICustomDialogViewerParameter(b))
-                    }
+//                    UICustomDialogViewer(activity).apply {
+//                        make(UICustomDialogViewerParameter(b))
+//                    }
+                    val dsPhotoEditorIntent = Intent(activity, DsPhotoEditorActivity::class.java)
+                    dsPhotoEditorIntent.data = inputImageUri
+
+                    // This is optional. By providing an output directory, the edited photo
+                    // will be saved in the specified folder on your device's external storage;
+                    // If this is omitted, the edited photo will be saved to a folder
+                    // named "DS_Photo_Editor" by default.
+
+                    // This is optional. By providing an output directory, the edited photo
+                    // will be saved in the specified folder on your device's external storage;
+                    // If this is omitted, the edited photo will be saved to a folder
+                    // named "DS_Photo_Editor" by default.
+                    dsPhotoEditorIntent.putExtra(
+                        DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY,
+                        MainActivity.OUTPUT_PHOTO_DIRECTORY
+                    )
+
+                    // You can also hide some tools you don't need as below
+//                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
+//                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
+
+
+                    // You can also hide some tools you don't need as below
+//                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
+//                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
+                    activity. startActivityForResult(
+                        dsPhotoEditorIntent,
+                        MainActivity.DS_PHOTO_EDITOR_REQUEST_CODE
+                    )
                 }
             }
         }

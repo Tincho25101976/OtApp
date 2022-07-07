@@ -12,13 +12,17 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.READ_SMS"/>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Ot">
+        android:theme="@style/Theme.Ot"
+        android:largeHeap="true">
 
         <activity
             android:name=".MainActivity"
@@ -29,6 +33,33 @@
             </intent-filter>
         </activity>
 
+        <!--ImagenEditor:-->
+        <activity
+            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
+
+        <activity
+            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorStickerActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
+
+        <activity
+            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorTextActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorCropActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
+
+        <activity
+            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorDrawActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
+        
         <!--SecurityDialog-->
         <activity android:name=".ui.activities.securityDialog.main.MainSecurityDialog" />
         <activity android:name=".ui.activities.securityDialog.xact.main.MainXactRecord" />
