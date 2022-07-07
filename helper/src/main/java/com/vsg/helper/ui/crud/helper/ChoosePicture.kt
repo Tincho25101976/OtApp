@@ -68,35 +68,35 @@ class ChoosePicture(
 //                    UICustomDialogViewer(activity).apply {
 //                        make(UICustomDialogViewerParameter(b))
 //                    }
-                    val dsPhotoEditorIntent = Intent(activity, DsPhotoEditorActivity::class.java)
-                    dsPhotoEditorIntent.data = inputImageUri
-
-                    // This is optional. By providing an output directory, the edited photo
-                    // will be saved in the specified folder on your device's external storage;
-                    // If this is omitted, the edited photo will be saved to a folder
-                    // named "DS_Photo_Editor" by default.
-
-                    // This is optional. By providing an output directory, the edited photo
-                    // will be saved in the specified folder on your device's external storage;
-                    // If this is omitted, the edited photo will be saved to a folder
-                    // named "DS_Photo_Editor" by default.
-                    dsPhotoEditorIntent.putExtra(
-                        DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY,
-                        MainActivity.OUTPUT_PHOTO_DIRECTORY
-                    )
-
-                    // You can also hide some tools you don't need as below
-//                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
-//                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
-
-
-                    // You can also hide some tools you don't need as below
-//                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
-//                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
-                    activity. startActivityForResult(
-                        dsPhotoEditorIntent,
-                        MainActivity.DS_PHOTO_EDITOR_REQUEST_CODE
-                    )
+//                    val dsPhotoEditorIntent = Intent(activity, DsPhotoEditorActivity::class.java)
+//                    dsPhotoEditorIntent.data = inputImageUri
+//
+//                    // This is optional. By providing an output directory, the edited photo
+//                    // will be saved in the specified folder on your device's external storage;
+//                    // If this is omitted, the edited photo will be saved to a folder
+//                    // named "DS_Photo_Editor" by default.
+//
+//                    // This is optional. By providing an output directory, the edited photo
+//                    // will be saved in the specified folder on your device's external storage;
+//                    // If this is omitted, the edited photo will be saved to a folder
+//                    // named "DS_Photo_Editor" by default.
+//                    dsPhotoEditorIntent.putExtra(
+//                        DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY,
+//                        MainActivity.OUTPUT_PHOTO_DIRECTORY
+//                    )
+//
+//                    // You can also hide some tools you don't need as below
+////                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
+////                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
+//
+//
+//                    // You can also hide some tools you don't need as below
+////                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
+////                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
+//                    activity. startActivityForResult(
+//                        dsPhotoEditorIntent,
+//                        MainActivity.DS_PHOTO_EDITOR_REQUEST_CODE
+//                    )
                 }
             }
         }
