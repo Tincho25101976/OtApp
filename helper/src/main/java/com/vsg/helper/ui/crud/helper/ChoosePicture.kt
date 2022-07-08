@@ -1,17 +1,16 @@
 package com.vsg.helper.ui.crud.helper
 
+import android.R
 import android.app.Activity
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Typeface
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.annotation.DrawableRes
-import androidx.core.app.ActivityCompat.startActivityForResult
-import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity
-import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants
+import androidx.core.content.res.ResourcesCompat
 import com.vsg.helper.R
 import com.vsg.helper.helper.HelperUI
 import com.vsg.helper.helper.HelperUI.Static.getBitmap
@@ -30,7 +29,9 @@ import com.vsg.helper.helper.file.TypeTempFile
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
+import ja.burhanrashid52.photoeditor.PhotoEditor
 import java.io.File
+
 
 class ChoosePicture(
     private val view: View,
@@ -47,6 +48,8 @@ class ChoosePicture(
     private var mapRotate: MutableList<Pair<Int, Float>> = mutableListOf()
     private var angle: Int = 1
     private var fileToPhoto: File? = null
+
+    private lateinit var mPhotoEditor: PhotoEditor
 
     var onEventGetPicture: ((Bitmap?, ByteArray?) -> Unit)? = null
 
@@ -65,6 +68,25 @@ class ChoosePicture(
         this.tPicture.apply {
             onEventDoubleTap = { _, b ->
                 if (b != null) {
+                    //Use custom font using latest support library
+
+                    //Use custom font using latest support library
+                    val mTextRobotoTf = ResourcesCompat.getFont(this, R.font.roboto_medium)
+
+//loading font from asset
+
+//loading font from asset
+                    val mEmojiTypeFace =
+                        Typeface.createFromAsset(getAssets(), "emojione-android.ttf")
+
+                    mPhotoEditor = PhotoEditor. Builder(activity, mPhotoEditorView)
+                        .setPinchTextScalable(true)
+                        .setClipSourceImage(true)
+                        .setDefaultTextTypeface(mTextRobotoTf)
+                        .setDefaultEmojiTypeface(mEmojiTypeFace)
+                        .build()
+
+
 //                    UICustomDialogViewer(activity).apply {
 //                        make(UICustomDialogViewerParameter(b))
 //                    }
