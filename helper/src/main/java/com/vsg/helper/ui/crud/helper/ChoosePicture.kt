@@ -1,21 +1,29 @@
 package com.vsg.helper.ui.crud.helper
 
-import android.R
+//import ja.burhanrashid52.photoeditor.PhotoEditor
+
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Typeface
+import android.graphics.Color
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.annotation.DrawableRes
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.app.ActivityCompat.startActivityForResult
+import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity
+import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants
 import com.vsg.helper.R
 import com.vsg.helper.helper.HelperUI
+import com.vsg.helper.helper.HelperUI.Static.DS_PHOTO_EDITOR_REQUEST_CODE
 import com.vsg.helper.helper.HelperUI.Static.getBitmap
 import com.vsg.helper.helper.HelperUI.Static.makeCustomLayoutLinealLayout
 import com.vsg.helper.helper.HelperUI.Static.makeCustomLayoutRelativeLayout
+import com.vsg.helper.helper.HelperUI.Static.setPictureFromBitmap
 import com.vsg.helper.helper.HelperUI.Static.setPictureFromFile
 import com.vsg.helper.helper.array.HelperArray.Companion.toBitmap
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.makeMapRotate
@@ -27,9 +35,9 @@ import com.vsg.helper.helper.file.HelperFile.Static.chooserFile
 import com.vsg.helper.helper.file.HelperFile.Static.getTempFileFromUri
 import com.vsg.helper.helper.file.TypeTempFile
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
+import com.vsg.helper.ui.data.ui.ManagerCRUD
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
-import ja.burhanrashid52.photoeditor.PhotoEditor
 import java.io.File
 
 
@@ -48,10 +56,13 @@ class ChoosePicture(
     private var mapRotate: MutableList<Pair<Int, Float>> = mutableListOf()
     private var angle: Int = 1
     private var fileToPhoto: File? = null
+    private var currentUri: Uri? = null
+    var outDirectory: String = ""
 
-    private lateinit var mPhotoEditor: PhotoEditor
 
-    var onEventGetPicture: ((Bitmap?, ByteArray?) -> Unit)? = null
+//    private lateinit var mPhotoEditor: PhotoEditor
+
+    var onEventGetPicture: ((Bitmap?, ByteArray?, Uri?) -> Unit)? = null
 
     enum class TypeFormatChoosePicture {
         DEFAULT,
@@ -65,60 +76,90 @@ class ChoosePicture(
         // set format of view:
         setChooseFormat()
 
+
+//        { request, result, data ->
+//            if (data != null) {
+//                if (request == HelperUI.REQUEST_FOR_CHOOSER_FILE_FROM_MANAGER && result == Activity.RESULT_OK) {
+//                    val file: String = this.getTempFileFromUri(
+//                        data.data,
+//                        HelperFile.SUB_PATH_TEMP_FILE_DATABASE,
+//                        TypeTempFile.DATABASE
+//                    )?.absolutePath
+//                        ?: ""
+//                    if (file.isNotEmpty()) {
+////                        this.fileXML = file
+//                        crud =
+//                            ManagerCRUD(
+//                                this,
+//                                aGetEntity(),
+//                                file
+//                            )
+//                    }
+//                }
+//            }
+//        }
+
+//        activity.onEventExecuteActivityResult = { request, result, data ->
+//            val dsPhotoEditorIntent = Intent(activity, DsPhotoEditorActivity::class.java)
+//            dsPhotoEditorIntent.data = currentUri
+//
+//            // This is optional. By providing an output directory, the edited photo
+//            // will be saved in the specified folder on your device's external storage;
+//            // If this is omitted, the edited photo will be saved to a folder
+//            // named "DS_Photo_Editor" by default.
+//
+//            // This is optional. By providing an output directory, the edited photo
+//            // will be saved in the specified folder on your device's external storage;
+//            // If this is omitted, the edited photo will be saved to a folder
+//            // named "DS_Photo_Editor" by default.
+//            dsPhotoEditorIntent.putExtra(
+//                DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY,
+//                outDirectory
+//            )
+//
+//            // You can also hide some tools you don't need as below
+////                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
+////                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
+//
+//
+//            // You can also hide some tools you don't need as below
+////                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
+////                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
+//            activity.startActivityForResult(
+//                dsPhotoEditorIntent,
+//                DS_PHOTO_EDITOR_REQUEST_CODE
+//            )
+//        }
+
         this.tPicture.apply {
             onEventDoubleTap = { _, b ->
-                if (b != null) {
-                    //Use custom font using latest support library
-
-                    //Use custom font using latest support library
-                    val mTextRobotoTf = ResourcesCompat.getFont(this, R.font.roboto_medium)
-
-//loading font from asset
-
-//loading font from asset
-                    val mEmojiTypeFace =
-                        Typeface.createFromAsset(getAssets(), "emojione-android.ttf")
-
-                    mPhotoEditor = PhotoEditor. Builder(activity, mPhotoEditorView)
-                        .setPinchTextScalable(true)
-                        .setClipSourceImage(true)
-                        .setDefaultTextTypeface(mTextRobotoTf)
-                        .setDefaultEmojiTypeface(mEmojiTypeFace)
-                        .build()
+                if (b != null && currentUri != null) {
+                    ChooseEditPicture().apply {
+                        verifyStoragePermissionsAndPerformOperation()
+                    }
+//                    //Use custom font using latest support library
+//
+//                    //Use custom font using latest support library
+//                    val mTextRobotoTf = ResourcesCompat.getFont(this, R.font.roboto_medium)
+//
+////loading font from asset
+//
+////loading font from asset
+//                    val mEmojiTypeFace =
+//                        Typeface.createFromAsset(getAssets(), "emojione-android.ttf")
+//
+//                    mPhotoEditor = PhotoEditor. Builder(activity, mPhotoEditorView)
+//                        .setPinchTextScalable(true)
+//                        .setClipSourceImage(true)
+//                        .setDefaultTextTypeface(mTextRobotoTf)
+//                        .setDefaultEmojiTypeface(mEmojiTypeFace)
+//                        .build()
 
 
 //                    UICustomDialogViewer(activity).apply {
 //                        make(UICustomDialogViewerParameter(b))
 //                    }
-//                    val dsPhotoEditorIntent = Intent(activity, DsPhotoEditorActivity::class.java)
-//                    dsPhotoEditorIntent.data = inputImageUri
-//
-//                    // This is optional. By providing an output directory, the edited photo
-//                    // will be saved in the specified folder on your device's external storage;
-//                    // If this is omitted, the edited photo will be saved to a folder
-//                    // named "DS_Photo_Editor" by default.
-//
-//                    // This is optional. By providing an output directory, the edited photo
-//                    // will be saved in the specified folder on your device's external storage;
-//                    // If this is omitted, the edited photo will be saved to a folder
-//                    // named "DS_Photo_Editor" by default.
-//                    dsPhotoEditorIntent.putExtra(
-//                        DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY,
-//                        MainActivity.OUTPUT_PHOTO_DIRECTORY
-//                    )
-//
-//                    // You can also hide some tools you don't need as below
-////                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
-////                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
-//
-//
-//                    // You can also hide some tools you don't need as below
-////                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
-////                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
-//                    activity. startActivityForResult(
-//                        dsPhotoEditorIntent,
-//                        MainActivity.DS_PHOTO_EDITOR_REQUEST_CODE
-//                    )
+
                 }
             }
         }
@@ -140,6 +181,7 @@ class ChoosePicture(
         }
 
         activity.onEventExecuteActivityResult = { requestCode, resultCode, data ->
+            this.currentUri = null
             if (requestCode == HelperUI.REQUEST_FOR_CHOOSER_FILE_FROM_MANAGER && resultCode == Activity.RESULT_OK) {
                 val file: File? = activity.getTempFileFromUri(
                     data?.data,
@@ -159,6 +201,7 @@ class ChoosePicture(
             }
         }
         activity.onEventPathForTakePhoto = { fileToPhoto = it }
+
     }
 
     //region format
@@ -260,7 +303,6 @@ class ChoosePicture(
             id = View.generateViewId()
             layoutParams = when (format) {
                 TypeFormatChoosePicture.DEFAULT -> {
-
                     makeCustomLayoutRelativeLayout().apply {
                         height = dimensionCommand
                         width = dimensionCommand
@@ -270,14 +312,15 @@ class ChoosePicture(
                 TypeFormatChoosePicture.COMMAND_BOTTOM -> {
                     makeCustomLayoutRelativeLayout().apply {
 //                        height = RelativeLayout.LayoutParams.MATCH_PARENT
-//                        width = RelativeLayout.LayoutParams.MATCH_PARENT
+                        width = RelativeLayout.LayoutParams.MATCH_PARENT
                         height = dimensionCommand
-                        width = dimensionCommand
+//                        width = dimensionCommand
                         addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
                         topMargin = 65.toPixel(activity)
                     }
                 }
             }
+            this.setBackgroundColor(Color.RED)
         }
     }
     //endregion
@@ -287,7 +330,8 @@ class ChoosePicture(
             tPicture.setPictureFromFile(file)
             rotate()
             file.delete()
-            onEventGetPicture?.invoke(getBitmap(), getArray())
+            this.currentUri = Uri.fromFile(file)
+            onEventGetPicture?.invoke(getBitmap(), getArray(), currentUri)
         }
     }
 

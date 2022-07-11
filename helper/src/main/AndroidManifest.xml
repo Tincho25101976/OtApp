@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vsg.helper">
 
-<!--    <application-->
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true"
+        android:largeHeap="true">
+
 <!--        android:allowBackup="true"-->
 <!--        android:icon="@mipmap/ic_launcher"-->
 <!--        android:label="@string/app_name"-->
@@ -11,14 +15,31 @@
 <!--        android:theme="@style/Theme.Ot"-->
 <!--        android:largeHeap="true">-->
 
-<!--        &lt;!&ndash;Imagen Editor&ndash;&gt;-->
-<!--        <activity android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity" />-->
-<!--        <activity android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorStickerActivity" />-->
+        <!--ImagenEditor:-->
+<!--        <activity-->
+<!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity"-->
+<!--            android:screenOrientation="fullSensor"-->
+<!--            android:theme="@android:style/Theme.Holo.NoActionBar" />-->
+
+<!--        <activity-->
+<!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorStickerActivity"-->
+<!--            android:screenOrientation="fullSensor"-->
+<!--            android:theme="@android:style/Theme.Holo.NoActionBar" />-->
+
 <!--        <activity-->
 <!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorTextActivity"-->
+<!--            android:screenOrientation="fullSensor"-->
+<!--            android:theme="@android:style/Theme.Holo.NoActionBar"-->
 <!--            android:windowSoftInputMode="adjustPan" />-->
-<!--        <activity android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorCropActivity" />-->
-<!--        <activity android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorDrawActivity" />-->
-<!--        -->
-<!--    </application>-->
+
+<!--        <activity-->
+<!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorCropActivity"-->
+<!--            android:screenOrientation="fullSensor"-->
+<!--            android:theme="@android:style/Theme.Holo.NoActionBar" />-->
+
+<!--        <activity-->
+<!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorDrawActivity"-->
+<!--            android:screenOrientation="fullSensor"-->
+<!--            android:theme="@android:style/Theme.Holo.NoActionBar" />-->
+    </application>
 </manifest>

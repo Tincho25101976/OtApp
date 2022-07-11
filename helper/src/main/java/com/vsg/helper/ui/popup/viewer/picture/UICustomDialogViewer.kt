@@ -8,7 +8,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler
+//import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler
 import com.vsg.helper.R
 import com.vsg.helper.helper.HelperUI.Static.getBitmap
 import com.vsg.helper.helper.HelperUI.Static.getCustomLayoutRelativeLayout
@@ -170,7 +170,7 @@ class UICustomDialogViewer<TActivity>(activity: TActivity) :
                     tViewZoom = ImageView(getContext()!!).apply {
                         layoutParams = setParameterLayout()
                     }
-                    tViewZoom?.setOnTouchListener(ImageMatrixTouchHandler(activity))
+//                    tViewZoom?.setOnTouchListener(ImageMatrixTouchHandler(activity))
                 }
                 tViewZoom?.imageMatrix = Matrix()
                 tViewZoom?.scaleType = ImageView.ScaleType.CENTER_CROP

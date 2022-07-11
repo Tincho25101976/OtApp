@@ -56,6 +56,8 @@ class HelperUI {
         const val REQUEST_FOR_PERMISSION_READ_STATE_PHONE = 104
         const val REQUEST_FOR_PERMISSION_READ_PHONE_NUMBER = 105
 
+        const val DS_PHOTO_EDITOR_REQUEST_CODE = 200
+
         const val DEFAULT_TEXT_SIZE_FOR_SPINNER = 20
 
         //region textView
@@ -491,9 +493,10 @@ class HelperUI {
             var data: Bitmap?
             try {
                 Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true).also {
-                    this.scaleType = ImageView.ScaleType.FIT_CENTER
+                    this.scaleType = ImageView.ScaleType.CENTER_INSIDE
                     this.setImageBitmap(it)
                     this.adjustViewBounds = true
+//                    this.layoutParams.apply {  }
                     data = it.copy(Bitmap.Config.ARGB_8888, true)
                 }
             } catch (e: Exception) {

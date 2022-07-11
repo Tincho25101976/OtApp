@@ -40,20 +40,22 @@ class CustomImageViewDobleTap @JvmOverloads constructor(
         onEventDoubleTap?.invoke(this, temp)
         return false
     }
+
     override fun onDoubleTapEvent(e: MotionEvent?): Boolean = false
     //endregion
 
     //region listener
-    override fun onDown(e: MotionEvent?): Boolean =false
-    override fun onShowPress(e: MotionEvent?) {    }
-    override fun onSingleTapUp(e: MotionEvent?): Boolean =false
+    override fun onDown(e: MotionEvent?): Boolean = false
+    override fun onShowPress(e: MotionEvent?) {}
+    override fun onSingleTapUp(e: MotionEvent?): Boolean = false
     override fun onScroll(
         e1: MotionEvent?,
         e2: MotionEvent?,
         distanceX: Float,
         distanceY: Float
     ): Boolean = false
-    override fun onLongPress(e: MotionEvent?) {    }
+
+    override fun onLongPress(e: MotionEvent?) {}
     override fun onFling(
         e1: MotionEvent?,
         e2: MotionEvent?,

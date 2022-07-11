@@ -21,7 +21,7 @@
                 android:layout_height="@dimen/DialogCrudPictureChooseSize"
                 android:layout_alignTop="@id/DialogGenericPicture"
                 android:layout_toStartOf="@id/DialogGenericPicture"
-                android:src="@drawable/pic_take_photo"/>
+                android:src="@drawable/pic_take_photo" />
             <ImageView
                 android:id="@+id/DialogGenericPictureChooseImage"
                 android:layout_width="@dimen/DialogCrudPictureChooseSize"
@@ -49,7 +49,11 @@
                 android:layout_width="@dimen/DialogGenericChoosePictureSize"
                 android:layout_height="@dimen/DialogGenericChoosePictureSize"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/DialogCrudPictureMargin"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/DialogCrudPictureMargin"
+                android:layout_marginTop="@dimen/DialogCrudPictureMargin"
+                android:layout_marginEnd="@dimen/DialogCrudPictureMargin"
+                android:layout_marginBottom="@dimen/DialogCrudPictureMargin"
                 android:background="@drawable/shadow_view"
                 android:scaleType="center"
                 android:src="@drawable/pic_picture_choose_grayscale" />

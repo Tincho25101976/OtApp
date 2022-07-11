@@ -242,7 +242,7 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
     private fun checkPermission() {
         this.checkedPermissionStorage()
         this.checkedPermissionCamera()
-        this.checkedPermissionPhoneStateAndNumbers()
+//        this.checkedPermissionPhoneStateAndNumbers()
     }
     //endregion
 
