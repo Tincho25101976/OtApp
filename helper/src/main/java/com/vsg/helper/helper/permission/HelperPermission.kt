@@ -2,9 +2,13 @@ package com.vsg.helper.helper.permission
 
 import android.Manifest
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.provider.MediaStore
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.startActivityForResult
 import com.vsg.helper.helper.HelperUI
+
 
 class HelperPermission {
     companion object Static {
@@ -88,12 +92,30 @@ class HelperPermission {
             requestCode: Int
         ): Boolean {
             if (!permissions.any()) return false
-            if (permissions.all { activity.checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }) return true
-            ActivityCompat.requestPermissions(
-                activity,
-                permissions,
-                requestCode
-            )
+//            if (permissions.all { activity.checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }) return true
+//            ActivityCompat.requestPermissions(
+//                activity,
+//                permissions,
+//                requestCode
+//            )
+
+            permissions.filter { it.isNotEmpty() }.forEach {
+                val permission = ActivityCompat.checkSelfPermission(
+                    activity,
+                    it
+                )
+                if (permission != PackageManager.PERMISSION_GRANTED) {
+                    // Request the permission.
+                    ActivityCompat.requestPermissions(
+                        activity,
+                        arrayOf(it),
+                        requestCode
+                    )
+                } else {
+                    return true
+                }
+            }
+
             return false
         }
     }
