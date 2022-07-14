@@ -77,6 +77,18 @@ class HelperPermission {
             HelperUI.REQUEST_FOR_PERMISSION_CAMERA
         )
 
+        fun Activity.checkedPermissionInternet(): Boolean = checkedPermissionFor(
+            this,
+            arrayOf(Manifest.permission.ACCESS_NETWORK_STATE),
+            HelperUI.REQUEST_FOR_PERMISSION_ACCESS_NETWORK_STATE
+        )
+
+        fun Activity.checkedPermissionNetworkState(): Boolean = checkedPermissionFor(
+            this,
+            arrayOf(Manifest.permission.ACCESS_NETWORK_STATE),
+            HelperUI.REQUEST_FOR_PERMISSION_ACCESS_NETWORK_STATE
+        )
+
         fun Activity.checkedPermissionPhoneStateAndNumbers(): Boolean = checkedPermissionFor(
             this,
             arrayOf(

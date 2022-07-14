@@ -12,8 +12,8 @@
 <!--    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
 <!--    <uses-permission android:name="android.permission.READ_SMS"/>-->
 
-<!--    <uses-permission android:name="android.permission.INTERNET" />-->
-<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -34,31 +34,31 @@
         </activity>
 
         <!--ImagenEditor:-->
-        <activity
-            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity"
-            android:screenOrientation="fullSensor"
-            android:theme="@android:style/Theme.Holo.NoActionBar" />
+<!--        <activity-->
+<!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity"-->
+<!--            android:screenOrientation="fullSensor"-->
+<!--            android:theme="@android:style/Theme.Holo.NoActionBar" />-->
 
-        <activity
-            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorStickerActivity"
-            android:screenOrientation="fullSensor"
-            android:theme="@android:style/Theme.Holo.NoActionBar" />
+<!--        <activity-->
+<!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorStickerActivity"-->
+<!--            android:screenOrientation="fullSensor"-->
+<!--            android:theme="@android:style/Theme.Holo.NoActionBar" />-->
 
-        <activity
-            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorTextActivity"
-            android:screenOrientation="fullSensor"
-            android:theme="@android:style/Theme.Holo.NoActionBar"
-            android:windowSoftInputMode="adjustPan" />
+<!--        <activity-->
+<!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorTextActivity"-->
+<!--            android:screenOrientation="fullSensor"-->
+<!--            android:theme="@android:style/Theme.Holo.NoActionBar"-->
+<!--            android:windowSoftInputMode="adjustPan" />-->
 
-        <activity
-            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorCropActivity"
-            android:screenOrientation="fullSensor"
-            android:theme="@android:style/Theme.Holo.NoActionBar" />
+<!--        <activity-->
+<!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorCropActivity"-->
+<!--            android:screenOrientation="fullSensor"-->
+<!--            android:theme="@android:style/Theme.Holo.NoActionBar" />-->
 
-        <activity
-            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorDrawActivity"
-            android:screenOrientation="fullSensor"
-            android:theme="@android:style/Theme.Holo.NoActionBar" />
+<!--        <activity-->
+<!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorDrawActivity"-->
+<!--            android:screenOrientation="fullSensor"-->
+<!--            android:theme="@android:style/Theme.Holo.NoActionBar" />-->
         
         <!--SecurityDialog-->
         <activity android:name=".ui.activities.securityDialog.main.MainSecurityDialog" />

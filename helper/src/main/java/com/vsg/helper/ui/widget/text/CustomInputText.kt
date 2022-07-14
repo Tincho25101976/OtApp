@@ -55,7 +55,7 @@ class CustomInputText @JvmOverloads constructor(
 
     //region field
     private var tEdit: TextInputEditText = TextInputEditText(ctx).apply {
-        inputType = InputType.TYPE_CLASS_TEXT
+        inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
         gravity = Gravity.START
         setHintTextColor(Color.LTGRAY)
     }
@@ -199,7 +199,7 @@ class CustomInputText @JvmOverloads constructor(
                     tEdit.isSingleLine = false
                     tEdit.imeOptions = EditorInfo.IME_FLAG_NO_ENTER_ACTION
                     tEdit.inputType =
-                        InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE
+                        InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
                     setLinesForMultilineText(this.customLines, this.customMaxLines)
                     tEdit.isVerticalScrollBarEnabled = value
                     tEdit.movementMethod = ScrollingMovementMethod.getInstance()
@@ -208,7 +208,8 @@ class CustomInputText @JvmOverloads constructor(
                 false -> {
                     tEdit.isSingleLine = true
                     tEdit.imeOptions = EditorInfo.IME_FLAG_NAVIGATE_NEXT
-                    tEdit.inputType = InputType.TYPE_CLASS_TEXT
+                    tEdit.inputType =
+                        InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
                     tEdit.setLines(1)
                     tEdit.maxLines = 1
                     tEdit.isVerticalScrollBarEnabled = false
@@ -247,6 +248,7 @@ class CustomInputText @JvmOverloads constructor(
             setCounterOverflowTextAppearance(R.style.CounterOverFlowTextAppearance)
         }
         setupAttributes(attrs)
+        this.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
     }
 
     private fun setupAttributes(attrs: AttributeSet?) {

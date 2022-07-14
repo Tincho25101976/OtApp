@@ -3,7 +3,6 @@ package com.vsg.helper.ui.crud.helper
 //import ja.burhanrashid52.photoeditor.PhotoEditor
 
 import android.app.Activity
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -12,18 +11,12 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.annotation.DrawableRes
-import androidx.core.app.ActivityCompat.startActivityForResult
-import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity
-import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants
 import com.vsg.helper.R
 import com.vsg.helper.helper.HelperUI
-import com.vsg.helper.helper.HelperUI.Static.DS_PHOTO_EDITOR_REQUEST_CODE
 import com.vsg.helper.helper.HelperUI.Static.getBitmap
 import com.vsg.helper.helper.HelperUI.Static.makeCustomLayoutLinealLayout
 import com.vsg.helper.helper.HelperUI.Static.makeCustomLayoutRelativeLayout
-import com.vsg.helper.helper.HelperUI.Static.setPictureFromBitmap
 import com.vsg.helper.helper.HelperUI.Static.setPictureFromFile
 import com.vsg.helper.helper.array.HelperArray.Companion.toBitmap
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.makeMapRotate
@@ -35,7 +28,9 @@ import com.vsg.helper.helper.file.HelperFile.Static.chooserFile
 import com.vsg.helper.helper.file.HelperFile.Static.getTempFileFromUri
 import com.vsg.helper.helper.file.TypeTempFile
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
-import com.vsg.helper.ui.data.ui.ManagerCRUD
+import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewer
+import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewerParameter
+import com.vsg.helper.ui.popup.viewer.picture.UICustomImagenEditorDialogViewer
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
 import java.io.File
@@ -76,90 +71,15 @@ class ChoosePicture(
         // set format of view:
         setChooseFormat()
 
-
-//        { request, result, data ->
-//            if (data != null) {
-//                if (request == HelperUI.REQUEST_FOR_CHOOSER_FILE_FROM_MANAGER && result == Activity.RESULT_OK) {
-//                    val file: String = this.getTempFileFromUri(
-//                        data.data,
-//                        HelperFile.SUB_PATH_TEMP_FILE_DATABASE,
-//                        TypeTempFile.DATABASE
-//                    )?.absolutePath
-//                        ?: ""
-//                    if (file.isNotEmpty()) {
-////                        this.fileXML = file
-//                        crud =
-//                            ManagerCRUD(
-//                                this,
-//                                aGetEntity(),
-//                                file
-//                            )
-//                    }
-//                }
-//            }
-//        }
-
-//        activity.onEventExecuteActivityResult = { request, result, data ->
-//            val dsPhotoEditorIntent = Intent(activity, DsPhotoEditorActivity::class.java)
-//            dsPhotoEditorIntent.data = currentUri
-//
-//            // This is optional. By providing an output directory, the edited photo
-//            // will be saved in the specified folder on your device's external storage;
-//            // If this is omitted, the edited photo will be saved to a folder
-//            // named "DS_Photo_Editor" by default.
-//
-//            // This is optional. By providing an output directory, the edited photo
-//            // will be saved in the specified folder on your device's external storage;
-//            // If this is omitted, the edited photo will be saved to a folder
-//            // named "DS_Photo_Editor" by default.
-//            dsPhotoEditorIntent.putExtra(
-//                DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY,
-//                outDirectory
-//            )
-//
-//            // You can also hide some tools you don't need as below
-////                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
-////                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
-//
-//
-//            // You can also hide some tools you don't need as below
-////                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
-////                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
-//            activity.startActivityForResult(
-//                dsPhotoEditorIntent,
-//                DS_PHOTO_EDITOR_REQUEST_CODE
-//            )
-//        }
-
         this.tPicture.apply {
             onEventDoubleTap = { _, b ->
                 if (b != null && currentUri != null) {
-                    ChooseEditPicture().apply {
-                        verifyStoragePermissionsAndPerformOperation()
-                    }
-//                    //Use custom font using latest support library
-//
-//                    //Use custom font using latest support library
-//                    val mTextRobotoTf = ResourcesCompat.getFont(this, R.font.roboto_medium)
-//
-////loading font from asset
-//
-////loading font from asset
-//                    val mEmojiTypeFace =
-//                        Typeface.createFromAsset(getAssets(), "emojione-android.ttf")
-//
-//                    mPhotoEditor = PhotoEditor. Builder(activity, mPhotoEditorView)
-//                        .setPinchTextScalable(true)
-//                        .setClipSourceImage(true)
-//                        .setDefaultTextTypeface(mTextRobotoTf)
-//                        .setDefaultEmojiTypeface(mEmojiTypeFace)
-//                        .build()
-
-
-//                    UICustomDialogViewer(activity).apply {
-//                        make(UICustomDialogViewerParameter(b))
+//                    ChooseEditPicture().apply {
+//                        //editPicture(currentUri!!)
 //                    }
-
+                    UICustomImagenEditorDialogViewer(activity).apply {
+                        make(UICustomDialogViewerParameter(b))
+                    }
                 }
             }
         }

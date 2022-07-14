@@ -15,7 +15,7 @@
 <!--        android:theme="@style/Theme.Ot"-->
 <!--        android:largeHeap="true">-->
 
-        <!--ImagenEditor:-->
+<!--        ImagenEditor:-->
 <!--        <activity-->
 <!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity"-->
 <!--            android:screenOrientation="fullSensor"-->
@@ -41,5 +41,6 @@
 <!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorDrawActivity"-->
 <!--            android:screenOrientation="fullSensor"-->
 <!--            android:theme="@android:style/Theme.Holo.NoActionBar" />-->
+
     </application>
 </manifest>

@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.Gravity
@@ -86,7 +87,7 @@ class CustomEditText @JvmOverloads constructor(
         }
 
     override fun setLayoutParams(params: ViewGroup.LayoutParams?) {
-        if(params != null) {
+        if (params != null) {
             tEdit.setEditCustomLayoutRelativeLayout().apply {
                 height = params.height
                 width = params.width
@@ -98,9 +99,11 @@ class CustomEditText @JvmOverloads constructor(
     override fun setClickable(clickable: Boolean) {
         tEdit.isClickable = clickable
     }
+
     override fun setFocusable(focusable: Boolean) {
         tEdit.isFocusable = focusable
     }
+
     override fun setGravity(value: Int) {
         tEdit.gravity = value
     }
@@ -146,6 +149,7 @@ class CustomEditText @JvmOverloads constructor(
                         gravity = Gravity.CENTER
                     }
             gravity = Gravity.START
+            inputType = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
         }
         tTitle = TextView(ctx).apply {
             text = title
@@ -198,10 +202,12 @@ class CustomEditText @JvmOverloads constructor(
             true -> this.tEdit.text.toString().toDate()
             false -> null
         }
-    fun removeTextChangedListener(watcher: TextWatcher){
+
+    fun removeTextChangedListener(watcher: TextWatcher) {
         tEdit.removeTextChangedListener(watcher)
     }
-    fun addTextChangedListener(watcher: TextWatcher){
+
+    fun addTextChangedListener(watcher: TextWatcher) {
         tEdit.addTextChangedListener(watcher)
     }
     //endregion

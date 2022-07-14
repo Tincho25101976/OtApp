@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -34,7 +35,6 @@ import com.vsg.helper.helper.font.CustomTypefaceSpan
 import com.vsg.helper.helper.font.FontManager
 import com.vsg.helper.helper.font.FontManager.Static.typeFaceCustom
 import com.vsg.helper.helper.permission.HelperPermission.Static.checkedPermissionCamera
-import com.vsg.helper.helper.permission.HelperPermission.Static.checkedPermissionPhoneStateAndNumbers
 import com.vsg.helper.helper.permission.HelperPermission.Static.checkedPermissionStorage
 import com.vsg.helper.helper.type.TypeMakeLayoutParameter
 import com.vsg.helper.ui.layout.MainItemsLayoutScroll
@@ -109,6 +109,17 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
         val intent = Intent(this, data)
         if (id > 0) intent.putExtra(getString(R.string.MsgData), id)
         if (extra > 0) intent.putExtra(getString(R.string.MsgExtra), extra)
+        when (result == 0) {
+            true -> this.startActivity(intent)
+            false -> this.startActivityForResult(intent, result)
+        }
+    }
+
+    fun loadActivity(data: Class<*>, uri: Uri, extra: Pair<String, String>, result: Int) {
+        val intent = Intent(this, data).apply {
+            this.data = uri
+            putExtra(extra.first, extra.second)
+        }
         when (result == 0) {
             true -> this.startActivity(intent)
             false -> this.startActivityForResult(intent, result)
