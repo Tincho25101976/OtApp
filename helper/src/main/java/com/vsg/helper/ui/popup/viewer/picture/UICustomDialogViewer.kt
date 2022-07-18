@@ -49,7 +49,7 @@ class UICustomDialogViewer<TActivity>(activity: TActivity) :
 
     //region customView
     private var tViewImage: ImageView? = null
-    private var tViewDraw: DrawLineImage? = null //DrawLineCanvas? = null
+    private var tViewDraw: DrawLineImage? = null
     private var tViewZoom: ImageView? = null
     private var tViewCrop: CropImageView? = null
     //endregion
@@ -280,7 +280,7 @@ class UICustomDialogViewer<TActivity>(activity: TActivity) :
     //endregion
 
     //region result
-    fun getBitmap(): Bitmap? {
+    private fun getBitmap(): Bitmap? {
         bitmapProcess = try {
             when (typeLast) {
                 TypeOperation.ROTATE -> tViewImage?.getBitmap() ?: bitmap
@@ -295,7 +295,7 @@ class UICustomDialogViewer<TActivity>(activity: TActivity) :
         return bitmapProcess.copy(Bitmap.Config.ARGB_8888, true)
     }
 
-    fun getArray(): ByteArray? = getBitmap().toArray()
+    private fun getArray(): ByteArray? = getBitmap().toArray()
     //endregion
 
     //region layout

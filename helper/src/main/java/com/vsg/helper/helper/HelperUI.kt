@@ -54,13 +54,11 @@ class HelperUI {
         const val REQUEST_FOR_PERMISSION_READ_STATE_PHONE = 1004
         const val REQUEST_FOR_PERMISSION_READ_PHONE_NUMBER = 1005
 
-
-
         const val REQUEST_FOR_CHOOSER_FILE_FROM_MANAGER = 100
         const val REQUEST_FOR_IMAGE_CAPTURE = 101
         const val REQUEST_FOR_TAKE_SCREENSHOT = 102
         const val REQUEST_FOR_TAKE_PHOTO = 103
-
+        const val REQUEST_FOR_SEND_PICTURE = 104
 
         const val DS_PHOTO_EDITOR_REQUEST_CODE = 200
 

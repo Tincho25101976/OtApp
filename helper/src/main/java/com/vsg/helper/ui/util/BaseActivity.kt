@@ -2,6 +2,7 @@ package com.vsg.helper.ui.util
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Typeface
@@ -120,6 +121,24 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
             this.data = uri
             putExtra(extra.first, extra.second)
         }
+        when (result == 0) {
+            true -> this.startActivity(intent)
+            false -> this.startActivityForResult(intent, result)
+        }
+    }
+    fun loadActivity(data: Class<*>, uri: Uri, result: Int) {
+        val intent = Intent(this, data).apply {
+            this.data = uri
+        }
+        when (result == 0) {
+            true -> this.startActivity(intent)
+            false -> this.startActivityForResult(intent, result)
+        }
+    }
+
+    fun loadActivity(data: Class<*>, extra: Bitmap?, result: Int) {
+        val intent = Intent(this, data)
+        if (extra != null) intent.putExtra(getString(R.string.MsgExtra), extra)
         when (result == 0) {
             true -> this.startActivity(intent)
             false -> this.startActivityForResult(intent, result)

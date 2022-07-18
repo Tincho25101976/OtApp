@@ -20,6 +20,7 @@ class HelperScreenShot {
         private const val SUB_PATH_TEMP_FILE_SCREENSHOT = "tempScreenShot"
         private const val SUB_PATH_TEMP_FILE_VIEWER = "tempImageViewer"
         internal const val SUB_PATH_TEMP_FILE_CAMERA = "tempFileCamera"
+        internal const val SUB_PATH_TEMP_FILE_EDIT_PICTURE = "tempFileEditPicture"
 
 
         fun Window.getScreenShotFromView(view: View, callback: (Bitmap) -> Unit) {

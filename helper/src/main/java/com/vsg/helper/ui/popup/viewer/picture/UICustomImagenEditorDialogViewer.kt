@@ -21,8 +21,14 @@ class UICustomImagenEditorDialogViewer<TActivity>(activity: TActivity) :
     init {
         onSetDialogView = { _, data, _ ->
             bitmap = data.bitmap.copy(Bitmap.Config.ARGB_8888, true)
+            tViewImage = activity.findViewById(R.id.mainImageViewEdit)
             tViewImage.source.setImageBitmap(this.bitmap)
+            val eee = 2
+
         }
-        tViewImage = activity.findViewById(R.id.mainImageView)
+    }
+
+    fun addPicture(picture: Bitmap) {
+        tViewImage.source.setImageBitmap(this.bitmap)
     }
 }

@@ -1,7 +1,5 @@
 package com.vsg.helper.ui.crud.helper
 
-//import ja.burhanrashid52.photoeditor.PhotoEditor
-
 import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -28,9 +26,8 @@ import com.vsg.helper.helper.file.HelperFile.Static.chooserFile
 import com.vsg.helper.helper.file.HelperFile.Static.getTempFileFromUri
 import com.vsg.helper.helper.file.TypeTempFile
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
-import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewer
 import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewerParameter
-import com.vsg.helper.ui.popup.viewer.picture.UICustomImagenEditorDialogViewer
+import com.vsg.helper.ui.popup.viewer.picture.UICustomImagenEditorDialogViewer2
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
 import java.io.File
@@ -64,6 +61,7 @@ class ChoosePicture(
         COMMAND_BOTTOM
     }
 
+
     init {
         mapRotate = activity.makeMapRotate()
         tContainer = view.findViewById(R.id.DialogGenericPictureChooseContainer)
@@ -73,11 +71,11 @@ class ChoosePicture(
 
         this.tPicture.apply {
             onEventDoubleTap = { _, b ->
-                if (b != null && currentUri != null) {
-//                    ChooseEditPicture().apply {
-//                        //editPicture(currentUri!!)
-//                    }
-                    UICustomImagenEditorDialogViewer(activity).apply {
+                if (b != null) {
+                    UICustomImagenEditorDialogViewer2(activity).apply {
+                        this.onEventGetPicture = { picture ->
+                            if (picture != null) setPictureFromBitmap(picture)
+                        }
                         make(UICustomDialogViewerParameter(b))
                     }
                 }
@@ -248,10 +246,16 @@ class ChoosePicture(
     private fun setPictureFromFile(file: File?) {
         if (file != null) {
             tPicture.setPictureFromFile(file)
-            rotate()
+//            rotate()
             file.delete()
             this.currentUri = Uri.fromFile(file)
             onEventGetPicture?.invoke(getBitmap(), getArray(), currentUri)
+        }
+    }
+
+    private fun setPictureFromBitmap(bitmap: Bitmap?) {
+        if (bitmap != null) {
+            tPicture.setImageBitmap(bitmap)
         }
     }
 

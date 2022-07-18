@@ -1,14 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.crud.helper.ChooseEditPicture"
-    >
+    tools:context=".ui.popup.viewer.picture.UICustomImagenEditorDialogViewer2">
 
-    <ja.burhanrashid52.photoeditor.PhotoEditorView
-        android:id="@+id/mainImageView"
+    <RelativeLayout
+        android:id="@+id/CustomViewerContainerEdit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/CustomViewerDrawContainerMargin"
+        android:background="@drawable/shadow_view"
+        android:backgroundTint="@color/CropButtonText"
+        android:layout_alignParentTop="true"
+        android:elevation="999sp">
+
+        <ja.burhanrashid52.photoeditor.PhotoEditorView
+            android:id="@+id/mainImageViewEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/CustomViewerCommandOptionsEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/CustomViewerCommandEdit"
+        android:layout_marginStart="@dimen/CustomViewerLayoutMarginStartEnd"
+        android:layout_marginTop="@dimen/CustomViewerLayoutMarginTopBottom"
+        android:layout_marginEnd="@dimen/CustomViewerLayoutMarginStartEnd"
+        android:layout_marginBottom="@dimen/CustomViewerParameterDrawMargin"
+        android:gravity="center"
+        android:orientation="vertical">
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/CustomViewerCommandEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/CustomViewerLayoutMarginStartEnd"
+        android:layout_marginTop="@dimen/CustomViewerLayoutMarginTopBottom"
+        android:layout_marginEnd="@dimen/CustomViewerLayoutMarginStartEnd"
+        android:layout_marginBottom="@dimen/CustomViewerLayoutMarginTopBottom"
+        android:background="@drawable/shadow_view"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/CustomViewerCommandRotateEdit"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/CustomViewerCommandSize"
+                android:layout_height="@dimen/CustomViewerCommandSize"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/pic_choose_rotate" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/CustomViewerCommandZoomEdit"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/CustomViewerCommandSize"
+                android:layout_height="@dimen/CustomViewerCommandSize"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/pic_zoom" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/CustomViewerCommandDrawEdit"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/CustomViewerCommandSize"
+                android:layout_height="@dimen/CustomViewerCommandSize"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/pic_draw" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/CustomViewerCommandCropEdit"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/CustomViewerCommandSize"
+                android:layout_height="@dimen/CustomViewerCommandSize"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/pic_crop" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/CustomViewerCommandSendEdit"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/CustomViewerCommandSize"
+                android:layout_height="@dimen/CustomViewerCommandSize"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/pic_export" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/CustomViewerCommandOKEdit"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/CustomViewerCommandSize"
+                android:layout_height="@dimen/CustomViewerCommandSize"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/pic_ok" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
 </RelativeLayout>
