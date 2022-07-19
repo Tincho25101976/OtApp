@@ -14,16 +14,21 @@ import android.widget.RelativeLayout
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
+import androidx.transition.AutoTransition
+import androidx.transition.TransitionManager
 import com.vsg.helper.R
 import com.vsg.helper.helper.HelperUI
 import com.vsg.helper.helper.HelperUI.Static.getBitmap
+import com.vsg.helper.helper.HelperUI.Static.getCustomLayoutRelativeLayout
 import com.vsg.helper.helper.HelperUI.Static.toEditable
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toArray
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toRotate
 import com.vsg.helper.helper.file.HelperFile.Static.getTempFileStore
+import com.vsg.helper.helper.file.HelperFile.Static.sendFile
 import com.vsg.helper.helper.file.TypeTempFile
 import com.vsg.helper.helper.font.FontManager.Static.typeFaceCustom
 import com.vsg.helper.helper.screenshot.HelperScreenShot
+import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.getTempFileStoreViewer
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
 import com.vsg.helper.ui.popup.UICustomAlertDialogBase
 import com.vsg.helper.ui.util.BaseActivity
@@ -32,10 +37,11 @@ import com.vsg.helper.util.helper.HelperNumeric.Companion.toFormat
 import ja.burhanrashid52.photoeditor.PhotoEditor
 import ja.burhanrashid52.photoeditor.PhotoEditorView
 import ja.burhanrashid52.photoeditor.SaveSettings
+import ja.burhanrashid52.photoeditor.shape.ShapeBuilder
 import java.io.File
 
 
-class UICustomImagenEditorDialogViewer2<TActivity>(activity: TActivity) :
+class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
     UICustomAlertDialogBase<TActivity,
             UICustomDialogViewerParameter>(
         activity,
@@ -87,18 +93,6 @@ class UICustomImagenEditorDialogViewer2<TActivity>(activity: TActivity) :
     }
     //endregion
 
-    //region rotate
-    private var positionRotate: Float = 0F
-    private val dbRotate: List<Pair<Int, Float>>
-        get() =
-            listOf(
-                0 to 0F,
-                1 to 90F,
-                2 to 180F,
-                3 to 270F
-            )
-    //endregion
-
     //endregion
 
     //region methods
@@ -114,8 +108,7 @@ class UICustomImagenEditorDialogViewer2<TActivity>(activity: TActivity) :
             tDraw =
                 dialogView.findViewById<RelativeLayout>(R.id.CustomViewerCommandDrawEdit).apply {
                     setOnClickListener {
-//                    setOperation(TypeOperation.DRAW)
-                        makeDraw()
+                        setOperation(TypeOperation.DRAW)
                     }
                 }
             tZoom =
@@ -134,9 +127,7 @@ class UICustomImagenEditorDialogViewer2<TActivity>(activity: TActivity) :
             tRotate =
                 dialogView.findViewById<RelativeLayout>(R.id.CustomViewerCommandRotateEdit).apply {
                     setOnClickListener {
-//                        setOperation(TypeOperation.ROTATE)
-//                        mPhotoEditor.setFilterEffect(PhotoFilter.FLIP_HORIZONTAL)
-                        rotate()
+                        setOperation(TypeOperation.ROTATE)
                     }
                 }
             tOK = dialogView.findViewById<RelativeLayout>(R.id.CustomViewerCommandOKEdit).apply {
@@ -149,10 +140,10 @@ class UICustomImagenEditorDialogViewer2<TActivity>(activity: TActivity) :
             tExport =
                 dialogView.findViewById<RelativeLayout>(R.id.CustomViewerCommandSendEdit).apply {
                     setOnClickListener {
-//                        val temp: Bitmap = getBitmap() ?: return@setOnClickListener
-//                        val file: File =
-//                            temp.getTempFileStoreViewer(activity) ?: return@setOnClickListener
-//                        activity.sendFile(file)
+                        val temp: Bitmap = getBitmap() ?: return@setOnClickListener
+                        val file: File =
+                            temp.getTempFileStoreViewer(activity) ?: return@setOnClickListener
+                        activity.sendFile(file)
                     }
                 }
 
@@ -168,31 +159,20 @@ class UICustomImagenEditorDialogViewer2<TActivity>(activity: TActivity) :
     }
 
     //region operation
-//    @SuppressLint("ClickableViewAccessibility")
-//    private fun setOperation(type: TypeOperation) {
-//        if (!initialLoad) if (this.type == type) return
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setOperation(type: TypeOperation) {
+        if (!initialLoad) if (this.type == type) return
 //        tContainer.removeAllViews()
-//        var heightResult = MARGIN_BOTTOM_NORMAL
+        var heightResult = MARGIN_BOTTOM_NORMAL
 //        this.typeLast = this.type
-//        when (type) {
-//            TypeOperation.ROTATE -> {
-//                tViewImage = ImageView(activity).apply {
-//                    layoutParams = setParameterLayout()
-//                }
-//                tViewImage?.setImageBitmap(this.getBitmap())
-//                tContainer.addView(tViewImage)
-//            }
-//            TypeOperation.DRAW -> {
-//                makeDraw()
-//                heightResult = MARGIN_BOTTOM_DRAW
-//                tViewDraw = DrawLineImage(getContext()!!).apply {
-//                    layoutParams = setParameterLayout()
-//                }
-//                tViewDraw?.setBrushToDraw(tBrushDraw)
-//                tViewDraw?.setImageBitmap(this.getBitmap())
-//                tContainer.addView(tViewDraw)
-//            }
-//            TypeOperation.ZOOM -> {
+        mPhotoEditor.setBrushDrawingMode(false)
+        when (type) {
+            TypeOperation.ROTATE -> rotate()
+            TypeOperation.DRAW -> {
+                makeDraw()
+                heightResult = MARGIN_BOTTOM_DRAW
+            }
+            TypeOperation.ZOOM -> {
 //                if (tViewZoom == null) {
 //                    tViewZoom = ImageView(getContext()!!).apply {
 //                        layoutParams = setParameterLayout()
@@ -203,25 +183,25 @@ class UICustomImagenEditorDialogViewer2<TActivity>(activity: TActivity) :
 //                tViewZoom?.scaleType = ImageView.ScaleType.CENTER_CROP
 //                tViewZoom?.setImageBitmap(this.getBitmap())
 //                tContainer.addView(tViewZoom)
-//            }
-//            TypeOperation.CROP -> {
+            }
+            TypeOperation.CROP -> {
 //                tViewCrop =
 //                    CropImageView(getContext()).apply { layoutParams = setParameterLayout() }
 //                tViewCrop?.imageBitmap = this.getBitmap()
 //                tContainer.addView(tViewCrop)
-//            }
-//            else -> Unit
-//        }
-//        TransitionManager.beginDelayedTransition(tContainer, AutoTransition())
-//        tContainer.layoutParams = tContainer.getCustomLayoutRelativeLayout().apply {
-//            height = RelativeLayout.LayoutParams.MATCH_PARENT
-//            width = RelativeLayout.LayoutParams.MATCH_PARENT
-//            addRule(RelativeLayout.ALIGN_PARENT_TOP)
-//            bottomMargin = heightResult
-//        }
-//        initialLoad = false
-//        this.type = type
-//    }
+            }
+            else -> Unit
+        }
+        TransitionManager.beginDelayedTransition(tContainer, AutoTransition())
+        tContainer.layoutParams = tContainer.getCustomLayoutRelativeLayout().apply {
+            height = RelativeLayout.LayoutParams.MATCH_PARENT
+            width = RelativeLayout.LayoutParams.MATCH_PARENT
+            addRule(RelativeLayout.ALIGN_PARENT_TOP)
+            bottomMargin = heightResult
+        }
+        initialLoad = false
+        this.type = type
+    }
     //endregion
 
     //region draw
@@ -229,11 +209,14 @@ class UICustomImagenEditorDialogViewer2<TActivity>(activity: TActivity) :
     private fun makeDraw() {
         tContainerOptions.removeAllViews()
         if (this.getContext() == null || this.dialogView == null) return
+        mPhotoEditor.setBrushDrawingMode(true)
+        val shapeBuilder = ShapeBuilder()
         tColorPickerLine = ColorPicker(getContext()!!).apply {
             layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply { height = 65.toPixel() }
             onEventChangeColorPicker = {
                 tBrushDraw.color = it
                 tSampleLine.setBackgroundColor(it)
+                shapeBuilder.withShapeColor(it)
 //                if (tViewDraw != null) tViewDraw?.setBrushToDraw(tBrushDraw)
             }
         }
@@ -258,7 +241,7 @@ class UICustomImagenEditorDialogViewer2<TActivity>(activity: TActivity) :
                     tSampleLine.text =
                         tBrushDraw.strokeWidth.toFormat(DECIMAL_SHOW_SIZE_DRAW).toEditable()
 //                    if (tViewDraw != null) tViewDraw?.setBrushToDraw(tBrushDraw)
-
+                    shapeBuilder.withShapeSize(tBrushDraw.strokeWidth)
                 }
             })
             layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
@@ -266,6 +249,7 @@ class UICustomImagenEditorDialogViewer2<TActivity>(activity: TActivity) :
                 width = ViewGroup.LayoutParams.MATCH_PARENT
             }
         }
+        mPhotoEditor.setShape(shapeBuilder)
         tSampleLine = TextView(getContext()).apply {
             text = null
             setBackgroundColor(Color.WHITE)

@@ -34,7 +34,7 @@
         </activity>
 
         <!--ImagenEditor:-->
-        <activity android:name="com.vsg.helper.ui.popup.viewer.picture.UICustomImagenEditorDialogViewer2" />
+        <activity android:name="com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewerEditor" />
         <!--        <activity-->
         <!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity"-->
         <!--            android:screenOrientation="fullSensor"-->

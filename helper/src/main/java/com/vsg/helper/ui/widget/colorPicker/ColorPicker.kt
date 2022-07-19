@@ -16,22 +16,22 @@ class ColorPicker @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(ctx, attrs, defStyleAttr) {
 
-    val colors: IntArray
-    val strokeColor: Int
+    private val colors: IntArray
+    private val strokeColor: Int
 
-    val strokeSize: Float
-    val radius: Float
-    val pickRadius: Float
-    val previewBaseline: Float
-    val rainbowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    private val strokeSize: Float
+    private val radius: Float
+    private val pickRadius: Float
+    private val previewBaseline: Float
+    private val rainbowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
         strokeCap = Paint.Cap.ROUND
     }
-    val rainbowBackgroundPaint by lazy { bgPaint() }
-    val pickPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    val previewRadius: Float
+    private val rainbowBackgroundPaint by lazy { bgPaint() }
+    private val pickPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val previewRadius: Float
     var pick = 0.5f
-    val rainbowBaseline: Float
+    private val rainbowBaseline: Float
     var showPreview = false
     var listener: OnColorChangedListener? = null
 

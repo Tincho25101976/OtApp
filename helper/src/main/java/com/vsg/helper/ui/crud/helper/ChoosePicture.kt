@@ -27,7 +27,7 @@ import com.vsg.helper.helper.file.HelperFile.Static.getTempFileFromUri
 import com.vsg.helper.helper.file.TypeTempFile
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
 import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewerParameter
-import com.vsg.helper.ui.popup.viewer.picture.UICustomImagenEditorDialogViewer2
+import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewerEditor
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
 import java.io.File
@@ -72,7 +72,7 @@ class ChoosePicture(
         this.tPicture.apply {
             onEventDoubleTap = { _, b ->
                 if (b != null) {
-                    UICustomImagenEditorDialogViewer2(activity).apply {
+                    UICustomDialogViewerEditor(activity).apply {
                         this.onEventGetPicture = { picture ->
                             if (picture != null) setPictureFromBitmap(picture)
                         }
