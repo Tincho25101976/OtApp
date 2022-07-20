@@ -2,13 +2,10 @@ package com.vsg.helper.ui.popup.viewer.picture
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.pm.PackageManager
 import android.graphics.*
 import android.net.Uri
-import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.SeekBar
@@ -20,7 +17,6 @@ import com.vsg.helper.R
 import com.vsg.helper.helper.HelperUI
 import com.vsg.helper.helper.HelperUI.Static.getBitmap
 import com.vsg.helper.helper.HelperUI.Static.getCustomLayoutRelativeLayout
-import com.vsg.helper.helper.HelperUI.Static.toEditable
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toArray
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toRotate
 import com.vsg.helper.helper.file.HelperFile.Static.getTempFileStore
@@ -29,11 +25,10 @@ import com.vsg.helper.helper.file.TypeTempFile
 import com.vsg.helper.helper.font.FontManager.Static.typeFaceCustom
 import com.vsg.helper.helper.screenshot.HelperScreenShot
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.getTempFileStoreViewer
-import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
 import com.vsg.helper.ui.popup.UICustomAlertDialogBase
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.helper.ui.widget.colorPicker.ColorPicker
-import com.vsg.helper.util.helper.HelperNumeric.Companion.toFormat
+import com.vsg.helper.ui.widget.shapeCustom.ShapeCustomSelect
 import ja.burhanrashid52.photoeditor.PhotoEditor
 import ja.burhanrashid52.photoeditor.PhotoEditorView
 import ja.burhanrashid52.photoeditor.SaveSettings
@@ -82,6 +77,7 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
     //endregion
 
     //region draw
+    private lateinit var tShapeCustomSelect: ShapeCustomSelect
     private lateinit var tColorPickerLine: ColorPicker
     private lateinit var tSeekSizeLine: SeekBar
     private lateinit var tSampleLine: TextView
@@ -147,13 +143,13 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
                     }
                 }
 
-            activity.onEventExecuteActivityResult = { request, result, data ->
-                if (data != null || data?.data != null) {
-                    if (request == HelperUI.REQUEST_FOR_SEND_PICTURE && result == Activity.RESULT_OK) {
-                        addPicture(data.data!!)
-                    }
-                }
-            }
+//            activity.onEventExecuteActivityResult = { request, result, data ->
+//                if (data != null || data?.data != null) {
+//                    if (request == HelperUI.REQUEST_FOR_SEND_PICTURE && result == Activity.RESULT_OK) {
+//                        addPicture(data.data!!)
+//                    }
+//                }
+//            }
         }
 
     }
@@ -211,81 +207,89 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         if (this.getContext() == null || this.dialogView == null) return
         mPhotoEditor.setBrushDrawingMode(true)
         val shapeBuilder = ShapeBuilder()
-        tColorPickerLine = ColorPicker(getContext()!!).apply {
-            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply { height = 65.toPixel() }
-            onEventChangeColorPicker = {
-                tBrushDraw.color = it
-                tSampleLine.setBackgroundColor(it)
-                shapeBuilder.withShapeColor(it)
-//                if (tViewDraw != null) tViewDraw?.setBrushToDraw(tBrushDraw)
-            }
-        }
-        tSeekSizeLine = SeekBar(getContext()).apply {
-            max = MAXIMO_SIZE_DRAW * FACTOR_SIZE_DRAW
-            min = MINIMO_SIZE_DRAW * FACTOR_SIZE_DRAW
-            progress = (DEFAULT_SIZE_DRAW * FACTOR_SIZE_DRAW).toInt()
-            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(
-                    seekBar: SeekBar?,
-                    progress: Int,
-                    fromUser: Boolean
-                ) {
-                }
-
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    tBrushDraw.strokeWidth = when (seekBar != null) {
-                        true -> seekBar.progress.toFloat() / FACTOR_SIZE_DRAW
-                        false -> DEFAULT_SIZE_DRAW
-                    }
-                    tSampleLine.text =
-                        tBrushDraw.strokeWidth.toFormat(DECIMAL_SHOW_SIZE_DRAW).toEditable()
-//                    if (tViewDraw != null) tViewDraw?.setBrushToDraw(tBrushDraw)
-                    shapeBuilder.withShapeSize(tBrushDraw.strokeWidth)
-                }
-            })
-            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
-                height = ViewGroup.LayoutParams.MATCH_PARENT
-                width = ViewGroup.LayoutParams.MATCH_PARENT
-            }
+        tShapeCustomSelect = ShapeCustomSelect(activity).apply {
+            id = View.generateViewId()
+            typeface = activity.typeFaceCustom(Typeface.BOLD_ITALIC)
+            this.onEventChangeShape = { s -> shapeBuilder.withShapeType(s) }
+            this.onEventChangeColor = { s -> shapeBuilder.withShapeColor(s) }
+            this.onEventChangeSize = { s -> shapeBuilder.withShapeSize(s) }
         }
         mPhotoEditor.setShape(shapeBuilder)
-        tSampleLine = TextView(getContext()).apply {
-            text = null
-            setBackgroundColor(Color.WHITE)
-            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
-                height = 32.toPixel()
-                width = 32.toPixel()
-            }
-            background = context.getDrawable(R.drawable.border_view)
-            gravity = Gravity.CENTER
-            textSize = 7.toPixel().toFloat()
-            text = tBrushDraw.strokeWidth.toFormat(DECIMAL_SHOW_SIZE_DRAW).toEditable()
-            setBackgroundColor(tColorPickerLine.color)
-            typeface = activity.typeFaceCustom(Typeface.BOLD_ITALIC)
-        }
-        val add = LinearLayout(getContext()).apply {
-            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
-                width = ViewGroup.LayoutParams.MATCH_PARENT
-                height = 36.toPixel()
-                gravity = Gravity.CENTER
-            }
-            orientation = LinearLayout.HORIZONTAL
-            addView(tSampleLine)
-            addView(tSeekSizeLine)
-        }
-        tContainerOptions.apply {
-            addView(tColorPickerLine)
-            addView(add)
-        }
+        tContainerOptions.addView(tShapeCustomSelect)
+
+//        tColorPickerLine = ColorPicker(getContext()!!).apply {
+//            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply { height = 65.toPixel() }
+//            onEventChangeColorPicker = {
+//                tBrushDraw.color = it
+//                tSampleLine.setBackgroundColor(it)
+//                shapeBuilder.withShapeColor(it)
+////                if (tViewDraw != null) tViewDraw?.setBrushToDraw(tBrushDraw)
+//            }
+//        }
+//        tSeekSizeLine = SeekBar(getContext()).apply {
+//            max = MAXIMO_SIZE_DRAW * FACTOR_SIZE_DRAW
+//            min = MINIMO_SIZE_DRAW * FACTOR_SIZE_DRAW
+//            progress = (DEFAULT_SIZE_DRAW * FACTOR_SIZE_DRAW).toInt()
+//            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+//                override fun onProgressChanged(
+//                    seekBar: SeekBar?,
+//                    progress: Int,
+//                    fromUser: Boolean
+//                ) {
+//                }
+//
+//                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+//                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+//                    tBrushDraw.strokeWidth = when (seekBar != null) {
+//                        true -> seekBar.progress.toFloat() / FACTOR_SIZE_DRAW
+//                        false -> DEFAULT_SIZE_DRAW
+//                    }
+//                    tSampleLine.text =
+//                        tBrushDraw.strokeWidth.toFormat(DECIMAL_SHOW_SIZE_DRAW).toEditable()
+////                    if (tViewDraw != null) tViewDraw?.setBrushToDraw(tBrushDraw)
+//                    shapeBuilder.withShapeSize(tBrushDraw.strokeWidth)
+//                }
+//            })
+//            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
+//                height = ViewGroup.LayoutParams.MATCH_PARENT
+//                width = ViewGroup.LayoutParams.MATCH_PARENT
+//            }
+//        }
+//        mPhotoEditor.setShape(shapeBuilder)
+//        tSampleLine = TextView(getContext()).apply {
+//            text = null
+//            setBackgroundColor(Color.WHITE)
+//            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
+//                height = 32.toPixel()
+//                width = 32.toPixel()
+//            }
+//            background = context.getDrawable(R.drawable.border_view)
+//            gravity = Gravity.CENTER
+//            textSize = 7.toPixel().toFloat()
+//            text = tBrushDraw.strokeWidth.toFormat(DECIMAL_SHOW_SIZE_DRAW).toEditable()
+//            setBackgroundColor(tColorPickerLine.color)
+//            typeface = activity.typeFaceCustom(Typeface.BOLD_ITALIC)
+//        }
+//        val add = LinearLayout(getContext()).apply {
+//            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
+//                width = ViewGroup.LayoutParams.MATCH_PARENT
+//                height = 36.toPixel()
+//                gravity = Gravity.CENTER
+//            }
+//            orientation = LinearLayout.HORIZONTAL
+//            addView(tSampleLine)
+//            addView(tSeekSizeLine)
+//        }
+//        tContainerOptions.apply {
+//            addView(tColorPickerLine)
+//            addView(add)
+//        }
     }
     //endregion
 
     //region rotate
     private fun rotate() {
         if (!this::tEditPhotoView.isLateinit) return
-//        if (positionRotate >= 360F) positionRotate = 0F
-//        positionRotate += 90F
         val bitmap = this.tEditPhotoView.source.getBitmap() ?: return
         this.tEditPhotoView.source.setImageBitmap(bitmap.toRotate(90F))
     }
@@ -383,6 +387,6 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         const val DECIMAL_SHOW_SIZE_DRAW: Int = 1
 
         const val MARGIN_BOTTOM_NORMAL = 100
-        const val MARGIN_BOTTOM_DRAW = 375
+        const val MARGIN_BOTTOM_DRAW = 550// 375
     }
 }
