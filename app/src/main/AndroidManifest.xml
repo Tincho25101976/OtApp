@@ -34,7 +34,7 @@
         </activity>
 
         <!--ImagenEditor:-->
-        <activity android:name="com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewerEditor" />
+<!--        <activity android:name="com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewerEditor" />-->
         <!--        <activity-->
         <!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity"-->
         <!--            android:screenOrientation="fullSensor"-->
@@ -60,6 +60,8 @@
         <!--            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorDrawActivity"-->
         <!--            android:screenOrientation="fullSensor"-->
         <!--            android:theme="@android:style/Theme.Holo.NoActionBar" />-->
+
+        <!--crop:-->
 
         <!--SecurityDialog-->
         <activity android:name=".ui.activities.securityDialog.main.MainSecurityDialog" />

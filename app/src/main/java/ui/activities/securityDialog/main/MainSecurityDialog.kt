@@ -18,7 +18,7 @@ class MainSecurityDialog : BaseActivity(R.layout.main_security_dialog) {
                 add(
                     R.drawable.pic_security_dialog,
                     getString(R.string.ActivityMainCommandSecurityDialog),
-                    dataClass = MainXactRecord::class.java
+//                    dataClass = MainXactRecord::class.java
                 )
             }.makeLayout()
             view

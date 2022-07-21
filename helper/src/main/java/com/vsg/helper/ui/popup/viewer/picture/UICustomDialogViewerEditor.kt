@@ -26,6 +26,7 @@ import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.getTempFileStore
 import com.vsg.helper.ui.popup.UICustomAlertDialogBase
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.helper.ui.widget.colorPicker.ColorPicker
+import com.vsg.helper.ui.widget.cropImage.CropImageView
 import com.vsg.helper.ui.widget.shapeCustom.ShapeCustomSelect
 import ja.burhanrashid52.photoeditor.OnSaveBitmap
 import ja.burhanrashid52.photoeditor.PhotoEditor
@@ -66,6 +67,8 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
     //region views:
     private lateinit var tEditPhotoView: PhotoEditorView
     private lateinit var mPhotoEditor: PhotoEditor
+    private lateinit var mPhotoCrop: CropImageView
+
     private lateinit var tRotate: RelativeLayout
     private lateinit var tExport: RelativeLayout
     private lateinit var tDraw: RelativeLayout
@@ -78,9 +81,6 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
 
     //region draw
     private lateinit var tShapeCustomSelect: ShapeCustomSelect
-    private lateinit var tColorPickerLine: ColorPicker
-    private lateinit var tSeekSizeLine: SeekBar
-    private lateinit var tSampleLine: TextView
     private var tBrushDraw: Paint = Paint().apply {
         color = Color.GREEN
         isAntiAlias = true
@@ -120,6 +120,7 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
                     }
                 }
             tCrop =
+                mPhotoCrop = 
                 dialogView.findViewById<RelativeLayout>(R.id.CustomViewerCommandCropEdit).apply {
                     setOnClickListener {
 //                    setOperation(TypeOperation.CROP)

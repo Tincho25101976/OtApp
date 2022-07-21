@@ -75,14 +75,8 @@ dependencies {
     implementation 'androidx.paging:paging-rxjava2-ktx:3.1.1'
 
     //UtilitiesBitmap
-//    implementation 'com.bogdwellers:pinchtozoom:0.1'
-//    implementation(name:'ds-photo-editor-sdk-v10', ext:'aar')
-//    implementation 'com.github.bumptech.glide:glide:4.13.2'
-//    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
-//    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-//    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
-
     implementation 'com.burhanrashid52:photoeditor:2.0.0'
+    implementation 'com.github.akshaaatt:Cropper:1.00'
 
     //Export:
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'

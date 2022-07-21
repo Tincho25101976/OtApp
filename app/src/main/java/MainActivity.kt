@@ -22,13 +22,13 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                 add(
                     R.drawable.pic_product,
                     getString(R.string.ActivityMainCommandMaster),
-                    dataClass = MainMaster::class.java
+//                    dataClass = MainMaster::class.java
                 )
-                add(
-                    R.drawable.pic_setting,
-                    getString(R.string.ActivityMainCommandSetting),
-                    dataClass = MainSetting::class.java
-                )
+//                add(
+//                    R.drawable.pic_setting,
+//                    getString(R.string.ActivityMainCommandSetting),
+//                    dataClass = MainSetting::class.java
+//                )
 //                add(
 //                    R.drawable.pic_operation,
 //                    getString(R.string.ActivityMainCommandOperation),

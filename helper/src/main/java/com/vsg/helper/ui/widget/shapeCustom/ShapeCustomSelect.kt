@@ -201,8 +201,8 @@ class ShapeCustomSelect @JvmOverloads constructor(
         const val DEFAULT_SIZE_DRAW: Float = 1F
         const val DECIMAL_SHOW_SIZE_DRAW: Int = 1
 
-        const val DEFAULT_SIZE_COLOR_PICKER: Int = 65
-        const val DEFAULT_SIZE_LINE: Int = 36
+        const val DEFAULT_SIZE_COLOR_PICKER: Int = 60
+        const val DEFAULT_SIZE_LINE: Int = 24
         const val DEFAULT_SIZE_SHAPE: Int = 24
 
         const val MARGIN_BOTTOM_NORMAL = 100
