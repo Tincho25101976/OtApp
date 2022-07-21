@@ -25,6 +25,7 @@ class ShapeCustomSelect @JvmOverloads constructor(
     defStyleAttr: Int = 0,
     defStyleRest: Int = 0
 ) : RelativeLayout(ctx, attrs, defStyleAttr, defStyleRest) {
+
     //region events
     var onEventChangeColor: ((Int) -> Unit)? = null
     var onEventChangeSize: ((Float) -> Unit)? = null
@@ -182,11 +183,10 @@ class ShapeCustomSelect @JvmOverloads constructor(
     private fun getRadioButton(type: ShapeType, checked: Boolean = false): RadioButton? {
         if (dbShapeId.any { it.first == type }) return null
         val result = RadioButton(ctx).apply {
-            layoutParams =
-                HelperUI.makeCustomLayoutRelativeLayout(customWidth = ViewGroup.LayoutParams.WRAP_CONTENT)
             id = View.generateViewId()
             isChecked = checked
             text = getShapeName(type)
+            setTextColor(Color.BLACK)
         }
         dbShapeId.add(type to result.id)
         return result

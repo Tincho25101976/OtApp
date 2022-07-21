@@ -14,8 +14,6 @@ import androidx.core.app.ActivityCompat
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.vsg.helper.R
-import com.vsg.helper.helper.HelperUI
-import com.vsg.helper.helper.HelperUI.Static.getBitmap
 import com.vsg.helper.helper.HelperUI.Static.getCustomLayoutRelativeLayout
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toArray
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toRotate
@@ -29,6 +27,7 @@ import com.vsg.helper.ui.popup.UICustomAlertDialogBase
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.helper.ui.widget.colorPicker.ColorPicker
 import com.vsg.helper.ui.widget.shapeCustom.ShapeCustomSelect
+import ja.burhanrashid52.photoeditor.OnSaveBitmap
 import ja.burhanrashid52.photoeditor.PhotoEditor
 import ja.burhanrashid52.photoeditor.PhotoEditorView
 import ja.burhanrashid52.photoeditor.SaveSettings
@@ -55,6 +54,7 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
 
     //region event
     var onEventGetPicture: ((Bitmap?) -> Unit)? = null
+    var onEventGetPictureMemory: ((Bitmap?) -> Unit)? = null
     //endregion
 
     //region properties
@@ -87,6 +87,12 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         style = Paint.Style.STROKE
         strokeWidth = 12f
     }
+    private val saveSettings: SaveSettings = SaveSettings.Builder()
+        .setClearViewsEnabled(true)
+        .setTransparencyEnabled(true)
+        .setCompressFormat(Bitmap.CompressFormat.PNG)
+        .setCompressQuality(90)
+        .build()
     //endregion
 
     //endregion
@@ -157,7 +163,7 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
     //region operation
     @SuppressLint("ClickableViewAccessibility")
     private fun setOperation(type: TypeOperation) {
-        if (!initialLoad) if (this.type == type) return
+//        if (!initialLoad) return //if (this.type == type) return
 //        tContainer.removeAllViews()
         var heightResult = MARGIN_BOTTOM_NORMAL
 //        this.typeLast = this.type
@@ -195,7 +201,7 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
             addRule(RelativeLayout.ALIGN_PARENT_TOP)
             bottomMargin = heightResult
         }
-        initialLoad = false
+//        initialLoad = true
         this.type = type
     }
     //endregion
@@ -216,82 +222,21 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         }
         mPhotoEditor.setShape(shapeBuilder)
         tContainerOptions.addView(tShapeCustomSelect)
-
-//        tColorPickerLine = ColorPicker(getContext()!!).apply {
-//            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply { height = 65.toPixel() }
-//            onEventChangeColorPicker = {
-//                tBrushDraw.color = it
-//                tSampleLine.setBackgroundColor(it)
-//                shapeBuilder.withShapeColor(it)
-////                if (tViewDraw != null) tViewDraw?.setBrushToDraw(tBrushDraw)
-//            }
-//        }
-//        tSeekSizeLine = SeekBar(getContext()).apply {
-//            max = MAXIMO_SIZE_DRAW * FACTOR_SIZE_DRAW
-//            min = MINIMO_SIZE_DRAW * FACTOR_SIZE_DRAW
-//            progress = (DEFAULT_SIZE_DRAW * FACTOR_SIZE_DRAW).toInt()
-//            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-//                override fun onProgressChanged(
-//                    seekBar: SeekBar?,
-//                    progress: Int,
-//                    fromUser: Boolean
-//                ) {
-//                }
-//
-//                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-//                override fun onStopTrackingTouch(seekBar: SeekBar?) {
-//                    tBrushDraw.strokeWidth = when (seekBar != null) {
-//                        true -> seekBar.progress.toFloat() / FACTOR_SIZE_DRAW
-//                        false -> DEFAULT_SIZE_DRAW
-//                    }
-//                    tSampleLine.text =
-//                        tBrushDraw.strokeWidth.toFormat(DECIMAL_SHOW_SIZE_DRAW).toEditable()
-////                    if (tViewDraw != null) tViewDraw?.setBrushToDraw(tBrushDraw)
-//                    shapeBuilder.withShapeSize(tBrushDraw.strokeWidth)
-//                }
-//            })
-//            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
-//                height = ViewGroup.LayoutParams.MATCH_PARENT
-//                width = ViewGroup.LayoutParams.MATCH_PARENT
-//            }
-//        }
-//        mPhotoEditor.setShape(shapeBuilder)
-//        tSampleLine = TextView(getContext()).apply {
-//            text = null
-//            setBackgroundColor(Color.WHITE)
-//            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
-//                height = 32.toPixel()
-//                width = 32.toPixel()
-//            }
-//            background = context.getDrawable(R.drawable.border_view)
-//            gravity = Gravity.CENTER
-//            textSize = 7.toPixel().toFloat()
-//            text = tBrushDraw.strokeWidth.toFormat(DECIMAL_SHOW_SIZE_DRAW).toEditable()
-//            setBackgroundColor(tColorPickerLine.color)
-//            typeface = activity.typeFaceCustom(Typeface.BOLD_ITALIC)
-//        }
-//        val add = LinearLayout(getContext()).apply {
-//            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
-//                width = ViewGroup.LayoutParams.MATCH_PARENT
-//                height = 36.toPixel()
-//                gravity = Gravity.CENTER
-//            }
-//            orientation = LinearLayout.HORIZONTAL
-//            addView(tSampleLine)
-//            addView(tSeekSizeLine)
-//        }
-//        tContainerOptions.apply {
-//            addView(tColorPickerLine)
-//            addView(add)
-//        }
     }
     //endregion
 
     //region rotate
     private fun rotate() {
         if (!this::tEditPhotoView.isLateinit) return
-        val bitmap = this.tEditPhotoView.source.getBitmap() ?: return
-        this.tEditPhotoView.source.setImageBitmap(bitmap.toRotate(90F))
+//        val bitmap = this.tEditPhotoView.source.getBitmap() ?: return
+        this.onEventGetPictureMemory = { picture ->
+            if (picture != null) {
+                this.tEditPhotoView.source.setImageBitmap(picture.toRotate(90F))
+            }
+        }
+        saveBitmapMemory()
+//        val bitmap = getBitmapMemory() ?: return
+//        this.tEditPhotoView.source.setImageBitmap(bitmap.toRotate(90F))
     }
 
     //endregion
@@ -322,12 +267,6 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         if (!this::tEditPhotoView.isLateinit) return null
         var bitmap: Bitmap? = null
 
-        val saveSettings: SaveSettings = SaveSettings.Builder()
-            .setClearViewsEnabled(true)
-            .setTransparencyEnabled(true)
-            .setCompressFormat(Bitmap.CompressFormat.PNG)
-            .setCompressQuality(90)
-            .build()
         val file: File =
             activity.getTempFileStore(
                 HelperScreenShot.SUB_PATH_TEMP_FILE_EDIT_PICTURE,
@@ -345,7 +284,6 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
                 bitmap = BitmapFactory.decodeFile(imagePath)
                 onEventGetPicture?.invoke(bitmap)
             }
-
         }
 
         if (ActivityCompat.checkSelfPermission(
@@ -363,19 +301,35 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         return bitmap
     }
 
+    private fun saveBitmapMemory() {
+        if (!this::tEditPhotoView.isLateinit) return
+        val parameter = object : OnSaveBitmap {
+            override fun onBitmapReady(saveBitmap: Bitmap?) {
+                onEventGetPictureMemory?.invoke(saveBitmap)
+            }
+
+            override fun onFailure(e: Exception?) {
+            }
+        }
+        mPhotoEditor.saveAsBitmap(
+            saveSettings,
+            parameter
+        )
+    }
+
     private fun getArray(): ByteArray? {
         if (getBitmap() == null) return null
         return getBitmap().toArray()
     }
 
-    //region layout
-    private fun View.setParameterLayout(): RelativeLayout.LayoutParams =
-        HelperUI.makeCustomLayoutRelativeLayout().apply {
-            height = RelativeLayout.LayoutParams.WRAP_CONTENT
-            width = RelativeLayout.LayoutParams.WRAP_CONTENT
-            addRule(RelativeLayout.CENTER_IN_PARENT)
-        }
-    //endregion
+//    //region layout
+//    private fun View.setParameterLayout(): RelativeLayout.LayoutParams =
+//        HelperUI.makeCustomLayoutRelativeLayout().apply {
+//            height = RelativeLayout.LayoutParams.WRAP_CONTENT
+//            width = RelativeLayout.LayoutParams.WRAP_CONTENT
+//            addRule(RelativeLayout.CENTER_IN_PARENT)
+//        }
+//    //endregion
 
     //endregion
 
