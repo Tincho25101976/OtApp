@@ -10,7 +10,10 @@ import android.view.Gravity.CENTER
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.setMargins
 import com.vsg.helper.R
+import com.vsg.helper.helper.Helper.Companion.or
+import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.helper.HelperUI
 import com.vsg.helper.helper.HelperUI.Static.toEditable
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
@@ -33,20 +36,15 @@ class ShapeCustomSelect @JvmOverloads constructor(
     //endregion
 
     //region properties
-    private var tColorPickerLine: ColorPicker
-    private var tSeekSizeLine: SeekBar
+    private lateinit var tColorPickerLine: ColorPicker
+    private lateinit var tSeekSizeLine: SeekBar
     private lateinit var tSampleLine: TextView
     private var tRadioOption: RadioGroup
     private var tRadioBrush: RadioButton?
     private var tRadioOval: RadioButton?
     private var tRadioLine: RadioButton?
     private var tRadioRectangle: RadioButton?
-    private var tBrushDraw: Paint = Paint().apply {
-        color = Color.GREEN
-        isAntiAlias = true
-        style = Paint.Style.STROKE
-        strokeWidth = 12f
-    }
+
 
     private val dbShapeId: MutableList<Pair<ShapeType, Int>> = mutableListOf()
 
@@ -71,7 +69,7 @@ class ShapeCustomSelect @JvmOverloads constructor(
                 gravity = CENTER
                 orientation = RadioGroup.HORIZONTAL
                 width = ViewGroup.LayoutParams.MATCH_PARENT
-                height = DEFAULT_SIZE_SHAPE.toPixel()
+                height = ViewGroup.LayoutParams.WRAP_CONTENT
             }
             setOnCheckedChangeListener { _, id ->
                 if (dbShapeId.any { it.second == id }) onEventChangeShape?.invoke(dbShapeId.first { it.second == id }.first)
@@ -89,7 +87,6 @@ class ShapeCustomSelect @JvmOverloads constructor(
                 addRule(BELOW, tRadioOption.id)
             }
             onEventChangeColorPicker = {
-                tBrushDraw.color = it
                 tSampleLine.setBackgroundColor(it)
                 onEventChangeColor?.invoke(it)
             }
@@ -99,8 +96,6 @@ class ShapeCustomSelect @JvmOverloads constructor(
             id = View.generateViewId()
             max = MAXIMUM_SIZE_DRAW
             min = MINIMUM_SIZE_DRAW
-
-            progress = (DEFAULT_SIZE_DRAW).toInt()
             setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(
                     seekBar: SeekBar?,
@@ -111,48 +106,32 @@ class ShapeCustomSelect @JvmOverloads constructor(
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    if (seekBar == null) {
-                        tBrushDraw.strokeWidth = DEFAULT_SIZE_DRAW
-                        return
-                    }
-                    val progress = seekBar.progress / FACTOR_SIZE_DRAW
-//                    onEventChangeSize?.invoke(seekBar.progress.toFloat())
+                    if (seekBar == null) return
+                    val progress = lineSizeCalc(seekBar.progress)
                     onEventChangeSize?.invoke(progress)
-                    tBrushDraw.strokeWidth = progress
-//                    tBrushDraw.strokeWidth = when (seekBar != null) {
-////                        true -> seekBar.progress.toFloat() / FACTOR_SIZE_DRAW
-//                        true -> progress
-//                        false -> DEFAULT_SIZE_DRAW
-//                    }
-//                    tSampleLine.text =
-//                        tBrushDraw.strokeWidth.toFormat(DECIMAL_SHOW_SIZE_DRAW)
-//                            .toEditable()
-                    tSampleLine.text = progress.toFormat(DECIMAL_SHOW_SIZE_DRAW).toEditable()
-
+                    setTextLineSize()
                 }
             })
             layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
                 height = ViewGroup.LayoutParams.MATCH_PARENT
                 width = ViewGroup.LayoutParams.MATCH_PARENT
             }
+            progress = arrayOf(max, min).average().toInt()
         }
         tSampleLine = TextView(ctx).apply {
             id = View.generateViewId()
             text = null
             setBackgroundColor(Color.WHITE)
             layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
-                height = 32.toPixel()
-                width = 32.toPixel()
+                height = DEFAULT_SIZE_SAMPLE.toPixel()
+                width = DEFAULT_SIZE_SAMPLE.toPixel()
             }
             background = ctx.getDrawable(R.drawable.border_view)
             gravity = CENTER
-            textSize = 7.toPixel().toFloat()
-            text =
-                tBrushDraw.strokeWidth.toFormat(DECIMAL_SHOW_SIZE_DRAW)
-                    .toEditable()
+            textSize = DEFAULT_SIZE_TEXT.toPixel().toFloat()
             setBackgroundColor(tColorPickerLine.color)
-
         }
+
         val viewSizeLine = LinearLayout(ctx).apply {
             layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
                 width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -164,12 +143,38 @@ class ShapeCustomSelect @JvmOverloads constructor(
             addView(tSampleLine)
             addView(tSeekSizeLine)
         }
+
+        setTextLineSize()
         this.apply {
             addView(tRadioOption)
             addView(tColorPickerLine)
             addView(viewSizeLine)
+            setTextLineSize()
         }
         //endregion
+    }
+
+    val lineSizeCalc = { value: Int -> value / FACTOR_SIZE_DRAW }
+    private fun setTextLineSize() {
+        if (!this::tSeekSizeLine.isLateinit || !this::tSampleLine.isLateinit) return
+        tSampleLine.text = getSizeLineResult().toFormat(DECIMAL_SHOW_SIZE_DRAW).toEditable()
+    }
+
+    private fun getSizeLineResult(): Float {
+        if (this::tSeekSizeLine.isLateinit) return DEFAULT_SIZE_DRAW
+        return lineSizeCalc(tSeekSizeLine.progress)
+    }
+
+    private fun getColorResult(): Int =
+        (this::tColorPickerLine.isLateinit) then Color.GREEN or tColorPickerLine.color
+
+    private fun getPaintResult(): Paint {
+        return Paint().apply {
+            color = getColorResult()
+            isAntiAlias = true
+            style = Paint.Style.STROKE
+            strokeWidth = getSizeLineResult()
+        }
     }
 
     private fun getShapeName(type: ShapeType): String =
@@ -187,6 +192,14 @@ class ShapeCustomSelect @JvmOverloads constructor(
             isChecked = checked
             text = getShapeName(type)
             setTextColor(Color.BLACK)
+
+            layoutParams =
+                HelperUI.makeCustomLayoutRelativeLayout()
+                    .apply {
+                        width = ViewGroup.LayoutParams.WRAP_CONTENT
+                        height = ViewGroup.LayoutParams.WRAP_CONTENT
+                        setMargins(5)
+                    }
         }
         dbShapeId.add(type to result.id)
         return result
@@ -198,14 +211,13 @@ class ShapeCustomSelect @JvmOverloads constructor(
         const val MINIMUM_SIZE_DRAW: Int = 50
         const val MAXIMUM_SIZE_DRAW: Int = 300
         const val FACTOR_SIZE_DRAW: Float = 10F
-        const val DEFAULT_SIZE_DRAW: Float = 1F
+        const val DEFAULT_SIZE_DRAW: Float = 12F
         const val DECIMAL_SHOW_SIZE_DRAW: Int = 1
 
         const val DEFAULT_SIZE_COLOR_PICKER: Int = 60
         const val DEFAULT_SIZE_LINE: Int = 24
         const val DEFAULT_SIZE_SHAPE: Int = 24
-
-        const val MARGIN_BOTTOM_NORMAL = 100
-        const val MARGIN_BOTTOM_DRAW = 375
+        const val DEFAULT_SIZE_SAMPLE: Int = 32
+        const val DEFAULT_SIZE_TEXT: Int = 7
     }
 }

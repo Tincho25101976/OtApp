@@ -121,7 +121,7 @@ class ColorPicker @JvmOverloads constructor(
     }
 
     val color: Int
-        get() = interpColor(pick, colors)
+        get() = interColor(pick, colors)
 
     fun setOnColorChangedListener(listener: OnColorChangedListener) {
         this.listener = listener

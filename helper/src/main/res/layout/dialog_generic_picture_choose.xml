@@ -36,20 +36,20 @@
                 android:layout_alignTop="@id/DialogGenericPicture"
                 android:layout_toEndOf="@id/DialogGenericPicture"
                 android:src="@drawable/pic_choose_rotate"/>
+
             <ImageView
                 android:id="@+id/DialogGenericPictureChooseDelete"
                 android:layout_width="@dimen/DialogCrudPictureChooseSize"
                 android:layout_height="@dimen/DialogCrudPictureChooseSize"
                 android:layout_alignBottom="@id/DialogGenericPicture"
                 android:layout_toStartOf="@id/DialogGenericPicture"
-                android:src="@drawable/pic_choose_delete"/>
+                android:src="@drawable/pic_choose_delete" />
 
             <com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
                 android:id="@+id/DialogGenericPicture"
                 android:layout_width="@dimen/DialogGenericChoosePictureSize"
                 android:layout_height="@dimen/DialogGenericChoosePictureSize"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
                 android:layout_marginStart="@dimen/DialogCrudPictureMargin"
                 android:layout_marginTop="@dimen/DialogCrudPictureMargin"
                 android:layout_marginEnd="@dimen/DialogCrudPictureMargin"

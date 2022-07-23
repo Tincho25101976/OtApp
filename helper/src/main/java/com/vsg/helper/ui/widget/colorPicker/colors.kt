@@ -5,7 +5,7 @@ import androidx.annotation.FloatRange
 import androidx.annotation.NonNull
 import kotlin.math.roundToLong
 
-fun interpColor(@FloatRange(from = 0.0, to = 1.0) unit: Float, @NonNull colors: IntArray): Int {
+fun interColor(@FloatRange(from = 0.0, to = 1.0) unit: Float, @NonNull colors: IntArray): Int {
     if (unit <= 0) return colors[0]
     if (unit >= 1) return colors[colors.size - 1]
 

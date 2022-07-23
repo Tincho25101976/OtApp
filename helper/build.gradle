@@ -37,9 +37,9 @@ android {
 
 dependencies {
 
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.0'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.0'
-    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.10'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.10'
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
@@ -61,8 +61,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0'
 
     // Coroutines:
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
     //PhoneUtils
     implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.51'
@@ -76,7 +76,7 @@ dependencies {
 
     //UtilitiesBitmap
     implementation 'com.burhanrashid52:photoeditor:2.0.0'
-    implementation 'com.github.akshaaatt:Cropper:1.00'
+//    implementation 'com.isseiaoki:simplecropview:1.1.8'
 
     //Export:
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'

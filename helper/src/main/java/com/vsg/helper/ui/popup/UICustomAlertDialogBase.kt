@@ -78,6 +78,8 @@ abstract class UICustomAlertDialogBase<TActivity, TParameter>(
     }
 
 
+
+
     companion object Static {
         const val DEFAULT_MARGIN: Int = 10
     }

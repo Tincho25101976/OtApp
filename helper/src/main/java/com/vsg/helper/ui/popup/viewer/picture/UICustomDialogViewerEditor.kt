@@ -8,16 +8,16 @@ import android.net.Uri
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import android.widget.SeekBar
-import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.vsg.helper.R
+import com.vsg.helper.helper.HelperUI
 import com.vsg.helper.helper.HelperUI.Static.getCustomLayoutRelativeLayout
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toArray
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toRotate
 import com.vsg.helper.helper.file.HelperFile.Static.getTempFileStore
+import com.vsg.helper.helper.file.HelperFile.Static.getURI
 import com.vsg.helper.helper.file.HelperFile.Static.sendFile
 import com.vsg.helper.helper.file.TypeTempFile
 import com.vsg.helper.helper.font.FontManager.Static.typeFaceCustom
@@ -25,7 +25,6 @@ import com.vsg.helper.helper.screenshot.HelperScreenShot
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.getTempFileStoreViewer
 import com.vsg.helper.ui.popup.UICustomAlertDialogBase
 import com.vsg.helper.ui.util.BaseActivity
-import com.vsg.helper.ui.widget.colorPicker.ColorPicker
 import com.vsg.helper.ui.widget.cropImage.CropImageView
 import com.vsg.helper.ui.widget.shapeCustom.ShapeCustomSelect
 import ja.burhanrashid52.photoeditor.OnSaveBitmap
@@ -56,6 +55,7 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
     //region event
     var onEventGetPicture: ((Bitmap?) -> Unit)? = null
     var onEventGetPictureMemory: ((Bitmap?) -> Unit)? = null
+    var onEventGetPictureUri: ((Uri?) -> Unit)? = null
     //endregion
 
     //region properties
@@ -101,6 +101,17 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
     init {
         onSetDialogView = { dialogView, value, _ ->
             tEditPhotoView = dialogView.findViewById(R.id.mainImageViewEdit)
+            mPhotoCrop = CropImageView(this.activity).apply {
+                id = View.generateViewId()
+                setCropMode(CropImageView.CropMode.FIT_IMAGE)
+                setHandleShowMode(CropImageView.ShowMode.SHOW_ALWAYS)
+                setGuideShowMode(CropImageView.ShowMode.SHOW_ALWAYS)
+                setFrameStrokeWeightInDp(1)
+                setGuideStrokeWeightInDp(1)
+                layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
+                    setPadding(16, 16, 16, 16)
+                }
+            }
             this.bitmap = value.bitmap
             makeEdit(bitmap)
 
@@ -120,10 +131,9 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
                     }
                 }
             tCrop =
-                mPhotoCrop = 
                 dialogView.findViewById<RelativeLayout>(R.id.CustomViewerCommandCropEdit).apply {
                     setOnClickListener {
-//                    setOperation(TypeOperation.CROP)
+                        setOperation(TypeOperation.CROP)
                     }
                 }
 
@@ -164,10 +174,8 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
     //region operation
     @SuppressLint("ClickableViewAccessibility")
     private fun setOperation(type: TypeOperation) {
-//        if (!initialLoad) return //if (this.type == type) return
-//        tContainer.removeAllViews()
+        tContainer.removeAllViews()
         var heightResult = MARGIN_BOTTOM_NORMAL
-//        this.typeLast = this.type
         mPhotoEditor.setBrushDrawingMode(false)
         when (type) {
             TypeOperation.ROTATE -> rotate()
@@ -176,22 +184,11 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
                 heightResult = MARGIN_BOTTOM_DRAW
             }
             TypeOperation.ZOOM -> {
-//                if (tViewZoom == null) {
-//                    tViewZoom = ImageView(getContext()!!).apply {
-//                        layoutParams = setParameterLayout()
-//                    }
-////                    tViewZoom?.setOnTouchListener(ImageMatrixTouchHandler(activity))
-//                }
-//                tViewZoom?.imageMatrix = Matrix()
-//                tViewZoom?.scaleType = ImageView.ScaleType.CENTER_CROP
-//                tViewZoom?.setImageBitmap(this.getBitmap())
-//                tContainer.addView(tViewZoom)
+
             }
             TypeOperation.CROP -> {
-//                tViewCrop =
-//                    CropImageView(getContext()).apply { layoutParams = setParameterLayout() }
-//                tViewCrop?.imageBitmap = this.getBitmap()
-//                tContainer.addView(tViewCrop)
+                makeCrop()
+                heightResult = MARGIN_BOTTOM_NORMAL
             }
             else -> Unit
         }
@@ -216,28 +213,38 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         val shapeBuilder = ShapeBuilder()
         tShapeCustomSelect = ShapeCustomSelect(activity).apply {
             id = View.generateViewId()
-            typeface = activity.typeFaceCustom(Typeface.BOLD_ITALIC)
+            typeface = activity.typeFaceCustom(Typeface.BOLD)
             this.onEventChangeShape = { s -> shapeBuilder.withShapeType(s) }
             this.onEventChangeColor = { s -> shapeBuilder.withShapeColor(s) }
             this.onEventChangeSize = { s -> shapeBuilder.withShapeSize(s) }
         }
         mPhotoEditor.setShape(shapeBuilder)
+        tContainer.addView(tEditPhotoView)
         tContainerOptions.addView(tShapeCustomSelect)
+    }
+    //endregion
+
+    //region crop
+    private fun makeCrop() {
+        tContainerOptions.removeAllViews()
+        if (this.getContext() == null || this.dialogView == null) return
+        this.onEventGetPicture = {
+            if (it != null) mPhotoCrop.imageBitmap = it
+        }
+        getBitmap()
+        tContainer.addView(mPhotoCrop)
     }
     //endregion
 
     //region rotate
     private fun rotate() {
         if (!this::tEditPhotoView.isLateinit) return
-//        val bitmap = this.tEditPhotoView.source.getBitmap() ?: return
         this.onEventGetPictureMemory = { picture ->
             if (picture != null) {
                 this.tEditPhotoView.source.setImageBitmap(picture.toRotate(90F))
             }
         }
         saveBitmapMemory()
-//        val bitmap = getBitmapMemory() ?: return
-//        this.tEditPhotoView.source.setImageBitmap(bitmap.toRotate(90F))
     }
 
     //endregion
@@ -282,6 +289,13 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
             }
 
             override fun onSuccess(imagePath: String) {
+                if (imagePath.isNotEmpty()) onEventGetPictureUri?.invoke(
+                    activity.getURI(
+                        File(
+                            imagePath
+                        )
+                    )
+                )
                 bitmap = BitmapFactory.decodeFile(imagePath)
                 onEventGetPicture?.invoke(bitmap)
             }
@@ -342,6 +356,6 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         const val DECIMAL_SHOW_SIZE_DRAW: Int = 1
 
         const val MARGIN_BOTTOM_NORMAL = 100
-        const val MARGIN_BOTTOM_DRAW = 550// 375
+        const val MARGIN_BOTTOM_DRAW = 500// 375
     }
 }

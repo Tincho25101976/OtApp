@@ -17,8 +17,6 @@ import com.vsg.helper.helper.HelperUI.Static.makeCustomLayoutLinealLayout
 import com.vsg.helper.helper.HelperUI.Static.makeCustomLayoutRelativeLayout
 import com.vsg.helper.helper.HelperUI.Static.setPictureFromFile
 import com.vsg.helper.helper.array.HelperArray.Companion.toBitmap
-import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.makeMapRotate
-import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.nextRotation
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toArray
 import com.vsg.helper.helper.bitmap.HelperBitmap.Companion.toRotate
 import com.vsg.helper.helper.file.HelperFile
@@ -26,30 +24,31 @@ import com.vsg.helper.helper.file.HelperFile.Static.chooserFile
 import com.vsg.helper.helper.file.HelperFile.Static.getTempFileFromUri
 import com.vsg.helper.helper.file.TypeTempFile
 import com.vsg.helper.helper.screenshot.HelperScreenShot.Static.toPixel
-import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewerParameter
 import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewerEditor
+import com.vsg.helper.ui.popup.viewer.picture.UICustomDialogViewerParameter
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.helper.ui.widget.imageView.CustomImageViewDobleTap
 import java.io.File
 
 
 class ChoosePicture(
-    private val view: View,
+    view: View,
     val activity: BaseActivity,
     val format: TypeFormatChoosePicture = TypeFormatChoosePicture.DEFAULT
 ) {
 
-    private var tContainer: RelativeLayout
+    private lateinit var tContainer: RelativeLayout
     lateinit var tPicture: CustomImageViewDobleTap
     private lateinit var tChoosePhoto: ImageView
     private lateinit var tChooseImage: ImageView
     private lateinit var tChooseRotate: ImageView
     private lateinit var tChooseDelete: ImageView
-    private var mapRotate: MutableList<Pair<Int, Float>> = mutableListOf()
-    private var angle: Int = 1
+
+    //    private var mapRotate: MutableList<Pair<Int, Float>> = mutableListOf()
+//    private var angle: Int = 1
     private var fileToPhoto: File? = null
     private var currentUri: Uri? = null
-    var outDirectory: String = ""
+//    var outDirectory: String = ""
 
 
 //    private lateinit var mPhotoEditor: PhotoEditor
@@ -63,7 +62,7 @@ class ChoosePicture(
 
 
     init {
-        mapRotate = activity.makeMapRotate()
+//        mapRotate = activity.makeMapRotate()
         tContainer = view.findViewById(R.id.DialogGenericPictureChooseContainer)
 
         // set format of view:
@@ -238,7 +237,7 @@ class ChoosePicture(
                     }
                 }
             }
-            this.setBackgroundColor(Color.RED)
+//            this.setBackgroundColor(Color.RED)
         }
     }
     //endregion
@@ -261,14 +260,15 @@ class ChoosePicture(
 
     private fun rotate() {
         val data: Bitmap? = tPicture.getBitmap()
-        tPicture.setImageBitmap(null)
-        val rotation = angle.nextRotation(mapRotate)
-        this.angle = rotation.first
-        tPicture.setImageBitmap(data.toRotate(rotation.second))
+//        tPicture.setImageBitmap(null)
+//        val rotation = angle.nextRotation(mapRotate)
+//        this.angle = rotation.first
+        tPicture.setImageBitmap(data.toRotate(90F))
     }
 
-    fun getBitmap(): Bitmap? = tPicture.getBitmap()
+    private fun getBitmap(): Bitmap? = tPicture.getBitmap()
     fun getArray(): ByteArray? = getBitmap().toArray()
+
     fun setBitmap(bitmap: Bitmap?) {
         tPicture.setImageBitmap(bitmap)
     }
