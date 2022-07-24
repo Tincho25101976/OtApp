@@ -72,7 +72,7 @@ class ChoosePicture(
             onEventDoubleTap = { _, b ->
                 if (b != null) {
                     UICustomDialogViewerEditor(activity).apply {
-                        this.onEventGetPicture = { picture ->
+                        this.onEventGetReturnPicture = { picture ->
                             if (picture != null) setPictureFromBitmap(picture)
                         }
                         make(UICustomDialogViewerParameter(b))
