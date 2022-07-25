@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.graphics.*
 import android.net.Uri
+import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
@@ -28,11 +29,9 @@ import com.vsg.helper.ui.popup.UICustomAlertDialogBase
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.helper.ui.widget.cropCustom.CropCustomSelect
 import com.vsg.helper.ui.widget.cropImage.CropImageView
+import com.vsg.helper.ui.widget.imageView.ZoomDrawImage
 import com.vsg.helper.ui.widget.shapeCustom.ShapeCustomSelect
-import ja.burhanrashid52.photoeditor.OnSaveBitmap
-import ja.burhanrashid52.photoeditor.PhotoEditor
-import ja.burhanrashid52.photoeditor.PhotoEditorView
-import ja.burhanrashid52.photoeditor.SaveSettings
+import ja.burhanrashid52.photoeditor.*
 import ja.burhanrashid52.photoeditor.shape.ShapeBuilder
 import java.io.File
 
@@ -56,6 +55,7 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
 
     //region event
     private var onEventGetPicture: ((Bitmap?) -> Unit)? = null
+    private var onEventGetArray: ((ByteArray?) -> Unit)? = null
     private var onEventGetPictureMemory: ((Bitmap?) -> Unit)? = null
     private var onEventGetPictureUri: ((Uri?) -> Unit)? = null
     var onEventGetReturnPicture: ((Bitmap?) -> Unit)? = null
@@ -63,13 +63,15 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
 
     //region properties
     private var type: TypeOperation = TypeOperation.ROTATE
-    private lateinit var bitmap: Bitmap
-
+    private val typeface get() = activity.typeFaceCustom(Typeface.BOLD)
+    var picture: Bitmap? = null
+    var pictureArray: ByteArray? = null
 
     //region views:
     private lateinit var tEditPhotoView: PhotoEditorView
     private lateinit var mPhotoEditor: PhotoEditor
     private lateinit var mPhotoCrop: CropImageView
+    private lateinit var mPhotoZoom: ZoomDrawImage
 
     private lateinit var tRotate: RelativeLayout
     private lateinit var tExport: RelativeLayout
@@ -101,6 +103,10 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
     private lateinit var tCropCustomSelect: CropCustomSelect
     //endregion
 
+    //region zoom
+
+    //endregion
+
     //endregion
 
     //region methods
@@ -108,8 +114,11 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         onSetDialogView = { dialogView, value, _ ->
             tContainer = dialogView.findViewById(R.id.CustomViewerContainerEdit)
             tContainerOptions = dialogView.findViewById(R.id.CustomViewerCommandOptionsEdit)
-            this.bitmap = value.bitmap
-            makeEdit(bitmap)
+            this.picture = value.bitmap
+            makeEdit(value.bitmap)
+
+            this.onEventGetPictureMemory = { this.picture = it }
+            this.onEventGetArray = { this.pictureArray = it }
 
             tDraw =
                 dialogView.findViewById<RelativeLayout>(R.id.CustomViewerCommandDrawEdit).apply {
@@ -150,7 +159,8 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
             tExport =
                 dialogView.findViewById<RelativeLayout>(R.id.CustomViewerCommandSendEdit).apply {
                     setOnClickListener {
-                        val temp: Bitmap = getBitmap() ?: return@setOnClickListener
+                        val temp: Bitmap =
+                            this@UICustomDialogViewerEditor.picture ?: return@setOnClickListener
                         val file: File =
                             temp.getTempFileStoreViewer(activity) ?: return@setOnClickListener
                         activity.sendFile(file)
@@ -203,7 +213,7 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         val shapeBuilder = ShapeBuilder()
         tShapeCustomSelect = ShapeCustomSelect(activity).apply {
             id = View.generateViewId()
-            typeface = activity.typeFaceCustom(Typeface.BOLD)
+            typeface = this@UICustomDialogViewerEditor.typeface
             this.onEventChangeShape = { s -> shapeBuilder.withShapeType(s) }
             this.onEventChangeColor = { s -> shapeBuilder.withShapeColor(s) }
             this.onEventChangeSize = { s -> shapeBuilder.withShapeSize(s) }
@@ -218,7 +228,11 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         tEditPhotoView = PhotoEditorView(activity).apply {
             layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
                 id = View.generateViewId()
+                gravity = Gravity.CENTER
+                width = RelativeLayout.LayoutParams.MATCH_PARENT
+                height = RelativeLayout.LayoutParams.MATCH_PARENT
             }
+
         }
         mPhotoEditor = PhotoEditor.Builder(activity, tEditPhotoView)
             .setPinchTextScalable(true)
@@ -251,15 +265,19 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         }
         tCropCustomSelect = CropCustomSelect(activity).apply {
             id = View.generateViewId()
+            setTypeFace(this@UICustomDialogViewerEditor.typeface)
             this.onEventRaiseCrop = {
                 makeEdit(mPhotoCrop.croppedBitmap)
                 tContainerOptions.removeAllViews()
             }
+            this.onEventChangeShape = {
+                mPhotoCrop.setCropMode(it)
+            }
         }
-        this.onEventGetPicture = {
+        this.onEventGetPictureMemory = {
             if (it != null) mPhotoCrop.imageBitmap = it
         }
-        getBitmap()
+        saveBitmapMemory()
         tContainer.addView(mPhotoCrop)
         tContainerOptions.addView(tCropCustomSelect)
     }
@@ -274,6 +292,37 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
             }
         }
         saveBitmapMemory()
+    }
+    //endregion
+
+    //region zoom
+    private fun makeZoom() {
+        tContainerOptions.removeAllViews()
+        if (this.getContext() == null || this.dialogView == null) return
+        mPhotoZoom = ZoomDrawImage(this.activity).apply {
+            id = View.generateViewId()
+            val margin = DEFAULT_CROP_MARGIN_SIZE.toPixel()
+            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
+                setPadding(margin, margin, margin, margin)
+            }
+        }
+        tCropCustomSelect = CropCustomSelect(activity).apply {
+            id = View.generateViewId()
+            setTypeFace(this@UICustomDialogViewerEditor.typeface)
+            this.onEventRaiseCrop = {
+                makeEdit(mPhotoCrop.croppedBitmap)
+                tContainerOptions.removeAllViews()
+            }
+            this.onEventChangeShape = {
+                mPhotoCrop.setCropMode(it)
+            }
+        }
+        this.onEventGetPictureMemory = {
+            if (it != null) mPhotoCrop.imageBitmap = it
+        }
+        saveBitmapMemory()
+        tContainer.addView(mPhotoCrop)
+        tContainerOptions.addView(tCropCustomSelect)
     }
     //endregion
 
@@ -336,9 +385,12 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         val parameter = object : OnSaveBitmap {
             override fun onBitmapReady(saveBitmap: Bitmap?) {
                 onEventGetPictureMemory?.invoke(saveBitmap)
+                onEventGetArray?.invoke(saveBitmap.toArray())
             }
 
             override fun onFailure(e: Exception?) {
+                onEventGetPictureMemory?.invoke(null)
+                onEventGetArray?.invoke(null)
             }
         }
         mPhotoEditor.saveAsBitmap(
@@ -347,10 +399,10 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         )
     }
 
-    private fun getArray(): ByteArray? {
-        if (getBitmap() == null) return null
-        return getBitmap().toArray()
-    }
+//    private fun getArray(): ByteArray? {
+//        if (getBitmap() == null) return null
+//        return getBitmap().toArray()
+//    }
     //endregion
 
     //endregion
@@ -365,7 +417,7 @@ class UICustomDialogViewerEditor<TActivity>(activity: TActivity) :
         const val DEFAULT_CROP_MARGIN_SIZE = 12
 
         const val MARGIN_BOTTOM_NORMAL = 100
-        const val MARGIN_BOTTOM_DRAW = 500// 375
-        const val MARGIN_BOTTOM_CROP = 550
+        const val MARGIN_BOTTOM_DRAW = 500
+        const val MARGIN_BOTTOM_CROP = 450
     }
 }
