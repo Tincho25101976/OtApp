@@ -29,32 +29,36 @@ class ShapeCustomSelect @JvmOverloads constructor(
     defStyleRest: Int = 0
 ) : RelativeLayout(ctx, attrs, defStyleAttr, defStyleRest) {
 
+
     //region events
     var onEventChangeColor: ((Int) -> Unit)? = null
     var onEventChangeSize: ((Float) -> Unit)? = null
     var onEventChangeShape: ((ShapeType) -> Unit)? = null
+    var onEventSelectAction: ((TypeShapeAction) -> Unit)? = null
     //endregion
 
     //region properties
-    private lateinit var tColorPickerLine: ColorPicker
-    private lateinit var tSeekSizeLine: SeekBar
+    private var tColorPickerLine: ColorPicker?
+    private var tSeekSizeLine: SeekBar?
     private lateinit var tSampleLine: TextView
     private var tRadioOption: RadioGroup
     private var tRadioBrush: RadioButton?
     private var tRadioOval: RadioButton?
     private var tRadioLine: RadioButton?
     private var tRadioRectangle: RadioButton?
-
+    private var tUndo: ImageView?
+    private var tRedo: ImageView?
 
     private val dbShapeId: MutableList<Pair<ShapeType, Int>> = mutableListOf()
 
-    var typeface: Typeface
-        get() = tSampleLine.typeface
-        set(value) {
-            tSampleLine.typeface = value
-            arrayOf(tRadioLine, tRadioBrush, tRadioOval, tRadioRectangle).filterNotNull()
-                .forEach { it.typeface = value }
-        }
+    var colorSelect: Int = DEFAULT_COLOR_SELECT
+        private set
+    var sizeLineSelect: Float = DEFAULT_SIZE_DRAW
+        private set
+    var shapeSelect: ShapeType = ShapeType.BRUSH
+        private set
+
+    private val lineSizeCalc = { value: Int -> value / FACTOR_SIZE_DRAW }
     //endregion
 
     //region methods
@@ -72,7 +76,10 @@ class ShapeCustomSelect @JvmOverloads constructor(
                 height = ViewGroup.LayoutParams.WRAP_CONTENT
             }
             setOnCheckedChangeListener { _, id ->
-                if (dbShapeId.any { it.second == id }) onEventChangeShape?.invoke(dbShapeId.first { it.second == id }.first)
+                if (dbShapeId.any { it.second == id }) {
+                    this@ShapeCustomSelect.shapeSelect = dbShapeId.first { it.second == id }.first
+                    onEventChangeShape?.invoke(this@ShapeCustomSelect.shapeSelect)
+                }
             }
             addView(tRadioBrush)
             addView(tRadioLine)
@@ -112,24 +119,48 @@ class ShapeCustomSelect @JvmOverloads constructor(
                     setTextLineSize()
                 }
             })
-            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
+            layoutParams = HelperUI.makeCustomLayoutLinealLayout().apply {
                 height = ViewGroup.LayoutParams.MATCH_PARENT
-                width = ViewGroup.LayoutParams.MATCH_PARENT
+                width = ViewGroup.LayoutParams.WRAP_CONTENT
+                weight = 7F
             }
             progress = arrayOf(max, min).average().toInt()
+
         }
         tSampleLine = TextView(ctx).apply {
             id = View.generateViewId()
             text = null
             setBackgroundColor(Color.WHITE)
-            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
+            layoutParams = HelperUI.makeCustomLayoutLinealLayout().apply {
                 height = DEFAULT_SIZE_SAMPLE.toPixel()
                 width = DEFAULT_SIZE_SAMPLE.toPixel()
+                weight = 1F
             }
             background = ctx.getDrawable(R.drawable.border_view)
             gravity = CENTER
             textSize = DEFAULT_SIZE_TEXT.toPixel().toFloat()
-            setBackgroundColor(tColorPickerLine.color)
+
+            setBackgroundColor(tColorPickerLine!!.color)
+        }
+        tUndo = ImageView(ctx).apply {
+            layoutParams = HelperUI.makeCustomLayoutLinealLayout().apply {
+                height = SIZE_CMD_SUCCESS.toPixel()
+                width = SIZE_CMD_SUCCESS.toPixel()
+                setMargins(5.toPixel())
+                weight = 1F
+            }
+            setImageDrawable(ctx.getDrawable(R.drawable.pic_undo))
+            setOnClickListener { onEventSelectAction?.invoke(TypeShapeAction.UNDO) }
+        }
+        tRedo = ImageView(ctx).apply {
+            layoutParams = HelperUI.makeCustomLayoutLinealLayout().apply {
+                height = SIZE_CMD_SUCCESS.toPixel()
+                width = SIZE_CMD_SUCCESS.toPixel()
+                setMargins(5.toPixel())
+                weight = 1F
+            }
+            setImageDrawable(ctx.getDrawable(R.drawable.pic_redo))
+            setOnClickListener { onEventSelectAction?.invoke(TypeShapeAction.REDO) }
         }
 
         val viewSizeLine = LinearLayout(ctx).apply {
@@ -137,16 +168,20 @@ class ShapeCustomSelect @JvmOverloads constructor(
                 width = ViewGroup.LayoutParams.MATCH_PARENT
                 height = DEFAULT_SIZE_LINE.toPixel()
                 gravity = CENTER
-                addRule(BELOW, tColorPickerLine.id)
+                weightSum = 10F
+                addRule(BELOW, tColorPickerLine!!.id)
             }
             orientation = LinearLayout.HORIZONTAL
             addView(tSampleLine)
-            addView(tSeekSizeLine)
+            addView(tSeekSizeLine!!)
+            addView(tUndo!!)
+            addView(tRedo!!)
         }
 
         setTextLineSize()
         this.apply {
             addView(tRadioOption)
+//            addView(viewAction)
             addView(tColorPickerLine)
             addView(viewSizeLine)
             setTextLineSize()
@@ -154,19 +189,34 @@ class ShapeCustomSelect @JvmOverloads constructor(
         //endregion
     }
 
-    val lineSizeCalc = { value: Int -> value / FACTOR_SIZE_DRAW }
+    private fun getLinealLayout(view: View, weight: Float = 1.0F): LinearLayout {
+        val viewSizeLine = LinearLayout(ctx).apply {
+            layoutParams = HelperUI.makeCustomLayoutLinealLayout().apply {
+                width = ViewGroup.LayoutParams.MATCH_PARENT
+                height = ViewGroup.LayoutParams.WRAP_CONTENT
+                gravity = CENTER
+                this.weight = weight
+            }
+            orientation = LinearLayout.VERTICAL
+            addView(view)
+        }
+        return viewSizeLine
+    }
+
     private fun setTextLineSize() {
-        if (!this::tSeekSizeLine.isLateinit || !this::tSampleLine.isLateinit) return
+        if (tSeekSizeLine == null || !this::tSampleLine.isLateinit) return
         tSampleLine.text = getSizeLineResult().toFormat(DECIMAL_SHOW_SIZE_DRAW).toEditable()
     }
 
     private fun getSizeLineResult(): Float {
-        if (this::tSeekSizeLine.isLateinit) return DEFAULT_SIZE_DRAW
-        return lineSizeCalc(tSeekSizeLine.progress)
+        if (tSeekSizeLine == null) return DEFAULT_SIZE_DRAW
+        val value = tSeekSizeLine!!.progress
+        val result = lineSizeCalc(value)
+        return result
     }
 
     private fun getColorResult(): Int =
-        (this::tColorPickerLine.isLateinit) then Color.GREEN or tColorPickerLine.color
+        (tColorPickerLine == null) then DEFAULT_COLOR_SELECT or tColorPickerLine!!.color
 
     private fun getPaintResult(): Paint {
         return Paint().apply {
@@ -205,6 +255,13 @@ class ShapeCustomSelect @JvmOverloads constructor(
         return result
     }
 
+    fun setTypeFace(value: Typeface) {
+        if (!this::tSeekSizeLine.isLateinit) tSampleLine.typeface = value
+        arrayOf(tRadioLine, tRadioBrush, tRadioOval, tRadioRectangle).filterNotNull()
+            .forEach { it.typeface = value }
+    }
+
+
     //endregion
 
     companion object {
@@ -219,5 +276,9 @@ class ShapeCustomSelect @JvmOverloads constructor(
         const val DEFAULT_SIZE_SHAPE: Int = 24
         const val DEFAULT_SIZE_SAMPLE: Int = 32
         const val DEFAULT_SIZE_TEXT: Int = 7
+
+        const val DEFAULT_COLOR_SELECT = Color.YELLOW
+
+        const val SIZE_CMD_SUCCESS: Int = 28
     }
 }

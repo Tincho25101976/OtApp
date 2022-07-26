@@ -25,6 +25,7 @@ class CropCustomSelect constructor(
     defStyleAttr: Int = 0,
     defStyleRest: Int = 0
 ) : RelativeLayout(ctx, attrs, defStyleAttr, defStyleRest) {
+
     //region events
     var onEventRaiseCrop: (() -> Unit)? = null
     var onEventChangeShape: ((CropImageView.CropMode) -> Unit)? = null
@@ -39,8 +40,6 @@ class CropCustomSelect constructor(
     private var tRadioFree: RadioButton?
 
     private val dbShapeId: MutableList<Pair<CropImageView.CropMode, Int>> = mutableListOf()
-
-
     //endregion
 
     //region methods
@@ -74,17 +73,10 @@ class CropCustomSelect constructor(
                 addRule(ALIGN_PARENT_END)
                 addRule(BELOW, tRadioOption.id)
             }
-            setImageDrawable(ctx.getDrawable(R.drawable.pic_ok))
+            setImageDrawable(ctx.getDrawable(R.drawable.pic_crop))
             setOnClickListener { onEventRaiseCrop?.invoke() }
         }
 
-//        val layout = LinearLayout(ctx).apply {
-//            layoutParams = HelperUI.makeCustomLayoutRelativeLayout().apply {
-//                width = ViewGroup.LayoutParams.MATCH_PARENT
-//                height = ViewGroup.LayoutParams.MATCH_PARENT
-//            }
-//            addView(tCmdCrop)
-//        }
         this.apply {
             addView(tRadioOption)
             addView(tCmdCrop)

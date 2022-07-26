@@ -180,7 +180,7 @@ class CustomSpinner @JvmOverloads constructor(
             layoutParams =
                 HelperUI.makeCustomLayoutRelativeLayout(TypeMakeLayoutParameter.WIDTH_WRAP_HEIGHT_WRAP)
                     .apply {
-                        setMargins(35, -15, 0, 0)
+                        setMargins(35, -5, 0, 0)
                     }
         }
         tContainer = RelativeLayout(ctx).apply {

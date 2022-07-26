@@ -51,7 +51,7 @@ class ZoomDrawImage @JvmOverloads constructor(
     private var mode: ZoomDrawImageType = ZoomDrawImageType.NONE
     //endregion
 
-    //region  Scales
+    //region scales
     private var mSaveScale = 1f
     private var mMinScale = 1f
     private var mMaxScale = 4f
@@ -220,17 +220,17 @@ class ZoomDrawImage @JvmOverloads constructor(
     private fun getFixTranslation(trans: Float, viewSize: Float, contentSize: Float): Float {
         val minTrans: Float
         val maxTrans: Float
-        if (contentSize <= viewSize) { // case: NOT ZOOMED
+        if (contentSize <= viewSize) {
             minTrans = 0f
             maxTrans = viewSize - contentSize
-        } else { //CASE: ZOOMED
+        } else {
             minTrans = viewSize - contentSize
             maxTrans = 0f
         }
-        if (trans < minTrans) { // negative x or y translation (down or to the right)
+        if (trans < minTrans) {
             return -trans + minTrans
         }
-        if (trans > maxTrans) { // positive x or y translation (up or to the left)
+        if (trans > maxTrans) {
             return -trans + maxTrans
         }
         return 0F
@@ -281,7 +281,6 @@ class ZoomDrawImage @JvmOverloads constructor(
                     mode = ZoomDrawImageType.NONE
                 }
             }
-//            currentCanvas.setMatrix(mMatrix)
             imageMatrix = mMatrix
         }
         return false

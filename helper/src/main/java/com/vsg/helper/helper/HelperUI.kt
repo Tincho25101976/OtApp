@@ -429,6 +429,24 @@ class HelperUI {
         //endregion
 
         //region imageView
+        fun takeScreenshotOfView(view: View, height: Int, width: Int): Bitmap {
+            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            val bgDrawable = view.background
+            if (bgDrawable != null) {
+                bgDrawable.draw(canvas)
+            } else {
+                canvas.drawColor(Color.WHITE)
+            }
+            view.draw(canvas)
+            return bitmap
+        }
+
+        fun ImageView.getCropVisibility(): Bitmap? {
+            val temp = takeScreenshotOfView(this, this.height, this.width)
+            return temp
+        }
+
         fun ImageView.getBitmap(): Bitmap? {
             val drawable = this.drawable
             return (drawable as BitmapDrawable).bitmap
