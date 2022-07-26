@@ -55,11 +55,19 @@ abstract class DataBaseActivity<TViewModel, TDao, TEntity>(type: Class<TViewMode
     private lateinit var tListView: ListView
     private lateinit var tLog: TextView
     private lateinit var tSend: ImageView
-    private lateinit var crud: ManagerCRUD<DataBaseActivity<TViewModel, TDao, TEntity>, TViewModel, TDao, TEntity>
+    private var crud: ManagerCRUD<DataBaseActivity<TViewModel, TDao, TEntity>, TViewModel, TDao, TEntity>? =
+        null
     private val isCrudLoad: Boolean
-        get() = this::crud.isLateinit
+        get() = this.crud != null
+
+    private var tCommandReadFile: ImageView? = null
+    private var tCommandFind: ImageView? = null
+    private var tCommandReadDataBase: ImageView? = null
+    private var tCommandDeleteDataBase: ImageView? = null
+    private var tCommandUpdateDataBase: ImageView? = null
     //endregion
 
+    //region methods
     override fun aSetContext(): CurrentBaseActivity<TViewModel, TDao, TEntity> = this
     override fun onExecuteCreate() {
         //region progress
@@ -70,7 +78,6 @@ abstract class DataBaseActivity<TViewModel, TDao, TEntity>(type: Class<TViewMode
                 }
         tDescriptionProgress = this.findViewById(R.id.activity_update_db_progress_text)
         tLayoutProgress = this.findViewById(R.id.activity_update_db_progress)
-        //endregion
 
         tListView = this.findViewById(R.id.lv_activity_update_database)
         tSend = this.findViewById<ImageView>(R.id.activity_update_iv_send).apply {
@@ -103,43 +110,57 @@ abstract class DataBaseActivity<TViewModel, TDao, TEntity>(type: Class<TViewMode
                 }
             })
         }
-
+        //endregion
 
         // read XML
-        this.findViewById<ImageView>(R.id.iv_activity_update_database_find_file_xml)
-            .setOnClickListener {
-                this.chooserFile(TypeTempFile.DATABASE)
-            }
-        // read XML
-        this.findViewById<ImageView>(R.id.iv_activity_update_database_read_xml)
-            .setOnClickListener {
-                if (!isCrudLoad) return@setOnClickListener
-                set(this.crud.getReadXML())
-            }
-        // read dataBase
-        this.findViewById<ImageView>(R.id.iv_activity_update_database_read_database)
-            .setOnClickListener {
-                if (!isCrudLoad) return@setOnClickListener
-                set(this.crud.getSelect())
-            }
-        // delete dataBase
-        this.findViewById<ImageView>(R.id.iv_activity_update_database_delete_database)
-            .setOnClickListener {
-                if (!isCrudLoad) return@setOnClickListener
-                set(this.crud.getDelete())
-            }
-        // update dataBase
-        this.findViewById<ImageView>(R.id.iv_activity_update_database_update)
-            .setOnClickListener {
-                HelperProgressBarGetAdapter(this, this.crud).apply {
-                    var adapter: UIIDataAdapter<TEntity>?
-                    onGetResult = {
-                        adapter = it
-                        set(adapter)
-                    }
-                    execute()
+        tCommandFind =
+            this.findViewById<ImageView>(R.id.iv_activity_update_database_find_file_xml).apply {
+                setOnClickListener {
+                    this@DataBaseActivity.chooserFile(TypeTempFile.DATABASE)
                 }
             }
+        // read XML
+        tCommandReadFile =
+            this.findViewById<ImageView>(R.id.iv_activity_update_database_read_xml).apply {
+                setOnClickListener {
+                    if (!isCrudLoad) return@setOnClickListener
+                    set(this@DataBaseActivity.crud!!.getReadXML())
+                }
+            }
+        // read dataBase
+        tCommandReadDataBase =
+            this.findViewById<ImageView>(R.id.iv_activity_update_database_read_database).apply {
+                setOnClickListener {
+                    if (!isCrudLoad) return@setOnClickListener
+                    set(this@DataBaseActivity.crud!!.getSelect())
+                }
+            }
+        // delete dataBase
+        tCommandDeleteDataBase =
+            this.findViewById<ImageView>(R.id.iv_activity_update_database_delete_database).apply {
+                setOnClickListener {
+                    if (!isCrudLoad) return@setOnClickListener
+                    set(this@DataBaseActivity.crud!!.getDelete())
+                }
+            }
+        // update dataBase
+        tCommandUpdateDataBase =
+            this.findViewById<ImageView>(R.id.iv_activity_update_database_update).apply {
+                setOnClickListener {
+                    HelperProgressBarGetAdapter(
+                        this@DataBaseActivity,
+                        this@DataBaseActivity.crud!!
+                    ).apply {
+                        var adapter: UIIDataAdapter<TEntity>?
+                        onGetResult = {
+                            adapter = it
+                            set(adapter)
+                        }
+                        execute()
+                    }
+                }
+            }
+        enabledCommands(false)
         this.onEventExecuteActivityResult = { request, result, data ->
             if (data != null) {
                 if (request == REQUEST_FOR_CHOOSER_FILE_FROM_MANAGER && result == Activity.RESULT_OK) {
@@ -157,17 +178,27 @@ abstract class DataBaseActivity<TViewModel, TDao, TEntity>(type: Class<TViewMode
                                 aGetEntity(),
                                 file
                             )
+                        enabledCommands(isCrudLoad)
                     }
                 }
             }
         }
     }
 
+    private fun enabledCommands(status: Boolean) {
+        listOfNotNull(
+            tCommandDeleteDataBase,
+            tCommandReadDataBase,
+            tCommandReadFile,
+            tCommandUpdateDataBase
+        ).forEach { it.setStatus(status, 50u) }
+    }
+
     abstract fun aGetEntity(): TEntity
     private fun set(adapter: UIIDataAdapter<TEntity>?) {
         clear()
         if (!isCrudLoad) return
-        tLog.text = this.crud.getLog()
+        tLog.text = this.crud!!.getLog()
         tListView.adapter = adapter
     }
 
@@ -175,4 +206,5 @@ abstract class DataBaseActivity<TViewModel, TDao, TEntity>(type: Class<TViewMode
         tLog.text = ""
         tListView.adapter = null
     }
+    //endregion
 }

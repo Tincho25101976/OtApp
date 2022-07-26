@@ -29,7 +29,6 @@ class ShapeCustomSelect @JvmOverloads constructor(
     defStyleRest: Int = 0
 ) : RelativeLayout(ctx, attrs, defStyleAttr, defStyleRest) {
 
-
     //region events
     var onEventChangeColor: ((Int) -> Unit)? = null
     var onEventChangeSize: ((Float) -> Unit)? = null
@@ -95,6 +94,7 @@ class ShapeCustomSelect @JvmOverloads constructor(
             }
             onEventChangeColorPicker = {
                 tSampleLine.setBackgroundColor(it)
+                tSampleLine.setTextColor(this.colorSample)
                 onEventChangeColor?.invoke(it)
             }
         }
@@ -141,6 +141,7 @@ class ShapeCustomSelect @JvmOverloads constructor(
             textSize = DEFAULT_SIZE_TEXT.toPixel().toFloat()
 
             setBackgroundColor(tColorPickerLine!!.color)
+            setTextColor(tColorPickerLine!!.colorSample)
         }
         tUndo = ImageView(ctx).apply {
             layoutParams = HelperUI.makeCustomLayoutLinealLayout().apply {

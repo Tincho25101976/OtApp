@@ -48,6 +48,7 @@ abstract class ViewModelGenericParse<TDao, TEntity>(
     }
 
     override fun deleteAll() = dao.deleteAll()
+    override fun resetIndexIdentity() = dao.resetIndexIdentity()
     override fun insert(item: List<TEntity>): Boolean {
         if (dao.onProgress == null) {
             dao.onProgress = { current, total, percentage ->

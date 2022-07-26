@@ -51,5 +51,5 @@ abstract class CurrentBaseActivityViewRoom<TViewModel, TDao, TEntity, TViewRoom>
 
     fun currentViewModel(): TViewModel = viewModel
     protected fun <TContext> context(): TContext where TContext : BaseActivity, TContext : LifecycleOwner =
-        context as TContext
+        (context as TContext)
 }

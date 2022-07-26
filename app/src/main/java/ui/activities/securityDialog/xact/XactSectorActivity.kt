@@ -42,7 +42,7 @@ class XactSectorActivity :
         onEventSetCRUDForApply = { context, operation -> UICRUDXactSector(context, operation) }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_update_source, menu)
         return true
     }

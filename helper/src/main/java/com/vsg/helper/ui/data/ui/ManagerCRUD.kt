@@ -57,7 +57,7 @@ class ManagerCRUD<TActivity, TViewModel, TDao, TEntity>(
         try {
             xml = XmlParseHelper(this.item)
             db.onProgress = { actual, total, porcentaje ->
-                Thread { onResultProgreso(actual, total, porcentaje) }.start()
+                Thread { onResultProgress(actual, total, porcentaje) }.start()
             }
         } catch (e: Exception) {
             throw e
@@ -65,7 +65,6 @@ class ManagerCRUD<TActivity, TViewModel, TDao, TEntity>(
     }
 
     //region methods
-
 
     private fun readFileXML() {
         if (fileUpload.isEmpty()) sb.append("No se ha especificado el nombre del archivo")
@@ -108,7 +107,7 @@ class ManagerCRUD<TActivity, TViewModel, TDao, TEntity>(
             val dataXML = xml.readToList()
             sb.append(xml.getLog()).appendLine()
 
-            db.deleteAll()
+            getDeleteAll(true)
             sb.append(db.getLog()).appendLine()
 
             db.processWithProgress(dataXML)
@@ -154,6 +153,11 @@ class ManagerCRUD<TActivity, TViewModel, TDao, TEntity>(
         return getAdapter()
     }
 
+    private fun getDeleteAll(restart: Boolean) {
+        db.deleteAll()
+        if (restart) db.resetIndexIdentity()
+    }
+
     private fun clear(clearLog: Boolean = true) {
         type = TypeManagerCRUD.DEFAULT
         if (clearLog) sb = StringBuilder()
@@ -162,8 +166,8 @@ class ManagerCRUD<TActivity, TViewModel, TDao, TEntity>(
 //endregion
 
     //region delegate
-    private fun onResultProgreso(actual: Int, total: Int, porcentaje: Double) {
-        onProgress?.invoke(actual, total, porcentaje)
+    private fun onResultProgress(actual: Int, total: Int, percentage: Double) {
+        onProgress?.invoke(actual, total, percentage)
     }
     //endregion
 

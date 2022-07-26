@@ -22,4 +22,5 @@ interface IViewModelAllPagingParse<TEntity> :
 
     fun insert(item: List<TEntity>): Boolean
     fun deleteAll()
+    fun resetIndexIdentity()
 }

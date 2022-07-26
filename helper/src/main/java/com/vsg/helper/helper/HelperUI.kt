@@ -429,7 +429,7 @@ class HelperUI {
         //endregion
 
         //region imageView
-        fun takeScreenshotOfView(view: View, height: Int, width: Int): Bitmap {
+        private fun takeScreenshotOfView(view: View, height: Int, width: Int): Bitmap {
             val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(bitmap)
             val bgDrawable = view.background

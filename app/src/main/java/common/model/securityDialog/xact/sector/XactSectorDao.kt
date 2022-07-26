@@ -5,6 +5,7 @@ import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
 import com.vsg.ot.common.model.init.dao.DaoGenericOtParse
+import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
 
 @Dao
 abstract class XactSectorDao : DaoGenericOtParse<XactSector>() {
@@ -30,6 +31,10 @@ abstract class XactSectorDao : DaoGenericOtParse<XactSector>() {
 
     @Query("DELETE FROM ${XactSector.ENTITY_NAME}")
     abstract override fun deleteAll()
+    @Query("UPDATE sqlite_sequence\n" +
+            "SET seq = (SELECT MAX('id') FROM '${XactSector.ENTITY_NAME}')\n" +
+            "WHERE name = '${XactSector.ENTITY_NAME}'")
+    abstract override fun resetIndexIdentity()
 
     //region check
     @Query("SELECT EXISTS(SELECT * FROM ${XactSector.ENTITY_NAME} WHERE id = :id)")

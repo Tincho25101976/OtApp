@@ -20,4 +20,5 @@ interface IGenericDaoPagingParse<T> : IGenericDaoPaging<T>,
               T : Comparable<T> {
     fun insert(item: List<T>): Boolean
     fun deleteAll()
+    fun resetIndexIdentity()
 }

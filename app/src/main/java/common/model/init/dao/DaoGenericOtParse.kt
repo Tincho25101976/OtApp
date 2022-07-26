@@ -1,6 +1,7 @@
 package com.vsg.ot.common.model.init.dao
 
 import android.text.Spanned
+import androidx.room.Query
 import com.vsg.helper.common.adapter.IResultRecyclerAdapter
 import com.vsg.helper.common.model.IEntity
 import com.vsg.helper.common.model.IEntityCreateDate
@@ -11,6 +12,7 @@ import com.vsg.helper.common.util.dao.IGenericDaoPagingParse
 import com.vsg.helper.helper.Helper.Companion.or
 import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.ui.data.log.CustomLog
+import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
 import kotlinx.coroutines.runBlocking
 
 abstract class DaoGenericOtParse<T> : IGenericDaoPagingParse<T>, IDaoAllTextSearch
@@ -51,6 +53,7 @@ abstract class DaoGenericOtParse<T> : IGenericDaoPagingParse<T>, IDaoAllTextSear
     }
 
     abstract override fun deleteAll()
+    abstract override fun resetIndexIdentity()
     override fun readToList(): MutableList<T> {
         val result = viewAllSimpleList()
         return (result == null) then mutableListOf<T>() or result!!.toMutableList()

@@ -165,7 +165,7 @@ abstract class CurrentBaseActivityPagingBaseViewRoom<TActivity, TViewModel, TDao
         //endregion
 
         pagingAdapter = UIRecyclerAdapterPagingData<TEntity>().apply {
-            onEventClickItem = { _, id, position ->
+            onEventClickItem = { _, _, _ ->
 //                val c = currentViewModel().viewModelView(id)
 //                if ((c as Comparable<TEntity>) != null) {
 //                    c.layoutPosition = position

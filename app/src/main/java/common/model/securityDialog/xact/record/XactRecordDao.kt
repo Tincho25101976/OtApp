@@ -34,6 +34,11 @@ abstract class XactRecordDao : DaoGenericOtParse<XactRecord>() {
     @Query("DELETE FROM ${XactRecord.ENTITY_NAME}")
     abstract override fun deleteAll()
 
+    @Query("UPDATE sqlite_sequence\n" +
+            "SET seq = (SELECT MAX('id') FROM '${XactRecord.ENTITY_NAME}')\n" +
+            "WHERE name = '${XactRecord.ENTITY_NAME}'")
+    abstract override fun resetIndexIdentity()
+
     //region check
     @Query("SELECT EXISTS(SELECT * FROM ${XactRecord.ENTITY_NAME} WHERE id = :id)")
     abstract override fun checkExitsEntity(id: Int): Boolean

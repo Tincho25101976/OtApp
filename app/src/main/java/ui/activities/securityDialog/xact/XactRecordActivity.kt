@@ -62,7 +62,7 @@ class XactRecordActivity :
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_update_source, menu)
         return true
     }

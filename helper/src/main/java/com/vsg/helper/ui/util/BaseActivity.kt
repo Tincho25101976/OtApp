@@ -199,7 +199,7 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
     //endregion
 
     //region menu
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
 //        menuInflater.inflate(R.menu.items_menu, menu)
 ////        val items: MenuItem = menu?.findItem(R.id.action_bar_item_update_db) ?: return true
 ////        val command: Button = items.actionView as Button

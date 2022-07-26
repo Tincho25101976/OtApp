@@ -2,8 +2,11 @@ package com.vsg.helper.ui.widget.colorPicker
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
 import android.graphics.Color.*
+import android.graphics.LinearGradient
+import android.graphics.Paint
+import android.graphics.Shader
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -83,7 +86,13 @@ class ColorPicker @JvmOverloads constructor(
             circleCenterX,
             baseLine,
             size + strokeSize,
-            pickPaint.apply { this.color = strokeColor })
+            pickPaint.apply {
+                //this.color = strokeColor
+                this.color = colorSample
+                this.strokeWidth = 2F
+                this.style = Paint.Style.FILL_AND_STROKE
+                this.isDither = true
+            })
         canvas.drawCircle(circleCenterX, baseLine, size, pickPaint.apply { this.color = color })
     }
 
@@ -122,6 +131,8 @@ class ColorPicker @JvmOverloads constructor(
 
     val color: Int
         get() = interColor(pick, colors)
+    val colorSample: Int
+        get() = interColor(pick, defColorsSample())
 
     fun setOnColorChangedListener(listener: OnColorChangedListener) {
         this.listener = listener
@@ -138,6 +149,9 @@ class ColorPicker @JvmOverloads constructor(
     }
 
     companion object {
-        private fun defColors() = intArrayOf(BLACK, GRAY, MAGENTA, RED, YELLOW, GREEN, BLUE, CYAN, WHITE)
+        private fun defColors() =
+            intArrayOf(BLACK, GRAY, MAGENTA, RED, YELLOW, GREEN, BLUE, CYAN, WHITE)
+
+        private fun defColorsSample() = intArrayOf(WHITE, BLACK)
     }
 }
