@@ -2,6 +2,7 @@ package com.vsg.helper.ui.util
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -101,6 +102,35 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
     }
     //endregion
 
+    //region theme
+    /*
+    int nightModeFlags =
+                getContext().getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK;
+            switch (nightModeFlags) {
+                case Configuration.UI_MODE_NIGHT_YES:
+                     doStuff();
+                     break;
+
+                case Configuration.UI_MODE_NIGHT_NO:
+                     doStuff();
+                     break;
+
+                case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                     doStuff();
+                     break;
+            }
+     */
+    public fun isDarkThemeMode(): Boolean {
+        when (this.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> return true
+            Configuration.UI_MODE_NIGHT_NO -> return false
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> return false
+        }
+        return false
+    }
+    //endregion
+
     //region database
     protected fun getDatabaseName(): String = getString(R.string.dbName)
     //endregion
@@ -126,6 +156,7 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
             false -> this.startActivityForResult(intent, result)
         }
     }
+
     fun loadActivity(data: Class<*>, uri: Uri, result: Int) {
         val intent = Intent(this, data).apply {
             this.data = uri
@@ -342,7 +373,7 @@ abstract class BaseActivity(@LayoutRes val view: Int) : AppCompatActivity(), Vie
 
     //region selector
     protected fun setActivityAsSelector(
-        @DrawableRes background: Int? = null,
+        @DrawableRes background: Int? = R.drawable.pic_back_buuf_04,
         chooseView: View? = null
     ) {
         val scrollView: ScrollView? =

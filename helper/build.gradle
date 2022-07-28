@@ -65,7 +65,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
     //PhoneUtils
-    implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.51'
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.52'
 
     //Mascara:
     implementation 'com.redmadrobot:input-mask-android:6.0.0'

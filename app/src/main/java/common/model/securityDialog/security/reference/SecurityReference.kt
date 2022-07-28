@@ -1,4 +1,4 @@
-package com.vsg.ot.common.model.securityDialog.xact.sector
+package com.vsg.ot.common.model.securityDialog.security.reference
 
 import androidx.annotation.DrawableRes
 import androidx.room.Entity
@@ -13,23 +13,23 @@ import com.vsg.ot.common.model.init.entity.EntityOtParseWithExport
     indices = [
         Index(
             value = arrayOf("valueCode", "description"),
-            name = "IX_XACT_SECTOR"
+            name = "IX_SECURITY_REFERENCE"
         )],
     inheritSuperIndices = true,
-    tableName = XactSector.ENTITY_NAME
+    tableName = SecurityReference.ENTITY_NAME
 )
-class XactSector : EntityOtParseWithExport<XactSector>() {
+class SecurityReference : EntityOtParseWithExport<SecurityReference>() {
 
     //region methods
     @Ignore
     @DrawableRes
-    override fun oGetDrawablePicture(): Int = R.drawable.pic_xact_sector
+    override fun oGetDrawablePicture(): Int = R.drawable.pic_security_dialog_reference
 
     override fun oGetSpannedGeneric(): StringBuilder =
         StringBuilder().toTitleSpanned(valueCode)
 
     override fun aEquals(other: Any?): Boolean {
-        if (other !is XactSector) return false
+        if (other !is SecurityReference) return false
         return valueCode == other.valueCode
                 && description == other.description
     }
@@ -48,10 +48,10 @@ class XactSector : EntityOtParseWithExport<XactSector>() {
         )
     }
 
-    override fun aGetItemCast(): XactSector = XactSector()
+    override fun aGetItemCast(): SecurityReference = SecurityReference()
     //endregion
 
     companion object {
-        const val ENTITY_NAME = "masterXactSector"
+        const val ENTITY_NAME = "masterSecurityReference"
     }
 }

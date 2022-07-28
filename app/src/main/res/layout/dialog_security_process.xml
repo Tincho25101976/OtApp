@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/uid"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"
+        android:background="@android:color/darker_gray"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        card_view:ignore="MissingConstraints">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:foreground="?android:attr/selectableItemBackground"
+            card_view:cardBackgroundColor="@color/white"
+            card_view:cardCornerRadius="10dp"
+            card_view:cardPreventCornerOverlap="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="16dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/uidNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="30dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="#000000"
+                    android:textSize="22sp"
+                    card_view:ignore="RelativeOverlap" />
+
+                <ImageView
+                    android:id="@+id/arrowUID"
+                    android:layout_width="32sp"
+                    android:layout_height="32sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/pic_ok" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/whatIsUID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="60sp"
+                    android:text="Test"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="20sp"
+                    android:visibility="visible"
+                    card_view:ignore="RelativeOverlap" />
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/whatIsUID"
+                    android:layout_marginTop="2dp"
+                    android:background="@android:color/darker_gray"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/copyUID"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/line"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/border_view"
+                    android:padding="4dp"
+                    android:text="Copy UID"
+                    android:textSize="18dp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

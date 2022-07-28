@@ -80,6 +80,6 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     }
 
     override fun onExecuteCreate() {
-        setActivityAsSelector(R.drawable.background_main)
+        setActivityAsSelector()
     }
 }

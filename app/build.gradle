@@ -74,7 +74,6 @@ dependencies {
 
     // Modules:
     implementation 'com.burhanrashid52:photoeditor:2.0.0'
-//    implementation 'com.isseiaoki:simplecropview:1.1.8'
 
     //Mascara:
     implementation 'com.redmadrobot:input-mask-android:6.0.0'

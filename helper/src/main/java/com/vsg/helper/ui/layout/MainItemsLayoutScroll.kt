@@ -9,6 +9,8 @@ import android.widget.*
 import androidx.annotation.DrawableRes
 import androidx.cardview.widget.CardView
 import com.vsg.helper.common.model.IEntity
+import com.vsg.helper.helper.Helper.Companion.or
+import com.vsg.helper.helper.Helper.Companion.then
 import com.vsg.helper.helper.HelperUI.Static.makeCustomLayoutGridLayout
 import com.vsg.helper.helper.HelperUI.Static.makeCustomLayoutLinealLayout
 import com.vsg.helper.helper.font.FontManager.Static.typeFaceCustom
@@ -49,6 +51,7 @@ class MainItemsLayoutScroll(private val activity: BaseActivity) {
             }
             radius = DEFAULT_CARD_VIEW_RADIUS.toCustomPixelFloat()
             elevation = DEFAULT_CARD_VIEW_ELEVATION.toFloat()
+            setCardBackgroundColor(activity.isDarkThemeMode() then Color.GRAY or Color.DKGRAY)
         }
 
         val linearLayout: LinearLayout = LinearLayout(activity).apply {
@@ -73,7 +76,7 @@ class MainItemsLayoutScroll(private val activity: BaseActivity) {
             layoutParams = makeCustomLayoutLinealLayout()
             text = textCard
             textAlignment = View.TEXT_ALIGNMENT_CENTER
-            setTextColor(Color.rgb(255, 255, 255))
+            setTextColor(activity.isDarkThemeMode() then Color.WHITE or Color.BLACK)
             textSize = DEFAULT_TEXT_SIZE.toFloat()
             typeface = activity.typeFaceCustom(Typeface.BOLD)
         }
