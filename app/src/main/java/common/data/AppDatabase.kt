@@ -6,6 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.vsg.helper.common.cast.Convert
+import com.vsg.ot.common.model.securityDialog.security.group.SecurityGroupDao
+import com.vsg.ot.common.model.securityDialog.security.item.SecurityItemDao
+import com.vsg.ot.common.model.securityDialog.security.process.SecurityProcessDao
+import com.vsg.ot.common.model.securityDialog.security.reference.SecurityReferenceDao
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEventDao
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
@@ -71,6 +75,11 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun xactRecordDao(): XactRecordDao
     abstract fun xactSectorDao(): XactSectorDao
     abstract fun xactEventDao(): XactEventDao
+
+    abstract fun securityGroup(): SecurityGroupDao
+    abstract fun securityItem(): SecurityItemDao
+    abstract fun securityReference(): SecurityReferenceDao
+    abstract fun securityProcess(): SecurityProcessDao
     //endregion
 
     //region setting

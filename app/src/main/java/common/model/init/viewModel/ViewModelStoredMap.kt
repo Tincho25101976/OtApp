@@ -5,6 +5,12 @@ import com.vsg.helper.common.model.viewModel.IViewModelStoredMap
 import com.vsg.helper.common.util.viewModel.IViewModelAllSimpleListIdRelation
 import com.vsg.helper.common.util.viewModel.IViewModelView
 import com.vsg.helper.common.util.viewModel.util.DataMakeViewModelView
+import com.vsg.ot.common.model.securityDialog.security.group.SecurityGroup
+import com.vsg.ot.common.model.securityDialog.security.group.SecurityGroupViewModel
+import com.vsg.ot.common.model.securityDialog.security.item.SecurityItem
+import com.vsg.ot.common.model.securityDialog.security.item.SecurityItemViewModel
+import com.vsg.ot.common.model.securityDialog.security.process.SecurityProcess
+import com.vsg.ot.common.model.securityDialog.security.process.SecurityProcessViewModel
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEventViewModel
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
@@ -20,7 +26,6 @@ import com.vsg.ot.common.model.setting.profile.menu.SettingProfileMenuViewModel
 import com.vsg.ot.common.model.setting.profile.user.SettingProfileUser
 import com.vsg.ot.common.model.setting.profile.user.SettingProfileUserViewModel
 import com.vsg.ot.common.model.setting.user.SettingUser
-import com.vsg.ot.common.model.setting.user.SettingUserDao
 import com.vsg.ot.common.model.setting.user.SettingUserViewModel
 import common.model.master.batch.MasterBatch
 import common.model.master.batch.MasterBatchViewModel
@@ -58,12 +63,28 @@ class ViewModelStoredMap : IViewModelStoredMap {
         data.add(DataMakeViewModelView(typeOf<XactEvent>(), XactEventViewModel(context)))
         data.add(DataMakeViewModelView(typeOf<XactSector>(), XactSectorViewModel(context)))
 
+        // Security Dialog (Records)
+        data.add(DataMakeViewModelView(typeOf<SecurityGroup>(), SecurityGroupViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<SecurityItem>(), SecurityItemViewModel(context)))
+//        data.add(DataMakeViewModelView(typeOf<SecurityReference>(), SecurityGroupViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<SecurityProcess>(), SecurityProcessViewModel(context)))
+
         // Setting
         data.add(DataMakeViewModelView(typeOf<SettingUser>(), SettingUserViewModel(context)))
         data.add(DataMakeViewModelView(typeOf<SettingMenu>(), SettingMenuViewModel(context)))
         data.add(DataMakeViewModelView(typeOf<SettingProfile>(), SettingProfileViewModel(context)))
-        data.add(DataMakeViewModelView(typeOf<SettingProfileUser>(), SettingProfileUserViewModel(context)))
-        data.add(DataMakeViewModelView(typeOf<SettingProfileMenu>(), SettingProfileMenuViewModel(context)))
+        data.add(
+            DataMakeViewModelView(
+                typeOf<SettingProfileUser>(),
+                SettingProfileUserViewModel(context)
+            )
+        )
+        data.add(
+            DataMakeViewModelView(
+                typeOf<SettingProfileMenu>(),
+                SettingProfileMenuViewModel(context)
+            )
+        )
         return data
     }
 

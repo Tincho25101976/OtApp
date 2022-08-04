@@ -2,9 +2,11 @@ package com.vsg.ot.common.model.securityDialog.security.reference
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
+import androidx.room.Dao
 import androidx.room.Query
 import com.vsg.ot.common.model.init.dao.DaoGenericOtParse
 
+@Dao
 abstract class SecurityReferenceDao : DaoGenericOtParse<SecurityReference>() {
     //region paging
     @Query("SELECT * FROM ${SecurityReference.ENTITY_NAME} ORDER BY valueCode")
