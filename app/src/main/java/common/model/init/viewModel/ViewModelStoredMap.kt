@@ -13,6 +13,8 @@ import com.vsg.ot.common.model.securityDialog.security.process.SecurityProcess
 import com.vsg.ot.common.model.securityDialog.security.process.SecurityProcessViewModel
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEventViewModel
+import com.vsg.ot.common.model.securityDialog.xact.rating.XactRating
+import com.vsg.ot.common.model.securityDialog.xact.rating.XactRatingViewModel
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecordViewModel
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
@@ -62,6 +64,7 @@ class ViewModelStoredMap : IViewModelStoredMap {
         data.add(DataMakeViewModelView(typeOf<XactRecord>(), XactRecordViewModel(context)))
         data.add(DataMakeViewModelView(typeOf<XactEvent>(), XactEventViewModel(context)))
         data.add(DataMakeViewModelView(typeOf<XactSector>(), XactSectorViewModel(context)))
+        data.add(DataMakeViewModelView(typeOf<XactRating>(), XactRatingViewModel(context)))
 
         // Security Dialog (Records)
         data.add(DataMakeViewModelView(typeOf<SecurityGroup>(), SecurityGroupViewModel(context)))

@@ -2,11 +2,11 @@ package com.vsg.ot.common.data.migration.file
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.vsg.ot.common.model.setting.menu.SettingMenu
-import com.vsg.ot.common.model.setting.profile.SettingProfile
-import com.vsg.ot.common.model.setting.profile.menu.SettingProfileMenu
-import com.vsg.ot.common.model.setting.profile.user.SettingProfileUser
-import com.vsg.ot.common.model.setting.user.SettingUser
+import com.vsg.ot.common.model.securityDialog.security.group.SecurityGroup
+import com.vsg.ot.common.model.securityDialog.security.item.SecurityItem
+import com.vsg.ot.common.model.securityDialog.security.process.SecurityProcess
+import com.vsg.ot.common.model.securityDialog.security.reference.SecurityReference
+import com.vsg.ot.common.model.securityDialog.xact.rating.XactRating
 import common.data.migration.util.MigrationUtil
 
 class Migration202205102119 : Migration(1, 2) {
@@ -17,14 +17,16 @@ class Migration202205102119 : Migration(1, 2) {
                 "'isDefault' INTEGER NOT NULL, \n" +
                 "'isEnabled' INTEGER NOT NULL, \n" +
                 "'createDate' INTEGER NOT NULL, \n" +
-                "'description' TEXT NOT NULL, \n" +
-                "'name' TEXT NOT NULL, \n" +
-                "'planta' INTEGER NOT NULL, \n" +
-                "'mail' TEXT NOT NULL \n" +
+                "'description' TEXT NOT NULL \n" +
                 ")"
 
-        MigrationUtil(database, SettingUser.ENTITY_NAME).run {
+        MigrationUtil(database, XactRating.ENTITY_NAME).apply {
             create(sqlCreate)
+            createIndex(
+                "IX_XACT_RATING",
+                XactRating.ENTITY_NAME,
+                "'valueCode', 'description'"
+            )
         }
 
         sqlCreate = "(" +
@@ -36,8 +38,46 @@ class Migration202205102119 : Migration(1, 2) {
                 "'description' TEXT NOT NULL \n" +
                 ")"
 
-        MigrationUtil(database, SettingMenu.ENTITY_NAME).run {
+        MigrationUtil(database, SecurityReference.ENTITY_NAME).apply {
             create(sqlCreate)
+            createIndex(
+                "IX_SECURITY_REFERENCE",
+                SecurityReference.ENTITY_NAME,
+                "'valueCode', 'description'"
+            )
+        }
+
+        sqlCreate = "(" +
+                "'valueCode' TEXT NOT NULL, \n" +
+                "'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \n" +
+                "'isDefault' INTEGER NOT NULL, \n" +
+                "'isEnabled' INTEGER NOT NULL, \n" +
+                "'createDate' INTEGER NOT NULL, \n" +
+                "'description' TEXT NOT NULL, \n" +
+                "'shift' INTEGER NOT NULL, \n" +
+                "'time' INTEGER NOT NULL \n" +
+                "'contactada' INTEGER NOT NULL \n" +
+                "'observada' INTEGER NOT NULL \n" +
+                "'actoSeguro' TEXT NOT NULL \n" +
+                "'actoInseguro' TEXT NOT NULL \n" +
+                "'medidaCorrectiva' TEXT NOT NULL \n" +
+                "'planta' INTEGER NOT NULL \n" +
+                "'idSector' INTEGER NOT NULL \n" +
+                "'idReference' INTEGER NOT NULL \n" +
+                ")"
+
+        MigrationUtil(database, SecurityProcess.ENTITY_NAME).apply {
+            create(sqlCreate)
+            createIndex(
+                "IX_SECURITY_PROCESS_FK",
+                SecurityProcess.ENTITY_NAME,
+                "'idSector', 'idReference', 'createDate'"
+            )
+            createIndex(
+                "IX_SECURITY_PROCESS",
+                SecurityProcess.ENTITY_NAME,
+                "'valueCode', 'description'"
+            )
         }
 
         sqlCreate = "(" +
@@ -47,29 +87,15 @@ class Migration202205102119 : Migration(1, 2) {
                 "'isEnabled' INTEGER NOT NULL, \n" +
                 "'createDate' INTEGER NOT NULL, \n" +
                 "'description' TEXT NOT NULL \n" +
+                "'idProcess' INTEGER NOT NULL, \n" +
                 ")"
 
-        MigrationUtil(database, SettingProfile.ENTITY_NAME).run {
-            create(sqlCreate)
-        }
-
-        sqlCreate = "(" +
-                "'valueCode' TEXT NOT NULL, \n" +
-                "'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \n" +
-                "'isDefault' INTEGER NOT NULL, \n" +
-                "'isEnabled' INTEGER NOT NULL, \n" +
-                "'createDate' INTEGER NOT NULL, \n" +
-                "'description' TEXT NOT NULL, \n" +
-                "'idProfile' INTEGER NOT NULL, \n" +
-                "'idMenu' INTEGER NOT NULL \n" +
-                ")"
-
-        MigrationUtil(database, SettingProfileMenu.ENTITY_NAME).run {
+        MigrationUtil(database, SecurityGroup.ENTITY_NAME).apply {
             create(sqlCreate)
             createIndex(
-                "IX_SETTING_PROFILE_USER_FK",
-                SettingProfileUser.ENTITY_NAME,
-                "'idProfile', 'idMenu'"
+                "IX_SECURITY_GROUP",
+                SecurityGroup.ENTITY_NAME,
+                "'valueCode', 'description', 'idProcess'"
             )
         }
 
@@ -80,18 +106,19 @@ class Migration202205102119 : Migration(1, 2) {
                 "'isEnabled' INTEGER NOT NULL, \n" +
                 "'createDate' INTEGER NOT NULL, \n" +
                 "'description' TEXT NOT NULL, \n" +
-                "'idProfile' INTEGER NOT NULL, \n" +
-                "'idUser' INTEGER NOT NULL \n" +
+                "'value' INTEGER NOT NULL, \n" +
+                "'idGroup' INTEGER NOT NULL \n" +
                 ")"
 
-        MigrationUtil(database, SettingProfileUser.ENTITY_NAME).run {
+        MigrationUtil(database, SecurityItem.ENTITY_NAME).run {
             create(sqlCreate)
             createIndex(
-                "IX_SETTING_PROFILE_USER_FK",
-                SettingProfileUser.ENTITY_NAME,
-                "'idProfile', 'idUser'"
+                "IX_SECURITY_ITEM",
+                SecurityItem.ENTITY_NAME,
+                "'valueCode', 'description', 'value', 'idGroup'"
             )
         }
+
 
     }
 }

@@ -4,6 +4,7 @@ import android.widget.ScrollView
 import com.vsg.helper.ui.util.BaseActivity
 import com.vsg.ot.R
 import com.vsg.ot.ui.activities.securityDialog.xact.XactEventActivity
+import com.vsg.ot.ui.activities.securityDialog.xact.XactRatingActivity
 import com.vsg.ot.ui.activities.securityDialog.xact.XactRecordActivity
 import com.vsg.ot.ui.activities.securityDialog.xact.XactSectorActivity
 
@@ -27,6 +28,11 @@ class MainXactRecord : BaseActivity(R.layout.sub_main_xact) {
                     R.drawable.pic_xact_event,
                     getString(R.string.ActivityXactProcessText),
                     dataClass = XactEventActivity::class.java
+                )
+                add(
+                    R.drawable.pic_xact_sector_update,
+                    getString(R.string.ActivityXactRatingText),
+                    dataClass = XactRatingActivity::class.java
                 )
             }.makeLayout()
             view

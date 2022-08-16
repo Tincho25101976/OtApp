@@ -7,6 +7,7 @@ import common.model.master.item.type.TypePlant
 import common.model.master.item.type.TypeProduct
 import common.model.master.section.type.TypeSection
 import com.vsg.helper.util.unit.type.TypeUnit
+import com.vsg.ot.common.model.securityDialog.security.type.TypeShift
 
 class ConvertCurrentModel {
     //region generic
@@ -48,5 +49,11 @@ class ConvertCurrentModel {
 
     @TypeConverter
     fun intToTypeUnit(data: Int): TypeUnit = intToEnum(data)
+
+    @TypeConverter
+    fun typeToInt(data: TypeShift): Int = enumToInt(data)
+
+    @TypeConverter
+    fun intToTypeShift(data: Int): TypeShift = intToEnum(data)
     //endregion
 }

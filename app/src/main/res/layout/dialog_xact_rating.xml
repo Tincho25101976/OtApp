@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/DialogCrudTextMargin"
+    android:layout_marginTop="@dimen/DialogCrudTextMargin"
+    android:layout_marginEnd="@dimen/DialogCrudTextMargin">
+
+    <RelativeLayout
+        android:id="@+id/DialogXactRatingMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.vsg.helper.ui.widget.text.CustomInputText
+            android:id="@+id/DialogXactRatingValueCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/DialogCrudPictureMargin"
+            android:hint="@string/DialogXactSector"
+            android:padding="@dimen/DialogCrudTextPadding" />
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/dialog_generic_item_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DialogXactRatingMain" />
+
+</RelativeLayout>

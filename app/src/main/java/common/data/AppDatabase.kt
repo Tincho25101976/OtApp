@@ -6,12 +6,19 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.vsg.helper.common.cast.Convert
+import com.vsg.ot.common.data.migration.file.Migration202205102119
+import com.vsg.ot.common.model.securityDialog.security.group.SecurityGroup
 import com.vsg.ot.common.model.securityDialog.security.group.SecurityGroupDao
+import com.vsg.ot.common.model.securityDialog.security.item.SecurityItem
 import com.vsg.ot.common.model.securityDialog.security.item.SecurityItemDao
+import com.vsg.ot.common.model.securityDialog.security.process.SecurityProcess
 import com.vsg.ot.common.model.securityDialog.security.process.SecurityProcessDao
+import com.vsg.ot.common.model.securityDialog.security.reference.SecurityReference
 import com.vsg.ot.common.model.securityDialog.security.reference.SecurityReferenceDao
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEvent
 import com.vsg.ot.common.model.securityDialog.xact.event.XactEventDao
+import com.vsg.ot.common.model.securityDialog.xact.rating.XactRating
+import com.vsg.ot.common.model.securityDialog.xact.rating.XactRatingDao
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecord
 import com.vsg.ot.common.model.securityDialog.xact.record.XactRecordDao
 import com.vsg.ot.common.model.securityDialog.xact.sector.XactSector
@@ -41,13 +48,18 @@ import common.model.master.warehouse.MasterWarehouse
 import common.model.master.warehouse.MasterWarehouseDao
 
 @Database(
+
     entities =
     [
         MasterCompany::class, MasterItem::class,
         MasterBatch::class, MasterWarehouse::class,
         MasterSection::class, MasterStock::class,
 
-        XactRecord::class, XactSector::class, XactEvent::class,
+        XactRecord::class, XactSector::class,
+        XactEvent::class, XactRating::class,
+
+        SecurityItem::class, SecurityProcess::class,
+        SecurityGroup::class, SecurityReference::class,
 
         SettingUser::class, SettingMenu::class, SettingProfile::class,
         SettingProfileMenu::class, SettingProfileUser::class
@@ -56,8 +68,9 @@ import common.model.master.warehouse.MasterWarehouseDao
     //    ProvisioningViewRoom::class, TrackingViewRoom::class,
     //    AccountingSummaryViewRoom::class, StockViewRoom::class
     //],
-    version = 1,
-    exportSchema = false
+    version = 2,
+    exportSchema = true,
+
 )
 @TypeConverters(Convert::class, ConvertCurrentModel::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -75,6 +88,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun xactRecordDao(): XactRecordDao
     abstract fun xactSectorDao(): XactSectorDao
     abstract fun xactEventDao(): XactEventDao
+    abstract fun xactRatingDao(): XactRatingDao
 
     abstract fun securityGroup(): SecurityGroupDao
     abstract fun securityItem(): SecurityItemDao
@@ -106,7 +120,7 @@ abstract class AppDatabase : RoomDatabase() {
                 )
                     .allowMainThreadQueries()
 //                    .fallbackToDestructiveMigration()
-//                    .addMigrations(Migration202205102119())
+                    .addMigrations(Migration202205102119())
                     .build()
             }
             return INSTANCE

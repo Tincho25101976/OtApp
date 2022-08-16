@@ -10,6 +10,7 @@
     <string name="ActivityMainCommandRecord">Condiciones inseguras</string>
     <string name="ActivityMainCommandSector">Sector</string>
     <string name="ActivityMainCommandProcess">Proceso</string>
+    <string name="ActivityMainCommandRating">Clasificación</string>
 
     <!--ActivitySetting (Main):-->
     <string name="ActivityMainCommandSetting">Setting</string>
@@ -23,6 +24,7 @@
     <string name="ActivityXactRecordText">Registros</string>
     <string name="ActivityXactSectorText">Sector</string>
     <string name="ActivityXactProcessText">Proceso</string>
+    <string name="ActivityXactRatingText">Configuración</string>
 
     <!--Condiciones inseguras (Registro):-->
     <string name="DialogXactEvent">Evento</string>
