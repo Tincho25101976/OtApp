@@ -1,0 +1,1888 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "e2167128a79b15e2c8dbc951d81c92c7",
+    "entities": [
+      {
+        "tableName": "masterCompany",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`picture` BLOB, `valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "picture",
+            "columnName": "picture",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "masterItem",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`shellLife` INTEGER NOT NULL, `shellLifeAlert` INTEGER NOT NULL, `typeUnit` INTEGER NOT NULL, `typeProduct` INTEGER NOT NULL, `typePlant` INTEGER NOT NULL, `idCompany` INTEGER NOT NULL, `valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL, FOREIGN KEY(`idCompany`) REFERENCES `masterCompany`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "shellLife",
+            "columnName": "shellLife",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "shellLifeAlert",
+            "columnName": "shellLifeAlert",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "typeUnit",
+            "columnName": "typeUnit",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "typeProduct",
+            "columnName": "typeProduct",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "typePlant",
+            "columnName": "typePlant",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idCompany",
+            "columnName": "idCompany",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_ITEM_FK",
+            "unique": false,
+            "columnNames": [
+              "id",
+              "idCompany"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_ITEM_FK` ON `${TABLE_NAME}` (`id`, `idCompany`)"
+          },
+          {
+            "name": "IX_ITEM",
+            "unique": false,
+            "columnNames": [
+              "id",
+              "valueCode",
+              "typeUnit"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_ITEM` ON `${TABLE_NAME}` (`id`, `valueCode`, `typeUnit`)"
+          },
+          {
+            "name": "index_masterItem_idCompany",
+            "unique": false,
+            "columnNames": [
+              "idCompany"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterItem_idCompany` ON `${TABLE_NAME}` (`idCompany`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "masterCompany",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idCompany"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "masterBatch",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`receiverQty` REAL NOT NULL, `dueDate` INTEGER, `idItem` INTEGER NOT NULL, `idCompany` INTEGER NOT NULL, `valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL, FOREIGN KEY(`idItem`) REFERENCES `masterItem`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`idCompany`) REFERENCES `masterCompany`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "receiverQty",
+            "columnName": "receiverQty",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dueDate",
+            "columnName": "dueDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idItem",
+            "columnName": "idItem",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idCompany",
+            "columnName": "idCompany",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_BATCH_FK",
+            "unique": false,
+            "columnNames": [
+              "idItem",
+              "idCompany"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_BATCH_FK` ON `${TABLE_NAME}` (`idItem`, `idCompany`)"
+          },
+          {
+            "name": "IX_BATCH_CREATE",
+            "unique": false,
+            "columnNames": [
+              "createDate"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_BATCH_CREATE` ON `${TABLE_NAME}` (`createDate`)"
+          },
+          {
+            "name": "IX_BATCH_ITEMS",
+            "unique": false,
+            "columnNames": [
+              "receiverQty",
+              "createDate",
+              "dueDate"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_BATCH_ITEMS` ON `${TABLE_NAME}` (`receiverQty`, `createDate`, `dueDate`)"
+          },
+          {
+            "name": "index_masterBatch_idItem",
+            "unique": false,
+            "columnNames": [
+              "idItem"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterBatch_idItem` ON `${TABLE_NAME}` (`idItem`)"
+          },
+          {
+            "name": "index_masterBatch_idCompany",
+            "unique": false,
+            "columnNames": [
+              "idCompany"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterBatch_idCompany` ON `${TABLE_NAME}` (`idCompany`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "masterItem",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idItem"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "masterCompany",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idCompany"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "masterWarehouse",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`location` TEXT NOT NULL, `idCompany` INTEGER NOT NULL, `valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL, FOREIGN KEY(`idCompany`) REFERENCES `masterCompany`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "location",
+            "columnName": "location",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idCompany",
+            "columnName": "idCompany",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_WAREHOUSE_FK",
+            "unique": false,
+            "columnNames": [
+              "idCompany"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_WAREHOUSE_FK` ON `${TABLE_NAME}` (`idCompany`)"
+          },
+          {
+            "name": "IX_WAREHOUSE_MAIN",
+            "unique": false,
+            "columnNames": [
+              "description",
+              "isEnabled"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_WAREHOUSE_MAIN` ON `${TABLE_NAME}` (`description`, `isEnabled`)"
+          },
+          {
+            "name": "index_masterWarehouse_idCompany",
+            "unique": false,
+            "columnNames": [
+              "idCompany"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterWarehouse_idCompany` ON `${TABLE_NAME}` (`idCompany`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "masterCompany",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idCompany"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "masterSection",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`type` INTEGER NOT NULL, `idWarehouse` INTEGER NOT NULL, `idCompany` INTEGER NOT NULL, `valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL, FOREIGN KEY(`idWarehouse`) REFERENCES `masterWarehouse`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`idCompany`) REFERENCES `masterCompany`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idWarehouse",
+            "columnName": "idWarehouse",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idCompany",
+            "columnName": "idCompany",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_SECTION_FK",
+            "unique": false,
+            "columnNames": [
+              "id",
+              "idWarehouse",
+              "idCompany"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_SECTION_FK` ON `${TABLE_NAME}` (`id`, `idWarehouse`, `idCompany`)"
+          },
+          {
+            "name": "IX_SECTION_MAIN",
+            "unique": false,
+            "columnNames": [
+              "valueCode",
+              "isEnabled",
+              "type"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_SECTION_MAIN` ON `${TABLE_NAME}` (`valueCode`, `isEnabled`, `type`)"
+          },
+          {
+            "name": "index_masterSection_idWarehouse",
+            "unique": false,
+            "columnNames": [
+              "idWarehouse"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterSection_idWarehouse` ON `${TABLE_NAME}` (`idWarehouse`)"
+          },
+          {
+            "name": "index_masterSection_idCompany",
+            "unique": false,
+            "columnNames": [
+              "idCompany"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterSection_idCompany` ON `${TABLE_NAME}` (`idCompany`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "masterWarehouse",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idWarehouse"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "masterCompany",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idCompany"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "masterStock",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idItem` INTEGER NOT NULL, `idBatch` INTEGER NOT NULL, `idSection` INTEGER NOT NULL, `idWarehouse` INTEGER NOT NULL, `mprController` TEXT NOT NULL, `materialGrouping` TEXT NOT NULL, `quantity` REAL NOT NULL, `idCompany` INTEGER NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL, FOREIGN KEY(`idCompany`) REFERENCES `masterCompany`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`idItem`) REFERENCES `masterItem`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`idBatch`) REFERENCES `masterBatch`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`idWarehouse`) REFERENCES `masterWarehouse`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`idSection`) REFERENCES `masterSection`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "idItem",
+            "columnName": "idItem",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idBatch",
+            "columnName": "idBatch",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idSection",
+            "columnName": "idSection",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idWarehouse",
+            "columnName": "idWarehouse",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mprController",
+            "columnName": "mprController",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "materialGrouping",
+            "columnName": "materialGrouping",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "quantity",
+            "columnName": "quantity",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idCompany",
+            "columnName": "idCompany",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_STOCK_FK",
+            "unique": false,
+            "columnNames": [
+              "idItem",
+              "idCompany",
+              "idBatch",
+              "idSection",
+              "idWarehouse"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_STOCK_FK` ON `${TABLE_NAME}` (`idItem`, `idCompany`, `idBatch`, `idSection`, `idWarehouse`)"
+          },
+          {
+            "name": "IX_STOCK_TYPE",
+            "unique": false,
+            "columnNames": [
+              "mprController",
+              "materialGrouping"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_STOCK_TYPE` ON `${TABLE_NAME}` (`mprController`, `materialGrouping`)"
+          },
+          {
+            "name": "IX_STOCK_QTY_DATE",
+            "unique": false,
+            "columnNames": [
+              "quantity",
+              "createDate"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_STOCK_QTY_DATE` ON `${TABLE_NAME}` (`quantity`, `createDate`)"
+          },
+          {
+            "name": "index_masterStock_idItem",
+            "unique": false,
+            "columnNames": [
+              "idItem"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterStock_idItem` ON `${TABLE_NAME}` (`idItem`)"
+          },
+          {
+            "name": "index_masterStock_idBatch",
+            "unique": false,
+            "columnNames": [
+              "idBatch"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterStock_idBatch` ON `${TABLE_NAME}` (`idBatch`)"
+          },
+          {
+            "name": "index_masterStock_idSection",
+            "unique": false,
+            "columnNames": [
+              "idSection"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterStock_idSection` ON `${TABLE_NAME}` (`idSection`)"
+          },
+          {
+            "name": "index_masterStock_idWarehouse",
+            "unique": false,
+            "columnNames": [
+              "idWarehouse"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterStock_idWarehouse` ON `${TABLE_NAME}` (`idWarehouse`)"
+          },
+          {
+            "name": "index_masterStock_idCompany",
+            "unique": false,
+            "columnNames": [
+              "idCompany"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterStock_idCompany` ON `${TABLE_NAME}` (`idCompany`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "masterCompany",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idCompany"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "masterItem",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idItem"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "masterBatch",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idBatch"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "masterWarehouse",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idWarehouse"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "masterSection",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idSection"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "masterXactRecord",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`planta` INTEGER NOT NULL, `updateDate` INTEGER, `caption` TEXT NOT NULL, `idEvent` INTEGER NOT NULL, `idSector` INTEGER NOT NULL, `picture` BLOB, `valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "planta",
+            "columnName": "planta",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updateDate",
+            "columnName": "updateDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "caption",
+            "columnName": "caption",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idEvent",
+            "columnName": "idEvent",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idSector",
+            "columnName": "idSector",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "picture",
+            "columnName": "picture",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_XACT",
+            "unique": false,
+            "columnNames": [
+              "caption",
+              "description",
+              "idEvent",
+              "idSector",
+              "planta"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_XACT` ON `${TABLE_NAME}` (`caption`, `description`, `idEvent`, `idSector`, `planta`)"
+          },
+          {
+            "name": "index_masterXactRecord_idEvent",
+            "unique": false,
+            "columnNames": [
+              "idEvent"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterXactRecord_idEvent` ON `${TABLE_NAME}` (`idEvent`)"
+          },
+          {
+            "name": "index_masterXactRecord_idSector",
+            "unique": false,
+            "columnNames": [
+              "idSector"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterXactRecord_idSector` ON `${TABLE_NAME}` (`idSector`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "masterXactSector",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_XACT_SECTOR",
+            "unique": false,
+            "columnNames": [
+              "valueCode",
+              "description"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_XACT_SECTOR` ON `${TABLE_NAME}` (`valueCode`, `description`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "masterXactEvent",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_XACT_EVENT",
+            "unique": false,
+            "columnNames": [
+              "valueCode",
+              "description"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_XACT_EVENT` ON `${TABLE_NAME}` (`valueCode`, `description`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "masterXactRating",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_XACT_RATING",
+            "unique": false,
+            "columnNames": [
+              "valueCode",
+              "description"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_XACT_RATING` ON `${TABLE_NAME}` (`valueCode`, `description`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "masterSecurityItem",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`value` INTEGER NOT NULL, `idGroup` INTEGER NOT NULL, `valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idGroup",
+            "columnName": "idGroup",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_SECURITY_ITEM",
+            "unique": false,
+            "columnNames": [
+              "valueCode",
+              "description",
+              "value",
+              "idGroup"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_SECURITY_ITEM` ON `${TABLE_NAME}` (`valueCode`, `description`, `value`, `idGroup`)"
+          },
+          {
+            "name": "index_masterSecurityItem_idGroup",
+            "unique": false,
+            "columnNames": [
+              "idGroup"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterSecurityItem_idGroup` ON `${TABLE_NAME}` (`idGroup`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "masterSecurityProcess",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`shift` INTEGER NOT NULL, `time` INTEGER NOT NULL, `contactada` INTEGER NOT NULL, `observada` INTEGER NOT NULL, `actoSeguro` TEXT NOT NULL, `actoInseguro` TEXT NOT NULL, `medidaCorrectiva` TEXT NOT NULL, `planta` INTEGER NOT NULL, `idSector` INTEGER NOT NULL, `idReference` INTEGER NOT NULL, `picture` BLOB, `valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "shift",
+            "columnName": "shift",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "contactada",
+            "columnName": "contactada",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "observada",
+            "columnName": "observada",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "actoSeguro",
+            "columnName": "actoSeguro",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "actoInseguro",
+            "columnName": "actoInseguro",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "medidaCorrectiva",
+            "columnName": "medidaCorrectiva",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "planta",
+            "columnName": "planta",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idSector",
+            "columnName": "idSector",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idReference",
+            "columnName": "idReference",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "picture",
+            "columnName": "picture",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_SECURITY_PROCESS",
+            "unique": false,
+            "columnNames": [
+              "valueCode",
+              "description"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_SECURITY_PROCESS` ON `${TABLE_NAME}` (`valueCode`, `description`)"
+          },
+          {
+            "name": "IX_SECURITY_PROCESS_FK",
+            "unique": false,
+            "columnNames": [
+              "idSector",
+              "idReference",
+              "createDate"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_SECURITY_PROCESS_FK` ON `${TABLE_NAME}` (`idSector`, `idReference`, `createDate`)"
+          },
+          {
+            "name": "index_masterSecurityProcess_idSector",
+            "unique": false,
+            "columnNames": [
+              "idSector"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterSecurityProcess_idSector` ON `${TABLE_NAME}` (`idSector`)"
+          },
+          {
+            "name": "index_masterSecurityProcess_idReference",
+            "unique": false,
+            "columnNames": [
+              "idReference"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterSecurityProcess_idReference` ON `${TABLE_NAME}` (`idReference`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "masterSecurityGroup",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idProcess` INTEGER NOT NULL, `valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "idProcess",
+            "columnName": "idProcess",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_SECURITY_GROUP",
+            "unique": false,
+            "columnNames": [
+              "valueCode",
+              "description",
+              "idProcess"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_SECURITY_GROUP` ON `${TABLE_NAME}` (`valueCode`, `description`, `idProcess`)"
+          },
+          {
+            "name": "index_masterSecurityGroup_idProcess",
+            "unique": false,
+            "columnNames": [
+              "idProcess"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterSecurityGroup_idProcess` ON `${TABLE_NAME}` (`idProcess`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "masterSecurityReference",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_SECURITY_REFERENCE",
+            "unique": false,
+            "columnNames": [
+              "valueCode",
+              "description"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_SECURITY_REFERENCE` ON `${TABLE_NAME}` (`valueCode`, `description`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "masterSettingUser",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `planta` INTEGER NOT NULL, `mail` TEXT NOT NULL, `valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "planta",
+            "columnName": "planta",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mail",
+            "columnName": "mail",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "masterSettingMenu",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`picture` BLOB, `valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "picture",
+            "columnName": "picture",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "masterSettingProfile",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "masterSettingProfileMenu",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idProfile` INTEGER NOT NULL, `idMenu` INTEGER NOT NULL, `valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL, FOREIGN KEY(`idProfile`) REFERENCES `masterSettingProfile`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`idMenu`) REFERENCES `masterSettingMenu`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "idProfile",
+            "columnName": "idProfile",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idMenu",
+            "columnName": "idMenu",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_SETTING_PROFILE_MENU_FK",
+            "unique": false,
+            "columnNames": [
+              "idMenu",
+              "idProfile"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_SETTING_PROFILE_MENU_FK` ON `${TABLE_NAME}` (`idMenu`, `idProfile`)"
+          },
+          {
+            "name": "index_masterSettingProfileMenu_idProfile",
+            "unique": false,
+            "columnNames": [
+              "idProfile"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterSettingProfileMenu_idProfile` ON `${TABLE_NAME}` (`idProfile`)"
+          },
+          {
+            "name": "index_masterSettingProfileMenu_idMenu",
+            "unique": false,
+            "columnNames": [
+              "idMenu"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterSettingProfileMenu_idMenu` ON `${TABLE_NAME}` (`idMenu`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "masterSettingProfile",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idProfile"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "masterSettingMenu",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idMenu"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "masterSettingProfileUser",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idProfile` INTEGER NOT NULL, `idUser` INTEGER NOT NULL, `valueCode` TEXT NOT NULL, `createDate` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isDefault` INTEGER NOT NULL, `isEnabled` INTEGER NOT NULL, `description` TEXT NOT NULL, FOREIGN KEY(`idProfile`) REFERENCES `masterSettingProfile`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`idUser`) REFERENCES `masterSettingUser`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "idProfile",
+            "columnName": "idProfile",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idUser",
+            "columnName": "idUser",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valueCode",
+            "columnName": "valueCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createDate",
+            "columnName": "createDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isEnabled",
+            "columnName": "isEnabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "IX_SETTING_PROFILE_USER_FK",
+            "unique": false,
+            "columnNames": [
+              "idUser",
+              "idProfile"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IX_SETTING_PROFILE_USER_FK` ON `${TABLE_NAME}` (`idUser`, `idProfile`)"
+          },
+          {
+            "name": "index_masterSettingProfileUser_idProfile",
+            "unique": false,
+            "columnNames": [
+              "idProfile"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterSettingProfileUser_idProfile` ON `${TABLE_NAME}` (`idProfile`)"
+          },
+          {
+            "name": "index_masterSettingProfileUser_idUser",
+            "unique": false,
+            "columnNames": [
+              "idUser"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_masterSettingProfileUser_idUser` ON `${TABLE_NAME}` (`idUser`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "masterSettingProfile",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idProfile"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "masterSettingUser",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idUser"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e2167128a79b15e2c8dbc951d81c92c7')"
+    ]
+  }
+}
